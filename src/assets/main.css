@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0A1929;
+  --color-navy-card: #0D2137;
+  --color-navy-light: #132F4C;
+  --color-navy-footer: #051220;
+  --color-accent-blue: #1565C0;
+  --color-accent-blue-hover: #1976D2;
+  --color-accent-gold: #FFB300;
+  --color-accent-red: #E53935;
+  --color-accent-green: #43A047;
+  --color-accent-teal: #00897B;
+  --color-accent-purple: #7B1FA2;
+  --color-accent-orange: #E65100;
+  --color-accent-violet: #6A1B9A;
+  --color-accent-yellow: #F9A825;
+  --color-accent-dark-red: #C62828;
+  --color-text-light: #B0BEC5;
+  --color-text-muted: #90A4AE;
+  --color-text-white: #FFFFFF;
+  --font-family-heading: "Trebuchet MS", "Inter", system-ui, sans-serif;
+  --font-family-body: "Inter", "Calibri", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading);
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out both;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+.stagger-7 { animation-delay: 0.7s; }
+
+/* Modal transitions */
+.modal-enter-active {
+  transition: opacity 0.25s ease-out;
+}
+.modal-enter-active > div:last-child {
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+.modal-leave-active {
+  transition: opacity 0.2s ease-in;
+}
+.modal-leave-active > div:last-child {
+  transition: opacity 0.2s ease-in, transform 0.2s ease-in;
+}
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+.modal-enter-from > div:last-child {
+  opacity: 0;
+  transform: scale(0.95) translateY(8px);
+}
+.modal-leave-to > div:last-child {
+  opacity: 0;
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-float {
+    animation: none;
+  }
+  .modal-enter-active,
+  .modal-leave-active,
+  .modal-enter-active > div:last-child,
+  .modal-leave-active > div:last-child {
+    transition: none;
+  }
+}

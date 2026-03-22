@@ -1,0 +1,821 @@
+PRESENTATION: 4 slides, 10.0x5.6 inches
+
+================================================================================
+SLIDE 1 (Layout: DEFAULT)
+================================================================================
+Background: SOLID #F5F7FA
+Shapes: 45
+
+  [SHAPE] Shape 0 | fill=#1565C0 | pos=(0.00",0.00") size=(10.00"x0.06")
+  [SHAPE] Shape 1 | fill=#0A1929 | pos=(0.00",0.06") size=(10.00"x1.10")
+  [IMAGE] Image 0 | image/png | size=(256, 256)
+    Position: (0.50", 0.22") Size: (0.55"x0.55")
+
+  [TEXT] Text 2
+    Position: (1.20", 0.15") Size: (7.50"x0.70")
+    > The First EU-Native Backend-as-a-Service Platform
+      "The First EU-Native Backend-as-a-Service Platform" [Trebuchet MS, 22.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 3
+    Position: (1.20", 0.75") Size: (5.00"x0.30")
+    > Investor Overview  •  Stefan Gimeson
+      "Investor Overview  •  Stefan Gimeson" [Calibri, 10.0pt, #FFB300]
+
+  [SHAPE] Shape 4 | fill=#FFFFFF | pos=(0.50",1.40") size=(4.30"x1.50")
+  [SHAPE] Shape 5 | fill=#E53935 | pos=(0.50",1.40") size=(0.06"x1.50")
+  [TEXT] Text 6
+    Position: (0.70", 1.48") Size: (3.00"x0.30")
+    > PROBLEM
+      "PROBLEM" [Trebuchet MS, 10.0pt, BOLD, #E53935]
+
+  [TEXT] Text 7
+    Position: (0.70", 1.75") Size: (3.90"x1.05")
+    > European companies face rising pressure from GDPR, Schrems II, and the US CLOUD Act. All major backend platforms — Firebase, Supabase, AWS, Google Cloud — are US-owned and cannot guarantee true data sovereignty.
+      "European companies face rising pressure from GDPR, Schrems II, and the US CLOUD Act. All major backend platforms — Firebase, Supabase, AWS, Google Cloud — are US-owned and cannot guarantee true data sovereignty." [Calibri, 10.0pt, #1A1A2E]
+
+  [SHAPE] Shape 8 | fill=#FFFFFF | pos=(0.50",3.10") size=(4.30"x2.10")
+  [SHAPE] Shape 9 | fill=#43A047 | pos=(0.50",3.10") size=(0.06"x2.10")
+  [TEXT] Text 10
+    Position: (0.70", 3.18") Size: (3.00"x0.30")
+    > SOLUTION
+      "SOLUTION" [Trebuchet MS, 10.0pt, BOLD, #43A047]
+
+  [TEXT] Text 11
+    Position: (0.70", 3.45") Size: (3.90"x0.45")
+    > A fully EU-owned, EU-hosted, EU-jurisdiction developer platform with zero DevOps and no US legal exposure:
+      "A fully EU-owned, EU-hosted, EU-jurisdiction developer platform with zero DevOps and no US legal exposure:" [Calibri, 10.0pt, #1A1A2E]
+
+  [IMAGE] Image 1 | image/png | size=(256, 256)
+    Position: (0.75", 3.92") Size: (0.20"x0.20")
+
+  [TEXT] Text 12
+    Position: (1.05", 3.92") Size: (3.20"x0.22")
+    > Authentication
+      "Authentication" [Calibri, 9.5pt, #1A1A2E]
+
+  [IMAGE] Image 2 | image/png | size=(256, 256)
+    Position: (0.75", 4.15") Size: (0.20"x0.20")
+
+  [TEXT] Text 13
+    Position: (1.05", 4.15") Size: (3.20"x0.22")
+    > Postgres with Realtime
+      "Postgres with Realtime" [Calibri, 9.5pt, #1A1A2E]
+
+  [IMAGE] Image 3 | image/png | size=(256, 256)
+    Position: (0.75", 4.38") Size: (0.20"x0.20")
+
+  [TEXT] Text 14
+    Position: (1.05", 4.38") Size: (3.20"x0.22")
+    > Object Storage
+      "Object Storage" [Calibri, 9.5pt, #1A1A2E]
+
+  [IMAGE] Image 4 | image/png | size=(256, 256)
+    Position: (0.75", 4.61") Size: (0.20"x0.20")
+
+  [TEXT] Text 15
+    Position: (1.05", 4.61") Size: (3.20"x0.22")
+    > Serverless Functions
+      "Serverless Functions" [Calibri, 9.5pt, #1A1A2E]
+
+  [IMAGE] Image 5 | image/png | size=(256, 256)
+    Position: (0.75", 4.84") Size: (0.20"x0.20")
+
+  [TEXT] Text 16
+    Position: (1.05", 4.84") Size: (3.20"x0.22")
+    > SDKs & Dashboard
+      "SDKs & Dashboard" [Calibri, 9.5pt, #1A1A2E]
+
+  [SHAPE] Shape 17 | fill=#FFFFFF | pos=(5.20",1.40") size=(4.30"x1.90")
+  [SHAPE] Shape 18 | fill=#1565C0 | pos=(5.20",1.40") size=(0.06"x1.90")
+  [TEXT] Text 19
+    Position: (5.40", 1.48") Size: (3.80"x0.30")
+    > UNIQUE SELLING PROPOSITION
+      "UNIQUE SELLING PROPOSITION" [Trebuchet MS, 10.0pt, BOLD, #1565C0]
+
+  [IMAGE] Image 6 | image/png | size=(256, 256)
+    Position: (5.40", 1.83") Size: (0.16"x0.16")
+
+  [TEXT] Text 20
+    Position: (5.65", 1.80") Size: (3.60"x0.32")
+    > True sovereignty: 100% CLOUD Act-immune
+      "True sovereignty: " [Calibri, 9.5pt, BOLD, #1A1A2E]
+      "100% CLOUD Act-immune" [Calibri, 9.5pt, #4A5568]
+
+  [IMAGE] Image 7 | image/png | size=(256, 256)
+    Position: (5.40", 2.18") Size: (0.16"x0.16")
+
+  [TEXT] Text 21
+    Position: (5.65", 2.15") Size: (3.60"x0.32")
+    > GDPR-native: Region locking, audit logs, automated DPAs
+      "GDPR-native: " [Calibri, 9.5pt, BOLD, #1A1A2E]
+      "Region locking, audit logs, automated DPAs" [Calibri, 9.5pt, #4A5568]
+
+  [IMAGE] Image 8 | image/png | size=(256, 256)
+    Position: (5.40", 2.53") Size: (0.16"x0.16")
+
+  [TEXT] Text 22
+    Position: (5.65", 2.50") Size: (3.60"x0.32")
+    > Enterprise + GovTech: ISO roadmap, VPC & on-prem editions
+      "Enterprise + GovTech: " [Calibri, 9.5pt, BOLD, #1A1A2E]
+      "ISO roadmap, VPC & on-prem editions" [Calibri, 9.5pt, #4A5568]
+
+  [IMAGE] Image 9 | image/png | size=(256, 256)
+    Position: (5.40", 2.88") Size: (0.16"x0.16")
+
+  [TEXT] Text 23
+    Position: (5.65", 2.85") Size: (3.60"x0.32")
+    > Migration tooling: Painless move from Firebase/Supabase
+      "Migration tooling: " [Calibri, 9.5pt, BOLD, #1A1A2E]
+      "Painless move from Firebase/Supabase" [Calibri, 9.5pt, #4A5568]
+
+  [SHAPE] Shape 24 | fill=#1565C0 | pos=(5.20",3.50") size=(4.30"x1.25")
+  [TEXT] Text 25
+    Position: (5.40", 3.56") Size: (3.50"x0.25")
+    > VALUE PROPOSITION
+      "VALUE PROPOSITION" [Trebuchet MS, 10.0pt, BOLD, #FFB300]
+
+  [IMAGE] Image 10 | image/png | size=(256, 256)
+    Position: (5.40", 3.87") Size: (0.17"x0.17")
+
+  [TEXT] Text 26
+    Position: (5.65", 3.85") Size: (3.65"x0.25")
+    > Developers: Build like on Firebase — privacy-first & EU-native
+      "Developers: " [Calibri, 9.0pt, BOLD, #FFFFFF]
+      "Build like on Firebase — privacy-first & EU-native" [Calibri, 9.0pt, #CFD8DC]
+
+  [IMAGE] Image 11 | image/png | size=(256, 256)
+    Position: (5.40", 4.15") Size: (0.17"x0.17")
+
+  [TEXT] Text 27
+    Position: (5.65", 4.13") Size: (3.65"x0.25")
+    > Enterprises: Compliant, modern backend replacing US platforms
+      "Enterprises: " [Calibri, 9.0pt, BOLD, #FFFFFF]
+      "Compliant, modern backend replacing US platforms" [Calibri, 9.0pt, #CFD8DC]
+
+  [IMAGE] Image 12 | image/png | size=(256, 256)
+    Position: (5.40", 4.43") Size: (0.17"x0.17")
+
+  [TEXT] Text 28
+    Position: (5.65", 4.41") Size: (3.65"x0.25")
+    > EU Ecosystem: Building block for sovereign cloud & AI services
+      "EU Ecosystem: " [Calibri, 9.0pt, BOLD, #FFFFFF]
+      "Building block for sovereign cloud & AI services" [Calibri, 9.0pt, #CFD8DC]
+
+  [SHAPE] Shape 29 | fill=#0A1929 | pos=(0.00",5.25") size=(10.00"x0.38")
+  [IMAGE] Image 13 | image/png | size=(256, 256)
+    Position: (0.50", 5.29") Size: (0.24"x0.24")
+
+  [TEXT] Text 30
+    Position: (0.85", 5.25") Size: (8.50"x0.38")
+    > VISION  Become the default backend platform for Europe — today's biggest underserved cloud market.
+      "VISION  " [Calibri, 10.0pt, BOLD, #FFB300]
+      "Become the default backend platform for Europe — today's biggest underserved cloud market." [Calibri, 10.0pt, #FFFFFF]
+
+================================================================================
+SLIDE 2 (Layout: DEFAULT)
+================================================================================
+Background: SOLID #0A1929
+Shapes: 44
+
+  [SHAPE] Shape 0 | fill=#FFB300 | pos=(0.00",0.00") size=(10.00"x0.05")
+  [IMAGE] Image 0 | image/png | size=(256, 256)
+    Position: (0.50", 0.25") Size: (0.40"x0.40")
+
+  [TEXT] Text 1
+    Position: (1.05", 0.20") Size: (7.00"x0.50")
+    > Europe's Own Backend Platform
+      "Europe's Own Backend Platform" [Trebuchet MS, 24.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 2
+    Position: (1.05", 0.65") Size: (5.00"x0.25")
+    > Co-Founder Pitch  •  Stefan Gimeson
+      "Co-Founder Pitch  •  Stefan Gimeson" [Calibri, 10.0pt, #FFB300]
+
+  [SHAPE] Shape 3 | fill=#0D2137 | pos=(0.50",1.10") size=(9.00"x1.05")
+  [SHAPE] Shape 4 | fill=#FFB300 | pos=(0.50",1.10") size=(0.06"x1.05")
+  [TEXT] Text 5
+    Position: (0.75", 1.16") Size: (3.00"x0.22")
+    > 15-SECOND PITCH
+      "15-SECOND PITCH" [Trebuchet MS, 9.0pt, BOLD, #FFB300]
+
+  [TEXT] Text 6
+    Position: (0.75", 1.40") Size: (8.50"x0.70")
+    > We're building a fully EU-native alternative to Firebase/Supabase — a developer platform for auth, database, storage and serverless functions, hosted exclusively on European infrastructure, owned by an EU company, and immune to the US CLOUD Act.
+      "We're building a fully EU-native alternative to Firebase/Supabase — a developer platform for auth, database, storage and serverless functions, hosted exclusively on European infrastructure, owned by an EU company, and immune to the US CLOUD Act." [Calibri, 10.5pt, #B0BEC5]
+
+  [IMAGE] Image 1 | image/png | size=(256, 256)
+    Position: (0.50", 2.37") Size: (0.22"x0.22")
+
+  [TEXT] Text 7
+    Position: (0.80", 2.35") Size: (5.00"x0.26")
+    > USP — UNIQUE SELLING PROPOSITION
+      "USP — UNIQUE SELLING PROPOSITION" [Trebuchet MS, 10.0pt, BOLD, #FFB300]
+
+  [SHAPE] Shape 8 | fill=#0D2137 | pos=(0.50",2.75") size=(1.70"x1.30")
+  [SHAPE] Shape 9 | fill=#1565C0 | pos=(0.50",2.75") size=(1.70"x0.04")
+  [TEXT] Text 10
+    Position: (0.62", 2.87") Size: (1.46"x0.25")
+    > 100% EU-Owned
+      "100% EU-Owned" [Trebuchet MS, 10.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 11
+    Position: (0.62", 3.15") Size: (1.46"x0.85")
+    > EU-hosted, EU-jurisdiction.
+      "EU-hosted, EU-jurisdiction." [Calibri, 8.5pt, #90A4AE]
+    > No CLOUD Act exposure.
+      "No CLOUD Act exposure." [Calibri, 8.5pt, #90A4AE]
+    > Schrems II–safe by design.
+      "Schrems II–safe by design." [Calibri, 8.5pt, #90A4AE]
+
+  [SHAPE] Shape 12 | fill=#0D2137 | pos=(2.33",2.75") size=(1.70"x1.30")
+  [SHAPE] Shape 13 | fill=#00897B | pos=(2.33",2.75") size=(1.70"x0.04")
+  [TEXT] Text 14
+    Position: (2.44", 2.87") Size: (1.46"x0.25")
+    > Zero-DevOps
+      "Zero-DevOps" [Trebuchet MS, 10.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 15
+    Position: (2.44", 3.15") Size: (1.46"x0.85")
+    > Postgres, Auth, Storage,
+      "Postgres, Auth, Storage," [Calibri, 8.5pt, #90A4AE]
+    > Realtime, Functions —
+      "Realtime, Functions —" [Calibri, 8.5pt, #90A4AE]
+    > ready in seconds.
+      "ready in seconds." [Calibri, 8.5pt, #90A4AE]
+
+  [SHAPE] Shape 16 | fill=#0D2137 | pos=(4.15",2.75") size=(1.70"x1.30")
+  [SHAPE] Shape 17 | fill=#7B1FA2 | pos=(4.15",2.75") size=(1.70"x0.04")
+  [TEXT] Text 18
+    Position: (4.27", 2.87") Size: (1.46"x0.25")
+    > GDPR-Native
+      "GDPR-Native" [Trebuchet MS, 10.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 19
+    Position: (4.27", 3.15") Size: (1.46"x0.85")
+    > Region locking, audit
+      "Region locking, audit" [Calibri, 8.5pt, #90A4AE]
+    > logging, retention,
+      "logging, retention," [Calibri, 8.5pt, #90A4AE]
+    > automated DPAs.
+      "automated DPAs." [Calibri, 8.5pt, #90A4AE]
+
+  [SHAPE] Shape 20 | fill=#0D2137 | pos=(5.97",2.75") size=(1.70"x1.30")
+  [SHAPE] Shape 21 | fill=#E65100 | pos=(5.97",2.75") size=(1.70"x0.04")
+  [TEXT] Text 22
+    Position: (6.09", 2.87") Size: (1.46"x0.25")
+    > Enterprise-Ready
+      "Enterprise-Ready" [Trebuchet MS, 10.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 23
+    Position: (6.09", 3.15") Size: (1.46"x0.85")
+    > ISO 27001 roadmap,
+      "ISO 27001 roadmap," [Calibri, 8.5pt, #90A4AE]
+    > on-prem & private cloud
+      "on-prem & private cloud" [Calibri, 8.5pt, #90A4AE]
+    > deployable.
+      "deployable." [Calibri, 8.5pt, #90A4AE]
+
+  [SHAPE] Shape 24 | fill=#0D2137 | pos=(7.80",2.75") size=(1.70"x1.30")
+  [SHAPE] Shape 25 | fill=#C62828 | pos=(7.80",2.75") size=(1.70"x0.04")
+  [TEXT] Text 26
+    Position: (7.92", 2.87") Size: (1.46"x0.25")
+    > Migration Kit
+      "Migration Kit" [Trebuchet MS, 10.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 27
+    Position: (7.92", 3.15") Size: (1.46"x0.85")
+    > A painless exit path from
+      "A painless exit path from" [Calibri, 8.5pt, #90A4AE]
+    > Firebase/Supabase that
+      "Firebase/Supabase that" [Calibri, 8.5pt, #90A4AE]
+    > EU companies need.
+      "EU companies need." [Calibri, 8.5pt, #90A4AE]
+
+  [IMAGE] Image 2 | image/png | size=(256, 256)
+    Position: (0.50", 4.17") Size: (0.22"x0.22")
+
+  [TEXT] Text 28
+    Position: (0.80", 4.15") Size: (5.00"x0.26")
+    > VALUE PROPOSITION
+      "VALUE PROPOSITION" [Trebuchet MS, 10.0pt, BOLD, #FFB300]
+
+  [SHAPE] Shape 29 | fill=#1565C0 | pos=(0.50",4.53") size=(2.90"x0.95")
+  [IMAGE] Image 3 | image/png | size=(256, 256)
+    Position: (0.62", 4.63") Size: (0.22"x0.22")
+
+  [TEXT] Text 30
+    Position: (0.92", 4.61") Size: (2.35"x0.22")
+    > For Developers
+      "For Developers" [Trebuchet MS, 10.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 31
+    Position: (0.62", 4.91") Size: (2.66"x0.52")
+    > Launch apps in minutes without touching infrastructure — like Firebase, but privacy-first and EU-native.
+      "Launch apps in minutes without touching infrastructure — like Firebase, but privacy-first and EU-native." [Calibri, 8.5pt, #CFD8DC]
+
+  [SHAPE] Shape 32 | fill=#00695C | pos=(3.55",4.53") size=(2.90"x0.95")
+  [IMAGE] Image 4 | image/png | size=(256, 256)
+    Position: (3.67", 4.63") Size: (0.22"x0.22")
+
+  [TEXT] Text 33
+    Position: (3.97", 4.61") Size: (2.35"x0.22")
+    > For Enterprises & GovTech
+      "For Enterprises & GovTech" [Trebuchet MS, 10.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 34
+    Position: (3.67", 4.91") Size: (2.66"x0.52")
+    > A modern backend that satisfies strict EU regulatory, sovereignty, and compliance requirements.
+      "A modern backend that satisfies strict EU regulatory, sovereignty, and compliance requirements." [Calibri, 8.5pt, #CFD8DC]
+
+  [SHAPE] Shape 35 | fill=#4527A0 | pos=(6.60",4.53") size=(2.90"x0.95")
+  [IMAGE] Image 5 | image/png | size=(256, 256)
+    Position: (6.72", 4.63") Size: (0.22"x0.22")
+
+  [TEXT] Text 36
+    Position: (7.02", 4.61") Size: (2.35"x0.22")
+    > For the EU Ecosystem
+      "For the EU Ecosystem" [Trebuchet MS, 10.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 37
+    Position: (6.72", 4.91") Size: (2.66"x0.52")
+    > A sovereign cloud building block keeping sensitive data, AI pipelines, and digital services under EU control.
+      "A sovereign cloud building block keeping sensitive data, AI pipelines, and digital services under EU control." [Calibri, 8.5pt, #CFD8DC]
+
+================================================================================
+SLIDE 3 (Layout: DEFAULT)
+================================================================================
+Background: SOLID #0A1929
+Shapes: 77
+
+  [SHAPE] Shape 0 | fill=#FFB300 | pos=(0.00",0.00") size=(10.00"x0.05")
+  [IMAGE] Image 0 | image/png | size=(256, 256)
+    Position: (0.50", 0.18") Size: (0.35"x0.35")
+
+  [TEXT] Text 1
+    Position: (0.95", 0.15") Size: (7.00"x0.42")
+    > EU-Native BaaS — Infrastructure Stack
+      "EU-Native BaaS — Infrastructure Stack" [Trebuchet MS, 20.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 2
+    Position: (0.95", 0.52") Size: (6.00"x0.22")
+    > Sovereign providers powering each layer  •  Stefan Gimeson
+      "Sovereign providers powering each layer  •  Stefan Gimeson" [Calibri, 9.0pt, #FFB300]
+
+  [SHAPE] Shape 3 | fill=#0D2137 | pos=(0.50",0.88") size=(2.15"x1.95")
+  [SHAPE] Shape 4 | fill=#F9A825 | pos=(0.50",0.88") size=(2.15"x0.04")
+  [TEXT] Text 5
+    Position: (0.60", 0.95") Size: (1.95"x0.28")
+    > 🔐  Authentication
+      "🔐  Authentication" [Trebuchet MS, 10.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 6
+    Position: (0.60", 1.26") Size: (1.95"x0.18")
+    > Managed Identity & OAuth
+      "Managed Identity & OAuth" [Trebuchet MS, 7.0pt, BOLD, #F9A825]
+
+  [TEXT] Text 7
+    Position: (0.60", 1.42") Size: (1.95"x0.30")
+    > ORY, Passbolt (LU)
+      "ORY, Passbolt (LU)" [Calibri, 7.5pt, #90A4AE]
+
+  [TEXT] Text 8
+    Position: (0.60", 1.76") Size: (1.95"x0.18")
+    > Enterprise Auth
+      "Enterprise Auth" [Trebuchet MS, 7.0pt, BOLD, #F9A825]
+
+  [TEXT] Text 9
+    Position: (0.60", 1.92") Size: (1.95"x0.30")
+    > Zitadel (CH), Elastic Security (NL)
+      "Zitadel (CH), Elastic Security (NL)" [Calibri, 7.5pt, #90A4AE]
+
+  [TEXT] Text 10
+    Position: (0.60", 2.26") Size: (1.95"x0.18")
+    > Self-hosted Auth
+      "Self-hosted Auth" [Trebuchet MS, 7.0pt, BOLD, #F9A825]
+
+  [TEXT] Text 11
+    Position: (0.60", 2.42") Size: (1.95"x0.30")
+    > Keycloak (EU OSS), Authelia (FR)
+      "Keycloak (EU OSS), Authelia (FR)" [Calibri, 7.5pt, #90A4AE]
+
+  [SHAPE] Shape 12 | fill=#0D2137 | pos=(2.78",0.88") size=(2.15"x1.95")
+  [SHAPE] Shape 13 | fill=#1E88E5 | pos=(2.78",0.88") size=(2.15"x0.04")
+  [TEXT] Text 14
+    Position: (2.88", 0.95") Size: (1.95"x0.28")
+    > 🗄️  Database
+      "🗄️  Database" [Trebuchet MS, 10.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 15
+    Position: (2.88", 1.26") Size: (1.95"x0.18")
+    > Managed Postgres
+      "Managed Postgres" [Trebuchet MS, 7.0pt, BOLD, #1E88E5]
+
+  [TEXT] Text 16
+    Position: (2.88", 1.42") Size: (1.95"x0.30")
+    > Clever Cloud, Aiven (FI), Scaleway
+      "Clever Cloud, Aiven (FI), Scaleway" [Calibri, 7.5pt, #90A4AE]
+
+  [TEXT] Text 17
+    Position: (2.88", 1.76") Size: (1.95"x0.18")
+    > Cloud VM (self-host)
+      "Cloud VM (self-host)" [Trebuchet MS, 7.0pt, BOLD, #1E88E5]
+
+  [TEXT] Text 18
+    Position: (2.88", 1.92") Size: (1.95"x0.30")
+    > Hetzner, Scaleway (FR), OVHcloud (FR)
+      "Hetzner, Scaleway (FR), OVHcloud (FR)" [Calibri, 7.5pt, #90A4AE]
+
+  [SHAPE] Shape 19 | fill=#0D2137 | pos=(5.06",0.88") size=(2.15"x1.95")
+  [SHAPE] Shape 20 | fill=#43A047 | pos=(5.06",0.88") size=(2.15"x0.04")
+  [TEXT] Text 21
+    Position: (5.16", 0.95") Size: (1.95"x0.28")
+    > 📦  Object Storage
+      "📦  Object Storage" [Trebuchet MS, 10.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 22
+    Position: (5.16", 1.26") Size: (1.95"x0.18")
+    > S3-Compatible
+      "S3-Compatible" [Trebuchet MS, 7.0pt, BOLD, #43A047]
+
+  [TEXT] Text 23
+    Position: (5.16", 1.42") Size: (1.95"x0.30")
+    > Scaleway (FR), Backblaze EU (AMS)
+      "Scaleway (FR), Backblaze EU (AMS)" [Calibri, 7.5pt, #90A4AE]
+
+  [TEXT] Text 24
+    Position: (5.16", 1.76") Size: (1.95"x0.18")
+    > Self-hosted MinIO
+      "Self-hosted MinIO" [Trebuchet MS, 7.0pt, BOLD, #43A047]
+
+  [TEXT] Text 25
+    Position: (5.16", 1.92") Size: (1.95"x0.30")
+    > Hetzner, Scaleway, OVHcloud
+      "Hetzner, Scaleway, OVHcloud" [Calibri, 7.5pt, #90A4AE]
+
+  [TEXT] Text 26
+    Position: (5.16", 2.26") Size: (1.95"x0.18")
+    > File & Blob
+      "File & Blob" [Trebuchet MS, 7.0pt, BOLD, #43A047]
+
+  [TEXT] Text 27
+    Position: (5.16", 2.42") Size: (1.95"x0.30")
+    > pCloud (CH), Tresorit (CH)
+      "pCloud (CH), Tresorit (CH)" [Calibri, 7.5pt, #90A4AE]
+
+  [SHAPE] Shape 28 | fill=#0D2137 | pos=(7.34",0.88") size=(2.15"x1.95")
+  [SHAPE] Shape 29 | fill=#8E24AA | pos=(7.34",0.88") size=(2.15"x0.04")
+  [TEXT] Text 30
+    Position: (7.44", 0.95") Size: (1.95"x0.28")
+    > 🧩  Realtime
+      "🧩  Realtime" [Trebuchet MS, 10.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 31
+    Position: (7.44", 1.26") Size: (1.95"x0.18")
+    > Kafka / Event Streams
+      "Kafka / Event Streams" [Trebuchet MS, 7.0pt, BOLD, #8E24AA]
+
+  [TEXT] Text 32
+    Position: (7.44", 1.42") Size: (1.95"x0.30")
+    > Aiven (FI), Clever Cloud (FR)
+      "Aiven (FI), Clever Cloud (FR)" [Calibri, 7.5pt, #90A4AE]
+
+  [TEXT] Text 33
+    Position: (7.44", 1.76") Size: (1.95"x0.18")
+    > CDC
+      "CDC" [Trebuchet MS, 7.0pt, BOLD, #8E24AA]
+
+  [TEXT] Text 34
+    Position: (7.44", 1.92") Size: (1.95"x0.30")
+    > Postgres logical repl, Debezium EU
+      "Postgres logical repl, Debezium EU" [Calibri, 7.5pt, #90A4AE]
+
+  [TEXT] Text 35
+    Position: (7.44", 2.26") Size: (1.95"x0.18")
+    > WebSockets
+      "WebSockets" [Trebuchet MS, 7.0pt, BOLD, #8E24AA]
+
+  [TEXT] Text 36
+    Position: (7.44", 2.42") Size: (1.95"x0.30")
+    > Self-hosted Hetzner/Scaleway, Ably EU
+      "Self-hosted Hetzner/Scaleway, Ably EU" [Calibri, 7.5pt, #90A4AE]
+
+  [SHAPE] Shape 37 | fill=#0D2137 | pos=(0.50",2.96") size=(2.15"x1.95")
+  [SHAPE] Shape 38 | fill=#E65100 | pos=(0.50",2.96") size=(2.15"x0.04")
+  [TEXT] Text 39
+    Position: (0.60", 3.03") Size: (1.95"x0.28")
+    > 🔧  Serverless Functions
+      "🔧  Serverless Functions" [Trebuchet MS, 10.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 40
+    Position: (0.60", 3.34") Size: (1.95"x0.18")
+    > Managed Serverless
+      "Managed Serverless" [Trebuchet MS, 7.0pt, BOLD, #E65100]
+
+  [TEXT] Text 41
+    Position: (0.60", 3.50") Size: (1.95"x0.30")
+    > Scaleway Functions (FR)
+      "Scaleway Functions (FR)" [Calibri, 7.5pt, #90A4AE]
+
+  [TEXT] Text 42
+    Position: (0.60", 3.84") Size: (1.95"x0.18")
+    > Container Runtimes
+      "Container Runtimes" [Trebuchet MS, 7.0pt, BOLD, #E65100]
+
+  [TEXT] Text 43
+    Position: (0.60", 4.00") Size: (1.95"x0.30")
+    > Civo EU (UK, EU-hosted)
+      "Civo EU (UK, EU-hosted)" [Calibri, 7.5pt, #90A4AE]
+
+  [TEXT] Text 44
+    Position: (0.60", 4.34") Size: (1.95"x0.18")
+    > K8s-based FaaS
+      "K8s-based FaaS" [Trebuchet MS, 7.0pt, BOLD, #E65100]
+
+  [TEXT] Text 45
+    Position: (0.60", 4.50") Size: (1.95"x0.30")
+    > OpenFaaS, Knative on Hetzner/Scaleway
+      "OpenFaaS, Knative on Hetzner/Scaleway" [Calibri, 7.5pt, #90A4AE]
+
+  [SHAPE] Shape 46 | fill=#0D2137 | pos=(2.78",2.96") size=(2.15"x1.95")
+  [SHAPE] Shape 47 | fill=#00897B | pos=(2.78",2.96") size=(2.15"x0.04")
+  [TEXT] Text 48
+    Position: (2.88", 3.03") Size: (1.95"x0.28")
+    > 💾  Edge Caching & CDN
+      "💾  Edge Caching & CDN" [Trebuchet MS, 10.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 49
+    Position: (2.88", 3.34") Size: (1.95"x0.18")
+    > Global CDN, EU-owned
+      "Global CDN, EU-owned" [Trebuchet MS, 7.0pt, BOLD, #00897B]
+
+  [TEXT] Text 50
+    Position: (2.88", 3.50") Size: (1.95"x0.30")
+    > bunny.net (Slovenia) ⭐
+      "bunny.net (Slovenia) ⭐" [Calibri, 7.5pt, #90A4AE]
+
+  [TEXT] Text 51
+    Position: (2.88", 3.84") Size: (1.95"x0.18")
+    > EU Edge Security
+      "EU Edge Security" [Trebuchet MS, 7.0pt, BOLD, #00897B]
+
+  [TEXT] Text 52
+    Position: (2.88", 4.00") Size: (1.95"x0.30")
+    > Gcore (Luxembourg)
+      "Gcore (Luxembourg)" [Calibri, 7.5pt, #90A4AE]
+
+  [TEXT] Text 53
+    Position: (2.88", 4.34") Size: (1.95"x0.18")
+    > Static Hosting
+      "Static Hosting" [Trebuchet MS, 7.0pt, BOLD, #00897B]
+
+  [TEXT] Text 54
+    Position: (2.88", 4.50") Size: (1.95"x0.30")
+    > Netlify EU (US-owned, CLOUD Act)
+      "Netlify EU (US-owned, CLOUD Act)" [Calibri, 7.5pt, #90A4AE]
+
+  [SHAPE] Shape 55 | fill=#0D2137 | pos=(5.06",2.96") size=(2.15"x1.95")
+  [SHAPE] Shape 56 | fill=#C62828 | pos=(5.06",2.96") size=(2.15"x0.04")
+  [TEXT] Text 57
+    Position: (5.16", 3.03") Size: (1.95"x0.28")
+    > 📜  Logging & Monitoring
+      "📜  Logging & Monitoring" [Trebuchet MS, 10.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 58
+    Position: (5.16", 3.34") Size: (1.95"x0.18")
+    > Observability
+      "Observability" [Trebuchet MS, 7.0pt, BOLD, #C62828]
+
+  [TEXT] Text 59
+    Position: (5.16", 3.50") Size: (1.95"x0.30")
+    > Checkly (EU), Sematext (EU)
+      "Checkly (EU), Sematext (EU)" [Calibri, 7.5pt, #90A4AE]
+
+  [TEXT] Text 60
+    Position: (5.16", 3.84") Size: (1.95"x0.18")
+    > Managed Elastic
+      "Managed Elastic" [Trebuchet MS, 7.0pt, BOLD, #C62828]
+
+  [TEXT] Text 61
+    Position: (5.16", 4.00") Size: (1.95"x0.30")
+    > Elastic (NL/US mix, EU presence)
+      "Elastic (NL/US mix, EU presence)" [Calibri, 7.5pt, #90A4AE]
+
+  [TEXT] Text 62
+    Position: (5.16", 4.34") Size: (1.95"x0.18")
+    > Metrics
+      "Metrics" [Trebuchet MS, 7.0pt, BOLD, #C62828]
+
+  [TEXT] Text 63
+    Position: (5.16", 4.50") Size: (1.95"x0.30")
+    > Prometheus/Grafana on Hetzner/Scaleway
+      "Prometheus/Grafana on Hetzner/Scaleway" [Calibri, 7.5pt, #90A4AE]
+
+  [SHAPE] Shape 64 | fill=#0D2137 | pos=(7.34",2.96") size=(2.15"x1.95")
+  [SHAPE] Shape 65 | fill=#6A1B9A | pos=(7.34",2.96") size=(2.15"x0.04")
+  [TEXT] Text 66
+    Position: (7.44", 3.03") Size: (1.95"x0.28")
+    > 🤖  AI & Vector Storage
+      "🤖  AI & Vector Storage" [Trebuchet MS, 10.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 67
+    Position: (7.44", 3.34") Size: (1.95"x0.18")
+    > Vector DBs
+      "Vector DBs" [Trebuchet MS, 7.0pt, BOLD, #6A1B9A]
+
+  [TEXT] Text 68
+    Position: (7.44", 3.50") Size: (1.95"x0.30")
+    > Qdrant (DE), Weaviate (NL)
+      "Qdrant (DE), Weaviate (NL)" [Calibri, 7.5pt, #90A4AE]
+
+  [TEXT] Text 69
+    Position: (7.44", 3.84") Size: (1.95"x0.18")
+    > GPU Compute
+      "GPU Compute" [Trebuchet MS, 7.0pt, BOLD, #6A1B9A]
+
+  [TEXT] Text 70
+    Position: (7.44", 4.00") Size: (1.95"x0.30")
+    > Scaleway GPU, OVHcloud GPU, Hetzner
+      "Scaleway GPU, OVHcloud GPU, Hetzner" [Calibri, 7.5pt, #90A4AE]
+
+  [TEXT] Text 71
+    Position: (7.44", 4.34") Size: (1.95"x0.18")
+    > Embeddings / Inference
+      "Embeddings / Inference" [Trebuchet MS, 7.0pt, BOLD, #6A1B9A]
+
+  [TEXT] Text 72
+    Position: (7.44", 4.50") Size: (1.95"x0.30")
+    > Aleph Alpha (DE), Mistral AI (FR)
+      "Aleph Alpha (DE), Mistral AI (FR)" [Calibri, 7.5pt, #90A4AE]
+
+  [SHAPE] Shape 73 | fill=#051220 | pos=(0.00",5.25") size=(10.00"x0.38")
+  [IMAGE] Image 1 | image/png | size=(256, 256)
+    Position: (0.50", 5.29") Size: (0.22"x0.22")
+
+  [TEXT] Text 74
+    Position: (0.80", 5.25") Size: (8.50"x0.38")
+    > All layers sourced from EU-owned or EU-hosted providers — zero US CLOUD Act exposure.
+      "All layers sourced from EU-owned or EU-hosted providers — zero US CLOUD Act exposure." [Calibri, 9.0pt, #90A4AE]
+
+================================================================================
+SLIDE 4 (Layout: DEFAULT)
+================================================================================
+Background: SOLID #0A1929
+Shapes: 34
+
+  [SHAPE] Shape 0 | fill=#FFB300 | pos=(0.00",0.00") size=(10.00"x0.05")
+  [TEXT] Text 1
+    Position: (0.50", 0.15") Size: (7.00"x0.42")
+    > 📈  Market Opportunity
+      "📈  Market Opportunity" [Trebuchet MS, 22.0pt, BOLD, #FFFFFF]
+
+  [TEXT] Text 2
+    Position: (0.50", 0.52") Size: (8.00"x0.22")
+    > The BaaS market is booming — and Europe has zero sovereign options  •  Stefan Gimeson
+      "The BaaS market is booming — and Europe has zero sovereign options  •  Stefan Gimeson" [Calibri, 9.0pt, #FFB300]
+
+  [SHAPE] Shape 3 | fill=#0D2137 | pos=(0.50",0.88") size=(2.15"x1.35")
+  [SHAPE] Shape 4 | fill=#1565C0 | pos=(0.50",0.88") size=(2.15"x0.04")
+  [TEXT] Text 5
+    Position: (0.62", 0.98") Size: (1.91"x0.42")
+    > $8.4B
+      "$8.4B" [Trebuchet MS, 28.0pt, BOLD, #1565C0]
+
+  [TEXT] Text 6
+    Position: (0.62", 1.40") Size: (1.91"x0.38")
+    > Global BaaS
+      "Global BaaS" [Calibri, 9.5pt, #B0BEC5]
+    > Market (2024)
+      "Market (2024)" [Calibri, 9.5pt, #B0BEC5]
+
+  [TEXT] Text 7
+    Position: (0.62", 1.83") Size: (1.91"x0.25")
+    > → $31.1B by 2030
+      "→ $31.1B by 2030" [Calibri, 8.5pt, BOLD, #4CAF50]
+
+  [SHAPE] Shape 8 | fill=#0D2137 | pos=(2.78",0.88") size=(2.15"x1.35")
+  [SHAPE] Shape 9 | fill=#00897B | pos=(2.78",0.88") size=(2.15"x0.04")
+  [TEXT] Text 10
+    Position: (2.90", 0.98") Size: (1.91"x0.42")
+    > 24.3%
+      "24.3%" [Trebuchet MS, 28.0pt, BOLD, #00897B]
+
+  [TEXT] Text 11
+    Position: (2.90", 1.40") Size: (1.91"x0.38")
+    > BaaS Market
+      "BaaS Market" [Calibri, 9.5pt, #B0BEC5]
+    > CAGR
+      "CAGR" [Calibri, 9.5pt, #B0BEC5]
+
+  [TEXT] Text 12
+    Position: (2.90", 1.83") Size: (1.91"x0.25")
+    > 2024–2030 growth rate
+      "2024–2030 growth rate" [Calibri, 8.5pt, BOLD, #4CAF50]
+
+  [SHAPE] Shape 13 | fill=#0D2137 | pos=(5.06",0.88") size=(2.15"x1.35")
+  [SHAPE] Shape 14 | fill=#7B1FA2 | pos=(5.06",0.88") size=(2.15"x0.04")
+  [TEXT] Text 15
+    Position: (5.18", 0.98") Size: (1.91"x0.42")
+    > $177B
+      "$177B" [Trebuchet MS, 28.0pt, BOLD, #7B1FA2]
+
+  [TEXT] Text 16
+    Position: (5.18", 1.40") Size: (1.91"x0.38")
+    > EU Cloud
+      "EU Cloud" [Calibri, 9.5pt, #B0BEC5]
+    > Market (2025)
+      "Market (2025)" [Calibri, 9.5pt, #B0BEC5]
+
+  [TEXT] Text 17
+    Position: (5.18", 1.83") Size: (1.91"x0.25")
+    > → $525B by 2032
+      "→ $525B by 2032" [Calibri, 8.5pt, BOLD, #4CAF50]
+
+  [SHAPE] Shape 18 | fill=#0D2137 | pos=(7.34",0.88") size=(2.15"x1.35")
+  [SHAPE] Shape 19 | fill=#E65100 | pos=(7.34",0.88") size=(2.15"x0.04")
+  [TEXT] Text 20
+    Position: (7.46", 0.98") Size: (1.91"x0.42")
+    > 72%
+      "72%" [Trebuchet MS, 28.0pt, BOLD, #E65100]
+
+  [TEXT] Text 21
+    Position: (7.46", 1.40") Size: (1.91"x0.38")
+    > EU Businesses
+      "EU Businesses" [Calibri, 9.5pt, #B0BEC5]
+    > Prioritize Sovereignty
+      "Prioritize Sovereignty" [Calibri, 9.5pt, #B0BEC5]
+
+  [TEXT] Text 22
+    Position: (7.46", 1.83") Size: (1.91"x0.25")
+    > in vendor selection
+      "in vendor selection" [Calibri, 8.5pt, BOLD, #FFB300]
+
+  [TEXT] Text 23
+    Position: (0.50", 2.45") Size: (6.00"x0.26")
+    > 🏆  Competitor Landscape — All US-Owned
+      "🏆  Competitor Landscape — All US-Owned" [Trebuchet MS, 10.0pt, BOLD, #FFB300]
+
+  [TABLE] Table 0 | 6x5
+    [0,0] Platform [Trebuchet MS, 8.0pt, B, #FFFFFF]
+    [0,1] Revenue [Trebuchet MS, 8.0pt, B, #FFFFFF]
+    [0,2] Valuation / Funding [Trebuchet MS, 8.0pt, B, #FFFFFF]
+    [0,3] Developers [Trebuchet MS, 8.0pt, B, #FFFFFF]
+    [0,4] Key Insight [Trebuchet MS, 8.0pt, B, #FFFFFF]
+    [1,0] Firebase (Google) [Calibri, 8.0pt, B, #FFFFFF]
+    [1,1] $50M+ (2020) [Calibri, 8.0pt, #B0BEC5]
+    [1,2] Google subsidiary [Calibri, 8.0pt, #B0BEC5]
+    [1,3] 1M+ devs, 1.5M+ apps [Calibri, 8.0pt, #B0BEC5]
+    [1,4] Market leader, full vendor lock-in [Calibri, 8.0pt, #B0BEC5]
+    [2,0] Supabase [Calibri, 8.0pt, B, #FFFFFF]
+    [2,1] $70M ARR (2025) [Calibri, 8.0pt, B, #4CAF50]
+    [2,2] $5.1B val, $501M raised [Calibri, 8.0pt, #B0BEC5]
+    [2,3] 1.7M+ developers [Calibri, 8.0pt, #B0BEC5]
+    [2,4] 250% YoY growth, vibe-coding boom [Calibri, 8.0pt, #B0BEC5]
+    [3,0] Appwrite [Calibri, 8.0pt, B, #FFFFFF]
+    [3,1] $1–10M est. [Calibri, 8.0pt, #B0BEC5]
+    [3,2] $37M raised (Series A) [Calibri, 8.0pt, #B0BEC5]
+    [3,3] 150K+ developers [Calibri, 8.0pt, #B0BEC5]
+    [3,4] Open-source, self-hostable [Calibri, 8.0pt, #B0BEC5]
+    [4,0] AWS Amplify [Calibri, 8.0pt, B, #FFFFFF]
+    [4,1] Part of $29B+ AWS [Calibri, 8.0pt, #B0BEC5]
+    [4,2] Amazon subsidiary [Calibri, 8.0pt, #B0BEC5]
+    [4,3] Large enterprise base [Calibri, 8.0pt, #B0BEC5]
+    [4,4] Complex, deep AWS lock-in [Calibri, 8.0pt, #B0BEC5]
+    [5,0] Nhost [Calibri, 8.0pt, B, #FFFFFF]
+    [5,1] Early stage [Calibri, 8.0pt, #B0BEC5]
+    [5,2] Seed-funded [Calibri, 8.0pt, #B0BEC5]
+    [5,3] Growing (GraphQL) [Calibri, 8.0pt, #B0BEC5]
+    [5,4] Postgres + Hasura, EU-friendly but small [Calibri, 8.0pt, #B0BEC5]
+
+  [SHAPE] Shape 24 | fill=#1A237E | pos=(0.50",4.55") size=(5.80"x0.70")
+  [SHAPE] Shape 25 | fill=#FFB300 | pos=(0.50",4.55") size=(0.06"x0.70")
+  [TEXT] Text 26
+    Position: (0.75", 4.60") Size: (3.00"x0.20")
+    > THE EU GAP
+      "THE EU GAP" [Trebuchet MS, 9.0pt, BOLD, #FFB300]
+
+  [TEXT] Text 27
+    Position: (0.75", 4.80") Size: (5.35"x0.42")
+    > US hyperscalers control >70% of Europe's cloud infrastructure. There is no EU-native BaaS platform. Every major option — Firebase, Supabase, Amplify — is US-owned, US-hosted, and subject to the CLOUD Act.
+      "US hyperscalers control >70% of Europe's cloud infrastructure. " [Calibri, 9.0pt, BOLD, #FFFFFF]
+      "There is no EU-native BaaS platform. Every major option — Firebase, Supabase, Amplify — is US-owned, US-hosted, and subject to the CLOUD Act." [Calibri, 9.0pt, #B0BEC5]
+
+  [SHAPE] Shape 28 | fill=#0D2137 | pos=(6.50",4.55") size=(3.00"x0.70")
+  [TEXT] Text 29
+    Position: (6.60", 4.57") Size: (1.20"x0.50")
+    > 0 align=RIGHT
+      "0" [Trebuchet MS, 40.0pt, BOLD, #E53935]
+
+  [TEXT] Text 30
+    Position: (7.60", 4.63") Size: (1.80"x0.50")
+    > EU-native BaaS
+      "EU-native BaaS" [Calibri, 9.5pt, BOLD, #FFFFFF]
+    > platforms exist today
+      "platforms exist today" [Calibri, 9.5pt, BOLD, #FFFFFF]
+
+  [SHAPE] Shape 31 | fill=#051220 | pos=(0.00",5.25") size=(10.00"x0.38")
+  [TEXT] Text 32
+    Position: (0.50", 5.25") Size: (9.00"x0.38")
+    > Sources: Research & Markets (BaaS Market 2024-2030) • Sacra.com (Supabase ARR 2025) • Tracxn (Supabase $5.1B val, Appwrite funding) • Getlatka (Firebase $50M rev) • Crunchbase (Firebase 1M+ devs) • Fortune Business Insights (EU Cloud Market) • Impossible Cloud / Gart Solutions (EU sovereignty data) • Bitcot.com (Firebase 1.5M+ apps)
+      "Sources: " [Calibri, 6.5pt, BOLD, #FFB300]
+      "Research & Markets (BaaS Market 2024-2030) • Sacra.com (Supabase ARR 2025) • Tracxn (Supabase $5.1B val, Appwrite funding) • Getlatka (Firebase $50M rev) • Crunchbase (Firebase 1M+ devs) • Fortune Business Insights (EU Cloud Market) • Impossible Cloud / Gart Solutions (EU sovereignty data) • Bitcot.com (Firebase 1.5M+ apps)" [Calibri, 6.5pt, #607D8B]
+
