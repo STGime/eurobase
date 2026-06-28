@@ -4,7 +4,7 @@
 <template>
   <footer aria-label="Site footer" class="bg-navy-footer border-t border-navy-light">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
         <div class="md:col-span-1">
           <RouterLink to="/" class="inline-block mb-4">
             <span class="text-xl font-bold text-text-white font-heading">euro</span><span class="text-xl font-bold text-accent-gold font-heading">base</span>
@@ -25,6 +25,14 @@
             <li><a href="/#pricing" class="text-text-muted text-sm hover:text-text-white transition-colors">Pricing</a></li>
             <li><a href="/#developers" class="text-text-muted text-sm hover:text-text-white transition-colors">Documentation</a></li>
             <li><a href="/#vision" class="text-text-muted text-sm hover:text-text-white transition-colors">Roadmap</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-text-white font-semibold text-sm mb-4">Compare</h4>
+          <ul class="space-y-2">
+            <li><RouterLink to="/vs/supabase" class="text-text-muted text-sm hover:text-text-white transition-colors">Eurobase vs Supabase</RouterLink></li>
+            <li><RouterLink to="/vs/firebase" class="text-text-muted text-sm hover:text-text-white transition-colors">Eurobase vs Firebase</RouterLink></li>
           </ul>
         </div>
 

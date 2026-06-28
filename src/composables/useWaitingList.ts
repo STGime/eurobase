@@ -1,7 +1,8 @@
 import { ref } from 'vue'
 import { neon } from '@neondatabase/serverless'
 
-const sql = neon(import.meta.env.VITE_NEON_DATABASE_URL)
+const dbUrl = import.meta.env.VITE_NEON_DATABASE_URL
+const sql = dbUrl ? neon(dbUrl) : null
 
 export type UserType = 'solo_developer' | 'startup' | 'smb' | 'enterprise' | 'agency' | 'other'
 
@@ -38,6 +39,10 @@ export function useWaitingList() {
     loading.value = true
 
     try {
+      if (!sql) {
+        error.value = 'Waiting list is temporarily unavailable. Please try again later.'
+        return
+      }
       await sql`
         INSERT INTO waiting_list (email, user_type, source)
         VALUES (${email}, ${userType}, ${source})

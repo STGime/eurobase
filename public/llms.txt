@@ -1,0 +1,94 @@
+# Eurobase
+
+> EU-sovereign Backend-as-a-Service platform. European alternative to Firebase and Supabase.
+
+Eurobase provides authentication, managed PostgreSQL, object storage, realtime subscriptions, edge functions, encrypted vault, cron jobs, webhooks, CLI, and audit logging — all on 100% EU infrastructure (Scaleway, France). No CLOUD Act exposure. GDPR-native by design.
+
+## Quick Facts
+
+- Website: https://eurobase.app
+- Console: https://console.eurobase.app
+- Docs: https://docs.eurobase.app
+- Status: Beta (early access May 2026)
+- Infrastructure: Scaleway, Paris, France (EU-owned)
+- SDK: @eurobase/sdk (TypeScript/JavaScript, zero dependencies)
+- CLI: @eurobase/cli (30+ commands)
+
+## Core Features
+
+1. Authentication — Email/password, magic links, OAuth (Google, GitHub, LinkedIn, Apple, Microsoft), phone SMS OTP. JWT sessions with refresh tokens.
+2. Managed PostgreSQL — REST API, SQL editor, row-level security with presets, schema management, full-text search. PostgREST-style query params.
+3. Object Storage — S3-compatible. Upload, download, list, delete, signed URLs. Supports File, Blob, ArrayBuffer, Uint8Array, Buffer.
+4. Realtime — WebSocket subscriptions for INSERT/UPDATE/DELETE events on tables. Auto-reconnect with exponential backoff.
+5. Edge Functions — Serverless TypeScript/JavaScript (Deno runtime). DB triggers, scheduling, versioning, environment variables.
+6. Vault — AES-256-GCM encrypted key-value store. Requires secret API key (eb_sk_*).
+7. Cron Jobs — Schedule SQL queries and RPC calls with execution logs.
+8. Webhooks — Event-driven HTTP delivery with retry logic and HMAC signing.
+9. CLI — 30+ commands: projects, database, storage, vault, functions, migrations.
+10. Audit & Compliance — GDPR export, DPA reports, sub-processor registry, full action logging.
+
+## SDK Quickstart
+
+```typescript
+import { createClient } from '@eurobase/sdk'
+
+const euro = createClient({
+  url: 'https://my-app.eurobase.app',
+  apiKey: 'eb_pk_...',
+})
+
+// Or use connection string:
+// const euro = createClient('eurobase://eb_pk_xxx@my-app.eurobase.app')
+
+// Auth
+await euro.auth.signUp({ email: 'user@example.com', password: 'secret' })
+await euro.auth.signIn({ email: 'user@example.com', password: 'secret' })
+euro.auth.signInWithOAuth('google')
+
+// Database (fluent query builder)
+const { data } = await euro.db.from('todos').select('id', 'title').eq('done', 'false').order('created_at', { ascending: false }).limit(20)
+
+// Insert / Update / Delete
+await euro.db.from('todos').insert({ title: 'Buy milk' })
+await euro.db.from('todos').update('uuid', { done: true })
+await euro.db.from('todos').delete('uuid')
+
+// Schema DDL (requires secret key eb_sk_*)
+await euro.db.schema.createTable('posts', {
+  columns: [
+    { name: 'id', type: 'uuid', primary_key: true, default_value: 'gen_random_uuid()' },
+    { name: 'title', type: 'text' },
+    { name: 'user_id', type: 'uuid' },
+  ],
+})
+
+// Storage
+await euro.storage.upload('avatars/me.png', file)
+const { objects } = await euro.storage.list({ prefix: 'avatars/' })
+const { url } = await euro.storage.createSignedUrl('avatars/me.png', 'download')
+
+// Realtime
+euro.realtime.on('orders', 'INSERT', (event) => console.log(event))
+
+// Vault (secret key only)
+await euro.vault.set('STRIPE_KEY', 'sk_live_...')
+const { data: key } = await euro.vault.get('STRIPE_KEY')
+
+// Edge Functions
+const { data: result } = await euro.functions.invoke('process-order', { body: { orderId: '123' } })
+
+// Health check
+const { ok, latency_ms } = await euro.status()
+```
+
+## Pricing
+
+- Free: 500 MB database, 1 GB storage, 5 GB bandwidth, 10K MAU, 2 projects, 3 functions, 3 webhooks
+- Pro: 5 GB database, 50 GB storage, 100 GB bandwidth, 100K MAU, 10 projects, 25 functions, unlimited webhooks
+- Enterprise: Custom limits, dedicated infrastructure, SLA
+
+## Links
+
+- Full API reference: https://eurobase.app/llms-full.txt
+- GitHub: https://github.com/eurobase
+- Contact: founders@eurobase.app

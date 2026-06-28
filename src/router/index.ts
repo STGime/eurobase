@@ -23,13 +23,34 @@ const router = createRouter({
       name: 'impressum',
       component: () => import('@/pages/ImpressumPage.vue'),
     },
+    {
+      path: '/blog/:slug',
+      name: 'blog-post',
+      component: () => import('@/pages/BlogPostPage.vue'),
+    },
+    {
+      path: '/vs/:slug',
+      name: 'comparison',
+      component: () => import('@/pages/ComparisonPage.vue'),
+    },
+    {
+      path: '/features/dsar',
+      name: 'feature-dsar',
+      component: () => import('@/pages/DsarFeaturePage.vue'),
+    },
   ],
   scrollBehavior(to) {
     if (to.hash) {
       return { el: to.hash, behavior: 'smooth' }
     }
-    return { top: 0 }
+    return { top: 0, behavior: 'smooth' }
   },
+})
+
+router.afterEach((to) => {
+  if (!to.hash) {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }
 })
 
 export default router
