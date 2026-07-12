@@ -131,7 +131,7 @@ import { legalStrings as ls } from '@/data/legalStrings'
             <li>Google LLC (US) and GitHub Inc. (US) — OAuth identity verification, only if you choose to sign in via those providers; covered by the EU-US Data Privacy Framework</li>
           </ul>
           <p class="mt-3">
-            The current list is published at <a href="/sub-processors" class="text-accent-blue hover:underline">/sub-processors</a>. We notify existing customers 30 days before adding or replacing a sub-processor.
+            The current sub-processor list is available on request from <a :href="`mailto:${ls.dpoEmail}`" class="text-accent-blue hover:underline">{{ ls.dpoEmail }}</a>; a self-service copy will be published at /sub-processors alongside the general-availability launch. We notify existing customers 30 days before adding or replacing a sub-processor.
           </p>
         </section>
 
