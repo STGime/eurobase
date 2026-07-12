@@ -86,7 +86,7 @@ import { legalStrings as ls } from '@/data/legalStrings'
             You retain full ownership of all data you store on the Eurobase platform ("Customer Data"). We do not access, use, or share your Customer Data except as necessary to provide the Service, as required by law, or as described in our Privacy Policy.
           </p>
           <p class="mt-3">
-            Where we process personal data on your behalf, we act as a data processor under GDPR Article 28. Our Data Processing Agreement (DPA) is available at <a href="/dpa" class="text-accent-blue hover:underline">/dpa</a> and forms part of these Terms.
+            Where we process personal data on your behalf, we act as a data processor under GDPR Article 28. A Data Processing Agreement (DPA) applies whenever you process personal data via the Service. The current DPA is available on request from <a :href="`mailto:${ls.dpoEmail}`" class="text-accent-blue hover:underline">{{ ls.dpoEmail }}</a>; a self-service copy will be published at /dpa alongside the general-availability launch.
           </p>
         </section>
 
