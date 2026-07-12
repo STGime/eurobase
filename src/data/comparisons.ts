@@ -59,6 +59,11 @@ export const comparisons: Record<string, ComparisonData> = {
       { feature: 'CLI', eurobase: '30+ commands', competitor: 'CLI available' },
       { feature: 'Audit Logging', eurobase: 'Built-in — actor, action, IP, timestamp', competitor: 'Not built-in', highlight: true },
       { feature: 'DPA Reports', eurobase: 'Automated', competitor: 'On request' },
+      // Migration CLI row — highlight because "how do I get off?" is
+      // the first question a Supabase user asks. Coming-soon phrasing
+      // matches the SolutionSection badge; keep them in sync when the
+      // feature graduates.
+      { feature: 'Migration from Supabase', eurobase: 'One-command CLI (coming soon) — DB, auth, storage, functions', competitor: '—', highlight: true },
     ],
     sovereigntyHeadline: 'Data Sovereignty Is Not a Feature Toggle',
     sovereigntyPoints: [

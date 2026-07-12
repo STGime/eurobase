@@ -35,6 +35,13 @@ export const solution = {
     { name: 'CLI Tool', icon: '\u2328\uFE0F', color: '#1565C0', description: '50+ commands for projects, database, storage, vault, functions, and migrations' },
     { name: 'MCP Server', icon: '🤖', color: '#3949AB', description: 'AI IDE integration (Claude Code, Cursor, Codex, Windsurf): list tables, run SQL, manage Vault, invoke functions' },
     { name: 'DSAR & Compliance', icon: '📋', color: '#AD1457', description: 'One-click GDPR Article 15 + 20 exports, Article 30 DPA reports, tamper-evident audit log, sub-processor registry' },
+    // Supabase → Eurobase migration CLI. Code has shipped on main
+    // but is being validated end-to-end (see #278 in the backend
+    // repo). Marketing card carries `comingSoon: true` so the UI
+    // renders a badge and we don't overset expectations. Flip to
+    // false and remove the flag once section 9's sign-off criteria
+    // are met.
+    { name: 'Supabase Migration', icon: '🔀', color: '#3ECF8E', description: 'One-command CLI to import database, auth users, storage, and edge functions from Supabase — coming soon', comingSoon: true },
   ],
   footer: ['No DevOps required.', 'No sovereignty compromise.'],
 }
