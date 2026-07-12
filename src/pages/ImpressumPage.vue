@@ -1,83 +1,84 @@
 <script setup lang="ts">
+// Impressum-equivalent for an Estonian OÜ. Estonia doesn't require a
+// German-style TMG-mandated Impressum, but many EU visitors expect
+// this page at /impressum and we want the German-speaking audience to
+// find it. We keep the German-language conventions where they still
+// apply (headings, dispute-resolution note) and drop the TMG/RStV
+// citations since we're not established in Germany.
+import { legalStrings as ls } from '@/data/legalStrings'
 </script>
 
 <template>
   <main class="pt-24 pb-16 bg-navy min-h-screen">
     <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl md:text-4xl font-bold text-text-white mb-8 font-heading">Impressum</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-text-white mb-8 font-heading">Impressum / Legal notice</h1>
 
       <div class="prose-legal space-y-6 text-text-light text-sm leading-relaxed">
         <section>
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Angaben gemäß § 5 TMG</h2>
+          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Company details</h2>
           <p>
-            Stefan Gimeson<br />
-            Postfach 37 03 29<br />
-            14133 Berlin<br />
-            Deutschland
+            {{ ls.legalEntity }}<br />
+            {{ ls.registeredAddress }}<br />
+            Estonia
+          </p>
+          <p class="mt-3">
+            Estonian commercial register (Äriregister) code: {{ ls.registryNumber }}<br />
+            EU VAT: {{ ls.vatNumber }}
           </p>
         </section>
 
         <section>
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Kontakt</h2>
+          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Contact</h2>
           <p>
-            Telefon: <a href="tel:+493040783108" class="text-accent-blue hover:underline">+49 30 40783108</a><br />
-            E-Mail: <a href="mailto:hello@eurobase.app" class="text-accent-blue hover:underline">hello@eurobase.app</a>
+            E-Mail: <a :href="`mailto:${ls.supportEmail}`" class="text-accent-blue hover:underline">{{ ls.supportEmail }}</a><br />
+            Data protection: <a :href="`mailto:${ls.dpoEmail}`" class="text-accent-blue hover:underline">{{ ls.dpoEmail }}</a>
           </p>
         </section>
 
         <section>
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Responsible for the content</h2>
           <p>
-            Stefan Gimeson<br />
-            Postfach 37 03 29<br />
-            14133 Berlin<br />
-            Deutschland
+            {{ ls.legalEntity }}<br />
+            {{ ls.registeredAddress }}
           </p>
         </section>
 
         <section>
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">EU-Streitschlichtung</h2>
+          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">EU-Streitschlichtung / EU Online Dispute Resolution</h2>
           <p>
-            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit /
+            The European Commission provides an Online Dispute Resolution platform:
             <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline">https://ec.europa.eu/consumers/odr/</a>.
           </p>
-          <p>Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+          <p>Our email address is listed above.</p>
         </section>
 
         <section>
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
+          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Consumer dispute resolution</h2>
           <p>
             Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+            We are not obliged, nor do we voluntarily participate, in alternative dispute-resolution proceedings before a consumer arbitration board.
           </p>
         </section>
 
         <section>
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Haftung für Inhalte</h2>
+          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Liability for content</h2>
           <p>
-            Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
-          </p>
-          <p>
-            Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+            The content of this website is provided by {{ ls.legalEntity }} to the best of our knowledge and belief. We assume no liability for the correctness, completeness, or topicality of the content, except where required by mandatory law. As a service provider, we are responsible for our own content under general law but are not obliged under Estonian law implementing Directive 2000/31/EC to monitor transmitted or stored third-party information.
           </p>
         </section>
 
         <section>
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Haftung für Links</h2>
+          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Liability for links</h2>
           <p>
-            Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.
-          </p>
-          <p>
-            Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+            Our offering contains links to external third-party websites, whose content we cannot control. We therefore cannot assume any liability for that external content. Responsibility for the content of linked pages rests solely with their respective operators. The linked pages were reviewed for possible legal infringements at the time of linking; no unlawful content was identifiable at that time. Permanent content monitoring of the linked pages is not reasonable without specific evidence of a legal infringement. Upon becoming aware of any legal infringements, we will remove such links without delay.
           </p>
         </section>
 
         <section>
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Urheberrecht</h2>
+          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Copyright</h2>
           <p>
-            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.
-          </p>
-          <p>
-            Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
+            The content on this site is subject to the copyright laws of Estonia and applicable EU law. Reproduction, adaptation, distribution, or any form of exploitation outside the limits of copyright law requires the written consent of the respective author or creator. Downloads and copies of this site are permitted only for private, non-commercial use.
           </p>
         </section>
       </div>
