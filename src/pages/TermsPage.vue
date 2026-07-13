@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import { legalStrings as ls } from '@/data/legalStrings'
 </script>
 
 <template>
   <main class="pt-24 pb-16 bg-navy min-h-screen">
     <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <h1 class="text-3xl md:text-4xl font-bold text-text-white mb-2 font-heading">Terms &amp; Conditions</h1>
-      <p class="text-text-muted text-sm mb-8">Last updated: February 18, 2026</p>
+      <p class="text-text-muted text-sm mb-8">Version {{ ls.documentVersion }} — effective {{ ls.effectiveDate }}</p>
 
       <div class="space-y-8 text-text-light text-sm leading-relaxed">
         <section>
@@ -14,10 +15,11 @@
             These Terms &amp; Conditions ("Terms") govern your use of the Eurobase website at eurobase.app (the "Website") and the Eurobase backend-as-a-service platform (the "Service"), operated by:
           </p>
           <p class="mt-3">
-            Stefan Gimeson<br />
-            Postfach 37 03 29<br />
-            14133 Berlin, Deutschland<br />
-            E-Mail: <a href="mailto:hello@eurobase.app" class="text-accent-blue hover:underline">hello@eurobase.app</a>
+            {{ ls.legalEntity }}<br />
+            {{ ls.registeredAddress }}<br />
+            Registry number: {{ ls.registryNumber }}<br />
+            VAT: {{ ls.vatNumber }}<br />
+            E-Mail: <a :href="`mailto:${ls.supportEmail}`" class="text-accent-blue hover:underline">{{ ls.supportEmail }}</a>
           </p>
           <p class="mt-3">
             By accessing the Website or using the Service, you agree to be bound by these Terms. If you do not agree, please do not use the Website or Service.
@@ -30,21 +32,22 @@
             Eurobase provides a European-native backend-as-a-service platform offering authentication, managed PostgreSQL databases, object storage, realtime data subscriptions, and serverless functions. The Service is hosted exclusively on European infrastructure under EU jurisdiction.
           </p>
           <p class="mt-3">
-            The Service is currently in development. Access to early versions may be granted through our Early Access Program. Features, availability, and specifications are subject to change during this phase.
+            The Service is currently in public beta. Access is open, but features, availability, and specifications are subject to change during this phase.
           </p>
         </section>
 
         <section>
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">3. Early Access Program</h2>
+          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">3. Public Beta</h2>
           <p>
-            The Early Access Program provides pre-release access to the Eurobase platform. By joining the program, you acknowledge that:
+            The Service is offered as a public beta. By using it, you acknowledge that:
           </p>
           <ul class="list-disc list-inside mt-2 space-y-1 text-text-muted">
-            <li>The Service is provided "as is" during the early access phase</li>
-            <li>Features may be incomplete, changed, or removed without notice</li>
-            <li>Data stored during early access may not be preserved for the general release</li>
-            <li>No uptime guarantees or SLAs apply during early access</li>
-            <li>We may limit, suspend, or terminate early access at any time</li>
+            <li>The Service is provided "as is" during the beta phase.</li>
+            <li>Features may be incomplete, changed, or removed without notice.</li>
+            <li>Data stored during beta may not be preserved for the general release; the general-availability launch may require a fresh Project.</li>
+            <li>No uptime guarantees or SLAs apply during beta.</li>
+            <li>We may reset, downgrade, or migrate any Project as part of platform preparation for general availability, with at least 14 days' notice before a reset that affects Customer Data. Export tooling remains available throughout that window.</li>
+            <li>We may limit, suspend, or terminate beta access at any time.</li>
           </ul>
         </section>
 
@@ -83,14 +86,14 @@
             You retain full ownership of all data you store on the Eurobase platform ("Customer Data"). We do not access, use, or share your Customer Data except as necessary to provide the Service, as required by law, or as described in our Privacy Policy.
           </p>
           <p class="mt-3">
-            Where we process personal data on your behalf, we act as a data processor under GDPR Article 28. A Data Processing Agreement (DPA) will be provided for all paid plans.
+            Where we process personal data on your behalf, we act as a data processor under GDPR Article 28. A Data Processing Agreement (DPA) applies whenever you process personal data via the Service. The current DPA is available on request from <a :href="`mailto:${ls.dpoEmail}`" class="text-accent-blue hover:underline">{{ ls.dpoEmail }}</a>; a self-service copy will be published at /dpa alongside the general-availability launch.
           </p>
         </section>
 
         <section>
           <h2 class="text-lg font-bold text-text-white mb-3 font-heading">7. Data Sovereignty</h2>
           <p>
-            All Customer Data is stored and processed exclusively within the European Economic Area (EEA) on infrastructure operated by EU-owned providers. We guarantee that Customer Data will not be transferred to, accessed from, or subject to the jurisdiction of any non-EU country.
+            All Customer Data is stored and processed exclusively within the European Economic Area (EEA) on infrastructure operated by EU-owned providers. We do not transfer Customer Data to non-EU jurisdictions in the ordinary course of providing the Service.
           </p>
         </section>
 
@@ -100,17 +103,17 @@
             The Service is offered in multiple tiers as described on our pricing page. All prices are stated in Euros (EUR) and are exclusive of applicable value-added tax (VAT) unless stated otherwise.
           </p>
           <ul class="list-disc list-inside mt-2 space-y-1 text-text-muted">
-            <li>Free tier: No payment required; subject to usage limits</li>
-            <li>Paid tiers: Billed monthly or annually; payment due in advance</li>
-            <li>Usage overages are billed at the rates published on the pricing page</li>
-            <li>We reserve the right to change pricing with 30 days' written notice</li>
+            <li>Free tier: no payment required; subject to usage limits and idle-pause after 30 days without activity.</li>
+            <li>Paid tiers: billed monthly or annually; payment due in advance.</li>
+            <li>Usage overages are billed at the rates published on the pricing page.</li>
+            <li>We reserve the right to change pricing with 30 days' written notice.</li>
           </ul>
         </section>
 
         <section>
           <h2 class="text-lg font-bold text-text-white mb-3 font-heading">9. Availability &amp; Support</h2>
           <p>
-            We aim to maintain high availability for the Service but do not guarantee uninterrupted access. Planned maintenance will be announced in advance where possible. Service Level Agreements (SLAs) are available for Enterprise plans.
+            We aim to maintain high availability for the Service but do not guarantee uninterrupted access. Planned maintenance will be announced in advance where possible. Service Level Agreements (SLAs) are available for higher tiers as those launch.
           </p>
         </section>
 
@@ -140,9 +143,9 @@
             Either party may terminate this agreement at any time. Upon termination:
           </p>
           <ul class="list-disc list-inside mt-2 space-y-1 text-text-muted">
-            <li>You may export your Customer Data for 30 days following termination</li>
-            <li>After the 30-day export period, your Customer Data will be permanently deleted</li>
-            <li>Any outstanding payments remain due</li>
+            <li>You may export your Customer Data for 30 days following termination.</li>
+            <li>After the 30-day export period, your Customer Data will be permanently deleted.</li>
+            <li>Any outstanding payments remain due.</li>
           </ul>
           <p class="mt-3">
             We may terminate or suspend your access immediately if you violate these Terms.
@@ -152,10 +155,10 @@
         <section>
           <h2 class="text-lg font-bold text-text-white mb-3 font-heading">13. Governing Law &amp; Jurisdiction</h2>
           <p>
-            These Terms are governed by the laws of the Federal Republic of Germany. Any disputes arising from these Terms shall be subject to the exclusive jurisdiction of the courts of Berlin, Germany.
+            These Terms are governed by the law of {{ ls.governingLaw }}. Any disputes arising from these Terms shall be subject to the exclusive jurisdiction of the {{ ls.courtOfJurisdiction }}.
           </p>
           <p class="mt-3">
-            For consumers within the EU, mandatory consumer protection provisions of your country of residence shall apply where they provide greater protection.
+            For consumers within the EU, mandatory consumer protection provisions of your country of residence shall apply where they provide greater protection. Consumers may also use the EU Online Dispute Resolution platform at <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline">https://ec.europa.eu/consumers/odr</a>.
           </p>
         </section>
 
@@ -172,8 +175,10 @@
             For questions about these Terms, contact us at:
           </p>
           <p class="mt-3">
-            E-Mail: <a href="mailto:hello@eurobase.app" class="text-accent-blue hover:underline">hello@eurobase.app</a><br />
-            Telefon: <a href="tel:+493040783108" class="text-accent-blue hover:underline">+49 30 40783108</a>
+            {{ ls.legalEntity }}<br />
+            {{ ls.registeredAddress }}<br />
+            E-Mail: <a :href="`mailto:${ls.supportEmail}`" class="text-accent-blue hover:underline">{{ ls.supportEmail }}</a><br />
+            Data protection: <a :href="`mailto:${ls.dpoEmail}`" class="text-accent-blue hover:underline">{{ ls.dpoEmail }}</a>
           </p>
         </section>
       </div>

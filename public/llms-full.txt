@@ -1,0 +1,611 @@
+# Eurobase — Full API Reference
+
+> EU-sovereign Backend-as-a-Service platform. The European alternative to Firebase and Supabase.
+> This is the comprehensive reference for AI models. For a concise overview, see /llms.txt.
+
+## Overview
+
+Eurobase is a fully European-operated backend-as-a-service (BaaS) platform providing 10 integrated services:
+authentication, managed PostgreSQL, object storage, realtime subscriptions, edge functions, encrypted vault,
+cron jobs, webhooks, CLI tooling, and audit/compliance. All infrastructure runs on Scaleway (Paris, France) —
+100% EU-owned, zero US CLOUD Act exposure, GDPR-native by design.
+
+- Website: https://eurobase.app
+- Console: https://console.eurobase.app
+- Docs: https://docs.eurobase.app
+- Status: Beta (public early access May 2026)
+- SDK package: @eurobase/sdk (npm)
+- CLI package: @eurobase/cli (npm)
+
+---
+
+## 1. SDK — @eurobase/sdk
+
+Zero external dependencies. Works in browsers and Node.js 18+.
+
+### Installation
+
+```bash
+npm install @eurobase/sdk
+```
+
+### Client Initialization
+
+```typescript
+import { createClient } from '@eurobase/sdk'
+
+// Object config
+const euro = createClient({
+  url: 'https://my-app.eurobase.app',
+  apiKey: 'eb_pk_...',
+})
+
+// Connection string format
+const euro = createClient('eurobase://eb_pk_xxx@my-app.eurobase.app')
+```
+
+**Exports from @eurobase/sdk:**
+- `createClient(config | connectionString)` — factory, returns EurobaseClient
+- `EurobaseClient` — interface with `.auth`, `.db`, `.functions`, `.storage`, `.realtime`, `.vault`, `.status()`
+- `EurobaseConfig` — `{ url: string, apiKey: string }`
+- `QueryBuilder`, `DatabaseClient`, `QueryResult`
+- `StorageClient`, `UploadResult`, `SignedUrlResult`, `ObjectInfo`, `ListResult`, `ListOptions`, `UploadOptions`, `SignedUrlOptions`
+- `RealtimeClient`, `RealtimeEvent`, `SubscriptionCallback`, `Subscription`, `RealtimeEventType`
+- `AuthClient`, `AuthUser`, `AuthSession`, `SignUpCredentials`, `SignInCredentials`, `AuthEvent`, `AuthStateChangeCallback`
+- `FunctionsClient`, `FunctionInvokeOptions`, `FunctionError`
+- `VaultClient`, `VaultSecret`, `VaultSecretMeta`
+- `SchemaClient`, `ColumnDefinition`, `CreateTableOptions`, `CreateTableResult`, `RLSPreset`
+
+### API Keys
+
+Two key types:
+- **Public key** (`eb_pk_*`) — safe for client-side code. Used for auth, database reads (with RLS), storage, realtime.
+- **Secret key** (`eb_sk_*`) — server-side only. Required for vault, schema DDL, and bypassing RLS.
+
+---
+
+## 2. Authentication (euro.auth)
+
+6 authentication methods. JWT-based sessions with automatic refresh.
+
+### Methods
+
+```typescript
+// Email/password
+auth.signUp({ email, password, metadata? }): Promise<{ data: AuthSession | null, error: string | null }>
+auth.signIn({ email, password }): Promise<{ data: AuthSession | null, error: string | null }>
+auth.signOut(): Promise<{ error: string | null }>
+auth.refreshSession(): Promise<{ data: AuthSession | null, error: string | null }>
+
+// Magic links (passwordless)
+auth.requestMagicLink(email): Promise<{ error: string | null }>
+auth.signInWithMagicLink(token): Promise<{ data: AuthSession | null, error: string | null }>
+
+// OAuth (browser redirect flow)
+auth.signInWithOAuth(provider, { redirectTo? }): void
+auth.handleOAuthCallback(): { data: AuthSession | null, error: string | null }
+// Supported providers: google, github, linkedin, apple, microsoft
+
+// Phone SMS OTP — via REST API (see endpoints below)
+
+// Session management
+auth.getUser(): Promise<{ data: AuthUser | null, error: string | null }>
+auth.getSession(): AuthSession | null
+auth.onAuthStateChange(callback): () => void  // returns unsubscribe fn
+```
+
+### Types
+
+```typescript
+interface AuthUser {
+  id: string
+  email: string
+  display_name?: string
+  avatar_url?: string
+  metadata?: Record<string, any>
+  created_at: string
+  updated_at: string
+}
+
+interface AuthSession {
+  access_token: string
+  token_type: string
+  expires_in: number
+  refresh_token: string
+  user: AuthUser
+}
+
+type AuthEvent = 'SIGNED_IN' | 'SIGNED_OUT' | 'TOKEN_REFRESHED'
+```
+
+### Auth REST Endpoints
+
+```
+POST /v1/auth/signup              — Email/password sign-up
+POST /v1/auth/signin              — Email/password sign-in
+POST /v1/auth/signout             — Sign out (revoke refresh token)
+POST /v1/auth/refresh             — Refresh access token
+POST /v1/auth/forgot-password     — Request password reset email
+POST /v1/auth/reset-password      — Reset password with token
+POST /v1/auth/verify-email        — Verify email with token
+POST /v1/auth/resend-verification — Resend verification email
+POST /v1/auth/request-magic-link  — Send magic link email
+POST /v1/auth/signin-magic-link   — Sign in with magic link token
+GET  /v1/auth/oauth/{provider}    — Initiate OAuth redirect
+GET  /v1/auth/oauth/{provider}/callback — OAuth callback
+POST /v1/auth/phone/send-otp      — Send SMS OTP
+POST /v1/auth/phone/verify        — Verify SMS OTP
+GET  /v1/auth/user                — Get current user (requires JWT)
+```
+
+---
+
+## 3. Database (euro.db)
+
+Managed PostgreSQL with a fluent query builder. PostgREST-style query parameters.
+
+### Query Builder
+
+```typescript
+// Start a query chain
+const query = euro.db.from<Type>('table_name')
+
+// Column selection
+.select('col1', 'col2', ...)
+
+// Filters
+.eq(column, value)      // column = value
+.neq(column, value)     // column != value
+.gt(column, value)      // column > value
+.gte(column, value)     // column >= value
+.lt(column, value)      // column < value
+.lte(column, value)     // column <= value
+.like(column, pattern)  // LIKE (case-sensitive)
+.ilike(column, pattern) // ILIKE (case-insensitive)
+.in(column, values[])   // IN (value1, value2, ...)
+
+// Ordering & Pagination
+.order(column, { ascending?: boolean })
+.limit(count)
+.offset(count)
+.single()  // expect exactly one row, unwraps array
+
+// Awaitable — implements PromiseLike
+const { data, count, error } = await query
+```
+
+### Write Operations
+
+```typescript
+// Insert
+await euro.db.from('todos').insert({ title: 'Buy milk', user_id: 'uuid' })
+
+// Update by ID
+await euro.db.from('todos').update('row-uuid', { done: true })
+
+// Delete by ID
+await euro.db.from('todos').delete('row-uuid')
+
+// Raw SQL (via REST)
+POST /v1/db/sql  — body: { query: "SELECT ...", params: [] }
+POST /v1/db/rpc/{function_name} — call a stored procedure
+```
+
+### Schema DDL (requires secret key eb_sk_*)
+
+```typescript
+const schema = euro.db.schema
+
+// Create table with RLS
+await schema.createTable('posts', {
+  columns: [
+    { name: 'id', type: 'uuid', primary_key: true, default_value: 'gen_random_uuid()' },
+    { name: 'title', type: 'text' },
+    { name: 'body', type: 'text', nullable: true },
+    { name: 'user_id', type: 'uuid' },  // auto-detected as owner column
+  ],
+  rlsPreset: 'owner_access',  // optional, auto-detected
+})
+
+// Drop table
+await schema.dropTable('posts')
+
+// Add column
+await schema.addColumn('posts', { name: 'published', type: 'boolean', default_value: 'false' })
+
+// Drop column
+await schema.dropColumn('posts', 'published')
+```
+
+### RLS Presets
+
+- `owner_access` — Owner can CRUD their own rows (matched by user_id/owner_id/created_by column)
+- `public_read_owner_write` — Anyone can read, owner can write
+- `authenticated_read_owner_write` — Authenticated users can read, owner can write
+- `full_access` — Any authenticated user can CRUD all rows
+- `read_only` — Any authenticated user can read, no writes
+- `none` — No preset applied (manual RLS setup)
+
+### Database REST Endpoints
+
+```
+GET    /v1/db/{table}            — Query rows (supports PostgREST-style params)
+GET    /v1/db/{table}/{id}       — Get row by ID
+POST   /v1/db/{table}            — Insert row
+PATCH  /v1/db/{table}/{id}       — Update row
+DELETE /v1/db/{table}/{id}       — Delete row
+POST   /v1/db/{table}/bulk-delete — Bulk delete
+POST   /v1/db/sql                — Raw SQL query
+POST   /v1/db/rpc/{function}     — Call stored procedure
+POST   /v1/db/schema/tables/     — Create table (secret key)
+DELETE /v1/db/schema/tables/{name} — Drop table (secret key)
+POST   /v1/db/schema/tables/{name}/columns — Add column (secret key)
+DELETE /v1/db/schema/tables/{name}/columns/{col} — Drop column (secret key)
+```
+
+---
+
+## 4. Storage (euro.storage)
+
+S3-compatible object storage with signed URL support.
+
+### Methods
+
+```typescript
+// Upload — supports File, Blob, ArrayBuffer, Uint8Array, Node.js Buffer
+storage.upload(key, file, { contentType? }): Promise<UploadResult>
+
+// Download
+storage.download(key): Promise<Blob>
+
+// Delete
+storage.remove(key): Promise<{ error: string | null }>
+
+// List files
+storage.list({ prefix?, limit?, cursor? }): Promise<ListResult>
+
+// Signed URLs (upload or download)
+storage.createSignedUrl(key, 'upload' | 'download', { expiresIn?, contentType? }): Promise<SignedUrlResult>
+```
+
+### Types
+
+```typescript
+interface UploadResult { key: string, content_type: string, size: number, error: string | null }
+interface SignedUrlResult { url: string, expires_at: string, error: string | null }
+interface ObjectInfo { key: string, size: number, last_modified: string, content_type?: string }
+interface ListResult { objects: ObjectInfo[], next_cursor: string | null, has_more: boolean, error: string | null }
+```
+
+### Storage REST Endpoints
+
+```
+POST   /v1/storage/upload       — Upload file (multipart/form-data)
+GET    /v1/storage/{key}        — Download file
+DELETE /v1/storage/{key}        — Delete file
+GET    /v1/storage              — List files (?prefix=&limit=&cursor=)
+POST   /v1/storage/signed-url   — Generate signed URL
+```
+
+---
+
+## 5. Realtime (euro.realtime)
+
+WebSocket subscriptions for database change events. Auto-reconnect with exponential backoff.
+
+### Methods
+
+```typescript
+// Subscribe to table events
+const sub = euro.realtime.on(table, event, callback)
+// event: 'INSERT' | 'UPDATE' | 'DELETE' | '*'
+
+// Unsubscribe
+euro.realtime.off(sub)
+
+// Disconnect
+euro.realtime.disconnect()
+```
+
+### Types
+
+```typescript
+interface RealtimeEvent {
+  channel: string      // e.g. "db:orders"
+  type: string         // "INSERT" | "UPDATE" | "DELETE"
+  record: any          // new row data
+  old_record?: any     // previous row data (on UPDATE/DELETE)
+  timestamp: string
+}
+```
+
+### WebSocket Endpoint
+
+```
+GET /v1/realtime?token={jwt_or_apikey}  — WebSocket upgrade
+// Messages: { action: "subscribe", channel: "db:table_name" }
+```
+
+---
+
+## 6. Vault (euro.vault)
+
+AES-256-GCM encrypted key-value secrets store. Requires secret API key (eb_sk_*).
+
+### Methods
+
+```typescript
+vault.list(): Promise<{ data: VaultSecretMeta[] | null, error: string | null }>
+vault.get(name): Promise<{ data: string | null, error: string | null }>
+vault.set(name, value, description?): Promise<{ error: string | null }>
+vault.delete(name): Promise<{ error: string | null }>
+```
+
+### Types
+
+```typescript
+interface VaultSecretMeta { name: string, description: string, created_at: string, updated_at: string }
+interface VaultSecret extends VaultSecretMeta { id: string, value: string }
+```
+
+### Vault REST Endpoints
+
+```
+GET    /v1/vault           — List secrets (metadata only)
+GET    /v1/vault/{name}    — Get decrypted secret
+POST   /v1/vault           — Create/update secret
+DELETE /v1/vault/{name}    — Delete secret
+```
+
+---
+
+## 7. Edge Functions (euro.functions)
+
+Serverless TypeScript/JavaScript functions on Deno runtime.
+
+### SDK Method
+
+```typescript
+functions.invoke<T>(name, { body?, method?, headers? }): Promise<{ data: T | null, error: FunctionError | null }>
+```
+
+### Functions REST Endpoints
+
+```
+POST /v1/functions/{name}  — Invoke function (SDK route)
+
+# Platform management endpoints (require platform JWT):
+GET    /platform/projects/{id}/functions/          — List functions
+POST   /platform/projects/{id}/functions/          — Create function
+GET    /platform/projects/{id}/functions/{name}    — Get function details
+PUT    /platform/projects/{id}/functions/{name}    — Update function code
+DELETE /platform/projects/{id}/functions/{name}    — Delete function
+GET    /platform/projects/{id}/functions/{name}/logs     — Get execution logs
+GET    /platform/projects/{id}/functions/{name}/triggers — List triggers
+POST   /platform/projects/{id}/functions/{name}/triggers — Create trigger
+DELETE /platform/projects/{id}/functions/{name}/triggers/{id} — Delete trigger
+GET    /platform/projects/{id}/functions/{name}/versions — List versions
+POST   /platform/projects/{id}/functions/{name}/rollback — Rollback to version
+GET    /platform/projects/{id}/functions/{name}/metrics  — Get metrics
+```
+
+---
+
+## 8. Cron Jobs
+
+Schedule SQL queries and RPC calls with execution logging.
+
+### Cron REST Endpoints (platform-authenticated)
+
+```
+GET    /platform/projects/{id}/cron     — List cron jobs
+POST   /platform/projects/{id}/cron     — Create cron job
+GET    /platform/projects/{id}/cron/{jobId} — Get job details
+PUT    /platform/projects/{id}/cron/{jobId} — Update job
+DELETE /platform/projects/{id}/cron/{jobId} — Delete job
+```
+
+---
+
+## 9. Webhooks
+
+Event-driven HTTP delivery with retry logic and HMAC signing.
+
+### Webhooks REST Endpoints (platform-authenticated)
+
+```
+GET    /platform/projects/{id}/webhooks     — List webhooks
+POST   /platform/projects/{id}/webhooks     — Create webhook
+GET    /platform/projects/{id}/webhooks/{whId} — Get webhook details
+PUT    /platform/projects/{id}/webhooks/{whId} — Update webhook
+DELETE /platform/projects/{id}/webhooks/{whId} — Delete webhook
+```
+
+---
+
+## 10. Platform & Project Management
+
+### Project (Tenant) Management
+
+```
+POST   /v1/tenants       — Create project
+GET    /v1/tenants        — List projects
+PATCH  /v1/tenants/{id}   — Update project
+DELETE /v1/tenants/{id}   — Delete project
+```
+
+### Platform Auth (Console Authentication)
+
+```
+POST /platform/auth/signup           — Sign up for platform account
+POST /platform/auth/signin           — Sign in to platform
+POST /platform/auth/forgot-password  — Request password reset
+POST /platform/auth/reset-password   — Reset password
+GET  /platform/auth/account/profile  — Get account profile
+PATCH /platform/auth/account/profile — Update profile
+POST /platform/auth/account/change-password — Change password
+POST /platform/auth/account/delete   — Delete account
+```
+
+### Team Management
+
+```
+GET    /platform/projects/{id}/members           — List team members
+POST   /platform/projects/{id}/members/invite    — Invite member
+POST   /platform/projects/{id}/members/resend    — Resend invitation
+DELETE /platform/projects/{id}/members/{userId}  — Remove member
+PATCH  /platform/projects/{id}/members/{userId}  — Change role
+POST   /platform/invitations/accept              — Accept invitation
+```
+
+### Schema Introspection
+
+```
+GET /platform/projects/{id}/schema         — Full schema introspection
+GET /platform/projects/{id}/schema/changes — Schema change history
+GET /platform/projects/{id}/schema/rls-audit — RLS policy audit
+```
+
+### End-User Management (Console)
+
+```
+GET /platform/projects/{id}/users  — List end-users for a project
+```
+
+### API Keys
+
+```
+GET  /platform/projects/{id}/api-keys            — List API keys
+POST /platform/projects/{id}/api-keys/regenerate  — Regenerate keys
+GET  /platform/projects/{id}/connect              — Get connection info
+```
+
+### Compliance
+
+```
+GET /platform/projects/{id}/compliance/dpa-report      — Generate DPA report
+GET /platform/projects/{id}/compliance/sub-processors   — Sub-processor registry
+GET /platform/projects/{id}/compliance/audit-log        — Audit log
+```
+
+### Email Templates
+
+```
+GET    /platform/projects/{id}/email-templates           — List templates
+PUT    /platform/projects/{id}/email-templates/{type}    — Update template
+DELETE /platform/projects/{id}/email-templates/{type}    — Reset to default
+POST   /platform/projects/{id}/email-templates/{type}/preview — Preview
+POST   /platform/projects/{id}/email-templates/{type}/test    — Send test
+```
+
+### Plan & Usage
+
+```
+GET /platform/config/plans                — Get available plans
+GET /platform/projects/{id}/usage         — Get usage stats
+```
+
+### Health
+
+```
+GET /health — Returns { "status": "ok" }
+```
+
+---
+
+## 11. Plan Limits
+
+| Feature | Free | Pro |
+|---------|------|-----|
+| Database size | 500 MB | 5 GB |
+| Storage | 1 GB | 50 GB |
+| Bandwidth | 5 GB | 100 GB |
+| Monthly active users | 10,000 | 100,000 |
+| Rate limit | 100 req/s | 1,000 req/s |
+| WebSocket connections | 100 | 10,000 |
+| Upload file size | 10 MB | 50 MB |
+| Webhooks | 3 | Unlimited |
+| Projects | 2 | 10 |
+| Log retention | 1 day | 30 days |
+| Custom email templates | No | Yes |
+
+Enterprise plan: custom limits, dedicated infrastructure, SLA, compliance tooling.
+
+---
+
+## 12. Architecture
+
+- **Gateway**: Go (chi router), handles REST API, WebSocket, rate limiting, auth middleware
+- **Database**: PostgreSQL with per-tenant schemas, row-level security
+- **Storage**: S3-compatible (Scaleway Object Storage)
+- **Edge Functions**: Deno runtime, managed by functions-runner service
+- **Vault**: AES-256-GCM encryption, keys stored in Scaleway KMS
+- **Realtime**: WebSocket hub with pub/sub event routing
+- **Infrastructure**: Scaleway Kubernetes (Paris, France)
+- **DNS**: EU-managed DNS
+- **SDK**: TypeScript, zero dependencies, browser + Node.js 18+
+- **CLI**: Node.js, 30+ commands
+
+### Security
+
+- All traffic over TLS 1.3
+- Security headers: HSTS, X-Frame-Options, X-Content-Type-Options, CSP
+- Rate limiting per IP and per API key
+- Row-level security with policy presets
+- AES-256-GCM vault encryption
+- HMAC-signed webhooks
+- JWT tokens with configurable expiry
+- Audit logging with actor, action, IP, timestamp
+
+### Compliance
+
+- GDPR-native architecture
+- All data stored in EU (France)
+- Zero US CLOUD Act exposure
+- Schrems II compliant
+- Automated DPA reports
+- Sub-processor registry
+- GDPR data export
+- Full audit trail
+- EU-owned infrastructure provider (Scaleway)
+
+---
+
+## 13. MCP Server (Claude Code Integration)
+
+Connect Eurobase to Claude Code for AI-assisted development:
+
+```bash
+claude mcp add eurobase https://mcp.eurobase.app/mcp --header "Authorization: Bearer <your-platform-token>"
+```
+
+Available tools: listProjects, getProject, listTables, describeTable, runSQL, listUsers, listFiles, getSignedUrl, listSecrets, getSecret, setSecret, listFunctions, invokeFunction, createTable, healthCheck.
+
+---
+
+## 14. Comparison with Alternatives
+
+### vs Supabase
+- Same Postgres foundation, but Eurobase is 100% EU infrastructure (vs AWS us-east-1)
+- No CLOUD Act exposure (Supabase is US-incorporated, data subject to US law)
+- Native DPA reports and audit logging (Supabase requires manual setup)
+- No free tier project pausing (Supabase pauses after 7 days of inactivity)
+- Integrated vault, cron, webhooks in base platform
+
+### vs Firebase
+- SQL (PostgreSQL) vs NoSQL (Firestore) — no proprietary query language
+- No vendor lock-in — standard Postgres, S3 storage, REST APIs
+- EU infrastructure vs Google Cloud (US jurisdiction)
+- Open data format — export anytime via pg_dump
+- Row-level security via SQL policies, not proprietary rules
+
+---
+
+## Links
+
+- Website: https://eurobase.app
+- Console: https://console.eurobase.app
+- Docs: https://docs.eurobase.app
+- GitHub: https://github.com/eurobase
+- Contact: founders@eurobase.app
+- llms.txt (concise): https://eurobase.app/llms.txt

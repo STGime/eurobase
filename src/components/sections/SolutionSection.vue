@@ -27,6 +27,17 @@ const { elementRef, isVisible } = useScrollReveal()
           accent-position="top"
           :class="isVisible ? `animate-fade-in-up stagger-${i + 1}` : 'opacity-0'"
         >
+          <!-- Coming-soon badge for features that have landed in code
+               but not yet been validated end-to-end. Kept as a visible
+               pill so visitors don't try to use it prematurely and
+               there's no surprise when it doesn't appear in the
+               console yet. -->
+          <span
+            v-if="'comingSoon' in feature && feature.comingSoon"
+            class="absolute top-3 right-3 rounded-full bg-amber-500/15 text-amber-300 text-[10px] uppercase tracking-wide font-semibold px-2 py-0.5"
+          >
+            Coming soon
+          </span>
           <div class="text-3xl mb-3">{{ feature.icon }}</div>
           <h3 class="text-text-white font-semibold mb-1">{{ feature.name }}</h3>
           <p class="text-text-muted text-sm">{{ feature.description }}</p>

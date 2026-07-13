@@ -34,7 +34,14 @@ export const solution = {
     { name: 'Webhooks', icon: '\uD83D\uDD17', color: '#6A1B9A', description: 'Event-driven delivery with retry logic and HMAC signing' },
     { name: 'CLI Tool', icon: '\u2328\uFE0F', color: '#1565C0', description: '50+ commands for projects, database, storage, vault, functions, and migrations' },
     { name: 'MCP Server', icon: '🤖', color: '#3949AB', description: 'AI IDE integration (Claude Code, Cursor, Codex, Windsurf): list tables, run SQL, manage Vault, invoke functions' },
-    { name: 'Audit & Compliance', icon: '📋', color: '#AD1457', description: 'GDPR export, DPA reports, sub-processor registry, full action logging' },
+    { name: 'DSAR & Compliance', icon: '📋', color: '#AD1457', description: 'One-click GDPR Article 15 + 20 exports, Article 30 DPA reports, tamper-evident audit log, sub-processor registry' },
+    // Supabase → Eurobase migration CLI. Code has shipped on main
+    // but is being validated end-to-end (see #278 in the backend
+    // repo). Marketing card carries `comingSoon: true` so the UI
+    // renders a badge and we don't overset expectations. Flip to
+    // false and remove the flag once section 9's sign-off criteria
+    // are met.
+    { name: 'Supabase Migration', icon: '🔀', color: '#3ECF8E', description: 'One-command CLI to import database, auth users, storage, and edge functions from Supabase — coming soon', comingSoon: true },
   ],
   footer: ['No DevOps required.', 'No sovereignty compromise.'],
 }
@@ -53,8 +60,8 @@ export const differentiators = {
       color: '#00897B',
     },
     {
-      title: 'GDPR-Native',
-      description: 'Audit logging, automated DPA reports, GDPR data export, sub-processor registry.',
+      title: 'DSAR in One Click',
+      description: 'GDPR Article 15 + 20 exports built into every project. Audit-trailed, EU-only. No DIY scripts, no middleware.',
       color: '#7B1FA2',
     },
     {
@@ -68,6 +75,57 @@ export const differentiators = {
       color: '#C62828',
     },
   ],
+}
+
+export const dsar = {
+  subtitle: 'Automated DSAR',
+  headline: 'One click. Article 15 + 20. Built into every project.',
+  description: 'When a user emails "what do you have on me?" (Article 15) or asks for their data on the way out (Article 20), Eurobase turns the answer into a one-click console export. No SQL to write each time. No middleware to maintain. The 30-day deadline stays statutory; the tooling stops being the bottleneck.',
+  cost: {
+    title: 'The cost of DIY DSAR',
+    description: 'A single DSAR runs about $1,500 to fulfil — and request volume is up 246% in two years. That cost lands on whoever happens to be on call.',
+    stats: [
+      { value: '$1,500', label: 'Avg. cost per DSAR fulfilment', detail: '8–12 hrs of engineering per request', color: '#E53935', footnote: 1 },
+      { value: '246%', label: 'Two-year jump in DSAR volume', detail: 'Industry survey, 2024', color: '#F9A825', footnote: 1 },
+      { value: '30 days', label: 'Statutory deadline (GDPR Art. 12)', detail: 'Miss it = supervisory-authority risk', color: '#7B1FA2' },
+      { value: '€20M', label: 'GDPR maximum administrative fine', detail: 'or 4% of global annual turnover', color: '#C62828' },
+    ],
+    footnoteSource: { id: 1, text: 'Eurobase blog — "The $1,500 GDPR Tax"', url: '/blog/compliance-tab-dsar-ropa-audit-log' },
+  },
+  gap: {
+    title: 'Built-in elsewhere? No.',
+    description: 'Every other major BaaS leaves DSAR fulfilment as homework. Custom SQL across every table, custom middleware, custom audit trail. Re-implemented per project.',
+    rows: [
+      { name: 'Firebase', status: 'No DSAR primitive', detail: 'DIY Cloud Function across Firestore collections + Auth + Storage', supported: false },
+      { name: 'Supabase', status: 'No DSAR endpoint', detail: 'Hand-roll across auth.users and every public table', supported: false },
+      { name: 'AWS Amplify', status: 'No DSAR primitive', detail: 'DIY across DynamoDB / Cognito / S3 buckets', supported: false },
+      { name: 'Eurobase', status: 'One click. Every project. Every tier.', detail: 'Per-user export + full-project zip + audit trail — out of the box', supported: true },
+    ],
+  },
+  solution: {
+    title: 'The Eurobase answer',
+    description: 'DSAR is a first-class platform feature — not a checkbox in an enterprise tier, not a paragraph in the privacy policy. We built it because we got tired of watching small EU teams treat each request as a fire drill.',
+    bullets: [
+      {
+        title: 'Article 15 + Article 20 in one click.',
+        body: 'Per-user export (every row referencing their user_id) and full-project export (every table + auth + storage manifest) as a downloadable zip.',
+      },
+      {
+        title: 'Audit log captures every request, completion, and failure.',
+        body: 'Actor email + IP, stamped on every action. Your evidence trail is built in, not bolted on.',
+      },
+      {
+        title: 'All bytes stay on Scaleway fr-par.',
+        body: 'Zero CLOUD Act exposure. Download links expire after 7 days. EU jurisdiction end-to-end.',
+      },
+      {
+        title: 'API stays open on every tier.',
+        body: 'Free-tier projects can still meet a statutory deadline by calling the export endpoint directly — we won\'t paywall a legal obligation.',
+      },
+    ],
+    primaryCta: { label: 'Request Beta Access', href: '#cta' },
+    secondaryCta: { label: 'How we built it: DSAR + RoPA + Audit Log in one tab', href: '/blog/compliance-tab-dsar-ropa-audit-log' },
+  },
 }
 
 export const developer = {
@@ -246,6 +304,57 @@ export const blog = {
   headline: 'From the Blog',
   description: 'Thoughts on European data sovereignty, cloud infrastructure, and building for developers.',
   posts: [
+    {
+      slug: 'compliance-tab-dsar-ropa-audit-log',
+      title: 'The $1,500 GDPR Tax: Why DSAR Fulfilment Belongs in Your Platform, Not Your Spreadsheet',
+      excerpt: 'A single Data Subject Access Request costs the average company around $1,500 to fulfil — 8–12 hours of someone\'s week spent stitching CSVs together. Volume is up 246% in two years. Eurobase puts Article 15 export, RoPA, and a tamper-evident audit log on the Compliance tab of every project, by default.',
+      date: '2026-06-18',
+      author: 'Stefan Gimeson',
+      readTime: '5 min read',
+      content: `A single GDPR Data Subject Access Request — a DSAR — costs the average company around $1,500 to fulfil. Someone exports a CSV, searches the support tool, digs through application logs, stitches it together, and hopes nothing was missed. Eight to twelve hours per request. And volume is up more than 70% since 2021, with one 2024 industry survey clocking a 246% jump in two years.
+
+That's the operational tax most teams quietly pay — and the one we kept seeing small EU teams treat as a fire drill. Discovered two weeks before launch, hand-rolled into a spreadsheet, left to rot. So we built the answer into the platform.
+
+## Compliance, by construction
+
+Every Eurobase project ships with a **Compliance tab**. Three surfaces, all wired up the moment your project exists. No add-on SKU, no separate dashboard, no integration to configure.
+
+### Data Export — GDPR Article 15 + 20
+
+One click exports a full project, or scoped to a single user across every table they have touched. The platform understands the relationships — the user's rows in your tables, their auth identities, their files in storage, their entries in audit logs — and produces a structured, portable dump that satisfies both the right of access (Art. 15) and the right to data portability (Art. 20).
+
+Or stay out of the loop entirely: end-users self-serve through the SDK with \`eb.auth.exportMyData()\`, rate-limited and audited. A $1,500 cost centre becomes a function call.
+
+### DPA Report — Article 30 Record of Processing Activities
+
+Every controller has to keep a RoPA. The bigger question, though, isn't *"can I get my data?"* — it's *"who can compel access to it?"*. 61% of Western European CIOs told Gartner they plan to move to local providers; EU sovereign-cloud adoption jumped from 30% to 40% in a single year per IDC. Microsoft's French executive told the French Senate, under oath, that they cannot guarantee EU data stays out of the reach of the US CLOUD Act.
+
+Eurobase generates the RoPA from your project's actual configuration and the sub-processors actually in use — each entry flagged with region, encryption, and CLOUD Act exposure. For Eurobase itself, that exposure flag reads zero. By construction: EU-incorporated, EU-hosted (Scaleway, France), no US-controlled parent.
+
+### Audit Log
+
+Append-only. Schema changes, RLS policy toggles, key rotations, vault reads and writes, role changes, DSAR exports — each entry stamped with timestamp, actor, IP, and target. Useful for the next security review. Also useful for the *"who dropped that table at 3am?"* conversation.
+
+It's the same log we use ourselves for incident triage. We didn't bolt one on for compliance theatre; we exposed the one that was already there.
+
+## None of this is new regulation
+
+Article 15 was published in 2016. Article 30 has been mandatory for almost every controller since 2018. The CLOUD Act passed the US Congress in March 2018. The only thing that's changed is the volume — 246% in two years — and the increasing willingness of regulators to actually enforce the response timelines.
+
+The only question worth asking is whether you hand-roll the response the fortnight before launch, or whether your platform just does it.
+
+## Sovereign by construction, documented by default
+
+This is what we mean when we say Eurobase is GDPR-native. Not a privacy policy on the marketing site. Not an "enterprise tier" upcharge. The articles of the regulation map directly to surfaces of the product — and they're on every project from day one, including the free tier.
+
+If you're a developer, founder, or CTO who's been quietly dreading what your DSAR response looks like under load — that's the cost centre we made into a function call. [Sign up for the beta](/#cta).`,
+      references: [
+        { label: 'EUR-Lex — GDPR (Regulation 2016/679, Art. 15, 20, 30)', url: 'https://eur-lex.europa.eu/eli/reg/2016/679/oj' },
+        { label: 'U.S. Congress — CLOUD Act (H.R. 4943)', url: 'https://www.congress.gov/bill/115th-congress/house-bill/4943' },
+        { label: 'Sénat — Audition de Microsoft France sur la souveraineté numérique', url: 'https://www.senat.fr/compte-rendu-commissions/commission-d-enquete-commande-publique.html' },
+        { label: 'IDC — European sovereign cloud adoption trends', url: 'https://www.idc.com/getdoc.jsp?containerId=prEUR152263925' },
+      ],
+    },
     {
       slug: 'ai-kill-switch-eu-sovereignty',
       title: 'We Just Saw the AI Kill-Switch in Action — And Why It Makes EU Sovereignty Non-Negotiable',
