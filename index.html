@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Primary SEO -->
-    <title>Eurobase — EU-Sovereign BaaS with One-Click GDPR DSAR Exports</title>
-    <meta name="description" content="Eurobase ships one-click GDPR Article 15 + 20 (DSAR) exports for every project — the only EU BaaS that does. Firebase and Supabase leave it as homework. Audit-trailed, EU-only on Scaleway, no middleware. Free API on every tier." />
+    <title>Eurobase — EU-sovereign Supabase alternative on French infrastructure</title>
+    <meta name="description" content="EU-sovereign Postgres backend on Scaleway (France). No CLOUD Act, no US corporate parent. Auth, DB, storage, realtime, edge functions. One-click GDPR DSAR + RoPA. Free tier, €19/mo Pro. Migrate from Supabase with one CLI command." />
     <meta name="keywords" content="automated DSAR SaaS, GDPR Article 15 export API, one-click DSAR GDPR, DSAR tool EU sovereign, GDPR data subject access request automation, Article 30 records of processing automated, European Firebase alternative, European Supabase alternative, EU BaaS, free backend as a service, GDPR backend platform, sovereign cloud Europe, EU-native database, vibe coding backend, free tier BaaS Europe, CLOUD Act free backend, Schrems II compliant, EU managed PostgreSQL, European serverless platform, GDPR compliant BaaS, European developer platform, sovereign infrastructure EU, free European cloud, EU hosted backend, vibe coder tools, backend for teams Europe" />
     <meta name="author" content="Eurobase" />
     <link rel="canonical" href="https://eurobase.app/" />
@@ -15,16 +15,16 @@
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://eurobase.app/" />
-    <meta property="og:title" content="Automated DSAR exports for SaaS — Eurobase" />
-    <meta property="og:description" content="One-click GDPR Article 15 + 20 (DSAR) exports for every Eurobase project. EU-only, audit-trailed, no middleware. Firebase and Supabase don't ship this — we do." />
+    <meta property="og:title" content="Eurobase — EU-sovereign Supabase alternative (Scaleway, France)" />
+    <meta property="og:description" content="Same Postgres + auth + storage + realtime + edge functions as Supabase — on French infrastructure with no US jurisdiction. GDPR-native. Free tier, €19/mo Pro." />
     <meta property="og:image" content="https://eurobase.app/og-image.png" />
     <meta property="og:site_name" content="Eurobase" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Eurobase — One-Click GDPR DSAR for Every Project" />
-    <meta name="twitter:description" content="EU-sovereign BaaS with Article 15 + 20 exports built in. Audit-trailed, EU-only, no DIY scripts. Closed beta is live." />
+    <meta name="twitter:title" content="Eurobase — EU-sovereign Supabase alternative" />
+    <meta name="twitter:description" content="Postgres backend on Scaleway (France). No CLOUD Act. Auth, DB, storage, realtime, functions. GDPR-native. €19/mo Pro. Migrate from Supabase in one CLI command." />
     <meta name="twitter:image" content="https://eurobase.app/og-image.png" />
 
     <!-- Structured Data (JSON-LD) -->
@@ -38,12 +38,31 @@
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Web",
       "url": "https://eurobase.app",
-      "offers": {
-        "@type": "Offer",
-        "priceCurrency": "EUR",
-        "price": "0",
-        "description": "Free tier: 50,000 database rows, 500 MB storage, 2 projects, all auth methods. No credit card required. Pro and Enterprise plans coming soon."
-      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Free",
+          "priceCurrency": "EUR",
+          "price": "0",
+          "description": "5,000 monthly active users, 512 MB storage, 2 GB bandwidth, 50 realtime connections. Every feature included. Projects auto-pause after 30 days idle; a single request wakes them. No credit card required."
+        },
+        {
+          "@type": "Offer",
+          "name": "Pro",
+          "priceCurrency": "EUR",
+          "price": "19",
+          "priceValidUntil": "2027-01-01",
+          "description": "€19/mo per project. 100,000 monthly active users, 100 GB storage, 250 GB bandwidth, 10,000 realtime connections. BYO SMTP, quota alerts, priority support. Never pauses."
+        },
+        {
+          "@type": "Offer",
+          "name": "Team",
+          "priceCurrency": "EUR",
+          "price": "149",
+          "availability": "https://schema.org/PreOrder",
+          "description": "€149/mo per project (coming soon). Dedicated Postgres, point-in-time recovery, SSO, RBAC, SOC 2. For teams shipping regulated SMB software."
+        }
+      ],
       "featureList": [
         "Automated DSAR Exports — GDPR Article 15 + 20, one click, every project, every tier",
         "Article 30 Records-of-Processing (DPA) Report — generated from live project configuration",
@@ -170,7 +189,7 @@
           "name": "Is Eurobase free to use?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The free tier includes 50,000 database rows, 500 MB storage, 2 projects, and all auth methods — no credit card required. Pro and Enterprise plans for teams and organizations open with the public early access this summer. Closed-beta testers get founder-friendly pricing locked in."
+            "text": "Yes. The Free tier includes 5,000 monthly active users, 512 MB storage, 2 GB bandwidth, 50 realtime connections, and every feature — no credit card required. Projects auto-pause after 30 days idle and wake on the first request. Pro is €19/mo per project (no pausing, custom email templates, BYO SMTP, quota alerts, 100,000 MAU). A Team tier with dedicated Postgres is €149/mo (coming soon)."
           }
         },
         {
@@ -196,6 +215,30 @@
             "@type": "Answer",
             "text": "All data is stored exclusively on European infrastructure operated by EU-owned providers, specifically Scaleway in France. Eurobase has zero exposure to the US CLOUD Act or similar extraterritorial legislation. Your data never leaves EU jurisdiction."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a Supabase alternative in the EU?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Eurobase is a Supabase-compatible backend built and hosted entirely in the EU. Same Postgres foundation, same auth + storage + realtime + edge functions surface, same SDK shape. The difference is the corporate parent (Estonian OÜ vs Delaware) and the infrastructure floor (Scaleway in France vs AWS). That removes the CLOUD Act exposure that survives even when Supabase is deployed in an EU region."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is a Supabase EU-region deployment enough for GDPR?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Picking Supabase's EU region gives you physical data residency in the EEA and a standard SCC-based DPA — a competent baseline, but not immunity from the CLOUD Act. Because Supabase Inc. is a Delaware corporation using AWS, US authorities can compel data access even for EU-region deployments. Eurobase removes that exposure by having no US corporate parent and no US-owned processor in the critical path."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I migrate from Supabase to Eurobase?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use the Eurobase CLI: `eurobase import supabase assess` for a read-only report against your existing Supabase project, then `eurobase import supabase schema | data | storage | functions` to move each surface. Auth-user import is next. The CLI reads your Supabase project directly and emits an executable plan; no rewrites required on your app code."
+          }
         }
       ]
     }
@@ -213,6 +256,36 @@
         "url": "https://eurobase.app"
       },
       "blogPost": [
+        {
+          "@type": "BlogPosting",
+          "headline": "Supabase GDPR + DPA: what an EU-region deployment actually gets you",
+          "description": "You picked eu-central-1, you signed the DPA, and the compliance page has a green tick. Under EU law — and under the CLOUD Act — that gets you less than most teams think.",
+          "url": "https://eurobase.app/blog/supabase-gdpr-dpa-eu-region",
+          "datePublished": "2026-07-18",
+          "author": { "@type": "Person", "name": "Stefan Gimeson" },
+          "publisher": { "@type": "Organization", "name": "Eurobase", "url": "https://eurobase.app" },
+          "keywords": ["Supabase GDPR", "Supabase DPA", "Supabase EU region", "CLOUD Act", "EU sovereign backend", "Supabase alternative Europe"]
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "The $1,500 GDPR Tax: Why DSAR Fulfilment Belongs in Your Platform, Not Your Spreadsheet",
+          "description": "A single DSAR costs the average company around $1,500 to fulfil — 8–12 hours of engineering. Volume is up 246% in two years. Eurobase puts Article 15, RoPA, and audit log on every project.",
+          "url": "https://eurobase.app/blog/compliance-tab-dsar-ropa-audit-log",
+          "datePublished": "2026-06-18",
+          "author": { "@type": "Person", "name": "Stefan Gimeson" },
+          "publisher": { "@type": "Organization", "name": "Eurobase", "url": "https://eurobase.app" },
+          "keywords": ["DSAR automation", "GDPR Article 15", "GDPR Article 30", "RoPA", "compliance-by-construction"]
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "We Just Saw the AI Kill-Switch in Action — And Why It Makes EU Sovereignty Non-Negotiable",
+          "description": "On June 12th 2026 the US government forced Anthropic to shut down Fable 5 and Mythos 5 worldwide. A kill-switch is no longer hypothetical — and it makes the case for EU-sovereign infrastructure impossible to ignore.",
+          "url": "https://eurobase.app/blog/ai-kill-switch-eu-sovereignty",
+          "datePublished": "2026-06-15",
+          "author": { "@type": "Person", "name": "Stefan Gimeson" },
+          "publisher": { "@type": "Organization", "name": "Eurobase", "url": "https://eurobase.app" },
+          "keywords": ["AI kill switch", "EU AI Act", "EU sovereignty", "CLOUD Act", "export control", "sovereign cloud"]
+        },
         {
           "@type": "BlogPosting",
           "headline": "Europe's Digital Sovereignty Problem: We Built Our Startups on American Soil",
@@ -324,8 +397,8 @@
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Eurobase vs Supabase — EU-Native Postgres Backend Alternative",
-      "description": "Compare Eurobase and Supabase: same PostgreSQL foundation, but Eurobase runs 100% on EU infrastructure with zero CLOUD Act exposure, native GDPR compliance, and no free tier pausing.",
+      "name": "Eurobase vs Supabase — EU-sovereign Postgres backend alternative",
+      "description": "Supabase runs on AWS; Eurobase runs on Scaleway in France with zero US jurisdiction. Same Postgres + auth + storage + realtime. GDPR-native, DPA in one click, EU-only sub-processors. Free tier, €19/mo Pro.",
       "url": "https://eurobase.app/vs/supabase",
       "mainEntity": {
         "@type": "SoftwareApplication",
@@ -401,7 +474,7 @@
 
         <h2 style="color:#fff;margin-top:40px;">Why Choose Eurobase Over Firebase or Supabase?</h2>
         <ul>
-          <li><strong>Always-Free Tier</strong> — 50,000 rows, 500 MB storage, 2 projects, all auth methods. No credit card required.</li>
+          <li><strong>Free Tier</strong> — 5,000 MAU, 512 MB storage, 2 GB bandwidth, 50 realtime cxns, every feature. No credit card required.</li>
           <li><strong>100% EU Infrastructure</strong> — EU-hosted on Scaleway (France). No CLOUD Act exposure. Schrems II-safe.</li>
           <li><strong>Zero-DevOps</strong> — Postgres, Auth, Storage, Functions, Cron, Vault — production-ready in seconds.</li>
           <li><strong>GDPR-Native</strong> — Audit logging, automated DPA reports, GDPR data export, sub-processor registry.</li>
@@ -417,9 +490,9 @@
 
         <h2 style="color:#fff;margin-top:40px;">Pricing — Built to Grow With You</h2>
         <ul>
-          <li><strong>Free</strong> — 50,000 database rows, 500 MB storage, 2 projects, all auth methods. No credit card required.</li>
-          <li><strong>Pro (Coming Soon)</strong> — 5,000,000 rows, 50 GB storage, unlimited projects, priority support.</li>
-          <li><strong>Enterprise (Contact Us)</strong> — Dedicated infrastructure, custom limits, SLA and compliance tooling.</li>
+          <li><strong>Free</strong> — 5,000 MAU, 512 MB storage, 2 GB bandwidth, 50 realtime connections, every feature. Projects auto-pause after 30 days idle. No credit card required.</li>
+          <li><strong>Pro (€19/mo per project)</strong> — 100,000 MAU, 100 GB storage, 250 GB bandwidth, 10,000 realtime connections. BYO SMTP, quota alerts, priority support. Never pauses.</li>
+          <li><strong>Team (€149/mo — coming soon)</strong> — Dedicated Postgres per project, backups + PITR, SSO, RBAC, SOC 2.</li>
         </ul>
         <p>Closed-beta testers get founder-friendly pricing locked in when the Pro tier opens.</p>
 

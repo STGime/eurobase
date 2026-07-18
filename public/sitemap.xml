@@ -13,6 +13,12 @@
     <priority>0.95</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/faq</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/blog/supabase-gdpr-dpa-eu-region</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>monthly</changefreq>
@@ -85,8 +91,8 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://eurobase.app/impressum</loc>
-    <lastmod>2026-02-18</lastmod>
+    <loc>https://eurobase.app/legal</loc>
+    <lastmod>2026-07-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

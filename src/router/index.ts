@@ -19,9 +19,17 @@ const router = createRouter({
       component: () => import('@/pages/TermsPage.vue'),
     },
     {
+      path: '/legal',
+      name: 'legal',
+      component: () => import('@/pages/LegalNoticePage.vue'),
+    },
+    // Preserve inbound SEO links to the old German-conventional URL —
+    // the entity is now Estonian, but existing backlinks and Search
+    // Console history point at /impressum. 301 to /legal so link equity
+    // consolidates and users still land somewhere useful.
+    {
       path: '/impressum',
-      name: 'impressum',
-      component: () => import('@/pages/ImpressumPage.vue'),
+      redirect: '/legal',
     },
     {
       path: '/blog/:slug',
@@ -37,6 +45,11 @@ const router = createRouter({
       path: '/features/dsar',
       name: 'feature-dsar',
       component: () => import('@/pages/DsarFeaturePage.vue'),
+    },
+    {
+      path: '/faq',
+      name: 'faq',
+      component: () => import('@/pages/FaqPage.vue'),
     },
   ],
   scrollBehavior(to) {

@@ -2,26 +2,27 @@
 // version. Phase A of the public-beta launch plan (see the euroback
 // docs/public-beta-launch-plan.md).
 //
-// Company formation in Estonia is in flight. Until the registered
-// entity name / address / registry number / VAT number are final, all
-// four appear as placeholders on the rendered pages. That's a
-// documented choice — the legal *shape* (Estonia jurisdiction, DPA v2,
-// beta window) lands now; the entity-specific *strings* land in one
-// follow-up commit once formation completes. Overriding is a matter of
-// filling in the four TODO fields below and rebuilding.
+// Estonia formation completed 2026-07 — the entity is Eurobase OÜ,
+// registered at Ahtri 12, Tallinn (E-Residency Hub as local contact
+// person, as required for Estonian e-residency companies without a
+// resident board member). Registry code lands in a follow-up commit
+// once the Äriregister issues it (few days after registration filing).
 //
-// The jurisdiction / court fields are NOT placeholders — those are
-// locked by the choice to incorporate in Estonia and don't change
-// with the entity name.
+// The jurisdiction / court fields are NOT parameterised — those are
+// locked by the choice to incorporate in Estonia.
 
 export interface LegalStrings {
-  /** Legal entity name — will be the Estonian OÜ once formation completes. */
+  /** Legal entity name (Estonian OÜ). */
   legalEntity: string
-  /** Registered address of the entity. */
+  /** Type of legal entity — private limited company (OÜ). */
+  entityType: string
+  /** Registered address of the entity (street, city + postal). */
   registeredAddress: string
-  /** Estonian commercial-register code (registry number). */
+  /** Estonian commercial-register code (äriregistri kood). */
   registryNumber: string
-  /** EU VAT ID once VAT-registered. */
+  /** EU VAT identification number, or a plain-language marker when the
+   *  entity is not VAT-registered (e.g. under the Estonian €40k
+   *  threshold). */
   vatNumber: string
   /** ISO date effective for the current v2 documents. */
   effectiveDate: string
@@ -36,17 +37,30 @@ export interface LegalStrings {
   noticesEmail: string
   withdrawalEmail: string
   dpoEmail: string
+  /** Estonian-law transparency additions (ISTS §4 / good-practice for
+   *  e-residency companies). Not strictly required by ISTS but read as
+   *  a positive signal by B2B contract reviewers. */
+  principalActivity: string
+  shareCapital: string
+  financialYear: string
+  /** Local contact person — required for OÜs whose board members are
+   *  not Estonian residents (Estonian Commercial Code §631). */
+  contactPerson: string
 }
 
 export const legalStrings: LegalStrings = {
-  // TODO(formation): fill these four in when the Estonian OÜ is
-  // registered. Keep the {{…}} placeholder syntax so anything that
-  // renders them mid-flight is visibly incomplete rather than silently
-  // wrong.
-  legalEntity: '{{LEGAL_ENTITY}}',
-  registeredAddress: '{{REGISTERED_ADDRESS}}',
+  legalEntity: 'Eurobase OÜ',
+  entityType: 'Private limited company (osaühing / OÜ)',
+  registeredAddress: 'Ahtri 12, Tallinn 15551',
+  // TODO(formation): fill once the Äriregister issues the registry
+  // code (typically a few business days after filing). Keep the
+  // {{…}} placeholder so an incomplete render is visibly wrong.
   registryNumber: '{{REGISTRY_NUMBER}}',
-  vatNumber: '{{VAT_NUMBER}}',
+  // Eurobase OÜ is below the Estonian VAT threshold (€40,000
+  // taxable turnover). It will register for VAT once turnover
+  // approaches the threshold; until then this reads as a plain
+  // statement rather than a placeholder.
+  vatNumber: 'Not VAT-registered (below Estonian €40,000 threshold)',
   effectiveDate: '{{EFFECTIVE_DATE}}',
 
   // Locked by jurisdiction choice — do not parameterise.
@@ -54,8 +68,15 @@ export const legalStrings: LegalStrings = {
   courtOfJurisdiction: 'Harju County Court (Harju Maakohus), Tallinn',
   documentVersion: '2.0',
 
-  supportEmail: 'hello@eurobase.app',
-  noticesEmail: 'hello@eurobase.app',
-  withdrawalEmail: 'hello@eurobase.app',
+  supportEmail: 'contact@eurobase.app',
+  noticesEmail: 'contact@eurobase.app',
+  withdrawalEmail: 'contact@eurobase.app',
+  // DPO stays on its own address so subject-rights + breach-notice
+  // channels are separately monitored from general contact.
   dpoEmail: 'dpo@eurobase.app',
+
+  principalActivity: 'Software as a Service (SaaS) provider',
+  shareCapital: '€1',
+  financialYear: '1 January – 31 December',
+  contactPerson: 'E-Residency Hub OÜ',
 }
