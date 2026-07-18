@@ -306,6 +306,103 @@ export const blog = {
   description: 'Thoughts on European data sovereignty, cloud infrastructure, and building for developers.',
   posts: [
     {
+      slug: 'supabase-gdpr-dpa-eu-region',
+      title: 'Supabase GDPR + DPA: what an EU-region deployment actually gets you',
+      excerpt: 'You picked the eu-central-1 region, you signed the DPA, and the compliance page has a green tick. Under EU law — and under the CLOUD Act — that gets you less than most teams think. Here is what an "EU-region" Supabase project actually protects you from, what it does not, and where an EU-sovereign backend draws a different line.',
+      date: '2026-07-18',
+      author: 'Stefan Gimeson',
+      readTime: '7 min read',
+      content: `You picked the \`eu-central-1\` region when you spun up your Supabase project. You signed the DPA in the dashboard. The compliance page in your console has a green tick next to "GDPR". Your DPO glanced at the sub-processor list and moved on.
+
+If that is the whole extent of your EU-data story, you are probably in the majority — and probably exposed in a way that will not surface until an auditor, a large enterprise customer, or a regulator asks a specific question.
+
+This is not a Supabase takedown. Supabase is a good product, its DPA is real, and the EU-region option is not marketing theatre. But *EU-region hosting* and *EU sovereignty* are two very different things, and the difference matters a lot more in 2026 than it did in 2020. Here is what an EU-region Supabase deployment actually gives you.
+
+## What the DPA actually promises
+
+Supabase's DPA is a competent, SCC-based document. Sign it and you get:
+
+- **Standard Contractual Clauses** (SCCs) for personal data leaving the EEA — the legal mechanism the CJEU has repeatedly upheld as necessary for transfers to third countries.
+- **A committed sub-processor list**, notified 30 days in advance of changes.
+- **Security controls** (encryption in transit + at rest, SOC 2 Type II).
+- **Data breach notification** SLAs and a defined incident-response contact.
+- **Data-subject rights assistance** — Supabase will help you respond to a DSAR, but the fulfilment work is still yours.
+
+Those are the same building blocks every serious US-headquartered SaaS company offers. That is not a knock — it is the responsible baseline. But it is a baseline, not a moat.
+
+## What "EU region" changes — and what it does not
+
+Picking \`eu-central-1\` moves the physical storage of your Postgres, your object storage, and (mostly) your compute inside the EEA. Latency-wise that matters. Data-residency-wise, on paper, it matters.
+
+But EU-region hosting does not change who *controls* the infrastructure. AWS is the underlying provider; Supabase Inc. is a Delaware corporation. Both are US persons under US law. The **CLOUD Act (2018)** is explicit:
+
+> "A provider of electronic communication service or remote computing service shall comply with the obligations of this chapter to preserve, backup, or disclose the contents of a wire or electronic communication and any record or other information pertaining to a customer or subscriber within such provider's possession, custody, or control, regardless of whether such communication, record, or other information is located within or outside of the United States."
+
+The words "regardless of whether … located within or outside of the United States" are not decorative. A US court can order Supabase Inc. (or AWS) to hand over data physically stored in Frankfurt, and neither has legal standing to refuse on the basis of location alone. **FISA §702** adds a bulk-collection layer on top for foreign-intelligence purposes, with a gag order that prevents the provider from telling you it happened.
+
+This is not hypothetical. In April 2025, [Microsoft's French leadership testified under oath](https://www.senat.fr/compte-rendu-commissions/commission-d-enquete-commande-publique.html) to the French Senate that they *cannot guarantee* EU data stays out of the reach of US authorities under the CLOUD Act. Microsoft — which offers the "Bleu" sovereign-cloud partnership in France precisely because they know this — was the most honest of the hyperscalers about it. AWS's position, by omission, is the same.
+
+## The three things the DPA cannot fix
+
+1. **Jurisdictional access.** SCCs govern contractual behaviour. They cannot override a lawful order from a US court under the CLOUD Act. This is what the CJEU meant in Schrems II when it said transfer mechanisms must be evaluated in the context of the destination country's surveillance laws.
+
+2. **Sub-processor concentration.** Even if Supabase's sub-processor list is short, the two big ones — AWS and Cloudflare — are US-headquartered. Every EU-region Supabase deployment ultimately depends on both. A single US administrative action can affect every one of them simultaneously (see the [Anthropic Fable 5 / Mythos 5 shutdown](/blog/ai-kill-switch-eu-sovereignty) from June 2026 for a real-world example of what "single-jurisdiction on-off switch" looks like in practice).
+
+3. **DSAR + RoPA are still your job.** The DPA obliges Supabase to *help* you respond to Article 15 requests. It does not fulfil them. A Data Subject Access Request that requires you to export every row a specific user has ever touched across ten tables, plus their auth identity, plus their storage objects, plus their audit trail, is still your engineering team's problem. Same for the Article 30 Record of Processing Activities — Supabase gives you a sub-processor list, but the actual RoPA (with legal bases, retention, cross-border transfers) is on you to maintain.
+
+## What an EU-sovereign backend draws differently
+
+There are two lines to draw. Neither is technical — both are structural.
+
+### 1. The corporate parent
+
+If the entity you contract with is US-incorporated, the CLOUD Act reaches. If it is EU-incorporated with no US corporate parent, the CLOUD Act does not.
+
+Eurobase's corporate parent is an Estonian OÜ. Every processor in our RoPA — Scaleway (France), Mollie (Netherlands), GatewayAPI (Denmark), Sendgrid replacement TEM (Scaleway, France) — is EU-headquartered. That is not decorative either; it is what removes the CLOUD Act exposure line from your audit.
+
+### 2. The infrastructure floor
+
+Storage in \`eu-central-1\` on AWS is EU-region. Storage on Scaleway in fr-par is EU-owned. Both are physically in Europe. Only the second is operated by a company that has no obligation to cooperate with a US warrant.
+
+Our Postgres, S3-compatible storage, and Deno edge functions all run on Scaleway. Not "an EU region of a US provider" — a French provider, full stop. This closes the "sub-processor concentration" problem in row 2 above.
+
+## What that actually looks like in the product
+
+The reason to bother with all this is not the audit checkbox. It is that once the structural line is drawn, the compliance surfaces stop being enterprise-tier upcharges and start being defaults. In every Eurobase project on every tier — including Free — you get:
+
+- **DSAR export in one click.** Per-user (every row referencing their user_id + auth record + storage) or full-project (every table + auth manifest + storage manifest + audit log) as a downloadable zip. Rate-limited and audited. No custom SQL, no CSV-stitching-in-a-spreadsheet.
+- **RoPA / Article 30 record, auto-generated** from your project's actual configuration and the sub-processors actually in use. Each entry flagged with region, encryption, and CLOUD Act exposure. For every Eurobase-provided processor that flag reads zero, by construction.
+- **Tamper-evident audit log** — every admin action stamped with actor, IP, timestamp. Not "available on the enterprise tier." Present on every project.
+- **DPA available as v2 Markdown**, versioned, with a checksum stored the moment a user accepts it — so an auditor can prove *which bytes of the DPA the user actually saw*.
+
+None of this is revolutionary. Article 15 was published in 2016; Article 30 has been mandatory for eight years. The DSAR volume trend is [up 246 % in two years](https://www.idc.com/getdoc.jsp?containerId=prEUR152263925) and shows no sign of flattening. The only question is whether your platform bakes this in or leaves it to your engineering team the fortnight before an auditor arrives.
+
+## The honest summary
+
+An EU-region Supabase deployment gets you:
+
+- Physical data residency in the EEA ✓
+- Standard SCC-based DPA ✓
+- A responsive sub-processor process ✓
+- **Not** immunity from the CLOUD Act
+- **Not** a DSAR / RoPA that fulfils itself
+- **Not** a supply chain free of single-jurisdiction concentration risk
+
+If those last three do not matter to your business, an EU-region Supabase project is a reasonable choice. If they do — because you serve regulated customers, because a large enterprise contract is asking, because your DPO is starting to hedge in meetings — the fix is not another SCC addendum. It is a structural change to who operates the layer underneath your app.
+
+Eurobase is what that structural change looks like in practice. Same Postgres, same DX, same SDK shape as Supabase; different corporate parent, different infrastructure floor, different failure modes.
+
+If you want to see the exact DPA + RoPA output for a real Eurobase project, [request beta access](/#cta). If you are actively evaluating a migration, [read the Supabase-vs-Eurobase comparison](/vs/supabase) or take a look at the [\`eurobase import supabase\`](/vs/supabase#feature-comparison) CLI — schema, data, storage, and functions imports are already shipping, auth users is next.`,
+      references: [
+        { label: 'EUR-Lex — GDPR (Regulation 2016/679, Art. 15, 20, 30)', url: 'https://eur-lex.europa.eu/eli/reg/2016/679/oj' },
+        { label: 'U.S. Congress — CLOUD Act (H.R. 4943)', url: 'https://www.congress.gov/bill/115th-congress/house-bill/4943' },
+        { label: 'CJEU — Schrems II (C-311/18)', url: 'https://curia.europa.eu/juris/liste.jsf?num=C-311/18' },
+        { label: 'Sénat — Audition de Microsoft France sur la souveraineté numérique', url: 'https://www.senat.fr/compte-rendu-commissions/commission-d-enquete-commande-publique.html' },
+        { label: 'IDC — European sovereign cloud adoption trends', url: 'https://www.idc.com/getdoc.jsp?containerId=prEUR152263925' },
+        { label: 'Supabase DPA (data processing agreement)', url: 'https://supabase.com/legal/dpa' },
+      ],
+    },
+    {
       slug: 'compliance-tab-dsar-ropa-audit-log',
       title: 'The $1,500 GDPR Tax: Why DSAR Fulfilment Belongs in Your Platform, Not Your Spreadsheet',
       excerpt: 'A single Data Subject Access Request costs the average company around $1,500 to fulfil — 8–12 hours of someone\'s week spent stitching CSVs together. Volume is up 246% in two years. Eurobase puts Article 15 export, RoPA, and a tamper-evident audit log on the Compliance tab of every project, by default.',

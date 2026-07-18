@@ -29,51 +29,60 @@ export const comparisons: Record<string, ComparisonData> = {
   supabase: {
     slug: 'supabase',
     competitor: 'Supabase',
-    heroHeadline: 'Eurobase vs Supabase',
-    heroSubheadline: 'Same Postgres power. Full EU sovereignty. No CLOUD Act. No project pausing.',
-    metaTitle: 'Eurobase vs Supabase — EU-Native Postgres Backend Alternative',
-    metaDescription: 'Compare Eurobase and Supabase: same PostgreSQL foundation, but Eurobase runs 100% on EU infrastructure with zero CLOUD Act exposure, native GDPR compliance, and no free tier pausing.',
+    heroHeadline: 'Eurobase vs Supabase: the EU-sovereign alternative',
+    heroSubheadline: 'Same PostgreSQL, same DX — hosted in France, outside the CLOUD Act, GDPR-native, and €19/mo per project once you go live.',
+    metaTitle: 'Eurobase vs Supabase — EU-sovereign Postgres backend alternative',
+    metaDescription: 'Supabase runs on AWS; Eurobase runs on Scaleway in France with zero US jurisdiction. Same Postgres + auth + storage + realtime. GDPR-native, DPA in one click, EU-only sub-processors. Free tier, €19/mo Pro.',
     sections: [
       {
-        title: 'Same Foundation, Different Jurisdiction',
-        description: 'Both Eurobase and Supabase are built on PostgreSQL with REST APIs, auth, storage, and realtime. The difference is where your data lives and who can access it. Supabase runs on AWS (US), making it subject to the CLOUD Act. Eurobase runs entirely on EU-owned infrastructure.',
+        title: 'Same foundation, different jurisdiction',
+        description: 'Eurobase and Supabase are both built on PostgreSQL with REST + realtime, auth, storage, edge functions, and vault. The difference is where the bytes sit and which laws bind the operator. Supabase runs on AWS in the US; Eurobase runs on Scaleway in France, operated by an Estonian OÜ with no US corporate parent.',
       },
       {
-        title: 'Why EU Developers Are Switching',
-        description: 'If you are building for European users or operating under GDPR, choosing US-hosted infrastructure creates legal uncertainty. Eurobase removes that uncertainty entirely — same developer experience, zero jurisdictional risk.',
+        title: 'Why the CLOUD Act matters even when your data is "in Europe"',
+        description: 'A US-region deployment does not remove US jurisdiction. Under the CLOUD Act (2018) and FISA §702, US authorities can compel a US-headquartered provider to hand over data it controls anywhere in the world — including data stored in the EU. Microsoft France told the French Senate under oath in 2025 that they cannot guarantee EU data stays out of that reach. Eurobase removes the question by removing the exposure: EU corporate parent, EU infrastructure, no US-owned processor in the critical path.',
       },
     ],
     rows: [
-      { feature: 'Database', eurobase: 'PostgreSQL (managed)', competitor: 'PostgreSQL (managed)' },
+      { feature: 'Database', eurobase: 'PostgreSQL 16 (managed, Scaleway RDB)', competitor: 'PostgreSQL (managed)' },
       { feature: 'Infrastructure', eurobase: 'Scaleway, France (EU-owned)', competitor: 'AWS (US-owned)', highlight: true },
-      { feature: 'CLOUD Act Exposure', eurobase: 'None', competitor: 'Yes — US jurisdiction', highlight: true },
-      { feature: 'GDPR Compliance', eurobase: 'Native — DPA reports, audit log, data export', competitor: 'Manual setup required' },
-      { feature: 'Auth Methods', eurobase: '6 (email, magic link, OAuth, phone SMS)', competitor: '5 (email, magic link, OAuth, phone, SAML on enterprise)' },
-      { feature: 'Row-Level Security', eurobase: 'Yes — with preset policies', competitor: 'Yes — manual policy writing' },
-      { feature: 'Realtime', eurobase: 'WebSocket subscriptions', competitor: 'WebSocket subscriptions' },
-      { feature: 'Edge Functions', eurobase: 'Deno runtime, EU-hosted', competitor: 'Deno runtime, AWS-hosted' },
-      { feature: 'Vault / Secrets', eurobase: 'AES-256-GCM encrypted, built-in', competitor: 'Vault available (newer feature)' },
-      { feature: 'Free Tier Pausing', eurobase: 'Never — projects stay active', competitor: 'Paused after 7 days inactive', highlight: true },
-      { feature: 'Cron Jobs', eurobase: 'Built-in with execution logs', competitor: 'pg_cron extension' },
-      { feature: 'Webhooks', eurobase: 'Built-in with HMAC signing', competitor: 'Database webhooks (newer)' },
-      { feature: 'CLI', eurobase: '30+ commands', competitor: 'CLI available' },
-      { feature: 'Audit Logging', eurobase: 'Built-in — actor, action, IP, timestamp', competitor: 'Not built-in', highlight: true },
-      { feature: 'DPA Reports', eurobase: 'Automated', competitor: 'On request' },
-      // Migration CLI row — highlight because "how do I get off?" is
-      // the first question a Supabase user asks. Coming-soon phrasing
-      // matches the SolutionSection badge; keep them in sync when the
-      // feature graduates.
-      { feature: 'Migration from Supabase', eurobase: 'One-command CLI (coming soon) — DB, auth, storage, functions', competitor: '—', highlight: true },
+      { feature: 'Corporate parent', eurobase: 'Estonian OÜ', competitor: 'US corporation (Delaware)', highlight: true },
+      { feature: 'CLOUD Act exposure', eurobase: 'None', competitor: 'Yes — US jurisdiction applies globally', highlight: true },
+      { feature: 'GDPR compliance', eurobase: 'Native — DPA, RoPA, DSAR export, audit log in every project', competitor: 'DPA on request; DSAR + RoPA left to the customer' },
+      { feature: 'Auth methods', eurobase: 'Email/password, magic link, phone SMS, OAuth (6 providers)', competitor: 'Email/password, magic link, phone SMS, OAuth, SAML (paid)' },
+      { feature: 'Row-Level Security', eurobase: 'PostgreSQL RLS with preset policy shape (is_service_role() OR …)', competitor: 'PostgreSQL RLS — write your own policies' },
+      { feature: 'Realtime', eurobase: 'WebSocket subscriptions with row-filter', competitor: 'WebSocket subscriptions with row-filter' },
+      { feature: 'Edge functions', eurobase: 'Deno runtime, hosted in France', competitor: 'Deno runtime, hosted on AWS' },
+      { feature: 'Vault / Secrets', eurobase: 'AES-256-GCM, per-tenant key, built-in', competitor: 'Vault available (newer feature)' },
+      // Free-tier pause language must stay in sync with Phase B
+      // (migration 000075 + idle-pause worker). Eurobase = "paused
+      // after 30 days" on Free, "never" on Pro. Same shape as
+      // Supabase — the differentiator is the days count and the
+      // sub-second wake path, not the presence/absence of pause.
+      { feature: 'Free-tier idle pause', eurobase: 'After 30 days idle; single request wakes it (~30 s). Never on Pro.', competitor: 'After 7 days idle. Never on Pro.', highlight: true },
+      { feature: 'Pricing (paid tier)', eurobase: '€19/mo per project (Pro). Team tier €149/mo (dedicated Postgres) coming soon.', competitor: '$25/mo per organization (Pro) + usage-based overages', highlight: true },
+      { feature: 'Cron jobs', eurobase: 'Built-in scheduler with execution log', competitor: 'pg_cron extension' },
+      { feature: 'Webhooks', eurobase: 'Built-in with HMAC signing + retries', competitor: 'Database webhooks (newer)' },
+      { feature: 'CLI', eurobase: '50+ commands (projects, DB, storage, vault, functions, migrations, cron, webhooks)', competitor: 'CLI available' },
+      { feature: 'MCP server (AI IDEs)', eurobase: 'First-class — Claude Code, Cursor, Windsurf, Codex', competitor: 'Community MCP servers' },
+      { feature: 'Audit logging', eurobase: 'Built-in — every admin action with actor, IP, timestamp', competitor: 'Not built-in', highlight: true },
+      { feature: 'DSAR / Article 15 export', eurobase: 'One click — per-user or full-project zip', competitor: 'DIY: write SQL + join across tables + zip yourself' },
+      { feature: 'DPA / Article 30 record', eurobase: 'Auto-generated from actual sub-processor registry', competitor: 'On request' },
+      // Migration CLI status (as of 2026-07): assess, schema, data,
+      // storage, functions all landed (PRs #268, #270, #272, #276,
+      // #277). auth-users import is the remaining piece. Keep this
+      // row in sync with internal/cli/migrate_supabase_*.go.
+      { feature: 'Migration from Supabase', eurobase: 'eurobase import supabase — schema, data, storage, functions (auth users next)', competitor: '—', highlight: true },
     ],
-    sovereigntyHeadline: 'Data Sovereignty Is Not a Feature Toggle',
+    sovereigntyHeadline: 'Sovereignty is not a feature toggle',
     sovereigntyPoints: [
-      'Eurobase infrastructure is 100% EU-owned and operated by Scaleway (France). No AWS, no GCP, no Azure.',
-      'The US CLOUD Act grants American authorities access to data held by US companies — regardless of server location. Supabase, as a US corporation using AWS, is subject to this.',
-      'Eurobase has zero CLOUD Act exposure. Your data stays under EU jurisdiction, full stop.',
-      'Built-in DPA reports, sub-processor registry, GDPR data export, and full audit trail — not as paid add-ons, but as core features.',
+      'Eurobase infrastructure is 100 % EU-owned: Scaleway, France (fr-par). No AWS, no GCP, no Azure — not for the DB, not for storage, not for functions.',
+      'The US CLOUD Act (2018) and FISA §702 grant American authorities access to data held by US companies regardless of server location. Supabase Inc., as a Delaware corporation using AWS, is subject to both.',
+      'Eurobase has zero CLOUD Act exposure. Corporate parent is an Estonian OÜ; every processor in the RoPA is EU-headquartered.',
+      'DPA, RoPA, DSAR export, and audit log are built into every project on every tier. Not paywalled — a legal obligation should not sit behind a $99/mo SKU.',
     ],
-    ctaHeadline: 'Ready to Build on Sovereign Infrastructure?',
-    ctaDescription: 'Get the same Postgres-powered backend experience — without the jurisdictional risk. Free tier available, no credit card required.',
+    ctaHeadline: 'Ready to build on sovereign infrastructure?',
+    ctaDescription: 'Same Postgres, same DX, without the jurisdictional risk. Free tier, no credit card. Pro is €19/mo per project when you go live.',
   },
   firebase: {
     slug: 'firebase',
