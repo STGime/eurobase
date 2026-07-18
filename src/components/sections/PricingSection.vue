@@ -33,6 +33,15 @@ const { elementRef, isVisible } = useScrollReveal()
           <div v-if="tier.highlighted" class="bg-accent-blue text-white text-xs font-semibold text-center py-1.5">
             Recommended
           </div>
+          <!-- Coming-soon badge — mirrors the pattern used on the
+               SolutionSection's "Supabase Migration" card so it reads
+               visually the same across the site. -->
+          <span
+            v-if="'comingSoon' in tier && tier.comingSoon"
+            class="absolute top-3 right-3 rounded-full bg-amber-500/15 text-amber-300 text-[10px] uppercase tracking-wide font-semibold px-2 py-0.5"
+          >
+            Coming soon
+          </span>
           <div class="p-6 flex flex-col items-center text-center">
             <span class="text-4xl mb-4">{{ tier.icon }}</span>
             <h3 class="text-text-white font-bold text-lg font-heading mb-1">{{ tier.name }}</h3>

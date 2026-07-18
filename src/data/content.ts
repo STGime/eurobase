@@ -244,28 +244,29 @@ export const howItWorks = {
 
 export const pricing = {
   headline: 'Built to Grow With You',
-  description: 'Transparent pricing with a generous free tier. No surprises, no bait-and-switch. Early access users get founder-friendly pricing.',
+  description: 'Free while you prototype, €19/mo per project when you go live, and a Team tier for the SMB stack coming later this year. No surprises, no bait-and-switch.',
   tiers: [
     {
       name: 'Free',
       price: 'Free',
-      description: '50,000 database rows, 500 MB storage, 2 projects, all auth methods included. No credit card required.',
+      description: '5,000 monthly active users, 512 MB storage, 2 GB bandwidth, 50 realtime connections. All auth methods and every feature included. Projects auto-pause after 30 days idle — a single request wakes them.',
       icon: '\uD83D\uDE80',
       highlighted: false,
     },
     {
       name: 'Pro',
-      price: 'Coming soon',
-      description: '5,000,000 database rows, 50 GB storage, unlimited projects, priority support.',
+      price: '€19/mo',
+      description: '100,000 monthly active users, 100 GB storage, 250 GB bandwidth, 10,000 realtime connections. Custom domain, BYO SMTP, quota alerts. Never pauses. Priced per project.',
       icon: '\u26A1',
       highlighted: true,
     },
     {
-      name: 'Enterprise',
-      price: 'Contact us',
-      description: 'Dedicated infrastructure, custom limits, SLA and compliance tooling.',
+      name: 'Team',
+      price: '€149/mo',
+      description: 'Dedicated Postgres per project (direct DATABASE_URL), backups + point-in-time recovery, SSO, RBAC, audit trail, SOC 2. For teams shipping regulated SMB software.',
       icon: '\uD83C\uDFE2',
       highlighted: false,
+      comingSoon: true,
     },
   ],
 }
