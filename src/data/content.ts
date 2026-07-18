@@ -256,7 +256,7 @@ export const pricing = {
     {
       name: 'Pro',
       price: '€19/mo',
-      description: '100,000 monthly active users, 100 GB storage, 250 GB bandwidth, 10,000 realtime connections. Custom domain, BYO SMTP, quota alerts. Never pauses. Priced per project.',
+      description: '100,000 monthly active users, 100 GB storage, 250 GB bandwidth, 10,000 realtime connections. BYO SMTP, quota alerts, priority support. Never pauses. Priced per project.',
       icon: '\u26A1',
       highlighted: true,
     },
