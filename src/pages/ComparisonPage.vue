@@ -239,6 +239,11 @@ onBeforeUnmount(() => {
         <h2 class="text-2xl font-bold text-text-white mb-6 font-heading">Related reading</h2>
         <ul class="space-y-3">
           <li>
+            <RouterLink to="/blog/supabase-migration-cli" class="text-accent-blue hover:underline">
+              Move off Supabase in one CLI command — what the migrator does and why teams are asking now &rarr;
+            </RouterLink>
+          </li>
+          <li>
             <RouterLink to="/blog/supabase-gdpr-dpa-eu-region" class="text-accent-blue hover:underline">
               Supabase GDPR + DPA: what an EU-region deployment actually gets you &rarr;
             </RouterLink>

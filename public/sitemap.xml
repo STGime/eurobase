@@ -19,6 +19,12 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/blog/supabase-migration-cli</loc>
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/blog/supabase-gdpr-dpa-eu-region</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>monthly</changefreq>

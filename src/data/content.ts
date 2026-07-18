@@ -306,6 +306,91 @@ export const blog = {
   description: 'Thoughts on European data sovereignty, cloud infrastructure, and building for developers.',
   posts: [
     {
+      slug: 'supabase-migration-cli',
+      title: 'Move off Supabase in one CLI command — here is what the migrator does and why teams are asking now',
+      excerpt: 'Type `eurobase import supabase assess` today and get a read-only migration plan back. Schema, data, storage buckets, and Deno handlers all move on the same CLI. Auth users next. Here is what the migrator does — and why the teams asking us to build it are moving now, not later.',
+      date: '2026-07-19',
+      author: 'Stefan Gimeson',
+      readTime: '7 min read',
+      content: `Someone in your team can, today, type this into a terminal:
+
+\`\`\`
+eurobase import supabase assess --project ref-xxxx --db-url postgres://…
+\`\`\`
+
+The command opens a read-only connection to your Supabase project, walks the schema, the RLS policies, the storage buckets, and the deployed edge functions, and prints a migration report — what will move cleanly, what will need a hand, and what the estimated wall-clock is. Nothing is written anywhere. It is a plan.
+
+Run the four sibling commands after that plan looks reasonable, and your project is on Eurobase — same Postgres shape, same SDK shape, same RLS shape.
+
+That capability existed in our head for six months. It exists in prod today, in the same CLI you would download to bootstrap a fresh Eurobase project. It is not a marketing page. It is a subcommand.
+
+## What the migrator moves today
+
+Five subcommands, one per surface:
+
+- **\`eurobase import supabase assess\`** — read-only project audit. Emits a plan: table count, column-type warnings (Supabase-specific extensions like \`pgsodium\` that Eurobase does not carry, columns the migrator will need to cast to text), policy count, storage bucket sizes, function names + runtime. No writes.
+- **\`eurobase import supabase schema\`** — pulls the DDL, translates Supabase-specific bits (\`auth.uid()\` → \`auth_uid()\`, \`storage.foldername()\` → Eurobase equivalent), rewrites RLS policies to the Eurobase \`is_service_role() OR (…)\` shape, and applies against your Eurobase project via the tenant-migration path.
+- **\`eurobase import supabase data\`** — row-by-row \`COPY\` streaming from Supabase into Eurobase, with per-column type translation for the corner cases (Postgres extensions Eurobase has not enabled land as \`text\` with a flagged comment; \`json\` vs \`jsonb\` normalised; \`vault.secrets\` rows do NOT copy — they need to be re-set via \`eb.vault.set()\` on the new side, by design).
+- **\`eurobase import supabase storage\`** — walks Supabase buckets, generates an \`rclone\` plan for each, and executes the copy against your Eurobase project's Scaleway-hosted bucket. Preserves object metadata + custom headers.
+- **\`eurobase import supabase functions\`** — walks your \`supabase/functions/\` directory, transforms each \`Deno.serve\` handler into the Eurobase \`module.exports\` shape, and deploys via the standard \`eurobase functions deploy\` path. Environment references (\`Deno.env.get\`) become \`ctx.env.…\` reads from the Eurobase vault.
+
+**What is not there yet:** auth-user import. The users themselves — email, hashed password, OAuth identity, session state — is the piece we are actively working on and will land alongside the public-beta open. Until it does, migrations are two-step: run the four commands above, then re-invite users from a CSV, or run the platform side-by-side for two weeks while sessions naturally roll over. Not glorious, but honest.
+
+## Why now — the risk pattern
+
+Nobody moves a production backend on a whim. The teams asking us to prioritise the migrator moved when their board / CTO / legal counsel started asking one specific question:
+
+*"If a US court issued a warrant tomorrow for our production data, could our current provider refuse?"*
+
+The answer, for Supabase specifically, is no — and it is important to understand this is not a Supabase-specific problem. Any US-headquartered service provider running on any US-owned infrastructure (AWS, GCP, Azure) is in the same position, regardless of the region the customer picked. The **CLOUD Act** (H.R. 4943, 2018) says it in one sentence:
+
+> A provider of electronic communication service or remote computing service shall comply with the obligations of this chapter to preserve, backup, or disclose the contents of a wire or electronic communication and any record or other information pertaining to a customer or subscriber within such provider's possession, custody, or control, **regardless of whether such communication, record, or other information is located within or outside of the United States.**
+
+The last twelve words are load-bearing. A Supabase project deployed to \`eu-central-1\` on AWS is physically stored in Frankfurt. That does not change who controls it or which laws bind the operator. **FISA §702** adds a bulk-collection layer with a gag order that legally prevents the provider from telling you it happened.
+
+We are not the first to point this out. In April 2025 [Microsoft's French leadership testified under oath to the French Senate](https://www.senat.fr/compte-rendu-commissions/commission-d-enquete-commande-publique.html) that they *cannot guarantee* EU customer data stays out of the reach of the US CLOUD Act. Microsoft — a company deeply invested in EU cloud revenue, offering the "Bleu" sovereign-cloud joint venture in France for exactly this reason — was the most honest of the hyperscalers about it. Everyone else's position, by omission, is the same.
+
+And in June 2026 the US government forced Anthropic to switch off two commercial AI models worldwide with a single export-control directive. Not throttled, not geo-blocked — [gone, globally, from one administrative decision in one jurisdiction](/blog/ai-kill-switch-eu-sovereignty). If a US regulator can turn off an AI model your product depends on with a signature, they can compel disclosure of a Postgres database with the same signature. The pattern is the same; the model shutdown just made it visible.
+
+## What "control of your own data" actually means
+
+It is not a slogan. It is a two-part structural test the operator you rely on either passes or fails:
+
+1. **Is the corporate parent EU-incorporated?** If yes, the CLOUD Act does not reach. If no, it does — even if the entity has an EU subsidiary. Contractual gymnastics (SCCs, Transfer Impact Assessments) do not override a US court order.
+2. **Is the infrastructure EU-owned in the critical path?** If the underlying compute, storage, and network are operated by a US company (AWS, GCP, Azure), the same jurisdictional reach applies to the provider-below-the-provider. "EU region of a US hyperscaler" fails this test.
+
+Eurobase passes both. The corporate parent is Eurobase OÜ, an Estonian private limited company; the compute + storage + edge-function runtime is Scaleway, a French company operating in Paris. There is no US-owned processor in the path from your app to the disk. That is not a differentiator we can retrofit — it is the reason the company exists at this specific shape.
+
+## The GDPR obligations that ride along
+
+Because they are structurally decoupled from CLOUD Act exposure, they are worth calling out separately. A US-region deployment gives you a competent SCC-based DPA and physical EEA residency. It does not fulfil these for you:
+
+- **Article 15 (right of access)** and **Article 20 (data portability)**. When a user emails "what do you have on me?" you are still on the hook to build the export. On Eurobase, every project ships a one-click console export plus \`eb.auth.exportMyData()\` — audited, rate-limited, per-user or full-project. [Full write-up](/blog/compliance-tab-dsar-ropa-audit-log).
+- **Article 30 (record of processing activities)**. You must maintain a RoPA. On Eurobase this is auto-generated from your live sub-processor registry; every entry flagged with region, encryption, and CLOUD Act exposure. For every Eurobase-provided processor, that exposure flag reads zero.
+- **Article 33 (breach notification)**. The controller-processor chain must notify within 72 hours. If your provider is under a FISA §702 gag order, they legally cannot tell you an unlawful access happened. That is not compatible with Article 33.
+
+None of this is new regulation. Article 15 was published in 2016. Article 30 has been mandatory since 2018. The CLOUD Act is from 2018. The only thing that has changed is that regulators are starting to enforce the response timelines and boards are starting to ask.
+
+## Try the assess command yourself
+
+If you have a Supabase project you want a read of, [request beta access](/#cta) and we will send you the CLI + a one-page walkthrough. The assess subcommand is read-only, safe against production. You get a plan; you decide whether to move.
+
+If moving is not on the table this quarter, that is fine — but running \`assess\` gives you a document you can hand your CTO / DPO next time the question comes up. "Here is what we would need to move, here is how long it would take, here is what we would need to touch." That answer is worth having even if the migration itself waits.
+
+## Closing — this is about *being able to*, not *having to*
+
+The best sovereignty posture is not "everyone must migrate." It is "any team that decides to move, can, in a working week." We are building the migrator because we want that option to exist for European developers who are increasingly asked to justify their infrastructure choices, and because we would rather compete on product than on lock-in.
+
+If the answer to *"could your current provider refuse a US warrant tomorrow?"* was "no", and that answer sits uncomfortably with your board, [we are on hello@eurobase.app](mailto:hello@eurobase.app). If you want the assess command against your own project first, that works too.`,
+      references: [
+        { label: 'U.S. Congress — CLOUD Act (H.R. 4943, 2018)', url: 'https://www.congress.gov/bill/115th-congress/house-bill/4943' },
+        { label: 'Sénat — Audition de Microsoft France sur la souveraineté numérique (April 2025)', url: 'https://www.senat.fr/compte-rendu-commissions/commission-d-enquete-commande-publique.html' },
+        { label: 'EUR-Lex — GDPR (Regulation 2016/679, Art. 15, 20, 30, 33)', url: 'https://eur-lex.europa.eu/eli/reg/2016/679/oj' },
+        { label: 'CJEU — Schrems II (C-311/18)', url: 'https://curia.europa.eu/juris/liste.jsf?num=C-311/18' },
+        { label: 'heise online — US government forces shutdown of Anthropic\'s AI Fable 5 and Mythos 5', url: 'https://www.heise.de/en/news/US-government-forces-shutdown-of-Anthropic-s-AI-Fable-5-and-Mythos-5-11331146.html' },
+      ],
+    },
+    {
       slug: 'supabase-gdpr-dpa-eu-region',
       title: 'Supabase GDPR + DPA: what an EU-region deployment actually gets you',
       excerpt: 'You picked the eu-central-1 region, you signed the DPA, and the compliance page has a green tick. Under EU law — and under the CLOUD Act — that gets you less than most teams think. Here is what an "EU-region" Supabase project actually protects you from, what it does not, and where an EU-sovereign backend draws a different line.',
