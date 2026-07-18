@@ -51,7 +51,7 @@
           <ul class="space-y-2">
             <li><RouterLink to="/privacy" class="text-text-muted text-sm hover:text-text-white transition-colors">Privacy Policy</RouterLink></li>
             <li><RouterLink to="/terms" class="text-text-muted text-sm hover:text-text-white transition-colors">Terms &amp; Conditions</RouterLink></li>
-            <li><RouterLink to="/impressum" class="text-text-muted text-sm hover:text-text-white transition-colors">Impressum</RouterLink></li>
+            <li><RouterLink to="/legal" class="text-text-muted text-sm hover:text-text-white transition-colors">Legal notice</RouterLink></li>
           </ul>
         </div>
       </div>
