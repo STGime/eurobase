@@ -33,6 +33,7 @@
           <ul class="space-y-2">
             <li><RouterLink to="/vs/supabase" class="text-text-muted text-sm hover:text-text-white transition-colors">Eurobase vs Supabase</RouterLink></li>
             <li><RouterLink to="/vs/firebase" class="text-text-muted text-sm hover:text-text-white transition-colors">Eurobase vs Firebase</RouterLink></li>
+            <li><RouterLink to="/faq" class="text-text-muted text-sm hover:text-text-white transition-colors">FAQ</RouterLink></li>
           </ul>
         </div>
 

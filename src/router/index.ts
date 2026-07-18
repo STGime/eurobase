@@ -38,6 +38,11 @@ const router = createRouter({
       name: 'feature-dsar',
       component: () => import('@/pages/DsarFeaturePage.vue'),
     },
+    {
+      path: '/faq',
+      name: 'faq',
+      component: () => import('@/pages/FaqPage.vue'),
+    },
   ],
   scrollBehavior(to) {
     if (to.hash) {

@@ -6,9 +6,12 @@ import SectionHeading from '@/components/ui/SectionHeading.vue'
 
 const { elementRef, isVisible } = useScrollReveal()
 
-// DSAR post is pinned first to reinforce the home-page DSAR positioning.
-// Remaining posts: newest first regardless of order in content.ts.
-const PINNED_SLUG = 'compliance-tab-dsar-ropa-audit-log'
+// The Supabase-GDPR post is pinned first because "supabase eu*" is
+// our highest-intent SEO cluster (per Search Console) and this post
+// is the direct answer to it. Rotate this slug as the SEO priority
+// shifts. Remaining posts: newest first regardless of order in
+// content.ts.
+const PINNED_SLUG = 'supabase-gdpr-dpa-eu-region'
 const sortedPosts = computed(() => {
   const pinned = blog.posts.find(p => p.slug === PINNED_SLUG)
   const rest = blog.posts
