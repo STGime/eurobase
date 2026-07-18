@@ -6,19 +6,14 @@ import SectionHeading from '@/components/ui/SectionHeading.vue'
 
 const { elementRef, isVisible } = useScrollReveal()
 
-// The Supabase-GDPR post is pinned first because "supabase eu*" is
-// our highest-intent SEO cluster (per Search Console) and this post
-// is the direct answer to it. Rotate this slug as the SEO priority
-// shifts. Remaining posts: newest first regardless of order in
-// content.ts.
-const PINNED_SLUG = 'supabase-gdpr-dpa-eu-region'
-const sortedPosts = computed(() => {
-  const pinned = blog.posts.find(p => p.slug === PINNED_SLUG)
-  const rest = blog.posts
-    .filter(p => p.slug !== PINNED_SLUG)
-    .sort((a, b) => b.date.localeCompare(a.date))
-  return pinned ? [pinned, ...rest] : rest
-})
+// Strict newest-first ordering. We used to pin a specific slug on top
+// to promote a high-intent SEO piece, but chronological order is
+// clearer for readers and stops old posts overshadowing new drops.
+// If we ever want to re-pin, restore PINNED_SLUG + the two-array
+// concat here (git history has the shape).
+const sortedPosts = computed(() =>
+  [...blog.posts].sort((a, b) => b.date.localeCompare(a.date)),
+)
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
