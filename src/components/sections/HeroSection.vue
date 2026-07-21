@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { hero } from '@/data/content'
 import CtaButton from '@/components/ui/CtaButton.vue'
 import WaitingListModal from '@/components/WaitingListModal.vue'
+import HeroGlobe from '@/components/HeroGlobe.vue'
 import heroImage from '@/assets/images/hero-network.webp'
 
 const showModal = ref(false)
@@ -53,36 +54,7 @@ const showModal = ref(false)
         </div>
 
         <div class="hidden lg:flex justify-center">
-          <div class="relative animate-float">
-            <div class="w-[360px] h-[360px] relative">
-              <!-- Outer ring -->
-              <div class="absolute inset-0 rounded-full border-2 border-accent-blue/20 animate-[spin_20s_linear_infinite]" />
-              <!-- Inner rings -->
-              <div class="absolute inset-8 rounded-full border border-accent-gold/15" />
-              <div class="absolute inset-20 rounded-full bg-gradient-to-br from-accent-blue/20 to-accent-purple/10 backdrop-blur" />
-              <!-- 7 service nodes positioned around the circle (evenly at ~51° intervals) -->
-              <!-- 0° = top -->
-              <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-yellow/30 text-[11px] text-accent-yellow" style="top: 2%; left: 50%; transform: translateX(-50%)">🔐 Auth</div>
-              <!-- ~51° -->
-              <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-blue/30 text-[11px] text-accent-blue" style="top: 14%; right: 2%; transform: translateX(0)">🗄️ Database</div>
-              <!-- ~103° -->
-              <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-green/30 text-[11px] text-accent-green" style="top: 52%; right: -4%; transform: translateY(-50%)">📦 Storage</div>
-              <!-- ~154° -->
-              <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-purple/30 text-[11px] text-accent-purple" style="bottom: 8%; right: 8%">🧩 Realtime</div>
-              <!-- ~206° -->
-              <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-orange/30 text-[11px] text-accent-orange" style="bottom: 8%; left: 8%">🔧 Functions</div>
-              <!-- ~257° -->
-              <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-dark-red/30 text-[11px] text-accent-dark-red" style="top: 52%; left: -4%; transform: translateY(-50%)">📜 Logging</div>
-              <!-- ~309° -->
-              <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-teal/30 text-[11px] text-accent-teal" style="top: 14%; left: 2%">🖥️ Dashboard</div>
-              <!-- Center logo -->
-              <div class="absolute inset-0 flex items-center justify-center">
-                <div class="text-center">
-                  <span class="text-2xl font-bold text-text-white font-heading">euro</span><span class="text-2xl font-bold text-accent-gold font-heading">base</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <HeroGlobe />
         </div>
       </div>
     </div>
