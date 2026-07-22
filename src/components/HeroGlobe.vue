@@ -25,7 +25,7 @@ const canvasRef = ref<HTMLCanvasElement | null>(null)
 const DEG = Math.PI / 180
 const TILT = 0.52 // tip the north pole toward the viewer so Europe sits center stage
 const ROT_START = -14 * DEG // start with Europe facing the viewer
-const ROT_SPEED = 0.055 // rad/s — one revolution ≈ 2 minutes
+const ROT_SPEED = 0.18 // rad/s — one revolution ≈ 35 seconds
 
 interface Layer {
   vx: Float32Array

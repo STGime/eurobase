@@ -54,7 +54,28 @@ const showModal = ref(false)
         </div>
 
         <div class="hidden lg:flex justify-center">
-          <HeroGlobe />
+          <!-- Wrapper positions the seven feature chips around the globe
+               (Auth / Database / Storage / Realtime / Functions /
+               Logging / Dashboard). Chips sit on the same 420px stage
+               as the canvas but at percentages that keep them clear of
+               the sphere so the globe's amber Europe glow reads. -->
+          <div class="relative w-[420px] h-[420px] max-w-full">
+            <HeroGlobe />
+            <!-- 0° top -->
+            <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-yellow/30 text-[11px] text-accent-yellow whitespace-nowrap" style="top: -6%; left: 50%; transform: translateX(-50%)">🔐 Auth</div>
+            <!-- ~51° -->
+            <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-blue/30 text-[11px] text-accent-blue whitespace-nowrap" style="top: 12%; right: -8%">🗄️ Database</div>
+            <!-- ~103° -->
+            <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-green/30 text-[11px] text-accent-green whitespace-nowrap" style="top: 50%; right: -14%; transform: translateY(-50%)">📦 Storage</div>
+            <!-- ~154° -->
+            <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-purple/30 text-[11px] text-accent-purple whitespace-nowrap" style="bottom: 6%; right: -4%">🧩 Realtime</div>
+            <!-- ~206° -->
+            <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-orange/30 text-[11px] text-accent-orange whitespace-nowrap" style="bottom: 6%; left: -4%">🔧 Functions</div>
+            <!-- ~257° -->
+            <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-dark-red/30 text-[11px] text-accent-dark-red whitespace-nowrap" style="top: 50%; left: -14%; transform: translateY(-50%)">📜 Logging</div>
+            <!-- ~309° -->
+            <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-teal/30 text-[11px] text-accent-teal whitespace-nowrap" style="top: 12%; left: -8%">🖥️ Dashboard</div>
+          </div>
         </div>
       </div>
     </div>
