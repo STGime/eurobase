@@ -52,16 +52,19 @@ export const legalStrings: LegalStrings = {
   legalEntity: 'Eurobase OÜ',
   entityType: 'Private limited company (osaühing / OÜ)',
   registeredAddress: 'Ahtri 12, Tallinn 15551',
-  // TODO(formation): fill once the Äriregister issues the registry
-  // code (typically a few business days after filing). Keep the
-  // {{…}} placeholder so an incomplete render is visibly wrong.
-  registryNumber: '{{REGISTRY_NUMBER}}',
+  // Estonian commercial-register code (äriregistri kood), issued by
+  // Tartu Maakohus registriosakond. Certified extract nr 5529927 on
+  // file. First entry (esmakanne) 2026-07-22.
+  registryNumber: '17557586',
   // Eurobase OÜ is below the Estonian VAT threshold (€40,000
   // taxable turnover). It will register for VAT once turnover
   // approaches the threshold; until then this reads as a plain
   // statement rather than a placeholder.
   vatNumber: 'Not VAT-registered (below Estonian €40,000 threshold)',
-  effectiveDate: '{{EFFECTIVE_DATE}}',
+  // v2 documents came into effect the same day the Estonian entity
+  // was registered — one clean anchor point for auditors reviewing
+  // consent + governing-law shift.
+  effectiveDate: '22 July 2026',
 
   // Locked by jurisdiction choice — do not parameterise.
   governingLaw: 'the Republic of Estonia',
