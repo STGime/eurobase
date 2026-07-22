@@ -204,7 +204,11 @@ onMounted(() => {
     // dots are additive so the Europe halos accumulate into a continent-wide glow
     ctx.globalCompositeOperation = 'lighter'
     drawLayer(land, rot, cx, cy, r, landSprite, 3.4)
-    drawLayer(europe, rot, cx, cy, r, europeHalo, 12)
+    // Halo is what makes Europe read as "glowing", but too large a base
+    // size means each dot's soft edge bleeds past its country polygon
+    // — most visible at the Turkish and Levantine coasts. 9 keeps the
+    // continent-wide glow intact without leaking beyond the silhouette.
+    drawLayer(europe, rot, cx, cy, r, europeHalo, 9)
     drawLayer(europe, rot, cx, cy, r, europeCore, 3.1)
     drawLayer(cities, rot, cx, cy, r, citySprite, 6.5, (i) => 0.55 + 0.45 * Math.sin(time * 1.7 + i * 2.4))
     drawLayer(hubs, rot, cx, cy, r, hubSprite, 8, (i) => 0.7 + 0.3 * Math.sin(time * 2.1 + i * 1.9))

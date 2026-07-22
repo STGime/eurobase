@@ -18,6 +18,11 @@ const topojson = require('topojson-client')
 const world50m = require('world-atlas/countries-50m.json')
 const world110m = require('world-atlas/countries-110m.json')
 
+// Europe as a geographic silhouette, not a political membership list.
+// Cyprus is politically EU but geographically Middle-Eastern (34°N,
+// 33°E — south of Turkey); its dots + halo bleed visually into the
+// Anatolian coast on the rotating globe. Dropped for the same reason
+// we don't include French Guiana or the Azores individually.
 const EUROPE = new Set([
   'Iceland', 'Norway', 'Sweden', 'Finland', 'Denmark', 'Estonia', 'Latvia',
   'Lithuania', 'Poland', 'Germany', 'Netherlands', 'Belgium', 'Luxembourg',
@@ -25,7 +30,7 @@ const EUROPE = new Set([
   'Monaco', 'Switzerland', 'Liechtenstein', 'Austria', 'Czechia', 'Slovakia',
   'Hungary', 'Slovenia', 'Croatia', 'Bosnia and Herz.', 'Serbia', 'Montenegro',
   'Kosovo', 'Albania', 'Macedonia', 'Greece', 'Bulgaria', 'Romania', 'Moldova',
-  'Ukraine', 'Belarus', 'Italy', 'San Marino', 'Malta', 'Cyprus',
+  'Ukraine', 'Belarus', 'Italy', 'San Marino', 'Malta',
 ])
 
 // Bright "city lights" for the rest of the world.
@@ -87,13 +92,17 @@ function featureContains(feature, lon, lat) {
   return false
 }
 
-function sampleGrid(features, stepDeg, { latMin = -60, latMax = 75, exclude } = {}) {
+function sampleGrid(
+  features,
+  stepDeg,
+  { latMin = -60, latMax = 75, lonMin = -180, lonMax = 180, exclude } = {},
+) {
   const points = []
   for (let lat = latMin; lat <= latMax; lat += stepDeg) {
     const cos = Math.cos((lat * Math.PI) / 180)
     if (cos < 0.05) continue
     const lonStep = stepDeg / cos
-    for (let lon = -180; lon < 180; lon += lonStep) {
+    for (let lon = lonMin; lon < lonMax; lon += lonStep) {
       if (exclude && exclude.some((f) => featureContains(f, lon, lat))) continue
       if (features.some((f) => featureContains(f, lon, lat))) {
         points.push([Math.round(lat * 100) / 100, Math.round(lon * 100) / 100])
@@ -114,7 +123,16 @@ const europe110 = countries110.filter((f) => EUROPE.has(f.properties.name))
 const world110Only = countries110.filter((f) => !EUROPE.has(f.properties.name))
 
 // Dense fill for the European glow (50m resolution keeps coastlines crisp).
-const europe = sampleGrid(europe50, 0.62, { latMin: 34, latMax: 72 })
+// Hard longitude cap at 44°E covers Ukraine's easternmost reach without any
+// leakage toward Anatolia. latMin 36 avoids sampling the Aegean-Turkish coast
+// where Greek islands can host a dot inside a polygon that visually reads
+// as Turkish shoreline through the halo bleed.
+const europe = sampleGrid(europe50, 0.62, {
+  latMin: 36,
+  latMax: 72,
+  lonMin: -25,
+  lonMax: 44,
+})
 // Sparse context dots for the rest of the world (110m is plenty).
 const land = sampleGrid(world110Only, 1.7, { exclude: europe110 })
 
