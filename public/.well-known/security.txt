@@ -1,0 +1,10 @@
+# RFC 9116 security.txt for eurobase.app
+# Serves the coordinated-vulnerability-disclosure contact and pointers.
+# Regenerate before Expires with a signed copy if we add PGP.
+
+Contact: mailto:security@eurobase.app
+Expires: 2027-07-22T00:00:00.000Z
+Preferred-Languages: en, et
+Canonical: https://eurobase.app/.well-known/security.txt
+Policy: https://eurobase.app/security
+Hiring: https://eurobase.app/#cta

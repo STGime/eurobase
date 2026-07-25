@@ -51,6 +51,11 @@ const router = createRouter({
       name: 'faq',
       component: () => import('@/pages/FaqPage.vue'),
     },
+    {
+      path: '/security',
+      name: 'security',
+      component: () => import('@/pages/SecurityPage.vue'),
+    },
   ],
   scrollBehavior(to) {
     if (to.hash) {

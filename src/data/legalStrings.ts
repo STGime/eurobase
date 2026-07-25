@@ -37,6 +37,7 @@ export interface LegalStrings {
   noticesEmail: string
   withdrawalEmail: string
   dpoEmail: string
+  securityEmail: string
   /** Estonian-law transparency additions (ISTS §4 / good-practice for
    *  e-residency companies). Not strictly required by ISTS but read as
    *  a positive signal by B2B contract reviewers. */
@@ -77,6 +78,10 @@ export const legalStrings: LegalStrings = {
   // DPO stays on its own address so subject-rights + breach-notice
   // channels are separately monitored from general contact.
   dpoEmail: 'dpo@eurobase.app',
+  // Coordinated Vulnerability Disclosure entry point (RFC 9116) —
+  // monitored on the same schedule as dpo@; keep independent so
+  // security researchers land in a triage queue.
+  securityEmail: 'security@eurobase.app',
 
   principalActivity: 'Software as a Service (SaaS) provider',
   shareCapital: '€1',
