@@ -29,9 +29,19 @@ html {
 
 /* Any content overflowing the viewport width would stretch the layout
    viewport on mobile, pushing the fixed nav (and its hamburger button)
-   off-screen. Clip instead of hidden: no scroll container is created. */
+   off-screen. hidden as the universally-supported base; clip where
+   supported (no scroll container is created). Pin text-size-adjust so
+   Android font boosting can't inflate fixed-width content like code
+   blocks beyond the viewport. */
 html, body {
-  overflow-x: clip;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+@supports (overflow-x: clip) {
+  html, body {
+    overflow-x: clip;
+  }
 }
 
 body {
