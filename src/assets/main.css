@@ -27,6 +27,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Any content overflowing the viewport width would stretch the layout
+   viewport on mobile, pushing the fixed nav (and its hamburger button)
+   off-screen. Clip instead of hidden: no scroll container is created. */
+html, body {
+  overflow-x: clip;
+}
+
 body {
   font-family: var(--font-family-body);
 }

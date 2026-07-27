@@ -20,11 +20,11 @@ const { elementRef, isVisible } = useScrollReveal()
       </div>
 
       <div class="grid lg:grid-cols-2 gap-10 items-start">
-        <div :class="isVisible ? 'animate-fade-in-up stagger-2' : 'opacity-0'">
+        <div class="min-w-0" :class="isVisible ? 'animate-fade-in-up stagger-2' : 'opacity-0'">
           <CodeBlock :code="developer.code" />
         </div>
 
-        <div>
+        <div class="min-w-0">
           <ul class="space-y-4">
             <li
               v-for="(feature, i) in developer.features"
