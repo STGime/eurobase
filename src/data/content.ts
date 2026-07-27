@@ -306,6 +306,52 @@ export const blog = {
   description: 'Thoughts on European data sovereignty, cloud infrastructure, and building for developers.',
   posts: [
     {
+      slug: 'our-data-deserves-a-better-agreement',
+      title: '"Our Data Deserves a Better Agreement" — heise Is Right. It Also Deserves Not to Need One.',
+      excerpt: 'A heise online opinion piece argues the EU-US Data Privacy Framework no longer deserves Europe\'s trust — and that Washington itself is supplying the strongest arguments against it. We agree with the diagnosis. We disagree that a better agreement is the cure. The only transfer framework that cannot collapse is the one your stack never needed.',
+      date: '2026-07-27',
+      author: 'Stefan Gimeson',
+      readTime: '5 min read',
+      content: `heise online's English edition recently published an opinion piece by Ulrich Wolf with a headline that could double as a European infrastructure manifesto: ["Our data deserves a better agreement"](https://www.heise.de/en/opinion/EU-US-data-transfer-Our-data-deserves-a-better-agreement-11378463.html).
+
+The piece is about the EU-US Data Privacy Framework (DPF) — the legal bridge that lets US companies receive EU personal data, and the successor to two bridges that have already collapsed. Wolf's argument, compressed: when the DPF was adopted three years ago, Max Schrems — the lawyer who brought down both Safe Harbor and Privacy Shield — called it a missed opportunity and accused the EU of legitimising surveillance of its own population. A third court challenge from him never even became necessary to make the point. As Wolf puts it, a US president with absolutist tendencies is now supplying the best arguments against the framework himself.
+
+We read the piece the morning it landed in our feeds, and it deserves a response from exactly where we sit — because we agree with every word of the diagnosis and draw a different conclusion from it.
+
+## The receipts Wolf points to are real events, not hypotheticals
+
+The opinion piece leans on a case we have all watched unfold. In February 2025, the US sanctioned Karim Khan, chief prosecutor of the International Criminal Court in The Hague. Shortly afterwards, his official Microsoft email account went dark. Microsoft denies having pulled the plug, saying the ICC itself moved the mailbox — but pause on what that denial concedes: either a US provider cut off an international court's chief prosecutor under a sanctions order, or an international court concluded it could not risk finding out and fled to Switzerland's Proton Mail pre-emptively. For the sovereignty question, both readings end in the same place. By October 2025, the ICC announced it was dropping Microsoft Office for the European openDesk suite entirely.
+
+Wolf's wider point: if that can happen to a court in The Hague, the idea that an executive-order-based framework protects the data of 450 million Europeans is an exercise in hope. The DPF's safeguards live in a US executive order, reviewable and revocable by the same pen that signed the ICC sanctions. The oversight body underpinning its redress mechanism, the Privacy and Civil Liberties Oversight Board, was stripped of its quorum in January 2025 when its Democratic members were dismissed. The framework survived its first court test in September 2025 — [we wrote about that ruling and the appeal now sitting at the CJEU](/blog/adequacy-carousel-four-level-test) — but "survived a standing challenge" and "deserves trust" are different claims.
+
+## Where we part ways with the headline
+
+Wolf's conclusion is in his title: our data deserves a *better agreement*. Ours is one step further: our data deserves an architecture in which the agreement is irrelevant.
+
+Here is the structural problem a better agreement cannot fix. Any transfer framework has to reconcile two things that do not reconcile: EU fundamental-rights law, which requires that personal data stay protected from bulk state access, and US surveillance law — FISA §702, the CLOUD Act — which requires US providers to grant exactly that access, wherever the server racks stand. Safe Harbor pretended the tension away and fell in 2015. Privacy Shield repainted it and fell in 2020. The DPF is attempt number three, and the political ground under it is moving faster than under either predecessor. Even a genuinely better agreement — more safeguards, more oversight, more goodwill — remains a treaty-shaped patch over a statutory conflict, valid until the next executive order, the next court term, the next election.
+
+You cannot contract your way out of another country's law. You can only architect your way out of its jurisdiction.
+
+## What "not needing the agreement" looks like
+
+The DPF question only exists for your stack if your data crosses into US legal reach — through a US-incorporated provider, or a US-owned cloud under an EU flag. Remove that hop and the entire adequacy debate stops being your problem:
+
+- **EU jurisdiction end to end.** Eurobase's operating entity is European, and the infrastructure underneath — compute, Postgres, object storage, functions runtime — runs on Scaleway in France. No US processor sits anywhere in the path from your app to the disk, so there is no transatlantic transfer for any framework to bless.
+- **Verifiable, not asserted.** Every Eurobase project ships a live compliance report listing each active sub-processor with its jurisdiction and CLOUD Act exposure. For every Eurobase-provided processor, that exposure flag reads zero — and you can show the report to your DPO instead of quoting our marketing.
+- **A fallback you control.** If the DPF falls tomorrow, Supabase-style US-region stacks start the SCC-and-TIA paperwork sprint again, like tens of thousands of companies did after Schrems II. An EU-jurisdiction stack reads the news with coffee.
+
+Wolf is right that our data deserves better than the agreement it currently has. But Europe has spent twenty-five years and three frameworks trying to negotiate trust into a relationship whose statutes forbid it. At some point the better agreement is the one you stop needing.
+
+If you would rather read the next adequacy ruling as an observer than as a stakeholder, [join the early access programme](/#cta).`,
+      references: [
+        { label: 'heise online — EU-US data transfer: Our data deserves a better agreement (Ulrich Wolf)', url: 'https://www.heise.de/en/opinion/EU-US-data-transfer-Our-data-deserves-a-better-agreement-11378463.html' },
+        { label: 'Euronews — Trump\'s sanctions on ICC halt tribunal\'s work, staffers claim', url: 'https://www.euronews.com/2025/05/15/trumps-sanctions-on-icc-halt-tribunals-work-staffers-claim' },
+        { label: 'The Register — International Criminal Court dumps Microsoft Office', url: 'https://www.theregister.com/software/2025/10/31/international-criminal-court-dumps-microsoft-office/680564' },
+        { label: 'Court of Justice of the EU — Case C-311/18 (Schrems II), 16 July 2020', url: 'https://curia.europa.eu/juris/liste.jsf?num=C-311/18' },
+        { label: 'U.S. Congress — CLOUD Act (H.R. 4943)', url: 'https://www.congress.gov/bill/115th-congress/house-bill/4943' },
+      ],
+    },
+    {
       slug: 'supabase-migration-cli',
       title: 'Move off Supabase in one CLI command — here is what the migrator does and why teams are asking now',
       excerpt: 'Type `eurobase import supabase assess` today and get a read-only migration plan back. Schema, data, storage buckets, and Deno handlers all move on the same CLI. Auth users next. Here is what the migrator does — and why the teams asking us to build it are moving now, not later.',
