@@ -32,7 +32,7 @@ const showModal = ref(false)
           <p class="text-accent-gold font-medium mb-6 animate-fade-in-up stagger-3">
             {{ hero.tagline }}
           </p>
-          <p class="mb-8 animate-fade-in-up stagger-3">
+          <p class="mb-3 animate-fade-in-up stagger-3">
             <a
               href="#automated-dsar"
               class="inline-flex items-center gap-2 text-sm font-semibold text-text-white bg-accent-purple/15 hover:bg-accent-purple/25 border border-accent-purple/40 rounded-full px-4 py-2 transition-colors"
@@ -40,6 +40,18 @@ const showModal = ref(false)
               <span class="text-accent-gold">New</span>
               <span class="text-text-light">·</span>
               <span>One-click GDPR DSAR exports — built in, audit-trailed, EU-only.</span>
+              <span class="text-accent-gold">→</span>
+            </a>
+          </p>
+          <p class="mb-8 animate-fade-in-up stagger-3">
+            <a
+              href="https://www.producthunt.com/products/eurobase?utm_source=eurobase-landing&utm_medium=cta&utm_campaign=prelaunch"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 text-sm font-semibold text-text-white bg-orange-500/15 hover:bg-orange-500/25 border border-orange-400/40 rounded-full px-4 py-2 transition-colors"
+            >
+              <span aria-hidden="true">👀</span>
+              <span>Launching on Product Hunt · <strong class="text-accent-gold">Aug 26</strong> — get notified</span>
               <span class="text-accent-gold">→</span>
             </a>
           </p>
