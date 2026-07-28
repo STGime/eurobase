@@ -20,6 +20,33 @@ const showModal = ref(false)
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 w-full">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
+          <!--
+            Pre-launch Product Hunt promoter — pinned above the eyebrow so
+            it's the first thing on every visitor's screen. Full-width pill
+            in PH-orange with a live pulse dot to signal "act now". The
+            bigger a first-visit visitor's chance to click Notify-Me before
+            they scroll, the stronger our Day-1 leaderboard position. Take
+            this down (or swap to "live now") on 2026-08-26 and remove
+            entirely on 2026-08-27.
+          -->
+          <a
+            href="https://www.producthunt.com/products/eurobase?utm_source=eurobase-landing&utm_medium=hero-banner&utm_campaign=prelaunch"
+            target="_blank"
+            rel="noopener"
+            class="group inline-flex items-center gap-3 mb-6 rounded-xl px-5 py-3 text-white font-semibold shadow-lg shadow-orange-500/25 ring-1 ring-white/10 transition-all duration-200 hover:shadow-orange-500/50 hover:ring-white/25 animate-fade-in-up"
+            style="background: linear-gradient(135deg, #DA552F 0%, #EA6D3A 55%, #FFB300 100%);"
+          >
+            <span class="relative flex h-3 w-3 shrink-0" aria-hidden="true">
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-60"></span>
+              <span class="relative inline-flex h-3 w-3 rounded-full bg-white"></span>
+            </span>
+            <span class="text-sm sm:text-base">
+              <span class="uppercase tracking-wider text-[11px] sm:text-xs opacity-90 mr-2">Product Hunt</span>
+              <span>Launching Wed <strong>Aug 26</strong> — get notified</span>
+            </span>
+            <span class="ml-auto transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">→</span>
+          </a>
+
           <p class="text-accent-gold font-semibold text-sm uppercase tracking-wider mb-4 animate-fade-in-up">
             🇪🇺 EU-Native Backend-as-a-Service
           </p>
@@ -32,7 +59,7 @@ const showModal = ref(false)
           <p class="text-accent-gold font-medium mb-6 animate-fade-in-up stagger-3">
             {{ hero.tagline }}
           </p>
-          <p class="mb-3 animate-fade-in-up stagger-3">
+          <p class="mb-8 animate-fade-in-up stagger-3">
             <a
               href="#automated-dsar"
               class="inline-flex items-center gap-2 text-sm font-semibold text-text-white bg-accent-purple/15 hover:bg-accent-purple/25 border border-accent-purple/40 rounded-full px-4 py-2 transition-colors"
@@ -40,18 +67,6 @@ const showModal = ref(false)
               <span class="text-accent-gold">New</span>
               <span class="text-text-light">·</span>
               <span>One-click GDPR DSAR exports — built in, audit-trailed, EU-only.</span>
-              <span class="text-accent-gold">→</span>
-            </a>
-          </p>
-          <p class="mb-8 animate-fade-in-up stagger-3">
-            <a
-              href="https://www.producthunt.com/products/eurobase?utm_source=eurobase-landing&utm_medium=cta&utm_campaign=prelaunch"
-              target="_blank"
-              rel="noopener"
-              class="inline-flex items-center gap-2 text-sm font-semibold text-text-white bg-orange-500/15 hover:bg-orange-500/25 border border-orange-400/40 rounded-full px-4 py-2 transition-colors"
-            >
-              <span aria-hidden="true">👀</span>
-              <span>Launching on Product Hunt · <strong class="text-accent-gold">Aug 26</strong> — get notified</span>
               <span class="text-accent-gold">→</span>
             </a>
           </p>
