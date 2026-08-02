@@ -205,7 +205,7 @@ export const faq: FaqEntry[] = [
     category: 'Getting started',
     question: 'How do I sign up?',
     answer:
-      'Public beta is open — instant signup at <a href="https://console.eurobase.app" class="text-accent-blue hover:underline">console.eurobase.app</a>, no credit card required for Free. Pro (€19/mo per project) opens for card payment mid-August 2026 once Mollie KYC finalises.',
+      'Public beta and Pro billing open together in the first half of August 2026, once Mollie KYC finalises on the bank side. Instant signup at <a href="https://console.eurobase.app" class="text-accent-blue hover:underline">console.eurobase.app</a> — no credit card required for Free, €19/mo per project for Pro from day one.',
   },
   {
     id: 'sdk-languages',
