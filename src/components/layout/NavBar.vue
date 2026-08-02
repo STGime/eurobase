@@ -51,16 +51,8 @@ function openModal() {
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
-        <a href="#" class="inline-block" @click.prevent="handleLogoClick" aria-label="Eurobase — home">
-          <!-- Cream-on-transparent wordmark; sits over the dark navy
-               hero at top of viewport and over the semi-opaque navy
-               bar once the page scrolls. h-8 keeps it visually close
-               to the previous text mark's size. -->
-          <img
-            src="/eurobase-logo-light.png"
-            alt="Eurobase"
-            class="h-8 w-auto"
-          />
+        <a href="#" class="inline-block" @click.prevent="handleLogoClick">
+          <span class="text-xl font-bold text-text-white font-heading">euro</span><span class="text-xl font-bold text-accent-gold font-heading">base</span>
         </a>
 
         <div class="hidden md:flex items-center gap-8">
