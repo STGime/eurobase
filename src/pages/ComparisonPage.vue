@@ -81,7 +81,36 @@ watchEffect(() => {
   // WebPage + FAQPage schema. FAQPage answers the highest-intent
   // Search Console queries directly ("supabase eu alternative",
   // "supabase gdpr dpa eu region official") so Google can render
-  // an FAQ rich result under the /vs/* link.
+  // an FAQ rich result under the /vs/* link. When the comparison
+  // ships an `faqs` array we source from that (single source of
+  // truth with the visible FAQ section); otherwise we fall back to
+  // a generic set so existing comparisons (firebase) still emit
+  // schema.
+  const faqEntities = (c.faqs && c.faqs.length > 0
+    ? c.faqs
+    : [
+        {
+          question: `Is ${c.competitor} GDPR-compliant?`,
+          answer: `${c.competitor} offers a DPA and EU region options, but as a US-headquartered company using US-owned infrastructure it remains subject to the CLOUD Act and FISA §702. That means US authorities can compel data access even for EU-region deployments. Eurobase removes this exposure by using an Estonian corporate parent and Scaleway (France) infrastructure exclusively.`,
+        },
+        {
+          question: `Can I migrate from ${c.competitor} to Eurobase?`,
+          answer: `Yes. The Eurobase CLI ships eurobase import ${c.slug} with subcommands for schema, data, storage, and functions. Auth-users import is next. Migrations run against your existing ${c.competitor} project read-only and emit an executable plan.`,
+        },
+        {
+          question: 'Where does Eurobase host my data?',
+          answer: 'Scaleway fr-par (Paris, France). Postgres, S3-compatible object storage, and edge functions all run on Scaleway. No AWS, no GCP, no Azure in the critical path.',
+        },
+        {
+          question: 'How much does Eurobase cost?',
+          answer: 'Free while you prototype (5,000 MAU, 512 MB storage, 2 GB bandwidth, 50 realtime connections). €19/mo per project when you go live. A Team tier with dedicated Postgres is €149/mo (coming soon).',
+        },
+      ]).map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  }))
+
   const ld = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -100,40 +129,7 @@ watchEffect(() => {
       },
       {
         '@type': 'FAQPage',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: `Is ${c.competitor} GDPR-compliant?`,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: `${c.competitor} offers a DPA and EU region options, but as a US-headquartered company using US-owned infrastructure it remains subject to the CLOUD Act and FISA §702. That means US authorities can compel data access even for EU-region deployments. Eurobase removes this exposure by using an Estonian corporate parent and Scaleway (France) infrastructure exclusively.`,
-            },
-          },
-          {
-            '@type': 'Question',
-            name: `Can I migrate from ${c.competitor} to Eurobase?`,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: `Yes. The Eurobase CLI ships eurobase import supabase with subcommands for schema, data, storage, and functions. Auth-users import is next. Migrations run against your existing ${c.competitor} project read-only and emit an executable plan.`,
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Where does Eurobase host my data?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Scaleway fr-par (Paris, France). Postgres, S3-compatible object storage, and edge functions all run on Scaleway. No AWS, no GCP, no Azure in the critical path.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'How much does Eurobase cost?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Free while you prototype (5,000 MAU, 512 MB storage, 2 GB bandwidth, 50 realtime connections). €19/mo per project when you go live. A Team tier with dedicated Postgres is €149/mo (coming soon).',
-            },
-          },
-        ],
+        mainEntity: faqEntities,
       },
     ],
   }
@@ -188,6 +184,32 @@ onBeforeUnmount(() => {
       <section v-for="(section, i) in comparison.sections" :key="i" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
         <h2 class="text-2xl font-bold text-text-white mb-3 font-heading">{{ section.title }}</h2>
         <p class="text-text-light leading-relaxed">{{ section.description }}</p>
+        <!-- Optional extra paragraphs (long-form comparisons carry
+             multiple to hit depth targets Google needs to move
+             /vs/* pages from page 2 to page 1). -->
+        <p
+          v-for="(para, pi) in section.paragraphs || []"
+          :key="`p-${pi}`"
+          class="text-text-light leading-relaxed mt-4"
+        >
+          {{ para }}
+        </p>
+        <!-- Optional takeaway bullets. Rendered as a simple list so
+             the H2 above it can act as a scannable answer for the
+             query the section targets. -->
+        <ul
+          v-if="section.bullets && section.bullets.length"
+          class="mt-4 space-y-2"
+        >
+          <li
+            v-for="(bullet, bi) in section.bullets"
+            :key="`b-${bi}`"
+            class="flex items-start gap-3 text-text-light leading-relaxed"
+          >
+            <span class="text-accent-blue mt-1 text-xs flex-shrink-0">&#9656;</span>
+            <span>{{ bullet }}</span>
+          </li>
+        </ul>
       </section>
 
       <!-- Comparison Table -->
@@ -230,6 +252,32 @@ onBeforeUnmount(() => {
               <span class="text-text-light leading-relaxed">{{ point }}</span>
             </li>
           </ul>
+        </div>
+      </section>
+
+      <!-- Visible FAQ — same content as the FAQPage JSON-LD so
+           Google sees them aligned. These questions are drawn
+           directly from Search Console long-tails ("is supabase
+           gdpr compliant", "supabase eu alternative", etc.), so
+           each Q&A is both a user answer and a targeted SEO H3. -->
+      <section
+        v-if="comparison.faqs && comparison.faqs.length"
+        class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16"
+      >
+        <h2 class="text-2xl font-bold text-text-white mb-6 font-heading">
+          {{ comparison.competitor }} vs Eurobase — FAQ
+        </h2>
+        <div class="space-y-6">
+          <div
+            v-for="(faq, i) in comparison.faqs"
+            :key="i"
+            class="bg-navy-card rounded-xl p-6 border border-navy-light"
+          >
+            <h3 class="text-lg font-semibold text-text-white mb-3 font-heading">
+              {{ faq.question }}
+            </h3>
+            <p class="text-text-light leading-relaxed">{{ faq.answer }}</p>
+          </div>
         </div>
       </section>
 

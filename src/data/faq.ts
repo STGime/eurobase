@@ -61,6 +61,27 @@ export const faq: FaqEntry[] = [
     answer:
       'Around $1,500 per request per industry surveys — typically 8–12 hours of engineering time exporting CSVs, searching support tools, and stitching application logs. Volume is up 246% in two years. Eurobase replaces the manual workflow with a one-click console export and a SDK call (<code class="text-accent-gold">eb.auth.exportMyData()</code>) that lets end-users self-serve, rate-limited and audited.',
   },
+  {
+    id: 'legal-entity',
+    category: 'Sovereignty & compliance',
+    question: 'Who is the contracting legal entity, and does it have any non-EU parent or subsidiary?',
+    answer:
+      'Contracting entity: <strong>Eurobase OÜ</strong>, Estonian private limited company, registry code 17557586, Ahtri 12, Tallinn 15551. Not VAT-registered under Estonian VAT Act §19 (below the €40k threshold). <strong>No parent company, no subsidiaries, no non-EU entity.</strong> Sole shareholder is the founder. Every sub-processor in the RoPA is EU-headquartered.',
+  },
+  {
+    id: 'dpa',
+    category: 'Sovereignty & compliance',
+    question: 'Do you provide a signable DPA and an up-to-date sub-processor list?',
+    answer:
+      'Yes. DPA v2 is signable at <a href="/legal" class="text-accent-blue hover:underline">/legal</a>. The sub-processor list is auto-generated per project in the console Compliance tab as an Article 30 report (downloadable PDF, updated on every configuration change). No email tickets, no stale spreadsheets.',
+  },
+  {
+    id: 'operator-access',
+    category: 'Sovereignty & compliance',
+    question: 'When can your team access customer data, and can I audit it?',
+    answer:
+      'Our team is three people, all physically in the EU. Every operator SQL call goes through an authenticated pool that writes to <code class="text-accent-gold">public.data_access_log</code> — every query stamped with actor, source IP, and active Postgres role. You see that table from your own console (Audit tab). We do not process your data content for any purpose other than platform operation. No support-tooling shortcuts that bypass the audit log.',
+  },
 
   // ── Supabase alternative ──────────────────────────────────────
   {
@@ -121,6 +142,55 @@ export const faq: FaqEntry[] = [
     answer:
       'Email/password, magic-link email, phone SMS OTP, and six OAuth providers (Google, GitHub, LinkedIn, Apple, Microsoft, Discord). SAML is on the roadmap for the Team tier. All methods are on every tier — no paid gating for basic auth.',
   },
+  {
+    id: 'backups-pitr',
+    category: 'Product & pricing',
+    question: 'Are automatic backups and point-in-time recovery included?',
+    answer:
+      'Free and Pro projects share a pooled Postgres cluster (Scaleway Managed Database, France) with cluster-level snapshots (daily, 7-day retention). Restores go through support. <strong>Per-project point-in-time recovery, second-level precision, and console-triggered restore land on the Team tier</strong> — Team gets dedicated Postgres per project, which is what PITR requires. On every tier, <code class="text-accent-gold">eurobase db dump</code> produces a standard <code class="text-accent-gold">pg_dump</code> you can export anywhere at any time — that is the first-line reversibility guarantee independent of us.',
+  },
+  {
+    id: 'overage-pricing',
+    category: 'Product & pricing',
+    question: 'What happens if I exceed the Pro-tier storage or bandwidth caps?',
+    answer:
+      'Pro is deliberately predictable — past the 100 GB storage / 250 GB bandwidth caps, the affected module goes read-only until upgrade or the meter resets. We do <strong>not</strong> meter per-GB overage on Pro. For workloads that need elastic storage or high egress (photo/video-heavy modules, streaming), we recommend the Team tier or a bespoke contract — contact us directly.',
+  },
+  {
+    id: 'realtime-connections',
+    category: 'Product & pricing',
+    question: 'How is the "10,000 realtime connections" cap counted?',
+    answer:
+      'Active concurrent WebSocket connections. No hard limit on messages/second or connection duration today, but soft fair-use at ~100 msg/s per connection and ~1M msg/s per project — raiseable on request. Practical connection duration is bounded by TCP keepalive + our load-balancer idle timeout (600 s).',
+  },
+  {
+    id: 'byo-storage',
+    category: 'Product & pricing',
+    question: 'Can I point Eurobase at my own S3 bucket (BYO storage)?',
+    answer:
+      'Not today. BYO S3 is on the Team-tier roadmap — it needs per-tenant credentials + audit-path rewiring. No firm date yet. In the meantime, our object storage runs on Scaleway (Paris, France) with the same sovereignty guarantees as the rest of the platform.',
+  },
+  {
+    id: 'sla',
+    category: 'Product & pricing',
+    question: 'What SLA do you commit to per tier?',
+    answer:
+      'Free: no commitment. Pro: 99.5%/month, support response within 24h business hours. Team: 99.9%/month, response within 4h. No automatic downtime credits today — honest reflection of team size at launch. Credits land with the Team tier opening.',
+  },
+  {
+    id: 'continuity',
+    category: 'Product & pricing',
+    question: 'What happens to my data if Eurobase ceases operations?',
+    answer:
+      'Three lines of defence. (1) <strong>Standard format</strong>: Postgres + S3-compatible = migration to any host (OVH, Scaleway direct, self-hosted) is a documented path, not a rewrite. (2) <strong>Export CLI</strong>: <code class="text-accent-gold">eurobase export</code> produces a full dump (schema + data + storage + functions). (3) <strong>Open source at v1</strong>: we commit to open-sourcing the code under a permissive licence at v1 release (targeted end 2026); self-hosting becomes a real Plan B. On shutdown: 90-day notice + 90 additional days of read-only service to finalise export.',
+  },
+  {
+    id: 'team-size-funding',
+    category: 'Product & pricing',
+    question: 'How big is the Eurobase team, and how are you funded?',
+    answer:
+      'Core team: founder + two long-term freelancers, all EU-based. Bootstrapped, with EU-Sovereign-Cloud grant applications in flight and preliminary angel conversations. We are honest about being in the 6-12 month "can it survive" window. The way to size that risk is not our reassurances — it is the reversibility guarantee (Postgres dump + open-source at v1 + standard S3). If we sink, you migrate to Scaleway direct in a weekend with the export CLI.',
+  },
 
   // ── Getting started ───────────────────────────────────────────
   {
@@ -135,7 +205,7 @@ export const faq: FaqEntry[] = [
     category: 'Getting started',
     question: 'How do I sign up?',
     answer:
-      'Right now, request early access at <a href="/#cta" class="text-accent-blue hover:underline">/#cta</a>. Once public beta opens (imminent), signup is instant with no credit card required. Beta users get founder-friendly pricing locked in for the Pro tier.',
+      'Public beta is open — instant signup at <a href="https://console.eurobase.app" class="text-accent-blue hover:underline">console.eurobase.app</a>, no credit card required for Free. Pro (€19/mo per project) opens for card payment mid-August 2026 once Mollie KYC finalises.',
   },
   {
     id: 'sdk-languages',

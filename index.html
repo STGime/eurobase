@@ -32,6 +32,7 @@
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
+      "@id": "https://eurobase.app/#software",
       "name": "Eurobase",
       "alternateName": ["Eurobase BaaS", "Eurobase Backend Platform"],
       "description": "Eurobase is the first EU-native backend-as-a-service platform with one-click GDPR DSAR exports — Article 15 + 20 built into every project, audit-trailed, EU-only. Plus 6 auth methods, managed PostgreSQL, object storage, realtime subscriptions, edge functions, encrypted vault, cron jobs, webhooks, CLI — all on 100% EU infrastructure. Closed beta is live; public early access this summer.",
@@ -80,27 +81,92 @@
         "CLI Tool with 50+ Commands",
         "Team Collaboration with RBAC"
       ],
-      "creator": {
-        "@type": "Organization",
-        "name": "Eurobase",
-        "url": "https://eurobase.app",
-        "foundingLocation": {
-          "@type": "Place",
-          "name": "European Union"
-        }
-      }
+      "creator": { "@id": "https://eurobase.app/#organization" },
+      "publisher": { "@id": "https://eurobase.app/#organization" }
     }
     </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
+      "@id": "https://eurobase.app/#organization",
       "name": "Eurobase",
+      "legalName": "Eurobase OÜ",
+      "alternateName": ["Eurobase.app", "Eurobase BaaS", "Eurobase Backend Platform"],
       "url": "https://eurobase.app",
-      "logo": "https://eurobase.app/favicon.svg",
-      "description": "European-owned and operated backend-as-a-service platform with a free tier. The sovereign alternative to Firebase and Supabase for vibe coders, teams, and enterprises who need GDPR compliance and EU data residency.",
-      "sameAs": [],
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://eurobase.app/favicon.svg",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://eurobase.app/og-image.png",
+      "description": "European-owned and operated backend-as-a-service platform with a free tier. The sovereign alternative to Firebase and Supabase for vibe coders, teams, and enterprises who need GDPR compliance and EU data residency. Not affiliated with any other Eurobase entity — Eurobase OÜ is an Estonian private limited company registered 22 July 2026.",
+      "slogan": "The EU-sovereign backend platform.",
+      "sameAs": [
+        "https://www.producthunt.com/products/eurobase",
+        "https://github.com/STGime/euroback",
+        "https://www.linkedin.com/company/eurobase-baas"
+      ],
+      "foundingDate": "2026-07-22",
       "foundingLocation": {
+        "@type": "Place",
+        "name": "Tallinn, Estonia",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Ahtri 12",
+          "addressLocality": "Tallinn",
+          "postalCode": "15551",
+          "addressCountry": "EE",
+          "addressRegion": "Harju"
+        }
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Ahtri 12",
+        "addressLocality": "Tallinn",
+        "postalCode": "15551",
+        "addressCountry": "EE",
+        "addressRegion": "Harju"
+      },
+      "identifier": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "Estonian Commercial Register (äriregistri kood)",
+          "value": "17557586"
+        }
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "Stefan Gimeson",
+        "jobTitle": "Founder",
+        "worksFor": { "@id": "https://eurobase.app/#organization" }
+      },
+      "email": "contact@eurobase.app",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "contact@eurobase.app",
+          "availableLanguage": ["English"],
+          "areaServed": "EU"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "data protection officer",
+          "email": "dpo@eurobase.app",
+          "availableLanguage": ["English"],
+          "areaServed": "EU"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "security",
+          "email": "security@eurobase.app",
+          "availableLanguage": ["English"],
+          "areaServed": "Worldwide"
+        }
+      ],
+      "areaServed": {
         "@type": "Place",
         "name": "European Union"
       },
@@ -113,7 +179,13 @@
         "Serverless Computing",
         "Secrets Management",
         "Cron Scheduling",
-        "Webhooks"
+        "Webhooks",
+        "Supabase alternative",
+        "Firebase alternative",
+        "EU data residency",
+        "CLOUD Act",
+        "Schrems II",
+        "Estonian OÜ"
       ]
     }
     </script>
@@ -124,10 +196,7 @@
       "name": "Eurobase — EU-Sovereign BaaS with One-Click GDPR DSAR Exports",
       "description": "The first EU-native backend-as-a-service with one-click GDPR Article 15 + 20 (DSAR) exports built in — the feature Firebase and Supabase leave as homework. Plus PostgreSQL, 6 auth methods, storage, realtime, edge functions, vault, cron, webhooks & CLI — fully sovereign, audit-trailed, zero CLOUD Act exposure. Closed beta is live.",
       "url": "https://eurobase.app",
-      "mainEntity": {
-        "@type": "SoftwareApplication",
-        "name": "Eurobase"
-      },
+      "mainEntity": { "@id": "https://eurobase.app/#software" },
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [{
@@ -239,6 +308,86 @@
             "@type": "Answer",
             "text": "Use the Eurobase CLI: `eurobase import supabase assess` for a read-only report against your existing Supabase project, then `eurobase import supabase schema | data | storage | functions` to move each surface. Auth-user import is next. The CLI reads your Supabase project directly and emits an executable plan; no rewrites required on your app code."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Are automatic backups and point-in-time recovery included?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Free and Pro projects share a pooled Postgres cluster (Scaleway Managed Database, France) with cluster-level snapshots (daily, 7-day retention). Restores go through support. Per-project point-in-time recovery, second-level precision, and console-triggered restore land on the Team tier — Team gets dedicated Postgres per project, which is what PITR requires. On every tier, `eurobase db dump` produces a standard pg_dump you can export anywhere at any time — the first-line reversibility guarantee independent of us."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if I exceed the Pro-tier storage or bandwidth caps?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pro is deliberately predictable — past the 100 GB storage / 250 GB bandwidth caps, the affected module goes read-only until upgrade or the meter resets. We do not meter per-GB overage on Pro. For workloads that need elastic storage or high egress (photo/video-heavy modules, streaming), we recommend the Team tier or a bespoke contract."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is the 10,000 realtime connections cap counted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Active concurrent WebSocket connections. No hard limit on messages/second or connection duration today, but soft fair-use at ~100 msg/s per connection and ~1M msg/s per project — raiseable on request. Practical connection duration is bounded by TCP keepalive + our load-balancer idle timeout (600 s)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I point Eurobase at my own S3 bucket (BYO storage)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not today. BYO S3 is on the Team-tier roadmap — it needs per-tenant credentials + audit-path rewiring. No firm date. In the meantime, our object storage runs on Scaleway (Paris, France) with the same sovereignty guarantees as the rest of the platform."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who is the contracting legal entity, and does it have any non-EU parent or subsidiary?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Contracting entity: Eurobase OÜ, Estonian private limited company, registry code 17557586, Ahtri 12, Tallinn 15551. Not VAT-registered under Estonian VAT Act §19. No parent company, no subsidiaries, no non-EU entity. Sole shareholder is the founder. Every sub-processor in the RoPA is EU-headquartered."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide a signable DPA and an up-to-date sub-processor list?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. DPA v2 is signable at eurobase.app/legal. The sub-processor list is auto-generated per project in the console Compliance tab as an Article 30 report (downloadable PDF, updated on every configuration change). No email tickets, no stale spreadsheets."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When can your team access customer data, and can I audit it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our team is three people, all physically in the EU. Every operator SQL call goes through an authenticated pool that writes to public.data_access_log — every query stamped with actor, source IP, and active Postgres role. You see that table from your own console (Audit tab). We do not process your data content for any purpose other than platform operation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What SLA do you commit to per tier?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Free: no commitment. Pro: 99.5%/month, support response within 24h business hours. Team: 99.9%/month, response within 4h. No automatic downtime credits today — honest reflection of team size at launch. Credits land with the Team tier opening."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens to my data if Eurobase ceases operations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Three lines of defence. (1) Standard format: Postgres + S3-compatible = migration to any host (OVH, Scaleway direct, self-hosted) is documented, not a rewrite. (2) Export CLI: eurobase export produces a full dump (schema + data + storage + functions). (3) Open source at v1: we commit to open-sourcing the code under a permissive licence at v1 release (targeted end 2026); self-hosting becomes a real Plan B. On shutdown: 90-day notice + 90 additional days of read-only service to finalise export."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How big is the Eurobase team, and how are you funded?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Core team: founder + two long-term freelancers, all EU-based. Bootstrapped, with EU-Sovereign-Cloud grant applications in flight and preliminary angel conversations. The way to size that risk is not our reassurances — it is the reversibility guarantee (Postgres dump + open-source at v1 + standard S3). If we sink, you migrate to Scaleway direct in a weekend using the export CLI."
+          }
         }
       ]
     }
@@ -261,8 +410,9 @@
           "headline": "Move off Supabase in one CLI command — here is what the migrator does and why teams are asking now",
           "description": "eurobase import supabase assess reads your existing project and emits a migration plan. Schema, data, storage, functions all move on the same CLI. Auth users next. Why teams are moving now, not later.",
           "url": "https://eurobase.app/blog/supabase-migration-cli",
-          "datePublished": "2026-07-19",
-          "author": { "@type": "Person", "name": "Stefan Gimeson" },
+          "image": "https://eurobase.app/og-image.png",
+          "datePublished": "2026-07-19T09:00:00+00:00",
+          "author": { "@type": "Person", "name": "Stefan Gimeson", "url": "https://www.linkedin.com/company/eurobase-baas" },
           "publisher": { "@type": "Organization", "name": "Eurobase", "url": "https://eurobase.app" },
           "keywords": ["Supabase migration CLI", "migrate from Supabase", "Supabase alternative Europe", "CLOUD Act", "EU-sovereign backend", "data sovereignty", "GDPR"]
         },
@@ -271,8 +421,9 @@
           "headline": "Supabase GDPR + DPA: what an EU-region deployment actually gets you",
           "description": "You picked eu-central-1, you signed the DPA, and the compliance page has a green tick. Under EU law — and under the CLOUD Act — that gets you less than most teams think.",
           "url": "https://eurobase.app/blog/supabase-gdpr-dpa-eu-region",
-          "datePublished": "2026-07-18",
-          "author": { "@type": "Person", "name": "Stefan Gimeson" },
+          "image": "https://eurobase.app/og-image.png",
+          "datePublished": "2026-07-18T09:00:00+00:00",
+          "author": { "@type": "Person", "name": "Stefan Gimeson", "url": "https://www.linkedin.com/company/eurobase-baas" },
           "publisher": { "@type": "Organization", "name": "Eurobase", "url": "https://eurobase.app" },
           "keywords": ["Supabase GDPR", "Supabase DPA", "Supabase EU region", "CLOUD Act", "EU sovereign backend", "Supabase alternative Europe"]
         },
@@ -281,8 +432,9 @@
           "headline": "The $1,500 GDPR Tax: Why DSAR Fulfilment Belongs in Your Platform, Not Your Spreadsheet",
           "description": "A single DSAR costs the average company around $1,500 to fulfil — 8–12 hours of engineering. Volume is up 246% in two years. Eurobase puts Article 15, RoPA, and audit log on every project.",
           "url": "https://eurobase.app/blog/compliance-tab-dsar-ropa-audit-log",
-          "datePublished": "2026-06-18",
-          "author": { "@type": "Person", "name": "Stefan Gimeson" },
+          "image": "https://eurobase.app/og-image.png",
+          "datePublished": "2026-06-18T09:00:00+00:00",
+          "author": { "@type": "Person", "name": "Stefan Gimeson", "url": "https://www.linkedin.com/company/eurobase-baas" },
           "publisher": { "@type": "Organization", "name": "Eurobase", "url": "https://eurobase.app" },
           "keywords": ["DSAR automation", "GDPR Article 15", "GDPR Article 30", "RoPA", "compliance-by-construction"]
         },
@@ -291,8 +443,9 @@
           "headline": "We Just Saw the AI Kill-Switch in Action — And Why It Makes EU Sovereignty Non-Negotiable",
           "description": "On June 12th 2026 the US government forced Anthropic to shut down Fable 5 and Mythos 5 worldwide. A kill-switch is no longer hypothetical — and it makes the case for EU-sovereign infrastructure impossible to ignore.",
           "url": "https://eurobase.app/blog/ai-kill-switch-eu-sovereignty",
-          "datePublished": "2026-06-15",
-          "author": { "@type": "Person", "name": "Stefan Gimeson" },
+          "image": "https://eurobase.app/og-image.png",
+          "datePublished": "2026-06-15T09:00:00+00:00",
+          "author": { "@type": "Person", "name": "Stefan Gimeson", "url": "https://www.linkedin.com/company/eurobase-baas" },
           "publisher": { "@type": "Organization", "name": "Eurobase", "url": "https://eurobase.app" },
           "keywords": ["AI kill switch", "EU AI Act", "EU sovereignty", "CLOUD Act", "export control", "sovereign cloud"]
         },
@@ -301,10 +454,11 @@
           "headline": "Europe's Digital Sovereignty Problem: We Built Our Startups on American Soil",
           "description": "US hyperscalers control around 70% of the European cloud market. For EU startups and SMBs, this isn't just a vendor preference — it's a structural dependency.",
           "url": "https://eurobase.app/blog/europes-digital-sovereignty-problem",
-          "datePublished": "2026-03-05",
+          "image": "https://eurobase.app/og-image.png",
+          "datePublished": "2026-03-05T09:00:00+00:00",
           "author": {
             "@type": "Person",
-            "name": "Stefan Gimeson"
+            "name": "Stefan Gimeson", "url": "https://www.linkedin.com/company/eurobase-baas"
           },
           "publisher": {
             "@type": "Organization",
@@ -318,10 +472,11 @@
           "headline": "First Beta Testers Are Building on Eurobase — Here's What's Ready",
           "description": "This week we onboard the first beta testers onto Eurobase. A full backend platform — auth, Postgres, storage, realtime, edge functions, vault, cron, webhooks — running entirely on EU infrastructure.",
           "url": "https://eurobase.app/blog/first-beta-testers-are-building-on-eurobase",
-          "datePublished": "2026-04-24",
+          "image": "https://eurobase.app/og-image.png",
+          "datePublished": "2026-04-24T09:00:00+00:00",
           "author": {
             "@type": "Person",
-            "name": "Stefan Gimeson"
+            "name": "Stefan Gimeson", "url": "https://www.linkedin.com/company/eurobase-baas"
           },
           "publisher": {
             "@type": "Organization",
@@ -335,10 +490,11 @@
           "headline": "Eurobase Now Speaks MCP: AI-Native Backend Operations, Sovereign by Default",
           "description": "Claude Code, Codex, Cursor, and Windsurf can now operate your Eurobase project directly — list tables, run SQL, manage Vault, invoke functions — through a hosted MCP server that never leaves EU soil.",
           "url": "https://eurobase.app/blog/eurobase-mcp-server-ai-native-sovereign-backend",
-          "datePublished": "2026-04-28",
+          "image": "https://eurobase.app/og-image.png",
+          "datePublished": "2026-04-28T09:00:00+00:00",
           "author": {
             "@type": "Person",
-            "name": "Stefan Gimeson"
+            "name": "Stefan Gimeson", "url": "https://www.linkedin.com/company/eurobase-baas"
           },
           "publisher": {
             "@type": "Organization",
@@ -352,10 +508,11 @@
           "headline": "Four Ways to Run Server-Side Code on Eurobase: When to Pick Which",
           "description": "Cron Jobs, RPC, Database Triggers, and Edge Functions all live on Eurobase. They look similar from a distance but each has a specific job. Today we shipped the missing UI for the fourth, and a comparison table so you stop guessing.",
           "url": "https://eurobase.app/blog/four-ways-to-run-server-side-code",
-          "datePublished": "2026-04-29",
+          "image": "https://eurobase.app/og-image.png",
+          "datePublished": "2026-04-29T09:00:00+00:00",
           "author": {
             "@type": "Person",
-            "name": "Stefan Gimeson"
+            "name": "Stefan Gimeson", "url": "https://www.linkedin.com/company/eurobase-baas"
           },
           "publisher": {
             "@type": "Organization",
@@ -369,10 +526,11 @@
           "headline": "The Adequacy Carousel: Why Your EU Data Strategy Shouldn't Depend on the Next US Privacy Framework",
           "description": "The EU-US Data Privacy Framework was upheld in September 2025, appealed in October 2025, and goes back to the CJEU in 2026. A four-level test that gives you a sovereignty answer the next adequacy framework can't take away.",
           "url": "https://eurobase.app/blog/adequacy-carousel-four-level-test",
-          "datePublished": "2026-05-04",
+          "image": "https://eurobase.app/og-image.png",
+          "datePublished": "2026-05-04T09:00:00+00:00",
           "author": {
             "@type": "Person",
-            "name": "Stefan Gimeson"
+            "name": "Stefan Gimeson", "url": "https://www.linkedin.com/company/eurobase-baas"
           },
           "publisher": {
             "@type": "Organization",
@@ -386,10 +544,11 @@
           "headline": "Six Security Fixes in Twenty-Four Hours",
           "description": "A multi-tenant security review on Eurobase. Six findings — five Critical, one High. All closed in production within a day, with regression tests and four new defensive layers. Here is exactly what we found and what we shipped.",
           "url": "https://eurobase.app/blog/six-security-fixes-in-twenty-four-hours",
-          "datePublished": "2026-05-08",
+          "image": "https://eurobase.app/og-image.png",
+          "datePublished": "2026-05-08T09:00:00+00:00",
           "author": {
             "@type": "Person",
-            "name": "Stefan Gimeson"
+            "name": "Stefan Gimeson", "url": "https://www.linkedin.com/company/eurobase-baas"
           },
           "publisher": {
             "@type": "Organization",
@@ -410,10 +569,7 @@
       "name": "Eurobase vs Supabase — EU-sovereign Postgres backend alternative",
       "description": "Supabase runs on AWS; Eurobase runs on Scaleway in France with zero US jurisdiction. Same Postgres + auth + storage + realtime. GDPR-native, DPA in one click, EU-only sub-processors. Free tier, €19/mo Pro.",
       "url": "https://eurobase.app/vs/supabase",
-      "mainEntity": {
-        "@type": "SoftwareApplication",
-        "name": "Eurobase"
-      },
+      "mainEntity": { "@id": "https://eurobase.app/#software" },
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -430,10 +586,7 @@
       "name": "Eurobase vs Firebase — EU-Native SQL Backend Alternative",
       "description": "Compare Eurobase and Firebase: PostgreSQL vs Firestore, open standards vs vendor lock-in, EU sovereignty vs Google Cloud. Same speed, better architecture.",
       "url": "https://eurobase.app/vs/firebase",
-      "mainEntity": {
-        "@type": "SoftwareApplication",
-        "name": "Eurobase"
-      },
+      "mainEntity": { "@id": "https://eurobase.app/#software" },
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
