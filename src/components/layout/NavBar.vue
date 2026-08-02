@@ -15,6 +15,12 @@ const showModal = ref(false)
 
 function handleNav(href: string) {
   mobileMenuOpen.value = false
+  // Full-path route (e.g. /faq) — hand to the router directly
+  // rather than treating as a homepage-section anchor.
+  if (href.startsWith('/')) {
+    router.push(href)
+    return
+  }
   const sectionId = href.replace('#', '')
   if (route.path !== '/') {
     router.push({ path: '/', hash: `#${sectionId}` })

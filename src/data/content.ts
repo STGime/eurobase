@@ -1301,5 +1301,9 @@ export const nav = {
     { label: 'Market', href: '#market' },
     { label: 'Pricing', href: '#pricing' },
     { label: 'Blog', href: '#blog' },
+    // Full-path route — NavBar's handleNav dispatches on the
+    // leading '/' vs '#' so this routes to /faq instead of
+    // scroll-to-section.
+    { label: 'FAQ', href: '/faq' },
   ],
 }
