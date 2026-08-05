@@ -8,16 +8,61 @@ export const hero = {
 
 export const problem = {
   headline: 'Europe Builds on Infrastructure It Doesn\'t Control',
-  description: 'Modern applications depend on backend platforms for authentication, databases, storage, and serverless logic. Today, most of these platforms are operated by non-European companies and subject to foreign jurisdiction — even when data is stored in Europe.',
+  description:
+    'Every European app that uses Firebase, Supabase, Vercel, or AWS Amplify runs on a US-owned control plane. The data may live in Frankfurt, but the company that operates the platform, holds the keys, and answers subpoenas is a US corporation. In 2026 the consequences stopped being theoretical.',
+
+  stats: [
+    { value: '~70%', label: 'of Europe\'s cloud market is held by US hyperscalers', color: '#F9A825' },
+    { value: '~15%', label: 'is the combined share of all European cloud providers', color: '#F9A825' },
+    { value: '1 law', label: 'the US CLOUD Act reaches any US-owned provider, anywhere', color: '#F9A825' },
+  ],
+
+  // Concrete 2025-2026 receipts. These are the two case studies from
+  // the investor deck (page 2). They make the abstract sovereignty
+  // argument un-abstract.
+  receipts: [
+    {
+      title: 'A US order, a global blackout',
+      body: 'June 2026: a US export-control directive barred all foreign nationals from Anthropic\'s top models. To comply, the company disabled Claude Opus 4 and Sonnet 4 worldwide — EU users cut off by a single US decision, with no European review or recourse.',
+    },
+    {
+      title: 'Microsoft in a French court: no guarantee',
+      body: 'Microsoft conceded in a French Sénat hearing (2025) that it cannot guarantee EU data stays beyond US reach. The CLOUD Act\'s extraterritorial effect is still unrepealed in 2026, and the EU-US Data Privacy Framework survives its first challenge on shaky ground — a second Schrems case is already at the CJEU.',
+    },
+  ],
+
+  // Four pain points that map to the four investor-deck problem
+  // pillars: sovereignty, compliance, developer experience, and
+  // regulated-industry cost of DIY. Each ends with the concrete
+  // artifact / statute a buyer can point at.
   painPoints: [
-    { text: 'For startups, this may seem invisible.', emphasis: false },
-    { text: 'For regulated industries, it is a growing risk.', emphasis: true },
+    {
+      icon: '⚖️',
+      title: 'The CLOUD Act follows the flag, not the data',
+      text: 'Frankfurt or Dublin regions do not remove US jurisdiction. Any Firebase, Supabase, Vercel, Amplify, or Neon project remains subject to §2703(d) subpoenas, FISA §702 collection, and executive orders — reviewable and revocable by the same pen that signed the June 2026 export directive.',
+    },
+    {
+      icon: '📄',
+      title: 'GDPR compliance you can\'t verify',
+      text: 'Schrems II struck down Privacy Shield in 2020. The 2023 Data Privacy Framework is a US executive order — its oversight board lost its quorum in January 2025. Your DPO needs a signed DPA, a live sub-processor registry, and a defensible RoPA. Most BaaS platforms hand you a template PDF and a support-portal ticket queue.',
+    },
+    {
+      icon: '📥',
+      title: 'DSAR requests are a €1,500 tax per case',
+      text: 'GDPR Article 15 gives every end-user the right to a copy of their personal data within 30 days. Building the export yourself — SQL joins across auth, storage, logs, plus PDF generation and legal review — is 8-12 hours per request at a consultant\'s billable rate. Firebase, Supabase, and AWS Amplify give you a checkbox in the docs and a "DIY" tutorial.',
+    },
+    {
+      icon: '⚡',
+      title: 'No serious EU Firebase/Supabase alternative',
+      text: 'Bare managed Postgres from Scaleway, OVHcloud, or Aiven solves compute — not auth, not storage, not realtime, not edge functions, not DSAR export, not DPA paperwork. The developer experience gap between "one platform, one SDK" and "assemble six services yourself" is why EU teams keep defaulting to the US stack even after Schrems II.',
+    },
   ],
+
   tradeoff: [
-    'Choose world-class developer experience',
-    'Choose legal certainty and data sovereignty',
+    'Choose world-class developer experience — and inherit US jurisdiction',
+    'Choose EU sovereignty — and rebuild your backend from six moving parts',
   ],
-  conclusion: 'Europe deserves both.',
+  conclusion: 'Europe deserves both — on day one, on Free tier, on one SDK.',
 }
 
 export const solution = {
@@ -268,17 +313,6 @@ export const pricing = {
       highlighted: false,
       comingSoon: true,
     },
-  ],
-}
-
-export const vision = {
-  headline: 'Building Europe\'s Developer Cloud',
-  description: 'Eurobase is more than a backend platform.',
-  milestones: [
-    { phase: 'Now', title: 'Closed Beta', items: ['Real users building on Eurobase \u2014 full platform surface', 'Auth (6 methods), Database (REST + SQL + RLS), Storage, Realtime', 'Edge Functions, Schedules, Vault, Cron, Webhooks, Audit Log', 'GDPR self-serve data export, MCP server, CLI, 4-role team collab'] },
-    { phase: 'Summer 2026', title: 'Public Early Access', items: ['Free tier opens to all developers', 'Mollie billing for the Pro tier', 'SDK v1 and documentation polish'] },
-    { phase: '2026\u20132027', title: 'Enterprise & Scale', items: ['Database branches (Neon-style copy-on-write)', 'GraphQL API, image transforms', 'Custom domains, self-hosting'] },
-    { phase: '2027+', title: 'Sovereign AI & Beyond', items: ['ISO 27001 certification', 'On-premise deployments', 'European vector storage and AI pipelines'] },
   ],
 }
 

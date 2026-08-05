@@ -24,7 +24,6 @@
             <li><a href="/#solution" class="text-text-muted text-sm hover:text-text-white transition-colors">Features</a></li>
             <li><a href="/#pricing" class="text-text-muted text-sm hover:text-text-white transition-colors">Pricing</a></li>
             <li><a href="/#developers" class="text-text-muted text-sm hover:text-text-white transition-colors">Documentation</a></li>
-            <li><a href="/#vision" class="text-text-muted text-sm hover:text-text-white transition-colors">Roadmap</a></li>
           </ul>
         </div>
 

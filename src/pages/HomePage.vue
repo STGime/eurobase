@@ -9,7 +9,6 @@ import EnterpriseSection from '@/components/sections/EnterpriseSection.vue'
 import MarketSection from '@/components/sections/MarketSection.vue'
 import HowItWorksSection from '@/components/sections/HowItWorksSection.vue'
 import PricingSection from '@/components/sections/PricingSection.vue'
-import VisionSection from '@/components/sections/VisionSection.vue'
 import BlogSection from '@/components/sections/BlogSection.vue'
 import CtaSection from '@/components/sections/CtaSection.vue'
 </script>
@@ -26,7 +25,6 @@ import CtaSection from '@/components/sections/CtaSection.vue'
     <MarketSection />
     <HowItWorksSection />
     <PricingSection />
-    <VisionSection />
     <BlogSection />
     <CtaSection />
   </main>
