@@ -27,6 +27,7 @@ const { elementRef, isVisible } = useScrollReveal()
           :value="stat.value"
           :label="stat.label"
           :color="stat.color"
+          :footnote="stat.footnote"
           :class="isVisible ? `animate-fade-in-up stagger-${i + 2}` : 'opacity-0'"
         />
       </div>
@@ -36,13 +37,15 @@ const { elementRef, isVisible } = useScrollReveal()
         :class="isVisible ? 'animate-fade-in-up stagger-5' : 'opacity-0'"
       >
         <p class="text-sm font-semibold uppercase tracking-wide text-accent-yellow mb-4">
-          Foreign jurisdiction is not theoretical — 2026 made that clear
+          Foreign jurisdiction is not theoretical — 2025 made that clear
         </p>
         <div class="grid md:grid-cols-2 gap-6">
           <div v-for="(r, i) in problem.receipts" :key="i" class="flex gap-3">
             <span class="text-accent-yellow text-xl leading-none mt-0.5">▸</span>
             <div>
-              <p class="text-text-white font-semibold mb-1">{{ r.title }}</p>
+              <p class="text-text-white font-semibold mb-1">
+                {{ r.title }}<sup v-if="r.footnote" class="text-text-muted ml-0.5 text-[10px]">[{{ r.footnote }}]</sup>
+              </p>
               <p class="text-text-light text-sm leading-relaxed">{{ r.body }}</p>
             </div>
           </div>
@@ -60,7 +63,9 @@ const { elementRef, isVisible } = useScrollReveal()
           <div class="flex items-start gap-3">
             <span class="text-2xl leading-none mt-0.5" aria-hidden="true">{{ point.icon }}</span>
             <div>
-              <p class="text-text-white font-semibold mb-2">{{ point.title }}</p>
+              <p class="text-text-white font-semibold mb-2">
+                {{ point.title }}<sup v-if="point.footnote" class="text-text-muted ml-0.5 text-[10px]">[{{ point.footnote }}]</sup>
+              </p>
               <p class="text-text-light text-sm leading-relaxed">{{ point.text }}</p>
             </div>
           </div>
@@ -81,6 +86,28 @@ const { elementRef, isVisible } = useScrollReveal()
         </div>
         <p class="text-2xl font-bold text-text-white font-heading">{{ problem.conclusion }}</p>
       </AccentCard>
+
+      <div
+        class="mt-12 pt-6 border-t border-white/10"
+        :class="isVisible ? 'animate-fade-in-up stagger-6' : 'opacity-0'"
+      >
+        <p class="text-xs uppercase tracking-wide text-text-muted mb-3 font-semibold">References</p>
+        <ol class="space-y-1.5">
+          <li
+            v-for="ref in problem.references"
+            :key="ref.id"
+            class="text-xs text-text-muted leading-relaxed"
+          >
+            <span class="text-text-light">[{{ ref.id }}]</span>
+            <a
+              :href="ref.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="ml-1 hover:text-accent-yellow transition-colors underline decoration-white/20 hover:decoration-accent-yellow"
+            >{{ ref.text }}</a>
+          </li>
+        </ol>
+      </div>
     </div>
   </section>
 </template>

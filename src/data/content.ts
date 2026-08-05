@@ -9,25 +9,27 @@ export const hero = {
 export const problem = {
   headline: 'Europe Builds on Infrastructure It Doesn\'t Control',
   description:
-    'Every European app that uses Firebase, Supabase, Vercel, or AWS Amplify runs on a US-owned control plane. The data may live in Frankfurt, but the company that operates the platform, holds the keys, and answers subpoenas is a US corporation. In 2026 the consequences stopped being theoretical.',
+    'Every European app that uses Firebase, Supabase, Vercel, or AWS Amplify runs on a US-owned control plane. The data may live in Frankfurt, but the company that operates the platform, holds the keys, and answers subpoenas is a US corporation. In 2025 the consequences stopped being theoretical.',
 
   stats: [
-    { value: '~70%', label: 'of Europe\'s cloud market is held by US hyperscalers', color: '#F9A825' },
-    { value: '~15%', label: 'is the combined share of all European cloud providers', color: '#F9A825' },
-    { value: '1 law', label: 'the US CLOUD Act reaches any US-owned provider, anywhere', color: '#F9A825' },
+    { value: '~70%', label: 'of Europe\'s cloud market is held by US hyperscalers', color: '#F9A825', footnote: 1 },
+    { value: '~15%', label: 'is the combined share of all European cloud providers', color: '#F9A825', footnote: 1 },
+    { value: '1 law', label: 'the US CLOUD Act reaches any US-owned provider, anywhere', color: '#F9A825', footnote: 2 },
   ],
 
-  // Concrete 2025-2026 receipts. These are the two case studies from
-  // the investor deck (page 2). They make the abstract sovereignty
-  // argument un-abstract.
+  // Concrete, verifiable 2024-2026 receipts. The abstract sovereignty
+  // argument only lands with named events a buyer can look up. Both
+  // link out to primary or reputable secondary sources.
   receipts: [
     {
-      title: 'A US order, a global blackout',
-      body: 'June 2026: a US export-control directive barred all foreign nationals from Anthropic\'s top models. To comply, the company disabled Claude Opus 4 and Sonnet 4 worldwide — EU users cut off by a single US decision, with no European review or recourse.',
+      title: 'A US sanction, a global blackout',
+      body: 'February 2025: the US sanctioned ICC prosecutor Karim Khan. His official Microsoft mailbox went dark shortly after; the ICC subsequently moved to Switzerland\'s Proton Mail and by October 2025 dropped Microsoft 365 entirely. Whether Microsoft or the ICC pulled the plug, the sovereignty conclusion is the same.',
+      footnote: 3,
     },
     {
-      title: 'Microsoft in a French court: no guarantee',
-      body: 'Microsoft conceded in a French Sénat hearing (2025) that it cannot guarantee EU data stays beyond US reach. The CLOUD Act\'s extraterritorial effect is still unrepealed in 2026, and the EU-US Data Privacy Framework survives its first challenge on shaky ground — a second Schrems case is already at the CJEU.',
+      title: 'Microsoft under oath: no guarantee',
+      body: 'In a French Sénat hearing (June 2025) Microsoft France conceded under oath that it cannot guarantee EU customer data stays beyond US government reach. The CLOUD Act\'s extraterritorial effect is unrepealed; a second Schrems case is on file at the CJEU against the 2023 Data Privacy Framework.',
+      footnote: 4,
     },
   ],
 
@@ -39,22 +41,26 @@ export const problem = {
     {
       icon: '⚖️',
       title: 'The CLOUD Act follows the flag, not the data',
-      text: 'Frankfurt or Dublin regions do not remove US jurisdiction. Any Firebase, Supabase, Vercel, Amplify, or Neon project remains subject to §2703(d) subpoenas, FISA §702 collection, and executive orders — reviewable and revocable by the same pen that signed the June 2026 export directive.',
+      text: 'Frankfurt or Dublin regions do not remove US jurisdiction. Any Firebase, Supabase, Vercel, Amplify, or Neon project remains subject to 18 U.S.C. §2703 subpoenas, FISA §702 collection, and executive orders — reviewable and revocable at any time by the same US authorities.',
+      footnote: 2,
     },
     {
       icon: '📄',
       title: 'GDPR compliance you can\'t verify',
-      text: 'Schrems II struck down Privacy Shield in 2020. The 2023 Data Privacy Framework is a US executive order — its oversight board lost its quorum in January 2025. Your DPO needs a signed DPA, a live sub-processor registry, and a defensible RoPA. Most BaaS platforms hand you a template PDF and a support-portal ticket queue.',
+      text: 'Schrems II struck down Privacy Shield in 2020. The 2023 Data Privacy Framework is a US executive order — its oversight board (PCLOB) lost its quorum in January 2025 when its Democratic members were dismissed. Your DPO needs a signed DPA, a live sub-processor registry, and a defensible RoPA. Most BaaS platforms hand you a template PDF and a support-portal ticket queue.',
+      footnote: 5,
     },
     {
       icon: '📥',
-      title: 'DSAR requests are a €1,500 tax per case',
-      text: 'GDPR Article 15 gives every end-user the right to a copy of their personal data within 30 days. Building the export yourself — SQL joins across auth, storage, logs, plus PDF generation and legal review — is 8-12 hours per request at a consultant\'s billable rate. Firebase, Supabase, and AWS Amplify give you a checkbox in the docs and a "DIY" tutorial.',
+      title: 'DSAR requests are a four-figure tax per case',
+      text: 'GDPR Article 15 gives every end-user the right to a copy of their personal data within 30 days. Building the export yourself — SQL joins across auth, storage, logs, plus PDF generation and legal review — runs 8-12 hours per request at a consultant\'s billable rate. Firebase, Supabase, and AWS Amplify give you a docs checkbox and a "DIY" tutorial.',
+      footnote: 6,
     },
     {
       icon: '⚡',
       title: 'No serious EU Firebase/Supabase alternative',
-      text: 'Bare managed Postgres from Scaleway, OVHcloud, or Aiven solves compute — not auth, not storage, not realtime, not edge functions, not DSAR export, not DPA paperwork. The developer experience gap between "one platform, one SDK" and "assemble six services yourself" is why EU teams keep defaulting to the US stack even after Schrems II.',
+      text: 'Bare managed Postgres from Scaleway, OVHcloud, or Aiven solves compute — not auth, not storage, not realtime, not edge functions, not DSAR export, not DPA paperwork. The developer-experience gap between "one platform, one SDK" and "assemble six services yourself" is why EU teams keep defaulting to the US stack even after Schrems II.',
+      footnote: 7,
     },
   ],
 
@@ -63,6 +69,16 @@ export const problem = {
     'Choose EU sovereignty — and rebuild your backend from six moving parts',
   ],
   conclusion: 'Europe deserves both — on day one, on Free tier, on one SDK.',
+
+  references: [
+    { id: 1, text: 'Synergy Research Group — European cloud market share tracker (US hyperscalers dominate; European providers ~15% combined)', url: 'https://www.srgresearch.com/articles/european-cloud-providers-continue-to-grow-market-share-in-their-own-region' },
+    { id: 2, text: 'U.S. Department of Justice — CLOUD Act overview (18 U.S.C. §2523; extraterritorial reach for US-headquartered providers)', url: 'https://www.justice.gov/criminal-oia/cloud-act-resources' },
+    { id: 3, text: 'AP News / heise — Karim Khan Microsoft mailbox disabled after US sanctions (May 2025); ICC dropped Microsoft 365 in Oct 2025', url: 'https://apnews.com/article/icc-microsoft-karim-khan-us-sanctions-6ea6e1d1c8ff0a2cee02c6cbb0c4a2a2' },
+    { id: 4, text: 'Public Sénat / next.ink — Microsoft France concedes under oath (June 2025) that EU data cannot be guaranteed beyond US reach', url: 'https://next.ink/brief_article/microsoft-france-reconnait-devant-le-senat-ne-pas-pouvoir-garantir-la-souverainete-des-donnees/' },
+    { id: 5, text: 'CJEU — Schrems II ruling (Case C-311/18, 16 July 2020) invalidating the EU-US Privacy Shield; second Schrems challenge on file against the 2023 DPF', url: 'https://curia.europa.eu/juris/liste.jsf?num=C-311/18' },
+    { id: 6, text: 'Eurobase blog — "The €1,500 GDPR Tax": how much a DIY Article 15 export actually costs (breakdown of the 8-12 hour engineering + legal review estimate)', url: '/blog/compliance-tab-dsar-ropa-audit-log' },
+    { id: 7, text: 'Eurobase — Supabase / Firebase comparison pages (feature-by-feature parity, EU-hosting caveats, sovereignty story)', url: '/vs/supabase' },
+  ],
 }
 
 export const solution = {
