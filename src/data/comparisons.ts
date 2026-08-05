@@ -140,6 +140,7 @@ export const comparisons: Record<string, ComparisonData> = {
     ],
     rows: [
       { feature: 'Database', eurobase: 'PostgreSQL 16 (managed, Scaleway RDB)', competitor: 'PostgreSQL (managed)' },
+      { feature: 'Direct Postgres connection', eurobase: 'Team & Legal Team tiers — dedicated Postgres with a rotatable postgres:// URL for Payload, Prisma, Drizzle, Directus, psql. SDK/REST-only on Free & Pro (shared cluster).', competitor: 'All tiers — shared or dedicated Postgres URL exposed by default' },
       { feature: 'Infrastructure', eurobase: 'Scaleway, France (EU-owned)', competitor: 'AWS (US-owned)', highlight: true },
       { feature: 'Corporate parent', eurobase: 'Estonian OÜ', competitor: 'US corporation (Delaware)', highlight: true },
       { feature: 'CLOUD Act exposure', eurobase: 'None', competitor: 'Yes — US jurisdiction applies globally', highlight: true },
@@ -342,6 +343,7 @@ export const comparisons: Record<string, ComparisonData> = {
     rows: [
       { feature: 'Database', eurobase: 'PostgreSQL 16 (managed, Scaleway RDB)', competitor: 'Firestore (NoSQL, document)', highlight: true },
       { feature: 'Query Language', eurobase: 'Standard SQL + SDK', competitor: 'Proprietary Firestore SDK only', highlight: true },
+      { feature: 'Direct Postgres connection', eurobase: 'Team & Legal Team tiers — dedicated Postgres with a rotatable postgres:// URL for Payload, Prisma, Drizzle, Directus, psql', competitor: 'No direct DB access — Firestore SDK only', highlight: true },
       { feature: 'Infrastructure', eurobase: 'Scaleway, France (EU-owned)', competitor: 'Google Cloud (US-owned)', highlight: true },
       { feature: 'Corporate parent', eurobase: 'Estonian OÜ', competitor: 'US corporation (Google LLC, Delaware)', highlight: true },
       { feature: 'CLOUD Act exposure', eurobase: 'None', competitor: 'Yes — US jurisdiction applies globally', highlight: true },

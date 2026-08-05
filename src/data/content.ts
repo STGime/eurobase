@@ -306,6 +306,91 @@ export const blog = {
   description: 'Thoughts on European data sovereignty, cloud infrastructure, and building for developers.',
   posts: [
     {
+      slug: 'legaltech-backend-what-a-german-kanzlei-actually-needs',
+      title: 'What a German LegalTech Startup Actually Needs From Its Backend',
+      excerpt: 'A German legal-tech founder cannot ship the product without §203 StGB paperwork, §43e BRAO staff secrecy declarations, GoBD-conformant exports, and 10-year WORM retention. None of that is on the roadmap of the usual EU-region Firebase alternative. Here is exactly what a Kanzlei-facing backend has to solve — what Eurobase already does today, and what is landing in the "Legal Team" tier over the next weeks.',
+      date: '2026-08-05',
+      author: 'Stefan Gimeson',
+      readTime: '7 min read',
+      image: '/blog-legaltech-backend.png',
+      content: `One of our closed-beta customers is a German legal-tech startup. They are the reason a new premium tier — working name **Legal Team** — is being built alongside the base Team tier. This post is the honest ledger of what a Kanzlei-facing backend has to do, what Eurobase does today, and what is landing over the next few weeks.
+
+If you are thinking of building a product for lawyers, Steuerberater, notaries, or legal-ops teams in Germany, treat this as the checklist we wish we had been handed on day one.
+
+## The four hard blockers most stacks quietly ignore
+
+A German law-firm buyer will not sign an order form until four questions are answered on paper. These are not "GDPR" in the general sense — they are additional, sector-specific obligations layered on top.
+
+**1. §203 StGB and §43e BRAO — the secrecy chain.** Since the 2017 amendment, a lawyer is only allowed to use a third-party service if that service — and every individual employee of the service with access to client data — is bound in writing to the same criminal-liability secrecy the lawyer is bound to. Miss this, and the lawyer commits a criminal offence the moment client data lands on your servers. The paperwork is not optional and it names names: a signed Verschwiegenheitsverpflichtung for every relevant staff member, revocation dates included.
+
+**2. GoBD — Unveränderbarkeit and 10-year retention.** The BMF's GoBD circular reads §§145–147 AO as requiring "unveränderbare" (immutable) storage of tax-relevant records for ten years. In practice: object-lock / WORM storage, a Verfahrensdokumentation describing how you achieve it, and export in a specific structured shape (INDEX.XML + CSV per table) so the tax office can ingest it directly.
+
+**3. Legal-hold-aware erasure.** GDPR Article 17 gives an end-user the right to be forgotten. §50 BRAO says a lawyer must retain the client file for six years. §257 HGB and §147 AO push some records to ten. The two rules collide inside every DSAR request that touches a document with an active legal hold. The correct answer is neither "delete everything" nor "refuse the request" — it is to erase what can be erased, retain what must be retained, and *tell the requester* which items are on hold and until when.
+
+**4. GoBD-conformant export.** A generic JSON/CSV dump is not enough. The Betriebsprüfung expects a specific bundle shape (BMF DTD, UTF-8 or ISO 8859-15, semicolon-separated, a Verfahrensdokumentation next to it). Miss the shape and the auditor rejects the export.
+
+These four together are the reason a legal-tech founder cannot just use Firebase-EU, cannot just use Supabase-Frankfurt, and cannot just use a bare managed Postgres from any provider. The gaps are at the application layer, not the region layer.
+
+## What Eurobase already ships (every tier, including Free)
+
+The compliance primitives that *every* GDPR-serious backend needs are in the base product on day one:
+
+- **EU-only jurisdiction, end to end.** Eurobase OÜ is an Estonian entity; compute, Postgres, object storage, and edge functions all run on Scaleway fr-par. No US processor in the path — the DPF/CLOUD Act debate is not your problem. We wrote the longer form of this in ["Our Data Deserves a Better Agreement"](/blog/our-data-deserves-a-better-agreement).
+- **DSAR export in one click.** Article 15 + Article 20, per-user or full-project zip. No consultant, no custom SQL join, no PDF-generation library on your critical path.
+- **Article 30 record auto-generated** from the actual sub-processor registry — so when the auditor asks "who touches this data," the answer is verifiable rather than curated.
+- **Tamper-evident audit log**, hash-chained per project with a \`verify\` endpoint. Every admin action, every DSAR request, every credential rotation is recorded with actor + IP + timestamp, and a broken chain surfaces immediately.
+- **Breach register with 24h/72h SLAs** aligned to Art 33 GDPR — the workflow that shipped in [PR #219](https://github.com/STGime/euroback/pull/219) tracks incident acknowledgement, root-cause narrative, and notification to authorities and affected subjects, with the clocks visible on the dashboard.
+- **Signed DPA v2** with Eurobase OÜ named as processor; template Article 28 subcontracting clauses included; sub-processor registry linked to feature flags so a customer sees exactly which processor is engaged for which feature.
+
+That gets a general SaaS to a GDPR-defensible posture. It does not, by itself, meet the four hard legal-tech blockers.
+
+## What is landing in the Legal Team tier (weeks, not quarters)
+
+The base Team tier ships a dedicated Postgres instance per project, backup/PITR, and a direct \`DATABASE_URL\` for Payload / Prisma / Drizzle stacks — the last of those [merged this morning](https://github.com/STGime/euroback/pull/336). On top of that, the **Legal Team** tier layers the four blockers above:
+
+**§203 / §43e paperwork surface.** A signed *de-legal-tech-addendum* extends the DPA with §43e BRAO clauses and a §203 StGB Verschwiegenheitsverpflichtung template. Every Eurobase staff member with data access signs an individual declaration; the register is queryable via a public read endpoint so your firm can pull it into its own §43e audit file. A signed staff registry means your customer's compliance officer does not have to trust our marketing.
+
+**Object-lock / WORM on tenant storage** (GoBD Unveränderbarkeit). Scaleway Object Storage supports S3 Object Lock in both compliance and governance modes. Team-tier buckets are created with object-lock enabled; a per-prefix policy UI lets you pin \`/invoices/*\`, \`/mandant/*\`, \`/tax/*\` to a ten-year retention by default. Immutable at the storage layer, not just enforced by app code.
+
+**Legal-hold-aware erasure.** A \`retention_holds\` table records legal basis + expiry per row / per object / per table. The DSAR path checks it on every erase, skips held items, and returns them in the response as *"retained under &lt;legal_basis&gt;, purgeable after &lt;expires_at&gt;"* — so the requester and the DPO see the exact reason and the exact date. A daily worker sweeps expired holds so the erasure surface reopens automatically.
+
+**GoBD export endpoint.** A dedicated endpoint that returns \`INDEX.XML\` (BMF DTD-conformant) + one CSV per table + a Verfahrensdokumentation template alongside. Uses the same River queue + S3-signed-URL delivery mechanism as the existing DSAR export, so the audit trail is identical.
+
+**10-year audit-log retention.** The audit-log retention worker on Legal Team is pinned to 3,650 days so the tamper-evident chain itself is queryable inside the full statutory window, without falling back to the off-box WORM archive.
+
+Under the hood these are Milestone M2b on the Team-tier roadmap, tracked in a stacked series of PRs against \`main\`. The addendum text sits open pending German + Estonian legal signoff (issue #333).
+
+## What we deliberately do not do
+
+Every honest sales conversation should include a list of things the product does not solve. For the German legal stack that list includes:
+
+- **beA integration.** The BRAK's electronic-lawyer inbox is an app-layer concern. We do not sit in that flow and do not intend to.
+- **TR-ESOR / BSI TR-03125.** The German long-term-preservation profile expects dedicated middleware from Governikus or the ArchiSafe ecosystem. We integrate with those, we do not try to replace them.
+- **DATEV / ELSTER.** Steuerberater tooling for accounting export and tax filing is app-side. Our GoBD export produces the raw structured records; the last-mile format-conversion into DATEV or ELSTER-XML lives in your app.
+- **Formal ISO 27001 / BSI C5 certification.** On the roadmap post-beta with a target date documented in the trust center. Not certified today. If your customer requires a paper certificate before signature, we are not ready; if they will accept a Grundschutz self-declaration + a scheduled certification, we are.
+
+## Concrete positioning for a legal-tech founder
+
+If you are picking a backend for a legal-tech product aimed at the German or wider DACH market:
+
+- **Bare managed Postgres from an EU provider** (Scaleway, OVHcloud, Aiven) solves the region + jurisdiction question. It does not solve DSAR, audit log, retention holds, GoBD export, or §203 paperwork — those are hundreds of hours of app-layer engineering per team.
+- **Firebase or Supabase EU-region** solves the developer-experience question. It does not solve any of the four hard blockers, and adds a US-parent CLOUD Act exposure your customer will notice on the second call.
+- **Eurobase** solves the region + jurisdiction question on day one (Free tier), the compliance-primitive question on every tier, and — once the Legal Team tier ships in the coming weeks — the four legal-tech-specific blockers. The trade-off is the price step (Legal Team carries a large premium over base Team, and the number is deliberately not published until the closed beta lands its first paid conversion), and the ISO/BSI paper certificates that are on the roadmap rather than in hand today.
+
+If any of the above sounds like your product, the closed beta is where the actual product feedback loop is happening. The Legal Team tier will open with hand-picked customers first, at zero cost while we lock in the price and the paperwork. If you want to be one of them, open an issue on the public tracker or reach out — the door is open, small enough that we know our customers by name.`,
+      references: [
+        { label: '§203 StGB — Verletzung von Privatgeheimnissen', url: 'https://www.gesetze-im-internet.de/stgb/__203.html' },
+        { label: '§43e BRAO — Inanspruchnahme von Dienstleistungen', url: 'https://www.gesetze-im-internet.de/brao/__43e.html' },
+        { label: 'BMF GoBD circular — Grundsätze ordnungsgemäßer Buchführung (2019)', url: 'https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Weitere_Steuerthemen/Abgabenordnung/2019-11-28-GoBD.html' },
+        { label: '§50 BRAO — Handakten', url: 'https://www.gesetze-im-internet.de/brao/__50.html' },
+        { label: '§257 HGB — Aufbewahrungspflichten', url: 'https://www.gesetze-im-internet.de/hgb/__257.html' },
+        { label: '§147 AO — Ordnungsvorschriften für die Aufbewahrung', url: 'https://www.gesetze-im-internet.de/ao_1977/__147.html' },
+        { label: 'Scaleway Object Storage — S3 Object Lock (WORM)', url: 'https://www.scaleway.com/en/docs/object-storage/api-cli/object-lock/' },
+        { label: 'Eurobase — Team-tier milestone tracker (PR #327/#331/#332/#334/#336)', url: 'https://github.com/STGime/euroback/pulls?q=team-tier' },
+        { label: 'Eurobase — public issue tracker', url: 'https://github.com/STGime/euroback/issues' },
+      ],
+    },
+    {
       slug: 'our-data-deserves-a-better-agreement',
       title: '"Our Data Deserves a Better Agreement" — heise Is Right. It Also Deserves Not to Need One.',
       excerpt: 'A heise online opinion piece argues the EU-US Data Privacy Framework no longer deserves Europe\'s trust — and that Washington itself is supplying the strongest arguments against it. We agree with the diagnosis. We disagree that a better agreement is the cure. The only transfer framework that cannot collapse is the one your stack never needed.',
