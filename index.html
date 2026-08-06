@@ -311,6 +311,14 @@
         },
         {
           "@type": "Question",
+          "name": "My app is built on the supabase-js client. Do I have to rewrite my client layer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The honest picture on three levels. (1) Shape-parity: @eurobase/sdk mirrors @supabase/supabase-js deliberately — same .from(table).select().eq() chain, same channel(name).on('postgres_changes', …) subscribe shape, same auth methods. In practice this is search-replace on imports + package name, not a rewrite of query call sites. (2) Drop-in supabase-js wire-compat (same package name, no code change at all) is on the roadmap as a shim package — it removes the young-company objection entirely. (3) Zero-SDK escape hatch on Team tier: a direct Postgres DATABASE_URL means Payload, Prisma, Drizzle, or any Postgres client works without any Eurobase-specific code — the reversibility guarantee then covers your app code too, not just your data."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Are automatic backups and point-in-time recovery included?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -322,7 +330,7 @@
           "name": "What happens if I exceed the Pro-tier storage or bandwidth caps?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Pro is deliberately predictable — past the 100 GB storage / 250 GB bandwidth caps, the affected module goes read-only until upgrade or the meter resets. We do not meter per-GB overage on Pro. For workloads that need elastic storage or high egress (photo/video-heavy modules, streaming), we recommend the Team tier or a bespoke contract."
+            "text": "No overnight blackout — that is a business-risk pattern paying customers can't manage, and one of the clearest pieces of feedback from beta users. The Pro-tier overage policy for public beta: (1) email alerts at 75% and 100% of the storage / bandwidth caps. (2) A 14-day soft-grace window where writes continue and the console shows the overage banner — enough time to upgrade to Team, buy an add-on capacity block, or optimise. (3) Only after the grace window does the affected module hard-block writes — and even then reads always continue. Team tier (dedicated Postgres per project + elastic storage tier) removes the caps entirely and is the recommended path for photo/video-heavy or streaming workloads. We do not meter per-GB overage on Pro — no surprise line items."
           }
         },
         {
@@ -375,10 +383,10 @@
         },
         {
           "@type": "Question",
-          "name": "What happens to my data if Eurobase ceases operations?",
+          "name": "What happens to my data — and my app code — if Eurobase ceases operations?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Three lines of defence. (1) Standard format: Postgres + S3-compatible = migration to any host (OVH, Scaleway direct, self-hosted) is documented, not a rewrite. (2) Export CLI: eurobase export produces a full dump (schema + data + storage + functions). (3) Open source at v1: we commit to open-sourcing the code under a permissive licence at v1 release (targeted end 2026); self-hosting becomes a real Plan B. On shutdown: 90-day notice + 90 additional days of read-only service to finalise export."
+            "text": "Data reversibility, four lines of defence. (1) Standard formats: Postgres + S3-compatible = migration to any host (Scaleway direct, OVH, Aiven, self-hosted) is documented, not a rewrite. (2) Export CLI: eurobase export produces a full dump (schema + data + storage + functions). (3) Open source at v1: we commit to open-sourcing the code under a permissive licence at v1 (targeted end 2026); self-hosting becomes a real Plan B. (4) On shutdown: 90-day notice + 90 additional days of read-only service to finalise export. App-code reversibility, two mitigations: (a) @eurobase/sdk is shape-parity with supabase-js, so migrating away is search-replace on imports, not query-site rewrites. (b) On Team tier, the direct DATABASE_URL means your app can talk to Postgres with Payload / Prisma / Drizzle / psql — no Eurobase code in the client at all — so migration is a hostname change."
           }
         },
         {

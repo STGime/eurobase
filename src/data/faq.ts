@@ -106,6 +106,13 @@ export const faq: FaqEntry[] = [
       'Use the CLI: <code class="text-accent-gold">eurobase import supabase assess</code> for a read-only report against your existing project, then <code class="text-accent-gold">eurobase import supabase schema | data | storage | functions</code> to move each surface. Auth-user import is next. Reads your Supabase project directly and emits an executable plan; no rewrites on your app code.',
   },
   {
+    id: 'supabase-js-compat',
+    category: 'Supabase alternative',
+    question: 'My app is built on the supabase-js client. Do I have to rewrite my client layer?',
+    answer:
+      'The honest picture on three levels. (1) <strong>Shape-parity</strong>: <code class="text-accent-gold">@eurobase/sdk</code> mirrors <code class="text-accent-gold">@supabase/supabase-js</code> deliberately — same <code class="text-accent-gold">.from(table).select().eq()</code> chain, same <code class="text-accent-gold">.channel(name).on(\'postgres_changes\', …)</code> subscribe shape, same auth methods. In practice this is search-replace on imports + package name, not a rewrite of query call sites. (2) <strong>Drop-in <code class="text-accent-gold">supabase-js</code> wire-compat</strong> (same package name, no code change at all) is on the roadmap as a shim package — it removes the "young company" objection entirely. If this would move you off the fence, tell us — customer signal drives the priority. (3) <strong>Zero-SDK escape hatch on Team tier</strong>: a direct Postgres <code class="text-accent-gold">DATABASE_URL</code> means Payload, Prisma, Drizzle, or any Postgres client works without any Eurobase-specific code — the reversibility guarantee then covers your app code too, not just your data.',
+  },
+  {
     id: 'why-not-firebase',
     category: 'Supabase alternative',
     question: 'How is Eurobase different from Firebase?',
@@ -154,7 +161,7 @@ export const faq: FaqEntry[] = [
     category: 'Product & pricing',
     question: 'What happens if I exceed the Pro-tier storage or bandwidth caps?',
     answer:
-      'Pro is deliberately predictable — past the 100 GB storage / 250 GB bandwidth caps, the affected module goes read-only until upgrade or the meter resets. We do <strong>not</strong> meter per-GB overage on Pro. For workloads that need elastic storage or high egress (photo/video-heavy modules, streaming), we recommend the Team tier or a bespoke contract — contact us directly.',
+      'No overnight blackout — that is a business-risk pattern paying customers can\'t manage, and one of the clearest pieces of feedback from beta users. The Pro-tier overage policy for public beta: (1) email alerts at 75% and 100% of the storage / bandwidth caps. (2) A 14-day soft-grace window where writes continue and the console shows the overage banner — enough time to upgrade to Team, buy an add-on capacity block, or optimise. (3) Only after the grace window does the affected module hard-block writes — and even then <strong>reads always continue</strong>. Team tier (dedicated Postgres per project + elastic storage tier) removes the caps entirely and is the recommended path for photo/video-heavy or streaming workloads. We do <strong>not</strong> meter per-GB overage on Pro — no surprise line items.',
   },
   {
     id: 'realtime-connections',
@@ -180,9 +187,9 @@ export const faq: FaqEntry[] = [
   {
     id: 'continuity',
     category: 'Product & pricing',
-    question: 'What happens to my data if Eurobase ceases operations?',
+    question: 'What happens to my data — and my app code — if Eurobase ceases operations?',
     answer:
-      'Three lines of defence. (1) <strong>Standard format</strong>: Postgres + S3-compatible = migration to any host (OVH, Scaleway direct, self-hosted) is a documented path, not a rewrite. (2) <strong>Export CLI</strong>: <code class="text-accent-gold">eurobase export</code> produces a full dump (schema + data + storage + functions). (3) <strong>Open source at v1</strong>: we commit to open-sourcing the code under a permissive licence at v1 release (targeted end 2026); self-hosting becomes a real Plan B. On shutdown: 90-day notice + 90 additional days of read-only service to finalise export.',
+      '<strong>Data reversibility (four lines of defence).</strong> (1) <em>Standard formats</em>: Postgres + S3-compatible = migration to any host (Scaleway direct, OVH, Aiven, self-hosted) is documented, not a rewrite. (2) <em>Export CLI</em>: <code class="text-accent-gold">eurobase export</code> produces a full dump (schema + data + storage + functions). (3) <em>Open source at v1</em>: we commit to open-sourcing the code under a permissive licence at v1 (targeted end 2026); self-hosting becomes a real Plan B. (4) On shutdown: 90-day notice + 90 additional days of read-only service to finalise export.<br><br><strong>App-code reversibility — the point our earlier answer missed.</strong> Data reversibility does not cover the client layer if your app is bound to a proprietary SDK. Two mitigations: (a) <code class="text-accent-gold">@eurobase/sdk</code> is shape-parity with <code class="text-accent-gold">supabase-js</code>, so migrating away is search-replace on imports, not query-site rewrites (see the <a href="#supabase-js-compat" class="text-accent-blue hover:underline">SDK compatibility FAQ</a>). (b) On <strong>Team tier</strong>, the direct <code class="text-accent-gold">DATABASE_URL</code> means your app can talk to Postgres with Payload / Prisma / Drizzle / <code class="text-accent-gold">psql</code> — no Eurobase code in the client at all — so migration is a hostname change. That is the strongest reversibility guarantee we ship today.',
   },
   {
     id: 'team-size-funding',
