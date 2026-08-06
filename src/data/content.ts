@@ -356,6 +356,73 @@ export const blog = {
   description: 'Thoughts on European data sovereignty, cloud infrastructure, and building for developers.',
   posts: [
     {
+      slug: 'public-beta-open',
+      title: 'Eurobase Public Beta: EU-Sovereign Backend, Open to Everyone',
+      excerpt: 'Closed beta ran for six months with a hand-picked cohort. The platform surface — auth, Postgres, storage, realtime, edge functions, vault, cron, webhooks, DSAR export — has been running in production the whole time. Today the doors open: sign up at console.eurobase.app, no invitation required, no credit card for Free.',
+      date: '2026-08-06',
+      author: 'Stefan Gimeson',
+      readTime: '4 min read',
+      image: '/blog-public-beta-open.png',
+      content: `Six months of closed beta. Roughly a hundred developers building on the platform daily. Somewhere on the order of ten thousand tenant users authenticating through it, hundreds of gigabytes of storage, a couple of security reviews that shipped in the [six-fixes-in-24-hours post](/blog/six-security-fixes-in-twenty-four-hours) and the [week-in-closed-beta stream](/blog/a-week-in-closed-beta-streaming-dsar-realtime-rls-cve-crawl), and enough real customer feedback that we now know which bits of the roadmap deserve the next quarter and which were guessing.
+
+Today the door opens to everyone. Sign up at [console.eurobase.app](https://console.eurobase.app), no invitation, no waitlist, no credit card for Free. This post is a short honest map of what you get, what you pay for, and what is still in flight.
+
+## Free
+
+Free is Free for as long as your project fits inside it. 5,000 monthly active tenant users, 512 MB Postgres, 2 GB egress, 50 concurrent realtime WebSockets, all six auth methods, edge functions, vault, cron, webhooks, and the entire compliance stack (DSAR export, Article 30 record, hash-chained audit log, sub-processor registry). Projects auto-pause after 30 days without a request and a single request wakes them in under a second.
+
+No credit card. No feature paywall. The four numeric caps are the only thing separating Free from Pro; every binary switch is on.
+
+## Pro — €19 per project per month
+
+100,000 MAU, 100 GB storage, 250 GB egress, 10,000 realtime connections. BYO SMTP, quota alerts at 75% and 100%, priority support, never pauses. €19 per month, per project, billed in EUR. Priced per project rather than per organisation because our closed-beta customers overwhelmingly told us that was cleaner — one bill per production surface, no shared-pool fights inside a company.
+
+Payments through [Mollie](https://mollie.com) (Dutch, EU-headquartered, already in our sub-processor registry). SEPA direct debit, iDEAL, Bancontact, Sofort, plus the usual card set. Invoices land in the console the moment they clear.
+
+Overages don't blackout your users. If you cross 100 GB storage or 250 GB egress on Pro, you get email alerts at 75% and 100%, a 14-day soft-grace window where writes keep working while you decide, and only then a hard cap on the affected module — and even then reads always continue. No overnight blackout. No per-GB metering surprises. If you're heading past those caps regularly, Team is the tier for you.
+
+## Team — coming later this year
+
+Dedicated Postgres per project, direct \`DATABASE_URL\` for [Payload](https://payloadcms.com) / [Prisma](https://www.prisma.io) / [Drizzle](https://orm.drizzle.team) stacks, backup + point-in-time recovery, SSO, RBAC. Currently in closed beta with hand-picked customers — the infrastructure is [built and running](/blog/legaltech-backend-what-a-german-kanzlei-actually-needs), the price is still being validated with the first cohort of paying users. Ping us if this is the tier you actually want; that signal is what unlocks the general-availability flip.
+
+## What "EU-sovereign backend" means, concretely
+
+You're not our first EU-region SaaS. You have a stack of tools that stores bytes in Frankfurt and calls it done. The difference matters when the parent company sits under a different legal regime than the region.
+
+Eurobase is operated by Eurobase OÜ, an Estonian private limited company. All infrastructure runs on [Scaleway](https://scaleway.com) in France — Postgres, object storage, edge-function runtime, everything. No AWS, no GCP, no Azure. No US-headquartered sub-processor in the critical path. That's the difference between "our data is in the EU" (bytes) and "our data is under EU jurisdiction" (control). We wrote the longer form of this in ["Our Data Deserves a Better Agreement"](/blog/our-data-deserves-a-better-agreement) — the short version is: your DPO gets an Article 30 record they can defend without a caveat.
+
+## What's still in flight
+
+- **Team tier general availability** — closed beta continues; price and provisioning surface being validated against real customers before opening broadly.
+- **@supabase/supabase-js wire-compatibility shim** — customer feedback is that a drop-in shim would remove the last migration friction; on the roadmap, no firm date.
+- **BSI C5 and ISO 27001 certification** — self-attestation exists today ([Grundschutz](https://console.eurobase.app/security), NIS-2 positioning, BSI C5 roadmap), formal audits are the multi-quarter follow-up.
+- **SDK expansion** — TypeScript SDK is the primary today (browsers, Node, Deno, Bun, edge runtimes). Go SDK ships alongside the CLI for CI use. Python SDK is on the shortlist.
+
+## What to expect from us as a young company
+
+An honest one for the "should I bet production on this" question.
+
+We are a small team. Bootstrapped. Six-to-twelve-month runway. If you want a large vendor to bet a €5m migration on, we are not that vendor and won't pretend to be. If you want a European alternative to Firebase or Supabase that stores your bytes under EU jurisdiction, has a working DSAR button, and lets you \`eurobase db dump\` to a standard Postgres file at any time so migrating away is a hostname change — that's what we're building and today's what you can try.
+
+The reversibility story is deliberate: standard formats (Postgres, S3-compatible object storage), a one-command CLI export, and a commitment to open-source the platform code at v1 (targeted end of 2026). If we fail, you migrate to Scaleway direct in a weekend with the export CLI. That's the real safety net, not our reassurances.
+
+## Start
+
+- Sign up: [console.eurobase.app](https://console.eurobase.app)
+- Docs: [console.eurobase.app/docs](https://console.eurobase.app/docs)
+- CLI: \`npm install -g @eurobase/cli\`
+- SDK: \`npm install @eurobase/sdk\`
+- Issues + roadmap: [github.com/STGime/euroback](https://github.com/STGime/euroback)
+- Anything else: reply to any email from us, we read every word.`,
+      references: [
+        { label: 'Eurobase console — sign up', url: 'https://console.eurobase.app' },
+        { label: 'Eurobase docs', url: 'https://console.eurobase.app/docs' },
+        { label: 'Mollie — payment processor (Dutch, EU-headquartered)', url: 'https://mollie.com' },
+        { label: 'Scaleway — infrastructure provider (France, EU-owned)', url: 'https://scaleway.com' },
+        { label: 'GitHub — public issue tracker', url: 'https://github.com/STGime/euroback/issues' },
+      ],
+    },
+    {
       slug: 'legaltech-backend-what-a-german-kanzlei-actually-needs',
       title: 'What a German LegalTech Startup Actually Needs From Its Backend',
       excerpt: 'A German legal-tech founder cannot ship the product without §203 StGB paperwork, §43e BRAO staff secrecy declarations, GoBD-conformant exports, and 10-year WORM retention. None of that is on the roadmap of the usual EU-region Firebase alternative. Here is exactly what a Kanzlei-facing backend has to solve — what Eurobase already does today, and what is landing in the "Legal Team" tier over the next weeks.',
