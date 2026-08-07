@@ -358,14 +358,14 @@ export const blog = {
     {
       slug: 'public-beta-open',
       title: 'Eurobase Public Beta: EU-Sovereign Backend, Open to Everyone',
-      excerpt: 'Closed beta ran for six months with a hand-picked cohort. The platform surface — auth, Postgres, storage, realtime, edge functions, vault, cron, webhooks, DSAR export — has been running in production the whole time. Today the doors open: sign up at console.eurobase.app, no invitation required, no credit card for Free.',
+      excerpt: 'Closed beta ran with a hand-picked cohort. The platform surface — auth, Postgres, storage, realtime, edge functions, vault, cron, webhooks, DSAR export — has been running in production the whole time. Today the doors open: sign up at console.eurobase.app, no invitation required, no credit card for Free.',
       date: '2026-08-06',
       author: 'Stefan Gimeson',
       readTime: '4 min read',
       image: '/blog-public-beta-open.png',
-      content: `Six months of closed beta. Roughly a hundred developers building on the platform daily. Somewhere on the order of ten thousand tenant users authenticating through it, hundreds of gigabytes of storage, a couple of security reviews that shipped in the [six-fixes-in-24-hours post](/blog/six-security-fixes-in-twenty-four-hours) and the [week-in-closed-beta stream](/blog/a-week-in-closed-beta-streaming-dsar-realtime-rls-cve-crawl), and enough real customer feedback that we now know which bits of the roadmap deserve the next quarter and which were guessing.
+      content: `Closed beta ran with a small hand-picked cohort. Real developers building real projects on the platform — enough to surface security issues we wrote about openly in [six-fixes-in-24-hours](/blog/six-security-fixes-in-twenty-four-hours) and [a week in closed beta](/blog/a-week-in-closed-beta-streaming-dsar-realtime-rls-cve-crawl), and enough customer feedback that we now know which bits of the roadmap deserve the next quarter and which were guessing.
 
-Today the door opens to everyone. Sign up at [console.eurobase.app](https://console.eurobase.app), no invitation, no waitlist, no credit card for Free. This post is a short honest map of what you get, what you pay for, and what is still in flight.
+Today the door opens to everyone. Sign up at [console.eurobase.app](https://console.eurobase.app), no invitation, no waitlist, no credit card for Free. This post is a short map of what you get, what you pay for, and what is still in flight.
 
 ## Free
 
