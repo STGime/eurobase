@@ -56,7 +56,7 @@ const { elementRef, isVisible } = useScrollReveal()
       <div class="text-center mt-12" :class="isVisible ? 'animate-fade-in-up stagger-4' : 'opacity-0'">
         <p class="text-text-muted text-sm mb-6">Free tier, no credit card required. Upgrade to Pro any time from the console.</p>
         <a
-          href="https://console.eurobase.app"
+          href="https://console.eurobase.app/login?signup=1"
           target="_blank"
           rel="noopener"
           class="inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-accent-blue text-white hover:bg-accent-blue-hover shadow-lg shadow-accent-blue/25"

@@ -29,7 +29,7 @@ const { elementRef, isVisible } = useScrollReveal()
         :class="isVisible ? 'animate-fade-in-up stagger-2' : 'opacity-0'"
       >
         <a
-          href="https://console.eurobase.app"
+          href="https://console.eurobase.app/login?signup=1"
           target="_blank"
           rel="noopener"
           class="inline-flex items-center justify-center px-8 py-3.5 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-accent-blue text-white hover:bg-accent-blue-hover shadow-lg shadow-accent-blue/25"

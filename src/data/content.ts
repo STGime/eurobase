@@ -184,7 +184,7 @@ export const dsar = {
         body: 'Free-tier projects can still meet a statutory deadline by calling the export endpoint directly — we won\'t paywall a legal obligation.',
       },
     ],
-    primaryCta: { label: 'Sign up free', href: 'https://console.eurobase.app' },
+    primaryCta: { label: 'Sign up free', href: 'https://console.eurobase.app/login?signup=1' },
     secondaryCta: { label: 'How we built it: DSAR + RoPA + Audit Log in one tab', href: '/blog/compliance-tab-dsar-ropa-audit-log' },
   },
 }

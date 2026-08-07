@@ -256,7 +256,7 @@ POST /platform/projects/{id}/compliance/exports</code></pre>
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a
-          href="https://console.eurobase.app"
+          href="https://console.eurobase.app/login?signup=1"
           target="_blank"
           rel="noopener"
           class="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-accent-blue hover:bg-accent-blue-hover text-white font-semibold transition-colors"

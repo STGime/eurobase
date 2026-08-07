@@ -63,7 +63,7 @@ function closeMobileMenu() {
             {{ link.label }}
           </a>
           <a
-            href="https://console.eurobase.app"
+            href="https://console.eurobase.app/login?signup=1"
             target="_blank"
             rel="noopener"
             class="inline-flex items-center justify-center px-6 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-accent-blue text-white hover:bg-accent-blue-hover shadow-lg shadow-accent-blue/25"
@@ -107,7 +107,7 @@ function closeMobileMenu() {
             {{ link.label }}
           </a>
           <a
-            href="https://console.eurobase.app"
+            href="https://console.eurobase.app/login?signup=1"
             target="_blank"
             rel="noopener"
             class="w-full text-center mt-3 inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-accent-blue text-white hover:bg-accent-blue-hover shadow-lg shadow-accent-blue/25"
