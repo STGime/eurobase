@@ -1,8 +1,8 @@
 export const hero = {
   headline: 'Eurobase — The Sovereign BaaS for Europe',
   subheadline: 'Auth, database, storage, realtime, functions, cron, vault, webhooks, and CLI — fully EU-native, zero US jurisdiction, zero DevOps.',
-  tagline: 'Firebase simplicity. Postgres power. European sovereignty. Closed beta is live — public early access this summer.',
-  primaryCta: 'Request Beta Access',
+  tagline: 'Firebase simplicity. Postgres power. European sovereignty. Public beta is now open — sign up in a minute, no credit card.',
+  primaryCta: 'Sign up free',
   secondaryCta: 'Explore the Platform',
 }
 
@@ -184,7 +184,7 @@ export const dsar = {
         body: 'Free-tier projects can still meet a statutory deadline by calling the export endpoint directly — we won\'t paywall a legal obligation.',
       },
     ],
-    primaryCta: { label: 'Request Beta Access', href: '#cta' },
+    primaryCta: { label: 'Sign up free', href: 'https://console.eurobase.app' },
     secondaryCta: { label: 'How we built it: DSAR + RoPA + Audit Log in one tab', href: '/blog/compliance-tab-dsar-ropa-audit-log' },
   },
 }
@@ -334,8 +334,8 @@ export const pricing = {
 
 export const cta = {
   headline: 'Join the Next Generation of European Infrastructure',
-  description: 'Closed beta is live. Request access to start building on EU-native infrastructure today, with founder-friendly pricing locked in when the Pro tier opens.',
-  primaryCta: 'Request Beta Access',
+  description: 'Public beta is open. Sign up in a minute, no credit card required — Free tier is genuinely free, Pro is €19/mo per project.',
+  primaryCta: 'Sign up free',
   secondaryCta: 'Talk to the Founders',
 }
 

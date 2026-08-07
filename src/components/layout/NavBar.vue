@@ -4,14 +4,12 @@ import { useRoute, useRouter } from 'vue-router'
 import { useWindowScroll } from '@vueuse/core'
 import { useSmoothScroll } from '@/composables/useSmoothScroll'
 import { nav } from '@/data/content'
-import WaitingListModal from '@/components/WaitingListModal.vue'
 
 const route = useRoute()
 const router = useRouter()
 const { y } = useWindowScroll()
 const { scrollToSection } = useSmoothScroll()
 const mobileMenuOpen = ref(false)
-const showModal = ref(false)
 
 function handleNav(href: string) {
   mobileMenuOpen.value = false
@@ -37,9 +35,8 @@ function handleLogoClick() {
   }
 }
 
-function openModal() {
+function closeMobileMenu() {
   mobileMenuOpen.value = false
-  showModal.value = true
 }
 </script>
 
@@ -65,12 +62,14 @@ function openModal() {
           >
             {{ link.label }}
           </a>
-          <button
+          <a
+            href="https://console.eurobase.app"
+            target="_blank"
+            rel="noopener"
             class="inline-flex items-center justify-center px-6 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-accent-blue text-white hover:bg-accent-blue-hover shadow-lg shadow-accent-blue/25"
-            @click="openModal"
           >
-            Get Early Access
-          </button>
+            Sign up free
+          </a>
         </div>
 
         <button
@@ -107,16 +106,17 @@ function openModal() {
           >
             {{ link.label }}
           </a>
-          <button
+          <a
+            href="https://console.eurobase.app"
+            target="_blank"
+            rel="noopener"
             class="w-full text-center mt-3 inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-accent-blue text-white hover:bg-accent-blue-hover shadow-lg shadow-accent-blue/25"
-            @click="openModal"
+            @click="closeMobileMenu"
           >
-            Get Early Access
-          </button>
+            Sign up free
+          </a>
         </div>
       </div>
     </Transition>
   </nav>
-
-  <WaitingListModal :open="showModal" source="nav" @close="showModal = false" />
 </template>

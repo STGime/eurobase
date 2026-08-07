@@ -1,12 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { hero } from '@/data/content'
-import CtaButton from '@/components/ui/CtaButton.vue'
-import WaitingListModal from '@/components/WaitingListModal.vue'
 import HeroGlobe from '@/components/HeroGlobe.vue'
 import heroImage from '@/assets/images/hero-network.webp'
-
-const showModal = ref(false)
 </script>
 
 <template>
@@ -71,12 +66,14 @@ const showModal = ref(false)
             </a>
           </p>
           <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up stagger-4">
-            <button
+            <a
+              href="https://console.eurobase.app"
+              target="_blank"
+              rel="noopener"
               class="inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-accent-blue text-white hover:bg-accent-blue-hover shadow-lg shadow-accent-blue/25"
-              @click="showModal = true"
             >
               {{ hero.primaryCta }}
-            </button>
+            </a>
           </div>
         </div>
 
@@ -109,7 +106,5 @@ const showModal = ref(false)
 
     <!-- Gold accent line at top -->
     <div class="absolute top-0 left-0 right-0 h-1 bg-accent-gold" />
-
-    <WaitingListModal :open="showModal" source="hero" @close="showModal = false" />
   </section>
 </template>

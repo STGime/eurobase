@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { cta } from '@/data/content'
 import { useScrollReveal } from '@/composables/useScrollReveal'
-import WaitingListModal from '@/components/WaitingListModal.vue'
 
 const { elementRef, isVisible } = useScrollReveal()
-const showModal = ref(false)
 </script>
 
 <template>
@@ -31,12 +28,14 @@ const showModal = ref(false)
         class="max-w-md mx-auto mb-8"
         :class="isVisible ? 'animate-fade-in-up stagger-2' : 'opacity-0'"
       >
-        <button
+        <a
+          href="https://console.eurobase.app"
+          target="_blank"
+          rel="noopener"
           class="inline-flex items-center justify-center px-8 py-3.5 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-accent-blue text-white hover:bg-accent-blue-hover shadow-lg shadow-accent-blue/25"
-          @click="showModal = true"
         >
           {{ cta.primaryCta }}
-        </button>
+        </a>
       </div>
 
       <!-- Trust badges -->
@@ -59,6 +58,5 @@ const showModal = ref(false)
       </div>
     </div>
 
-    <WaitingListModal :open="showModal" source="cta" @close="showModal = false" />
   </section>
 </template>

@@ -252,14 +252,16 @@ POST /platform/projects/{id}/compliance/exports</code></pre>
     <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-bold text-text-white mb-4 font-heading">Built in. Audit-trailed. EU-only.</h2>
       <p class="text-text-light mb-8 max-w-xl mx-auto">
-        Closed beta is live. Request access and stop hand-rolling DSAR responses the fortnight before launch.
+        Public beta is live. Sign up in a minute and stop hand-rolling DSAR responses the fortnight before launch.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a
-          href="/#cta"
+          href="https://console.eurobase.app"
+          target="_blank"
+          rel="noopener"
           class="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-accent-blue hover:bg-accent-blue-hover text-white font-semibold transition-colors"
         >
-          Request Beta Access
+          Sign up free
         </a>
         <RouterLink
           to="/blog/compliance-tab-dsar-ropa-audit-log"
