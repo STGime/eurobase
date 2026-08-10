@@ -1503,9 +1503,17 @@ export const nav = {
     { label: 'Market', href: '#market' },
     { label: 'Pricing', href: '#pricing' },
     { label: 'Blog', href: '#blog' },
-    // Full-path route — NavBar's handleNav dispatches on the
-    // leading '/' vs '#' so this routes to /faq instead of
+    // Full-path routes — NavBar's handleNav dispatches on the
+    // leading '/' vs '#' so these route via vue-router instead of
     // scroll-to-section.
+    //
+    // "Trust" surfaces /security (security + German legal-tech
+    // dossier) into the top nav — matches the competitor
+    // convention (Supabase, PlanetScale, Neon all have a
+    // top-nav Trust/Security link). A "compliance" label was
+    // considered but "Trust" reads as broader and better matches
+    // a mixed audience of engineers + procurement + security.
+    { label: 'Trust', href: '/security' },
     { label: 'FAQ', href: '/faq' },
   ],
 }
