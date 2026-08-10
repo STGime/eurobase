@@ -167,7 +167,7 @@ const nis2Rows: Nis2Row[] = [
         <RouterLink to="/" class="text-accent-blue text-sm hover:underline mb-6 inline-block">&larr; Back to home</RouterLink>
         <h1 class="text-4xl md:text-5xl font-bold text-text-white mb-4 font-heading leading-tight">Security, vulnerability disclosure &amp; German legal-tech</h1>
         <p class="text-xl text-accent-gold max-w-3xl">
-          How we secure the platform, where our controls sit against EU NIS2 Article 21 and GDPR Article 32, how to responsibly report a security issue, and the dated <a href="#de-legaltech" class="text-accent-gold underline underline-offset-4 hover:text-accent-blue">German legal-tech dossier</a> (BSI C5 / ISO 27001 / IT-Grundschutz / NIS2 / AI Act).
+          How we secure the platform, where our controls sit against EU NIS2 Article 21 and GDPR Article 32, how to responsibly report a security issue, and the dated <RouterLink :to="{ hash: '#de-legaltech' }" class="text-accent-gold underline underline-offset-4 hover:text-accent-blue">German legal-tech dossier</RouterLink> (BSI C5 / ISO 27001 / IT-Grundschutz / NIS2 / AI Act).
         </p>
       </section>
 
