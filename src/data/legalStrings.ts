@@ -88,3 +88,64 @@ export const legalStrings: LegalStrings = {
   financialYear: '1 January – 31 December',
   contactPerson: 'E-Residency Hub OÜ',
 }
+
+// Central source for the versioned-legal-docs base URL. Derived
+// from `documentVersion` so a bump to v3 flips every consumer at
+// once — SecurityPage's German legal-tech dossier links, any
+// future page that references the same doc set, and the blog
+// posts that link a specific doc. Reduces the ~22× hardcoded
+// STGime/euroback/.../v2/ occurrences to one edit-point.
+//
+// If the docs ever move off GitHub (e.g. onto a first-party
+// /security/docs/ route to avoid the sovereignty-optics of a
+// US-owned canonical home for compliance docs), only this const
+// needs to change.
+export const legalDocsBase = `https://github.com/STGime/euroback/blob/main/docs/legal/v${legalStrings.documentVersion.split('.')[0]}`
+
+// Shape for a single dossier document. Rendered by SecurityPage
+// as a hyperlink + one-line note in a `<li v-for>` loop.
+export interface LegalDoc {
+  label: string
+  slug: string
+  note: string
+}
+
+// German legal-tech dossier + the two Legal-Team-tier backing
+// docs. Single source of truth — the SecurityPage lists derive
+// their count from `.length`, so a doc added or removed can't
+// silently disagree with the surrounding prose ("the five
+// documents…").
+export const germanLegalTechDocs = {
+  dossier: [
+    { label: 'BSI C5 roadmap', slug: 'bsi-c5-roadmap.md',
+      note: 'target Type-1 attestation 12 months post-launch, phase plan + assessor shortlist.' },
+    { label: 'ISO 27001 — Statement of Applicability (draft)', slug: 'iso-27001-soa.md',
+      note: '2022 Annex A control coverage, path to certificate.' },
+    { label: 'BSI IT-Grundschutz self-declaration', slug: 'grundschutz-self-declaration.md',
+      note: 'Basis-Absicherung profile for SME, self-attested until formal ISO 27001.' },
+    { label: 'NIS-2 positioning', slug: 'nis2-positioning.md',
+      note: 'below employee/revenue thresholds today; voluntary compliance to cascaded obligations; commitment to register on crossing.' },
+    { label: 'AI Act positioning', slug: 'ai-act-positioning.md',
+      note: 'Eurobase is infrastructure, not an AI system; Customer is the deployer for any high-risk build.' },
+  ] as LegalDoc[],
+  backing: [
+    { label: 'Legal-tech DPA addendum', slug: 'de-legal-tech-addendum.md',
+      note: '§203 StGB / §43e BRAO staff-secrecy, §50 BRAO / §257 HGB / §147 AO retention holds, GoBD export.' },
+    { label: 'GoBD Verfahrensdokumentation', slug: 'de-gobd-verfahrensdokumentation.md',
+      note: 'the process documentation §146 AO expects.' },
+  ] as LegalDoc[],
+  // Also rendered in the blog post at content.ts (de-legal-tech-
+  // backend). Sourced from here to prevent the two prose lists
+  // from drifting apart when scope changes (e.g. TR-ESOR moves
+  // from non-goal to integration).
+  nonGoals: [
+    { label: 'beA integration',
+      detail: 'application-side (the Anwaltssoftware layer). Not the backend’s concern.' },
+    { label: 'TR-ESOR (BSI TR-03125)',
+      detail: 'the archive-format standard for long-term signed documents. Customers plug in ArchiSafe/Governikus; Eurobase integrates but does not replace them.' },
+    { label: 'DATEV / ELSTER submission',
+      detail: 'application-side (the accounting/tax software layer).' },
+    { label: 'Actual BSI C5 or ISO 27001 certification',
+      detail: 'post-beta. The roadmaps above commit to dated milestones.' },
+  ],
+}

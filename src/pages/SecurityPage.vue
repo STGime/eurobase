@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { watchEffect, onBeforeUnmount } from 'vue'
+import { legalDocsBase, germanLegalTechDocs } from '@/data/legalStrings'
 
 // Static page — same SEO / head-management pattern as LegalNoticePage
 // and FaqPage. Sets a per-page title, description, canonical, OG /
@@ -7,10 +8,26 @@ import { watchEffect, onBeforeUnmount } from 'vue'
 // pointing at the ISMS.
 
 const SITE_ORIGIN = 'https://eurobase.app'
-const PAGE_TITLE = 'Security & vulnerability disclosure — Eurobase'
+// Title keeps "vulnerability disclosure" because .well-known/
+// security.txt (RFC 9116) publishes /security as the CVD policy URL
+// — dropping the phrase would leave researchers landing on a tab
+// titled "German legal-tech" with no CVD indication, and Google
+// tends to rewrite a title back to the H1 when the two diverge.
+const PAGE_TITLE = 'Security, vulnerability disclosure & German legal-tech — Eurobase'
+// Kept ≤160 chars (Google SERP cap ~155-160, social cards cut ~200)
+// with dossier keywords in the first half so the audience this
+// targets sees them in the truncated preview. Long-form goes into
+// PAGE_DESC_LONG below for the JSON-LD Article node.
 const PAGE_DESC =
-  'How Eurobase secures customer data: sub-processor list, encryption, incident-response SLAs, Coordinated Vulnerability Disclosure policy, ISMS-lite aligned to NIS2 Article 21 and GDPR Article 32.'
+  'Eurobase security & German legal-tech dossier: BSI C5 roadmap, ISO 27001 SoA, IT-Grundschutz, NIS2 + AI Act positioning, CVD policy, sub-processor list.'
+const PAGE_DESC_LONG =
+  'How Eurobase secures customer data: sub-processor list, encryption, incident-response SLAs, Coordinated Vulnerability Disclosure policy, ISMS-lite aligned to NIS2 Article 21 and GDPR Article 32. German legal-tech dossier: BSI C5 roadmap, ISO 27001 SoA, IT-Grundschutz self-declaration, NIS2 + AI Act positioning.'
 const PAGE_URL = `${SITE_ORIGIN}/security`
+
+// Bumped for the #316 legal-tech dossier addition so crawlers
+// re-index. Keep in sync with public/sitemap.xml's <lastmod> for
+// /security.
+const PAGE_MODIFIED = '2026-08-10'
 
 function findOrCreateMeta(attr: 'name' | 'property', key: string): HTMLMetaElement {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`)
@@ -72,10 +89,10 @@ watchEffect(() => {
       },
       {
         '@type': 'Article',
-        headline: 'Eurobase Security Overview',
-        description: PAGE_DESC,
+        headline: 'Eurobase security & German legal-tech dossier',
+        description: PAGE_DESC_LONG,
         datePublished: '2026-07-22',
-        dateModified: '2026-07-22',
+        dateModified: PAGE_MODIFIED,
         author: {
           '@type': 'Organization',
           name: 'Eurobase',
@@ -148,9 +165,9 @@ const nis2Rows: Nis2Row[] = [
       <!-- Hero -->
       <section class="mb-16">
         <RouterLink to="/" class="text-accent-blue text-sm hover:underline mb-6 inline-block">&larr; Back to home</RouterLink>
-        <h1 class="text-4xl md:text-5xl font-bold text-text-white mb-4 font-heading leading-tight">Security &amp; vulnerability disclosure</h1>
+        <h1 class="text-4xl md:text-5xl font-bold text-text-white mb-4 font-heading leading-tight">Security, vulnerability disclosure &amp; German legal-tech</h1>
         <p class="text-xl text-accent-gold max-w-3xl">
-          How we secure the platform, where our controls sit against EU NIS2 Article 21 and GDPR Article 32, and how to responsibly report a security issue.
+          How we secure the platform, where our controls sit against EU NIS2 Article 21 and GDPR Article 32, how to responsibly report a security issue, and the dated <RouterLink :to="{ hash: '#de-legaltech' }" class="text-accent-gold underline underline-offset-4 hover:text-accent-blue">German legal-tech dossier</RouterLink> (BSI C5 / ISO 27001 / IT-Grundschutz / NIS2 / AI Act).
         </p>
       </section>
 
@@ -178,13 +195,16 @@ const nis2Rows: Nis2Row[] = [
         <p class="text-text-light leading-relaxed mb-4">
           When Eurobase crosses the threshold, we will register with the Estonian national CSIRT (<a href="https://ria.ee/en" target="_blank" rel="noopener" class="text-accent-blue hover:underline">RIA</a> / CERT-EE) and issue an updated ISMS reflecting our new status as an important entity.
         </p>
-        <p class="text-text-light leading-relaxed">
+        <p class="text-text-light leading-relaxed mb-4">
           GDPR compliance is not conditional on the size threshold. GDPR Articles 32 (security of processing) and 33 (breach notification) apply from day one, and are governed by our published <a href="/legal" class="text-accent-blue hover:underline">Privacy Policy</a>, <a href="/faq" class="text-accent-blue hover:underline">FAQ</a>, and DPA.
+        </p>
+        <p class="text-text-light leading-relaxed">
+          German legal-tech / Steuerberater / regulated-industry customers: see the <RouterLink :to="{ hash: '#de-legaltech' }" class="text-accent-blue hover:underline">German legal-tech dossier</RouterLink> for BSI C5 / ISO 27001 / IT-Grundschutz / NIS2 / AI Act positioning.
         </p>
       </section>
 
       <!-- NIS2 Article 21 matrix -->
-      <section id="nis2-matrix" class="mb-16">
+      <section id="nis2-matrix" class="mb-16 scroll-mt-20">
         <h2 class="text-2xl font-bold text-text-white mb-6 font-heading">NIS2 Article 21 control matrix</h2>
         <p class="text-text-light leading-relaxed mb-6">
           The ten risk-management measures required by Article 21(2). Status reflects the platform as of the ISMS effective date — 22 July 2026.
@@ -265,7 +285,7 @@ const nis2Rows: Nis2Row[] = [
       </section>
 
       <!-- CVD -->
-      <section id="cvd" class="mb-16">
+      <section id="cvd" class="mb-16 scroll-mt-20">
         <h2 class="text-2xl font-bold text-text-white mb-4 font-heading">Coordinated Vulnerability Disclosure</h2>
         <p class="text-text-light leading-relaxed mb-4">
           If you believe you have found a security vulnerability in the Eurobase platform, please report it to <a href="mailto:security@eurobase.app" class="text-accent-blue hover:underline">security@eurobase.app</a>.
@@ -299,7 +319,7 @@ const nis2Rows: Nis2Row[] = [
       </section>
 
       <!-- ISMS -->
-      <section id="isms" class="mb-16">
+      <section id="isms" class="mb-16 scroll-mt-20">
         <h2 class="text-2xl font-bold text-text-white mb-4 font-heading">ISMS-lite</h2>
         <p class="text-text-light leading-relaxed mb-4">
           The full written Information Security Management System is public and versioned in the Eurobase source repository:
@@ -314,6 +334,48 @@ const nis2Rows: Nis2Row[] = [
         <p class="text-text-light leading-relaxed">
           Reviewed annually and after every significant incident. Version 2.0, effective 22 July 2026, approved by the sole board member of Eurobase OÜ.
         </p>
+      </section>
+
+      <!-- German legal-tech (#316) — data-driven from legalStrings so
+           a doc added / removed can't leave the "five documents" prose
+           lying. scroll-mt-20 keeps the H2 clear of the fixed 64px
+           navbar when arrived at via #de-legaltech. -->
+      <section id="de-legaltech" class="mb-16 scroll-mt-20">
+        <h2 class="text-2xl font-bold text-text-white mb-4 font-heading">German legal-tech</h2>
+        <p class="text-text-light leading-relaxed mb-4">
+          What German procurement will ask about — with dated roadmaps rather than glossy claims. Each doc is versioned in the Eurobase source repository so a customer's compliance team can diff any two revisions.
+        </p>
+        <ul class="space-y-3 text-text-light mb-6">
+          <li v-for="doc in germanLegalTechDocs.dossier" :key="doc.slug" class="flex gap-2">
+            <span class="text-accent-blue shrink-0">▸</span>
+            <span>
+              <a :href="`${legalDocsBase}/${doc.slug}`" target="_blank" rel="noopener" class="text-accent-blue hover:underline">{{ doc.label }}</a>
+              — {{ doc.note }}
+            </span>
+          </li>
+        </ul>
+        <p class="text-text-light leading-relaxed mb-3">
+          Plus the docs that back the <strong>Legal Team</strong> tier itself:
+        </p>
+        <ul class="space-y-3 text-text-light mb-6">
+          <li v-for="doc in germanLegalTechDocs.backing" :key="doc.slug" class="flex gap-2">
+            <span class="text-accent-blue shrink-0">▸</span>
+            <span>
+              <a :href="`${legalDocsBase}/${doc.slug}`" target="_blank" rel="noopener" class="text-accent-blue hover:underline">{{ doc.label }}</a>
+              — {{ doc.note }}
+            </span>
+          </li>
+        </ul>
+        <h3 class="text-lg font-semibold text-text-white mb-2 mt-6">Explicit non-goals</h3>
+        <p class="text-text-light leading-relaxed mb-3">
+          Some German legal-tech requirements sit outside the platform's scope. We name them so nothing is ambiguous:
+        </p>
+        <ul class="space-y-2 text-text-light">
+          <li v-for="ng in germanLegalTechDocs.nonGoals" :key="ng.label" class="flex gap-2">
+            <span class="text-accent-blue shrink-0">▸</span>
+            <span><strong>{{ ng.label }}</strong> — {{ ng.detail }}</span>
+          </li>
+        </ul>
       </section>
 
       <!-- Sub-processors + related -->
