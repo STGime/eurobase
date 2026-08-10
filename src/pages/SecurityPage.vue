@@ -7,9 +7,9 @@ import { watchEffect, onBeforeUnmount } from 'vue'
 // pointing at the ISMS.
 
 const SITE_ORIGIN = 'https://eurobase.app'
-const PAGE_TITLE = 'Security & vulnerability disclosure — Eurobase'
+const PAGE_TITLE = 'Security, compliance & German legal-tech — Eurobase'
 const PAGE_DESC =
-  'How Eurobase secures customer data: sub-processor list, encryption, incident-response SLAs, Coordinated Vulnerability Disclosure policy, ISMS-lite aligned to NIS2 Article 21 and GDPR Article 32.'
+  'How Eurobase secures customer data: encryption, incident-response SLAs, Coordinated Vulnerability Disclosure, ISMS-lite aligned to NIS2 Article 21 and GDPR Article 32. German legal-tech trust dossier: BSI C5 roadmap, ISO 27001 SoA, IT-Grundschutz self-declaration, NIS-2 + AI Act positioning.'
 const PAGE_URL = `${SITE_ORIGIN}/security`
 
 function findOrCreateMeta(attr: 'name' | 'property', key: string): HTMLMetaElement {
@@ -178,8 +178,11 @@ const nis2Rows: Nis2Row[] = [
         <p class="text-text-light leading-relaxed mb-4">
           When Eurobase crosses the threshold, we will register with the Estonian national CSIRT (<a href="https://ria.ee/en" target="_blank" rel="noopener" class="text-accent-blue hover:underline">RIA</a> / CERT-EE) and issue an updated ISMS reflecting our new status as an important entity.
         </p>
-        <p class="text-text-light leading-relaxed">
+        <p class="text-text-light leading-relaxed mb-4">
           GDPR compliance is not conditional on the size threshold. GDPR Articles 32 (security of processing) and 33 (breach notification) apply from day one, and are governed by our published <a href="/legal" class="text-accent-blue hover:underline">Privacy Policy</a>, <a href="/faq" class="text-accent-blue hover:underline">FAQ</a>, and DPA.
+        </p>
+        <p class="text-text-light leading-relaxed">
+          German legal-tech / Steuerberater / regulated-industry customers: see the <a href="#de-legaltech" class="text-accent-blue hover:underline">German legal-tech dossier</a> for BSI C5 / ISO 27001 / IT-Grundschutz / NIS-2 / AI Act positioning.
         </p>
       </section>
 
@@ -316,6 +319,38 @@ const nis2Rows: Nis2Row[] = [
         </p>
       </section>
 
+      <!-- German legal-tech (#316) -->
+      <section id="de-legaltech" class="mb-16">
+        <h2 class="text-2xl font-bold text-text-white mb-4 font-heading">German legal-tech</h2>
+        <p class="text-text-light leading-relaxed mb-4">
+          The five documents German procurement will ask about — with dated roadmaps rather than glossy claims. Each is versioned in the Eurobase source repository so a customer's compliance team can diff any two revisions.
+        </p>
+        <ul class="space-y-3 text-text-light mb-6">
+          <li>▸ <a href="https://github.com/STGime/euroback/blob/main/docs/legal/v2/bsi-c5-roadmap.md" target="_blank" rel="noopener" class="text-accent-blue hover:underline">BSI C5 roadmap</a> — target Type-1 attestation 12 months post-launch, phase plan + assessor shortlist.</li>
+          <li>▸ <a href="https://github.com/STGime/euroback/blob/main/docs/legal/v2/iso-27001-soa.md" target="_blank" rel="noopener" class="text-accent-blue hover:underline">ISO 27001 — Statement of Applicability (draft)</a> — 2022 Annex A control coverage, path to certificate.</li>
+          <li>▸ <a href="https://github.com/STGime/euroback/blob/main/docs/legal/v2/grundschutz-self-declaration.md" target="_blank" rel="noopener" class="text-accent-blue hover:underline">BSI IT-Grundschutz self-declaration</a> — Basis-Absicherung profile for SME, self-attested until formal ISO 27001.</li>
+          <li>▸ <a href="https://github.com/STGime/euroback/blob/main/docs/legal/v2/nis2-positioning.md" target="_blank" rel="noopener" class="text-accent-blue hover:underline">NIS-2 positioning</a> — below employee/revenue thresholds today; voluntary compliance to cascaded obligations; commitment to register on crossing.</li>
+          <li>▸ <a href="https://github.com/STGime/euroback/blob/main/docs/legal/v2/ai-act-positioning.md" target="_blank" rel="noopener" class="text-accent-blue hover:underline">AI Act positioning</a> — Eurobase is infrastructure, not an AI system; Customer is the deployer for any high-risk build.</li>
+        </ul>
+        <p class="text-text-light leading-relaxed mb-3">
+          Plus the two docs that back the <strong>Legal Team</strong> tier itself:
+        </p>
+        <ul class="space-y-3 text-text-light mb-6">
+          <li>▸ <a href="https://github.com/STGime/euroback/blob/main/docs/legal/v2/de-legal-tech-addendum.md" target="_blank" rel="noopener" class="text-accent-blue hover:underline">Legal-tech DPA addendum</a> — §203 StGB / §43e BRAO staff-secrecy, §50 BRAO / §257 HGB / §147 AO retention holds, GoBD export.</li>
+          <li>▸ <a href="https://github.com/STGime/euroback/blob/main/docs/legal/v2/de-gobd-verfahrensdokumentation.md" target="_blank" rel="noopener" class="text-accent-blue hover:underline">GoBD Verfahrensdokumentation</a> — the process documentation §146 AO expects.</li>
+        </ul>
+        <h3 class="text-lg font-semibold text-text-white mb-2 mt-6">Explicit non-goals</h3>
+        <p class="text-text-light leading-relaxed mb-3">
+          Some German legal-tech requirements sit outside the platform's scope. We name them so nothing is ambiguous:
+        </p>
+        <ul class="space-y-2 text-text-light">
+          <li>▸ <strong>beA integration</strong> — application-side (the Anwaltssoftware layer). Not the backend's concern.</li>
+          <li>▸ <strong>TR-ESOR (BSI TR-03125)</strong> — the archive-format standard for long-term signed documents. Customers plug in ArchiSafe/Governikus; Eurobase integrates but does not replace them.</li>
+          <li>▸ <strong>DATEV / ELSTER submission</strong> — application-side (the accounting/tax software layer).</li>
+          <li>▸ <strong>Actual BSI C5 or ISO 27001 certification</strong> — post-beta. The roadmaps above commit to dated milestones.</li>
+        </ul>
+      </section>
+
       <!-- Sub-processors + related -->
       <section class="mb-16">
         <h2 class="text-2xl font-bold text-text-white mb-4 font-heading">Related documents</h2>
@@ -325,6 +360,7 @@ const nis2Rows: Nis2Row[] = [
           <li>▸ <a href="/terms" class="text-accent-blue hover:underline">Terms &amp; conditions</a>.</li>
           <li>▸ <a href="/features/dsar" class="text-accent-blue hover:underline">One-click DSAR</a> — how the export works.</li>
           <li>▸ <a href="/faq" class="text-accent-blue hover:underline">FAQ</a> — sovereignty, migration, GDPR questions.</li>
+          <li>▸ <a href="#de-legaltech" class="text-accent-blue hover:underline">German legal-tech dossier</a> — BSI C5 / ISO 27001 / IT-Grundschutz / NIS-2 / AI Act positioning.</li>
         </ul>
       </section>
 
