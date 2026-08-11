@@ -342,9 +342,6 @@ const nis2Rows: Nis2Row[] = [
            navbar when arrived at via #de-legaltech. -->
       <section id="de-legaltech" class="mb-16 scroll-mt-20">
         <h2 class="text-2xl font-bold text-text-white mb-4 font-heading">German legal-tech</h2>
-        <p class="text-text-light leading-relaxed mb-4">
-          What German procurement will ask about — with dated roadmaps rather than glossy claims. Each doc is versioned in the Eurobase source repository so a customer's compliance team can diff any two revisions.
-        </p>
         <ul class="space-y-3 text-text-light mb-6">
           <li v-for="doc in germanLegalTechDocs.dossier" :key="doc.slug" class="flex gap-2">
             <span class="text-accent-blue shrink-0">▸</span>
@@ -354,9 +351,7 @@ const nis2Rows: Nis2Row[] = [
             </span>
           </li>
         </ul>
-        <p class="text-text-light leading-relaxed mb-3">
-          Plus the docs that back the <strong>Legal Team</strong> tier itself:
-        </p>
+        <h3 class="text-lg font-semibold text-text-white mb-2 mt-6">Legal Team tier backing docs</h3>
         <ul class="space-y-3 text-text-light mb-6">
           <li v-for="doc in germanLegalTechDocs.backing" :key="doc.slug" class="flex gap-2">
             <span class="text-accent-blue shrink-0">▸</span>
@@ -366,10 +361,7 @@ const nis2Rows: Nis2Row[] = [
             </span>
           </li>
         </ul>
-        <h3 class="text-lg font-semibold text-text-white mb-2 mt-6">Explicit non-goals</h3>
-        <p class="text-text-light leading-relaxed mb-3">
-          Some German legal-tech requirements sit outside the platform's scope. We name them so nothing is ambiguous:
-        </p>
+        <h3 class="text-lg font-semibold text-text-white mb-2 mt-6">Non-goals</h3>
         <ul class="space-y-2 text-text-light">
           <li v-for="ng in germanLegalTechDocs.nonGoals" :key="ng.label" class="flex gap-2">
             <span class="text-accent-blue shrink-0">▸</span>
