@@ -356,6 +356,50 @@ export const blog = {
   description: 'Thoughts on European data sovereignty, cloud infrastructure, and building for developers.',
   posts: [
     {
+      slug: 'storage-auth-console-fixes-this-week',
+      title: 'A week of quiet fixes — storage, auth, console',
+      excerpt: 'Nothing headline-grabbing, but a bunch of papercuts we shiped in the last few days that should make daily use noticeably nicer. Console-uploaded files are now deletable and downloadable. Filenames with umlauts, spaces, or commas work. SMS auth got a security hardening pass. And the "Copy URL" button on storage actually gives you a shareable link now.',
+      date: '2026-08-19',
+      author: 'Stefan Gimeson',
+      readTime: '2 min read',
+      content: `Nothing headline-grabbing this week — just a batch of storage, auth, and console fixes that should make the day-to-day noticeably nicer. Definately worth a quick read if you have files in your project or are on a paid plan.
+
+## Storage — the big one
+
+**Files uploaded via the console are now deletable and downloadable.** A bug was silently breaking every file uploaded through the browser — the file appeared in the list but Delete and Download returned *Not found*. All existing files have been recovered; nothing was lost. If you tried and gave up, please try again.
+
+**Filenames with special characters work.** Umlauts (ä, ö), spaces, commas, emoji — all fine now for upload, preview, download, delete. Previously anything with a non-ASCII character or a space would 404.
+
+**"Copy Link" replaces "Copy URL".** One click now gives you a shareable link that works when pasted into a browser tab or an \`<img src>\`. It expires after 1 hour by default. If you need a longer expiry, use the *Generate Signed URL* section below the button.
+
+## Auth
+
+**SMS one-time codes are now paid-plan only** (Pro and above). Each SMS has a real per-message cost from our EU-sovereign SMS provider, so we're gating this channel to paid tiers. Every other auth method — email/password, magic link, social login — stays available on Free.
+
+**SMS OTP security hardening** — codes now bind to the phone number and cap wrong-guess attempts per code. This closes a leftover security item from our audit; details are on the [GitHub issue](https://github.com/STGime/euroback/issues/233).
+
+**Local dev with a shifting port?** Add \`http://localhost:*\` to your project's CORS origins (Auth → Settings). It matches any port on localhost — useful for tools like [ship.studio](https://ship.studio) that bind a fresh random port on every restart. The wildcard is loopback-only by design; a remote page can never carry a loopback origin.
+
+## Console
+
+**Project create page** now shows all four tiers in a clean 2×2 grid (Free / Pro / Team / Legal Team) when you have access to the paid tiers.
+
+**Less audit-log noise** — the periodic \`402\` entries that used to appear on Free and Pro projects are gone. They were harmless internal poll requests but looked like real errors and were reported as such by a couple of you. Thanks for the noise report.
+
+## What's next
+
+A bunch of small things are queued up: better docs for the CLI, a proper "share this file" flow on storage (not just copy-link), and the first Team-tier customer conversations are seperate track we're moving on. If you want anything specific bumped up the list, reply to this post's announcement email — I read every one.
+
+Bug reports and feature ideas as always via the [public issue tracker](https://github.com/STGime/euroback/issues).
+
+— Stefan`,
+      references: [
+        { label: 'GitHub — public issue tracker', url: 'https://github.com/STGime/euroback/issues' },
+        { label: 'Eurobase console — sign in', url: 'https://console.eurobase.app' },
+        { label: 'Issue #233 — SMS OTP hardening', url: 'https://github.com/STGime/euroback/issues/233' },
+      ],
+    },
+    {
       slug: 'public-beta-open',
       title: 'Eurobase Public Beta: EU-Sovereign Backend, Open to Everyone',
       excerpt: 'Closed beta ran with a hand-picked cohort. The platform surface — auth, Postgres, storage, realtime, edge functions, vault, cron, webhooks, DSAR export — has been running in production the whole time. Today the doors open: sign up at console.eurobase.app, no invitation required, no credit card for Free.',
