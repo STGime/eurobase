@@ -426,7 +426,7 @@ export const cta = {
 export const founder = {
   subtitle: 'Meet the Founder',
   heading: 'Stefan Gimeson',
-  role: 'Founder & CEO, Eurobase OÜ',
+  role: 'Founder, Eurobase OÜ',
   location: 'Berlin, Germany',
   portrait: '/founder-stefan.png',
   portraitAlt: 'Portrait of Stefan Gimeson, founder of Eurobase',
@@ -438,7 +438,7 @@ export const founder = {
   ],
   personal: 'Outside of work I cook, run (15+ marathons and counting), and travel through Eastern Europe every chance I get — languages, food, and the parts of the map most tourists skip.',
   workHistory: [
-    { period: '2026 — Present', role: 'Founder & CEO', company: 'Eurobase OÜ', note: 'EU-sovereign Backend-as-a-Service.' },
+    { period: '2026 — Present', role: 'Founder', company: 'Eurobase OÜ', note: 'EU-sovereign Backend-as-a-Service.' },
     { period: '2024 — 2025', role: 'Technical Product Owner', company: 'Hubject GmbH', note: 'Mercedes ME Charge APAC rollout.' },
     { period: '2022 — 2023', role: 'Senior Product Owner', company: 'Mondu GmbH', note: 'B2B Buy-Now-Pay-Later platform.' },
     { period: '2021 — 2022', role: 'Senior Product Owner', company: 'Mercedes-Benz.io', note: 'Contactless in-car fueling.' },
