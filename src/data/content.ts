@@ -329,7 +329,91 @@ export const pricing = {
       highlighted: false,
       comingSoon: true,
     },
+    // Legal Team is closed beta — priced on request while paperwork
+    // (§203 StGB / §43e BRAO staff declarations, GoBD Verfahrens-
+    // dokumentation) firms up with the first paying customer. CTA
+    // points at /security#de-legaltech, which is where the German
+    // legal-tech dossier lives in this repo (Vue project chose that
+    // location over /legal because /legal is the Estonian Impressum).
+    {
+      name: 'Legal Team',
+      price: 'Contact us',
+      description: 'Everything in Team + §50 BRAO / §257 HGB / §147 AO retention (WORM per-prefix, ad-hoc holds, 10-year audit-log window), signed §203 StGB staff declarations, GoBD Verfahrensdokumentation. Closed beta with hand-picked German legal-tech customers.',
+      icon: '\u2696\uFE0F',
+      highlighted: false,
+      closedBeta: true,
+      learnMoreHref: '/security#de-legaltech',
+      learnMoreLabel: 'Learn more',
+    },
   ],
+  // Rendered under the tier cards. The legal-tech link goes to the
+  // dossier at /security#de-legaltech (the Vue project keeps the
+  // Impressum at /legal, so the dossier consolidated onto /security
+  // in #316 rather than living at /legal).
+  builtFor: {
+    lead: 'Built for',
+    audiences: [
+      { label: 'indie devs' },
+      { label: 'startups' },
+      { label: 'agencies' },
+      { label: 'legal-tech startups in Germany', href: '/security#de-legaltech' },
+    ],
+  },
+  // "Shipped recently" callout — dated, honest ledger of what
+  // landed in the last few weeks. Kept in content.ts so a marketing
+  // edit doesn't require touching component code.
+  recentShipments: {
+    heading: 'Shipped recently',
+    items: [
+      { label: 'Payment-first Pro checkout', detail: 'Card details captured before signup — no dangling accounts if the payment fails.' },
+      { label: 'Dedicated Postgres on Team', detail: 'Rotatable postgres:// URL for Payload, Prisma, Drizzle, Directus and psql (invite-only beta).' },
+      { label: 'Test-mode billing rehearsal', detail: 'Full Mollie test-mode dry-run of the checkout + invoicing surface before you touch a live card.' },
+      { label: 'Legal Team preview', detail: 'German legal-tech dossier + Legal Team tier backing docs.', href: '/security#de-legaltech' },
+    ],
+  },
+  // Per-tier feature matrix rendered under the tier cards. Beta cells
+  // render green italic; "Coming soon" cells amber italic; empty cells
+  // (undefined) render as an em-dash. Kept data-driven so the copy
+  // audit for the closed beta doesn't require component edits.
+  //
+  // §257 HGB is split (10y for books/invoices/annual accounts;
+  // 6y for commercial letters). §147 AO mirrors that split;
+  // §50 BRAO is a flat 6y. Do not lump commercial letters into
+  // 10y — a fact-checking legal buyer will notice.
+  matrix: {
+    heading: 'Feature matrix',
+    tiers: ['Free', 'Pro', 'Team', 'Legal Team'] as const,
+    categories: [
+      {
+        title: 'Core platform',
+        rows: [
+          { feature: 'Postgres, Auth, Storage, Realtime, Functions', values: ['\u2713', '\u2713', '\u2713', '\u2713'] },
+          { feature: 'DSAR export (Article 15 + 20)', values: ['\u2713', '\u2713', '\u2713', '\u2713'] },
+          { feature: 'Article 30 RoPA + hash-chained audit log', values: ['\u2713', '\u2713', '\u2713', '\u2713'] },
+          { feature: 'BYO SMTP, quota alerts, priority support', values: [undefined, '\u2713', '\u2713', '\u2713'] },
+        ],
+      },
+      {
+        title: 'Team',
+        rows: [
+          { feature: 'Dedicated Postgres (direct DATABASE_URL)', values: [undefined, undefined, 'Invite-only beta', 'Invite-only beta'] },
+          { feature: 'Backups + point-in-time recovery', values: [undefined, undefined, '\u2713', '\u2713'] },
+          { feature: 'SSO, RBAC, org-level roles', values: [undefined, undefined, '\u2713', '\u2713'] },
+          { feature: 'SOC 2 Type II', values: [undefined, undefined, 'Coming soon', 'Coming soon'] },
+        ],
+      },
+      {
+        title: 'German legal-tech retention',
+        rows: [
+          { feature: 'WORM per-prefix (object-storage lock)', values: [undefined, undefined, undefined, 'Beta'] },
+          { feature: 'Ad-hoc retention holds (per record / per prefix)', values: [undefined, undefined, undefined, 'Beta'] },
+          { feature: 'DSAR erasure respects legal holds', values: [undefined, undefined, undefined, 'Beta'] },
+          { feature: 'Audit-log retention', values: ['90 days', '90 days', '90 days', '10 years'] },
+          { feature: '§50 BRAO (6y) / §257 HGB (10y books, 6y letters) / §147 AO ready', values: [undefined, undefined, undefined, 'Beta'] },
+        ],
+      },
+    ],
+  },
 }
 
 export const cta = {
@@ -337,6 +421,32 @@ export const cta = {
   description: 'Public beta is open. Sign up in a minute, no credit card required — Free tier is genuinely free, Pro is €19/mo per project.',
   primaryCta: 'Sign up free',
   secondaryCta: 'Talk to the Founders',
+}
+
+export const founder = {
+  subtitle: 'Meet the Founder',
+  heading: 'Stefan Gimeson',
+  role: 'Founder & CEO, Eurobase OÜ',
+  location: 'Berlin, Germany',
+  portrait: '/founder-stefan.png',
+  portraitAlt: 'Portrait of Stefan Gimeson, founder of Eurobase',
+  bio: [
+    'I spent seventeen years shipping product at Nokia, HERE Technologies, Mercedes-Benz.io, Volkswagen, Mondu and Hubject — most of it on infrastructure teams that had to answer to European regulators, works councils, and privacy officers before a single line of customer code went live.',
+    'Every side project I started outside of work ended the same way: reach for Firebase or Supabase or Vercel because they are genuinely fast to build on, then hit the wall the moment a real EU customer asked where the data actually sat. "US company, EU region" is not sovereignty. It is a legal fiction that holds up until the first subpoena, the first policy change, the first parent-company reorg.',
+    'Eurobase exists because I want European developers to have what American developers already have: a backend that is easy, fast, powerful, and stays out of your way — without having to trade away legal certainty to get it. Postgres, Auth, Storage, Realtime, Functions, Vault, an SDK, a console. Hosted in France, on European infrastructure, under European law. No CLOUD Act footprint, no "trust us" governance layer bolted on top of a US stack.',
+    'Independence is the point. If the next decade of European digital services is built on infrastructure that a foreign government can compel access to, we will spend the decade after that trying to unwind it. Better to start on ground we own.',
+  ],
+  personal: 'Outside of work I cook, run (15+ marathons and counting), and travel through Eastern Europe every chance I get — languages, food, and the parts of the map most tourists skip.',
+  workHistory: [
+    { period: '2026 — Present', role: 'Founder & CEO', company: 'Eurobase OÜ', note: 'EU-sovereign Backend-as-a-Service.' },
+    { period: '2024 — 2025', role: 'Technical Product Owner', company: 'Hubject GmbH', note: 'Mercedes ME Charge APAC rollout.' },
+    { period: '2022 — 2023', role: 'Senior Product Owner', company: 'Mondu GmbH', note: 'B2B Buy-Now-Pay-Later platform.' },
+    { period: '2021 — 2022', role: 'Senior Product Owner', company: 'Mercedes-Benz.io', note: 'Contactless in-car fueling.' },
+    { period: '2020 — 2021', role: 'Entrepreneur in Residence', company: 'Beam GmbH', note: 'Early-stage venture studio.' },
+    { period: '2019 — 2020', role: 'Product Owner', company: 'Volkswagen', note: 'Vehicle-sharing platform.' },
+    { period: '2013 — 2019', role: 'Senior PO / PM', company: 'HERE Technologies', note: 'Indoor mapping platform.' },
+    { period: '2008 — 2013', role: 'Technical PM', company: 'Nokia', note: 'Indoor maps and Lumia devices.' },
+  ],
 }
 
 export interface BlogPost {
@@ -1547,6 +1657,7 @@ export const nav = {
     { label: 'Market', href: '#market' },
     { label: 'Pricing', href: '#pricing' },
     { label: 'Blog', href: '#blog' },
+    { label: 'Founder', href: '#founder' },
     // Full-path routes — NavBar's handleNav dispatches on the
     // leading '/' vs '#' so these route via vue-router instead of
     // scroll-to-section.

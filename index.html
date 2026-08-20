@@ -5,26 +5,33 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Primary SEO -->
-    <title>Eurobase — EU-sovereign Supabase alternative on French infrastructure</title>
-    <meta name="description" content="EU-sovereign Postgres backend on Scaleway (France). No CLOUD Act, no US corporate parent. Auth, DB, storage, realtime, edge functions. One-click GDPR DSAR + RoPA. Free tier, €19/mo Pro. Migrate from Supabase with one CLI command." />
-    <meta name="keywords" content="automated DSAR SaaS, GDPR Article 15 export API, one-click DSAR GDPR, DSAR tool EU sovereign, GDPR data subject access request automation, Article 30 records of processing automated, European Firebase alternative, European Supabase alternative, EU BaaS, free backend as a service, GDPR backend platform, sovereign cloud Europe, EU-native database, vibe coding backend, free tier BaaS Europe, CLOUD Act free backend, Schrems II compliant, EU managed PostgreSQL, European serverless platform, GDPR compliant BaaS, European developer platform, sovereign infrastructure EU, free European cloud, EU hosted backend, vibe coder tools, backend for teams Europe" />
+    <!-- Primary SEO — Legal Team tier (closed beta for German legal-tech)
+         is the current promoted lane, so the title, description, and
+         keywords now carry legal-tech + Kanzlei signals alongside the
+         existing EU-sovereign / Supabase-alternative positioning. The
+         dated dossier lives at /security#de-legaltech. -->
+    <title>Eurobase — EU-sovereign BaaS + German legal-tech backend (BRAO / HGB / AO / GoBD)</title>
+    <meta name="description" content="EU-sovereign Postgres backend on Scaleway (France). No CLOUD Act, no US corporate parent. Auth, DB, storage, realtime, edge functions. One-click GDPR DSAR + RoPA. Free tier, €19/mo Pro. Now with a Legal Team tier (closed beta) for German legal-tech: §50 BRAO / §257 HGB / §147 AO retention, WORM per-prefix, GoBD Verfahrensdokumentation, 10-year audit-log window." />
+    <meta name="keywords" content="German legal-tech backend, Kanzlei backend, Anwaltssoftware backend, §50 BRAO Datenhaltung, §257 HGB retention, §147 AO 10 Jahre Aufbewahrung, GoBD Verfahrensdokumentation, WORM storage GDPR, DSAR mit legal hold, BSI C5 roadmap SaaS, ISO 27001 SoA BaaS, BSI IT-Grundschutz Selbsterklärung, NIS-2 Positionierung SaaS, AI Act deployer infrastructure, automated DSAR SaaS, GDPR Article 15 export API, one-click DSAR GDPR, DSAR tool EU sovereign, GDPR data subject access request automation, Article 30 records of processing automated, European Firebase alternative, European Supabase alternative, EU BaaS, free backend as a service, GDPR backend platform, sovereign cloud Europe, EU-native database, vibe coding backend, free tier BaaS Europe, CLOUD Act free backend, Schrems II compliant, EU managed PostgreSQL, European serverless platform, GDPR compliant BaaS, European developer platform, sovereign infrastructure EU, free European cloud, EU hosted backend, vibe coder tools, backend for teams Europe" />
     <meta name="author" content="Eurobase" />
     <link rel="canonical" href="https://eurobase.app/" />
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://eurobase.app/" />
-    <meta property="og:title" content="Eurobase — EU-sovereign Supabase alternative (Scaleway, France)" />
-    <meta property="og:description" content="Same Postgres + auth + storage + realtime + edge functions as Supabase — on French infrastructure with no US jurisdiction. GDPR-native. Free tier, €19/mo Pro." />
+    <meta property="og:title" content="Eurobase — EU-sovereign BaaS + German legal-tech backend (closed beta)" />
+    <meta property="og:description" content="Same Postgres + auth + storage + realtime + edge functions as Supabase — on French infrastructure with no US jurisdiction. GDPR-native. Free tier, €19/mo Pro. Legal Team tier (closed beta) covers §50 BRAO / §257 HGB / §147 AO retention, WORM, GoBD Verfahrensdokumentation." />
     <meta property="og:image" content="https://eurobase.app/og-image.png" />
     <meta property="og:site_name" content="Eurobase" />
     <meta property="og:locale" content="en_US" />
+    <!-- Secondary locale — signals the German-market relevance of the
+         Legal Team dossier without forking the page to a /de/ tree. -->
+    <meta property="og:locale:alternate" content="de_DE" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Eurobase — EU-sovereign Supabase alternative" />
-    <meta name="twitter:description" content="Postgres backend on Scaleway (France). No CLOUD Act. Auth, DB, storage, realtime, functions. GDPR-native. €19/mo Pro. Migrate from Supabase in one CLI command." />
+    <meta name="twitter:title" content="Eurobase — EU-sovereign BaaS + German legal-tech backend" />
+    <meta name="twitter:description" content="Postgres backend on Scaleway (France). No CLOUD Act. GDPR-native. Legal Team tier (closed beta): §50 BRAO / §257 HGB / §147 AO retention, WORM, GoBD. €19/mo Pro." />
     <meta name="twitter:image" content="https://eurobase.app/og-image.png" />
 
     <!-- Structured Data (JSON-LD) -->
@@ -62,6 +69,13 @@
           "price": "149",
           "availability": "https://schema.org/PreOrder",
           "description": "€149/mo per project (coming soon). Dedicated Postgres, point-in-time recovery, SSO, RBAC, SOC 2. For teams shipping regulated SMB software."
+        },
+        {
+          "@type": "Offer",
+          "name": "Legal Team",
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/LimitedAvailability",
+          "description": "Closed beta. Everything in Team plus §50 BRAO / §257 HGB (10y books, 6y letters) / §147 AO retention, WORM per-prefix object storage, ad-hoc retention holds, DSAR erasure that respects legal holds, 10-year audit-log window, signed §203 StGB staff declarations, GoBD Verfahrensdokumentation. For German legal-tech founders (Kanzlei-facing software). Price on request."
         }
       ],
       "featureList": [
@@ -185,7 +199,22 @@
         "EU data residency",
         "CLOUD Act",
         "Schrems II",
-        "Estonian OÜ"
+        "Estonian OÜ",
+        "German legal-tech backend",
+        "Kanzlei backend infrastructure",
+        "§50 BRAO (Aufbewahrungspflicht Rechtsanwälte)",
+        "§257 HGB retention (Handelsbücher 10 Jahre, Handelsbriefe 6 Jahre)",
+        "§147 AO Aufbewahrungsfristen",
+        "§203 StGB Verschwiegenheitspflicht",
+        "§43e BRAO staff secrecy declarations",
+        "GoBD Verfahrensdokumentation",
+        "WORM object storage",
+        "Legal-hold-aware DSAR erasure",
+        "BSI C5 roadmap",
+        "BSI IT-Grundschutz Basis-Absicherung",
+        "ISO 27001 Statement of Applicability",
+        "NIS-2 positioning",
+        "EU AI Act deployer / provider distinction"
       ]
     }
     </script>
@@ -193,8 +222,8 @@
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Eurobase — EU-Sovereign BaaS with One-Click GDPR DSAR Exports",
-      "description": "The first EU-native backend-as-a-service with one-click GDPR Article 15 + 20 (DSAR) exports built in — the feature Firebase and Supabase leave as homework. Plus PostgreSQL, 6 auth methods, storage, realtime, edge functions, vault, cron, webhooks & CLI — fully sovereign, audit-trailed, zero CLOUD Act exposure. Public beta is now open.",
+      "name": "Eurobase — EU-Sovereign BaaS + German legal-tech backend (BRAO / HGB / AO / GoBD)",
+      "description": "EU-native backend-as-a-service with one-click GDPR Article 15 + 20 (DSAR) exports built in — the feature Firebase and Supabase leave as homework. Plus PostgreSQL, 6 auth methods, storage, realtime, edge functions, vault, cron, webhooks & CLI — fully sovereign, audit-trailed, zero CLOUD Act exposure. Now with a Legal Team tier (closed beta) for German legal-tech: §50 BRAO / §257 HGB / §147 AO retention, WORM per-prefix, 10-year audit-log window, signed §203 StGB staff declarations, GoBD Verfahrensdokumentation. Public beta is open.",
       "url": "https://eurobase.app",
       "mainEntity": { "@id": "https://eurobase.app/#software" },
       "breadcrumb": {
@@ -258,7 +287,31 @@
           "name": "Is Eurobase free to use?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The Free tier includes 5,000 monthly active users, 512 MB storage, 2 GB bandwidth, 50 realtime connections, and every feature — no credit card required. Projects auto-pause after 30 days idle and wake on the first request. Pro is €19/mo per project (no pausing, custom email templates, BYO SMTP, quota alerts, 100,000 MAU). A Team tier with dedicated Postgres is €149/mo (coming soon)."
+            "text": "Yes. The Free tier includes 5,000 monthly active users, 512 MB storage, 2 GB bandwidth, 50 realtime connections, and every feature — no credit card required. Projects auto-pause after 30 days idle and wake on the first request. Pro is €19/mo per project (no pausing, custom email templates, BYO SMTP, quota alerts, 100,000 MAU). A Team tier with dedicated Postgres is €149/mo (coming soon). A Legal Team tier for German legal-tech is in closed beta — pricing on request."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Eurobase support German legal-tech retention (§50 BRAO / §257 HGB / §147 AO)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, on the Legal Team tier (closed beta). §50 BRAO Aufbewahrungspflicht is 6 years flat; §257 HGB is split (10 years for Handelsbücher / Rechnungen / Jahresabschlüsse, 6 years for Handelsbriefe); §147 AO mirrors the §257 HGB split. Legal Team ships WORM per-prefix object-storage locks, ad-hoc retention holds (per record / per prefix), DSAR erasure that respects legal holds, a 10-year audit-log retention window, signed §203 StGB Verschwiegenheitsverpflichtungen from every staff member with data access, and a GoBD Verfahrensdokumentation. See eurobase.app/security#de-legaltech for the full dossier and the linked v2 legal documents."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What backend does a German legal-tech / Kanzlei-facing product actually need?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Four hard blockers you cannot solve with a plain EU-region Firebase or Supabase deployment: (1) §203 StGB / §43e BRAO staff-secrecy paperwork — signed declarations from every staff member with data access; (2) statutory retention with WORM enforcement — §50 BRAO 6y, §257 HGB 10y books / 6y letters, §147 AO mirror; (3) GoBD-conformant exports plus a Verfahrensdokumentation; (4) 10-year tamper-evident audit-log retention. Eurobase closes all four on the Legal Team tier (closed beta) via an addendum to the DPA. Region-only EU hosting does not satisfy any of them."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Eurobase have BSI C5, ISO 27001, and IT-Grundschutz coverage?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Actual certificates are on the post-beta roadmap. Today the dossier at eurobase.app/security#de-legaltech includes a dated BSI C5 roadmap (target Type-1 attestation 12 months post-launch), an ISO 27001 Statement of Applicability draft covering 2022 Annex A controls, a BSI IT-Grundschutz self-declaration under the Basis-Absicherung profile for SME, a NIS-2 positioning document (below employee/revenue thresholds today, voluntary cascade-obligation compliance, commitment to register on crossing), and an AI Act positioning document (Eurobase is infrastructure, not an AI system; the Customer is the deployer for any high-risk build)."
           }
         },
         {

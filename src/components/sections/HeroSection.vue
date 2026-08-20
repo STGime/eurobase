@@ -54,16 +54,24 @@ import heroImage from '@/assets/images/hero-network.webp'
           <p class="text-accent-gold font-medium mb-6 animate-fade-in-up stagger-3">
             {{ hero.tagline }}
           </p>
+          <!-- Hero "what's actually new" pill. DSAR is no longer the
+               new thing — it now lives in the differentiators grid
+               (card 3, right after Zero-DevOps). This slot promotes
+               the current shipment: the Legal Team tier for German
+               legal-tech, in closed beta. Points at the dossier
+               section on /security so the click resolves to the
+               dated, evidence-backed page rather than the marketing
+               pricing block. -->
           <p class="mb-8 animate-fade-in-up stagger-3">
-            <a
-              href="#automated-dsar"
-              class="inline-flex items-center gap-2 text-sm font-semibold text-text-white bg-accent-purple/15 hover:bg-accent-purple/25 border border-accent-purple/40 rounded-full px-4 py-2 transition-colors"
+            <RouterLink
+              to="/security#de-legaltech"
+              class="inline-flex items-center gap-2 text-sm font-semibold text-text-white bg-accent-green/15 hover:bg-accent-green/25 border border-accent-green/40 rounded-full px-4 py-2 transition-colors"
             >
-              <span class="text-accent-gold">New</span>
+              <span class="text-accent-green">New</span>
               <span class="text-text-light">·</span>
-              <span>One-click GDPR DSAR exports — built in, audit-trailed, EU-only.</span>
-              <span class="text-accent-gold">→</span>
-            </a>
+              <span>Legal Team tier — §50 BRAO / §257 HGB / §147 AO retention, closed beta for German legal-tech.</span>
+              <span class="text-accent-green">→</span>
+            </RouterLink>
           </p>
           <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up stagger-4">
             <a
