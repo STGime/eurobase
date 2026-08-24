@@ -154,7 +154,7 @@ export const faq: FaqEntry[] = [
     category: 'Product & pricing',
     question: 'Are automatic backups and point-in-time recovery included?',
     answer:
-      'Free and Pro projects share a pooled Postgres cluster (Scaleway Managed Database, France) with cluster-level snapshots (daily, 7-day retention). Restores go through support. <strong>Per-project point-in-time recovery, second-level precision, and console-triggered restore land on the Team tier</strong> — Team gets dedicated Postgres per project, which is what PITR requires. On every tier, <code class="text-accent-gold">eurobase db dump</code> produces a standard <code class="text-accent-gold">pg_dump</code> you can export anywhere at any time — that is the first-line reversibility guarantee independent of us.',
+      'Free and Pro projects share a pooled Postgres cluster (Scaleway Managed Database, France) with cluster-level snapshots (daily, 7-day retention). Restores go through support. <strong>Per-project point-in-time recovery, second-level precision, and console-triggered restore land on the Team tier</strong> — Team gets dedicated Postgres per project with daily scheduled backups (7-day retention), a 7-day PITR window, and 1 restore per calendar month included (snapshot-based or PITR — either counts against the same cap). Legal Team keeps 30-day scheduled backup retention as part of the compliance premium. On every tier, <code class="text-accent-gold">eurobase db dump</code> produces a standard <code class="text-accent-gold">pg_dump</code> you can export anywhere at any time — that is the first-line reversibility guarantee independent of us.',
   },
   {
     id: 'overage-pricing',

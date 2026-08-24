@@ -324,7 +324,7 @@ export const pricing = {
     {
       name: 'Team',
       price: '€149/mo',
-      description: 'Dedicated Postgres per project (direct DATABASE_URL), backups + point-in-time recovery, SSO, RBAC, audit trail, SOC 2. For teams shipping regulated SMB software.',
+      description: 'Dedicated Postgres per project (direct DATABASE_URL), 7-day scheduled backups + 7-day point-in-time recovery + 1 restore/month included, SSO, RBAC, audit trail, SOC 2. For teams shipping regulated SMB software.',
       icon: '\uD83C\uDFE2',
       highlighted: false,
       comingSoon: true,
@@ -535,9 +535,13 @@ Payments through [Mollie](https://mollie.com) (Dutch, EU-headquartered, already 
 
 Overages don't blackout your users. If you cross 100 GB storage or 250 GB egress on Pro, you get email alerts at 75% and 100%, a 14-day soft-grace window where writes keep working while you decide, and only then a hard cap on the affected module — and even then reads always continue. No overnight blackout. No per-GB metering surprises. If you're heading past those caps regularly, Team is the tier for you.
 
-## Team — coming later this year
+## Team — €149/mo per project
 
-Dedicated Postgres per project, direct \`DATABASE_URL\` for [Payload](https://payloadcms.com) / [Prisma](https://www.prisma.io) / [Drizzle](https://orm.drizzle.team) stacks, backup + point-in-time recovery, SSO, RBAC. Currently in closed beta with hand-picked customers — the infrastructure is [built and running](/blog/legaltech-backend-what-a-german-kanzlei-actually-needs), the price is still being validated with the first cohort of paying users. Ping us if this is the tier you actually want; that signal is what unlocks the general-availability flip.
+Dedicated Postgres per project, direct \`DATABASE_URL\` for [Payload](https://payloadcms.com) / [Prisma](https://www.prisma.io) / [Drizzle](https://orm.drizzle.team) stacks, SSO, RBAC. The [infrastructure is built and running](/blog/legaltech-backend-what-a-german-kanzlei-actually-needs); pricing is now locked at €149/mo per project.
+
+**Data guarantees.** Scaleway RDB native scheduled backups (daily, 7-day retention) plus 7-day point-in-time recovery. **1 restore per calendar month is included** — snapshot-based or PITR, either counts against the same cap. Additional restores are a support conversation until we roll out usage-based billing.
+
+The higher-retention story lives on the [Legal Team](#legal-team) tier for compliance customers — 30-day scheduled backup retention alongside WORM object storage, retention holds, and 10-year audit-log retention.
 
 ## What "EU-sovereign backend" means, concretely
 
