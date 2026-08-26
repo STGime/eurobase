@@ -1,7 +1,7 @@
 export const hero = {
   headline: 'Eurobase — The Sovereign BaaS for Europe',
   subheadline: 'Auth, database, storage, realtime, functions, cron, vault, webhooks, and CLI — fully EU-native, zero US jurisdiction, zero DevOps.',
-  tagline: 'Firebase simplicity. Postgres power. European sovereignty. Public beta is now open — sign up in a minute, no credit card.',
+  tagline: 'Firebase simplicity. Postgres power. European sovereignty. Sign up in a minute — no credit card.',
   primaryCta: 'Sign up free',
   secondaryCta: 'Explore the Platform',
 }
@@ -418,7 +418,7 @@ export const pricing = {
 
 export const cta = {
   headline: 'Join the Next Generation of European Infrastructure',
-  description: 'Public beta is open. Sign up in a minute, no credit card required — Free tier is genuinely free, Pro is €19/mo per project.',
+  description: 'Sign up in a minute, no credit card required — Free tier is genuinely free, Pro is €19/mo per project.',
   primaryCta: 'Sign up free',
   secondaryCta: 'Talk to the Founders',
 }

@@ -205,14 +205,14 @@ export const faq: FaqEntry[] = [
     category: 'Getting started',
     question: 'Is Eurobase in production or still in beta?',
     answer:
-      'Closed beta since early 2026, with real users building on the platform daily. Public beta opens once the Estonia corporate formation completes (July 2026). The platform surface — auth, DB, storage, realtime, functions, vault, cron, webhooks, MCP, CLI, compliance — is built and running in production.',
+      'In production and open to everyone. Signup is open at <a href="https://console.eurobase.app" class="text-accent-blue hover:underline">console.eurobase.app</a>, with paid Pro live since August 2026. The platform surface — auth, DB, storage, realtime, functions, vault, cron, webhooks, MCP, CLI, compliance — is built and running. Team and Legal Team tiers remain invite-only for now (email <a href="mailto:contact@eurobase.app" class="text-accent-blue hover:underline">contact@eurobase.app</a>).',
   },
   {
     id: 'signup',
     category: 'Getting started',
     question: 'How do I sign up?',
     answer:
-      'Public beta and Pro billing open together in the first half of August 2026, once Mollie KYC finalises on the bank side. Instant signup at <a href="https://console.eurobase.app" class="text-accent-blue hover:underline">console.eurobase.app</a> — no credit card required for Free, €19/mo per project for Pro from day one.',
+      'Instant signup at <a href="https://console.eurobase.app" class="text-accent-blue hover:underline">console.eurobase.app</a> — no credit card required for Free, €19/mo per project for Pro. Team and Legal Team tiers are invite-only for now.',
   },
   {
     id: 'sdk-languages',
