@@ -16,30 +16,24 @@ import heroImage from '@/assets/images/hero-network.webp'
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
           <!--
-            Pre-launch Product Hunt promoter — pinned above the eyebrow so
-            it's the first thing on every visitor's screen. Full-width pill
-            in PH-orange with a live pulse dot to signal "act now". The
-            bigger a first-visit visitor's chance to click Notify-Me before
-            they scroll, the stronger our Day-1 leaderboard position. Take
-            this down (or swap to "live now") on 2026-08-26 and remove
-            entirely on 2026-08-27.
+            Product Hunt — live-launch featured badge. Swapped in on
+            2026-08-26 (launch day) from the pre-launch "get notified"
+            pill. The badge points at the product page with PH's own
+            badge-attribution UTM string, so upvote flows attribute
+            back to this placement in PH's dashboard.
           -->
           <a
-            href="https://www.producthunt.com/products/eurobase?utm_source=eurobase-landing&utm_medium=hero-banner&utm_campaign=prelaunch"
+            href="https://www.producthunt.com/products/eurobase?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-eurobase"
             target="_blank"
-            rel="noopener"
-            class="group inline-flex items-center gap-3 mb-6 rounded-xl px-5 py-3 text-white font-semibold shadow-lg shadow-orange-500/25 ring-1 ring-white/10 transition-all duration-200 hover:shadow-orange-500/50 hover:ring-white/25 animate-fade-in-up"
-            style="background: linear-gradient(135deg, #DA552F 0%, #EA6D3A 55%, #FFB300 100%);"
+            rel="noopener noreferrer"
+            class="inline-block mb-6 animate-fade-in-up"
           >
-            <span class="relative flex h-3 w-3 shrink-0" aria-hidden="true">
-              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-60"></span>
-              <span class="relative inline-flex h-3 w-3 rounded-full bg-white"></span>
-            </span>
-            <span class="text-sm sm:text-base">
-              <span class="uppercase tracking-wider text-[11px] sm:text-xs opacity-90 mr-2">Product Hunt</span>
-              <span>Launching Wed <strong>Aug 26</strong> — get notified</span>
-            </span>
-            <span class="ml-auto transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">→</span>
+            <img
+              alt="Eurobase - The Sovereign BaaS for Europe | Product Hunt"
+              width="250"
+              height="54"
+              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1191233&amp;theme=light&amp;t=1787728446785"
+            />
           </a>
 
           <p class="text-accent-gold font-semibold text-sm uppercase tracking-wider mb-4 animate-fade-in-up">
