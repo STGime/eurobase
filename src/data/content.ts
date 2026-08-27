@@ -510,6 +510,73 @@ Bug reports and feature ideas as always via the [public issue tracker](https://g
       ],
     },
     {
+      slug: 'free-gdpr-readiness-assessment',
+      title: 'Score your backend on 10 GDPR obligations in 3 minutes — no email required',
+      excerpt: 'A DPO asked me for our RoPA the other day. I opened Eurobase, downloaded the auto-generated Article 30 report, and sent it in 20 seconds. On most backends that request is a fortnight-long ticket. That gap is what the new /gdpr-readiness assessment measures — a free 10-question quiz that scores your current backend against the specific GDPR obligations most managed platforms leave as your homework.',
+      date: '2026-08-27',
+      author: 'Stefan Gimeson',
+      readTime: '4 min read',
+      image: '/blog-gdpr-readiness.jpg',
+      content: `A DPO asked me for our Article 30 Record of Processing Activities the other day. I opened the Eurobase compliance tab, downloaded the auto-generated RoPA report — sub-processors, roles, transfer mechanisms, all pulled from the live registry — and sent it in 20 seconds.
+
+On most managed backends that same request is a fortnight-long engineering ticket: which sub-processors did we add since the last update? Where is that spreadsheet? Is the current transfer mechanism actually a valid one post-Schrems-II? The gap between "we shipped this obligation as a first-class feature" and "we left it as homework for the developer" is where a big chunk of every DPO's workload lives.
+
+That gap is what the new [**/gdpr-readiness assessment**](/gdpr-readiness) measures — for your current backend, not ours. Ten questions, three minutes, no email required, no signup.
+
+## What it actually asks
+
+The ten questions cover the specific obligations that come up in every GDPR audit and every regulated-industry procurement checklist:
+
+1. **Data residency** — where do the bytes physically sit?
+2. **Jurisdictional exposure** — is the corporate parent subject to the CLOUD Act?
+3. **Article 30 RoPA** — do you maintain a live Record of Processing Activities?
+4. **Article 15 / 20 DSAR** — how do you fulfil "give me a copy of my data" within 30 days?
+5. **Article 32 audit trail** — do you have a tamper-evident log of admin actions?
+6. **Article 5(1)(e) retention** — how do you auto-delete when the lawful basis expires?
+7. **Article 33 breach notification** — could you notify a DPA within 72 hours?
+8. **Chapter V transfers** — which mechanism do you rely on for non-EEA processors?
+9. **Article 35 DPIA** — do you have one on file for high-risk processing?
+10. **Encryption-key sovereignty** — who controls the key that could decrypt your data at rest?
+
+Each answer is weighted 0–3. Total 0–30 lands in one of three bands: **High risk**, **Partial coverage**, or **Good posture**. The report shows every question you scored low on with a specific "how Eurobase handles this obligation" paragraph — factual against what we actually ship today, and, where we have a dedicated feature or dossier page, linked to it.
+
+## Where it comes from
+
+I wrote it against the EDPB checklist depth and the DPO-side questions that come up in every conversation we have with a regulated-industry buyer. It is not a marketing wall — no email gate, no waitlist for the report, no PDF download that opens with a Calendly link. The whole point is that the assessment is useful on its own even if you never sign up for Eurobase. If you take it and go back to your existing stack, the ten questions are still the ten questions your DPO will ask you eventually.
+
+The other reason it is a free page is that I do not want us in the "we scored you low; give us your email for the answers" bucket. If you scored low, you already know why — the coverage paragraphs are on-screen, and the linked feature pages will tell you the rest.
+
+## What we cover, honestly
+
+Some of the "how Eurobase handles it" answers are the strong ones you would expect:
+
+- One-click DSAR export (\`eb.auth.exportMyData()\` for end-users, per-project zip for you) — [/features/dsar](/features/dsar).
+- Auto-generated RoPA from the live sub-processor registry — Article 30 as an artifact you download, not a spreadsheet you maintain.
+- Hash-chained audit log of every admin action, with actor, IP, and timestamp — deletion or reorder is detectable.
+- 100 % EU-owned infrastructure (Scaleway, France), Estonian corporate parent, no CLOUD Act exposure through the platform.
+
+Others are honest about where we are:
+
+- Full BYOK against a customer-controlled KMS is on the roadmap for Team / Legal Team, not shipped today. The current answer is per-tenant AES-256-GCM keys held in an EU-owned KMS (Scaleway) — good, but the report says "on the roadmap" for teams whose regulator specifies BYOK.
+- Breach-detection runbook is being formalised as part of the SOC 2 track; the audit-log and Grafana/Prometheus surfaces are there, the formal runbook is 2026-2027.
+
+If a DPO reads the report and cross-checks it against our [/privacy](/privacy) sub-processor list and [/security](/security) dossier, the language matches. That was the design goal — a compliance page a compliance person cannot flag as marketing spin.
+
+## Try it
+
+Ready? [**Take the assessment**](/gdpr-readiness) — three minutes, no email required.
+
+If your score surprises you either way, or if there is an obligation the ten questions do not cover that should be there, reply to this post's announcement email or drop a note in the [public issue tracker](https://github.com/STGime/euroback/issues). The question set is versioned — the next iteration ships when there is enough feedback to sharpen the specifics.
+
+— Stefan`,
+      references: [
+        { label: 'GDPR Readiness assessment', url: '/gdpr-readiness' },
+        { label: 'DSAR feature page', url: '/features/dsar' },
+        { label: 'Security & compliance', url: '/security' },
+        { label: 'Sub-processor list', url: '/privacy' },
+      ],
+    },
+    {
       slug: 'public-beta-open',
       title: 'Eurobase Public Beta: EU-Sovereign Backend, Open to Everyone',
       excerpt: 'Closed beta ran with a hand-picked cohort. The platform surface — auth, Postgres, storage, realtime, edge functions, vault, cron, webhooks, DSAR export — has been running in production the whole time. Today the doors open: sign up at console.eurobase.app, no invitation required, no credit card for Free.',
