@@ -66,6 +66,18 @@ function restart() {
 // mailto: fallback for "email me the report" — good enough for MVP.
 // Follow-up work: a real form endpoint that stores the score + gaps
 // so we can follow up with prospective customers (see #480 PR body).
+//
+// Kept intentionally minimal (score + band + link, no per-gap dump)
+// for two reasons:
+//   1. RFC 6068 requires CRLF (\r\n) line breaks in mailto bodies —
+//      encoded as %0D%0A. Outlook / Windows MAPI collapses %0A-only
+//      breaks into a run-on line. A high-risk report with 10 gap
+//      lines can also push the URL past the ~2083-char Windows
+//      ShellExecute cap, silently truncating the body or failing
+//      to open the client at all — worst outcome for the highest-
+//      intent (lowest-scoring) leads.
+//   2. The full per-question report already renders on-screen — the
+//      mail is just the "so I remember to come back" hook.
 const mailtoHref = computed(() => {
   const subject = encodeURIComponent(`My Eurobase GDPR Readiness score: ${totalScore.value}/30`)
   const lines = [
@@ -73,12 +85,9 @@ const mailtoHref = computed(() => {
     '',
     band.value.summary,
     '',
-    'Gaps flagged:',
-    ...gaps.value.map((g) => `- ${g.question.category}: ${g.question.question}`),
-    '',
-    `Report URL: ${PAGE_URL}`,
+    `Full per-question report: ${PAGE_URL}`,
   ]
-  return `mailto:?subject=${subject}&body=${encodeURIComponent(lines.join('\n'))}`
+  return `mailto:?subject=${subject}&body=${encodeURIComponent(lines.join('\r\n'))}`
 })
 
 // Per-route meta (client-side, matches ComparisonPage pattern).

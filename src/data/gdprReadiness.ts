@@ -77,7 +77,7 @@ export const assessmentQuestions: AssessmentQuestion[] = [
       { label: 'Yes — auto-generated from the live sub-processor registry of our platform', points: 3 },
     ],
     eurobaseCovers:
-      'Every Eurobase project can download an Article 30 RoPA report auto-generated from the live sub-processor registry (Scaleway for infra, GatewayAPI for SMS, Mollie for billing). When we add a processor, the RoPA updates automatically. No spreadsheet drift.',
+      'Every Eurobase project can download an Article 30 RoPA report auto-generated from the live sub-processor registry. The published list (Scaleway for infra + compute, Mollie for billing) is available on /privacy; when we add or replace a processor, the RoPA updates automatically and existing customers are notified 30 days ahead. No spreadsheet drift.',
     learnMoreHref: '/features/dsar',
     learnMoreLabel: 'Article 30 automation',
   },
@@ -125,7 +125,7 @@ export const assessmentQuestions: AssessmentQuestion[] = [
     ],
     eurobaseCovers:
       'Eurobase supports per-table retention policies (auto-delete after N days, soft-delete + purge, WORM per-prefix for records that must not be deletable — used by the Legal Team tier for BRAO / HGB / AO retention). Retention configuration is versioned and audit-logged.',
-    learnMoreHref: '/legal',
+    learnMoreHref: '/security#de-legaltech',
     learnMoreLabel: 'Retention + WORM',
   },
   {
@@ -153,7 +153,7 @@ export const assessmentQuestions: AssessmentQuestion[] = [
       { label: 'No transfers — every processor in our RoPA is inside the EEA', points: 3 },
     ],
     eurobaseCovers:
-      'Every Eurobase sub-processor is inside the EEA (France, Denmark, Netherlands). No Chapter V transfer mechanism is needed for the platform itself — a substantial simplification vs the SCC + supplementary-measure workload that a US-provider stack imposes.',
+      'The core Eurobase platform sub-processors (Scaleway, Mollie) are EU-based, so no Chapter V transfer mechanism is needed for the platform itself — a substantial simplification vs the SCC + supplementary-measure workload that a US-provider stack imposes. If your users authenticate via OAuth through Google or GitHub, those are US identity providers used only during the login handshake and covered by the EU-US Data Privacy Framework; the full sub-processor list is on /privacy.',
   },
   {
     id: 'dpia',
@@ -167,8 +167,6 @@ export const assessmentQuestions: AssessmentQuestion[] = [
     ],
     eurobaseCovers:
       'The Eurobase DPA download bundles a DPIA template pre-populated with our sub-processor list, security measures, and residency attestations — the parts of a DPIA that describe *our* processing. Your DPIA covers your own controller-side processing; the platform-side content is provided so you\'re not writing it from a blank page.',
-    learnMoreHref: '/legal',
-    learnMoreLabel: 'DPIA template',
   },
   {
     id: 'key-sovereignty',
@@ -182,7 +180,7 @@ export const assessmentQuestions: AssessmentQuestion[] = [
     ],
     eurobaseCovers:
       'Eurobase Vault today uses per-tenant AES-256-GCM keys held in Scaleway KMS (an EU-owned KMS). Full BYOK against a customer-controlled Scaleway Key Manager key is on the roadmap for Team / Legal Team customers with strict regulator-mandated key sovereignty — see the SOC 2 / Legal Team documentation for the current shape and the roadmap.',
-    learnMoreHref: '/legal',
+    learnMoreHref: '/security#de-legaltech',
     learnMoreLabel: 'Legal Team tier',
   },
 ]
