@@ -162,6 +162,7 @@ function renderMarkdown(md: string): string {
   return md
     .replace(/^## (.+)$/gm, '<h2 class="text-2xl font-bold text-text-white mt-10 mb-4 font-heading">$1</h2>')
     .replace(/\*\*(.+?)\*\*/g, '<strong class="text-text-white">$1</strong>')
+    .replace(/`([^`]+)`/g, '<code class="text-accent-blue/90 bg-navy-light/40 px-1 rounded text-[0.9em]">$1</code>')
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-accent-blue hover:underline">$1</a>')
     .replace(/^- (.+)$/gm, '<li class="flex items-start gap-2 text-text-light text-sm"><span class="text-accent-blue mt-1 text-xs">&#9656;</span><span>$1</span></li>')
     .replace(/((?:<li[^]*?<\/li>\n?)+)/g, '<ul class="space-y-2 my-4">$1</ul>')

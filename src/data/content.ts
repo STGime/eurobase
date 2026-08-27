@@ -538,7 +538,7 @@ The ten questions cover the specific obligations that come up in every GDPR audi
 9. **Article 35 DPIA** — do you have one on file for high-risk processing?
 10. **Encryption-key sovereignty** — who controls the key that could decrypt your data at rest?
 
-Each answer is weighted 0–3. Total 0–30 lands in one of three bands: **High risk**, **Partial coverage**, or **Good posture**. The report shows every question you scored low on with a specific "how Eurobase handles this obligation" paragraph — factual against what we actually ship today, and linked to the feature or dossier page that goes into more depth.
+Each answer is weighted 0–3. Total 0–30 lands in one of three bands: **High risk**, **Partial coverage**, or **Good posture**. The report shows every question you scored low on with a specific "how Eurobase handles this obligation" paragraph — factual against what we actually ship today, and, where we have a dedicated feature or dossier page, linked to it.
 
 ## Where it comes from
 
@@ -564,7 +564,7 @@ If a DPO reads the report and cross-checks it against our [/privacy](/privacy) s
 
 ## Try it
 
-[**Take the assessment — 3 minutes, no email required.**](/gdpr-readiness)
+Ready? [**Take the assessment**](/gdpr-readiness) — three minutes, no email required.
 
 If your score surprises you either way, or if there is an obligation the ten questions do not cover that should be there, reply to this post's announcement email or drop a note in the [public issue tracker](https://github.com/STGime/euroback/issues). The question set is versioned — the next iteration ships when there is enough feedback to sharpen the specifics.
 
