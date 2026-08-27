@@ -419,4 +419,169 @@ export const comparisons: Record<string, ComparisonData> = {
     ctaHeadline: 'Switch from NoSQL to SQL without switching continents',
     ctaDescription: 'Get a modern backend with PostgreSQL, real SQL queries, and full EU sovereignty. Free tier, no credit card required. Pro is €19/mo per project when you go live.',
   },
+  appwrite: {
+    slug: 'appwrite',
+    competitor: 'Appwrite',
+    heroHeadline: 'Eurobase vs Appwrite: PostgreSQL vs collections, EU-owned infra vs Appwrite Cloud on AWS',
+    heroSubheadline: 'Same open-source spirit, different data model and different infrastructure — Postgres on Scaleway (France) instead of collections on AWS, GDPR-native primitives in every project, €19/mo per project once you go live.',
+    metaTitle: 'Appwrite EU alternative — Eurobase (Postgres, Scaleway France, GDPR-native)',
+    metaDescription: 'Looking for an Appwrite EU alternative? Eurobase runs PostgreSQL + auth + storage + realtime + edge functions on Scaleway (France) instead of Appwrite Cloud on AWS. Real SQL instead of document collections. GDPR-native DPA + DSAR + audit log in every project. Free tier, €19/mo Pro.',
+    sections: [
+      {
+        title: 'Two open-ish EU-leaning stacks — two very different foundations',
+        description:
+          'Eurobase and Appwrite both aim at the same buyer: an EU-leaning developer who wants an open, batteries-included backend without stitching together auth, storage, functions, and a database from scratch. The similarities end at the pitch line. Appwrite is a document-oriented platform built around collections and attributes; Eurobase is a PostgreSQL platform built around tables, relations, and SQL. That single choice reshapes everything downstream — from how you model relationships to how RLS works to which analytics tools you can point at your data.',
+        paragraphs: [
+          'Appwrite is open-source (BSD-3-Clause) with a self-host option, plus a managed Appwrite Cloud that runs on AWS. The EU region of Appwrite Cloud is on AWS eu-central-1 (Frankfurt). Team is Netherlands-headquartered; the infrastructure is US-owned. If you evaluated Appwrite and Supabase together and preferred Appwrite for its data-model simplicity or its Flutter-first SDK, the honest question is whether the AWS dependency matters to you — that is where Appwrite Cloud and Eurobase actually diverge.',
+          'Eurobase is a PostgreSQL platform operated by Eurobase OÜ (Estonian private limited company, registry code 17557586, Ahtri 12, Tallinn), running exclusively on Scaleway in France (fr-par). The critical path — Postgres, S3-compatible object storage, Deno edge functions — is on EU-owned infrastructure. If your team wants relational queries, a real SQL surface, and EU-owned infra without a US cloud in the chain, that combination is what Eurobase does specifically.',
+        ],
+      },
+      {
+        title: 'Documents vs tables: the data-model question decides most of the migration',
+        description:
+          'Appwrite models data as collections of documents with attributes; Eurobase models data as PostgreSQL tables with columns, foreign keys, and joins. For a lot of app shapes both work, but the two paths diverge quickly once you need relational queries, transactions across entities, or an integration with the Postgres analytics ecosystem.',
+        paragraphs: [
+          'The Appwrite document model is a good fit when your data is naturally hierarchical, when you rarely need to join across entities, and when you want a Firestore-like collection metaphor. It also sits well next to Flutter and React Native — Appwrite has invested heavily in those SDKs and the developer experience is genuinely nice for mobile-first teams.',
+          'PostgreSQL is a better fit when you need joins across many tables, aggregate queries, window functions, JSON columns with GIN indexes, generated columns, materialised views, foreign-key cascades, or serialisable transactions. It is also where the majority of open-source data tooling lives: Metabase, Superset, dbt, Grafana, PostgREST, Hasura, Directus all speak Postgres natively. Appwrite collections do not integrate with those tools without an export step.',
+          'The concrete question is: does your product model relationships that would want joins? If you find yourself denormalising documents to keep queries fast, or building your own aggregation logic in application code, that is the signal Postgres would fit better. Eurobase lets you keep the "one platform for auth + storage + realtime + functions" shape without giving up SQL.',
+        ],
+        bullets: [
+          'Data model — Appwrite: collections + attributes (document-oriented). Eurobase: PostgreSQL tables with real relations.',
+          'Joins across entities — Appwrite: application-side or denormalisation. Eurobase: native SQL joins.',
+          'Aggregations — Appwrite: fetch and reduce client-side. Eurobase: SQL SUM/COUNT/AVG/window functions.',
+          'Transaction across records — Appwrite: single-document only. Eurobase: BEGIN/COMMIT across any tables.',
+          'Ecosystem — Appwrite: platform-specific. Eurobase: every Postgres tool works (Metabase, dbt, Grafana, PostgREST, psql).',
+          'Direct DB access — Appwrite: not exposed. Eurobase: Team & Legal Team tiers ship a rotatable postgres:// URL for Prisma / Drizzle / Payload / Directus.',
+        ],
+      },
+      {
+        title: 'Appwrite Cloud EU region: what the AWS dependency actually means',
+        description:
+          'Appwrite Cloud offers a Frankfurt region built on AWS eu-central-1. Physically, your data sits in Frankfurt. Jurisdictionally, the infrastructure is operated by Amazon Web Services, Inc., a Delaware corporation subject to the CLOUD Act. This is not a criticism of Appwrite — it is the standard trade-off any managed BaaS running on a hyperscaler faces. It is worth naming so procurement can weigh it.',
+        paragraphs: [
+          'Under the CLOUD Act (18 U.S.C. §2523, 2018), US authorities can compel disclosure of data held by US-headquartered providers or their subsidiaries, regardless of where the bytes physically sit. AWS falls squarely inside that rule. The Microsoft France testimony under oath at the French Senate in June 2025 made the same point about Azure EU regions: physical residency does not neutralise a warrant that reaches the US parent. AWS operates on the same statutory footing.',
+          'For most Appwrite Cloud users this is a non-issue — the CLOUD Act only bites when there is a US legal process against your data, and for most consumer or B2B SaaS apps that is a distant tail risk. For teams in regulated sectors (health, legal, gov-tech, some fintech), or teams selling into buyers whose procurement checklist added an EU-parent requirement after the 2024–2025 sovereignty wave, the tail risk becomes a hard filter.',
+          'Eurobase runs on Scaleway fr-par (Paris/France), a subsidiary of the French Iliad group. No hop in the critical path goes through a US-headquartered company. That is the difference between "our data is in Europe" and "our provider is Europe."',
+        ],
+      },
+      {
+        title: 'Self-hosting Appwrite vs a managed EU alternative',
+        description:
+          'Appwrite is BSD-3-Clause and genuinely self-hostable. That is a legitimate answer to the sovereignty question — run it on a Scaleway VM, and you have EU-hosted Appwrite with none of the AWS dependency. The trade-off is the operational cost.',
+        paragraphs: [
+          'Self-hosting Appwrite means you own the Docker Compose stack (MariaDB, Redis, InfluxDB, ClamAV, the Appwrite services), the container image upgrades, the backup and restore, the certificate rotation, the SMTP / OAuth secrets, the intrusion monitoring, the log retention, the disk sizing, and the failover story. For a solo developer or a small team where one person happily does this, self-hosted Appwrite on Scaleway or Hetzner is a fine answer.',
+          'For most product teams the calculation is different. The reason people pick a BaaS is to not run infrastructure. Eurobase is a middle path: a managed platform where the operator (Eurobase OÜ) and the underlying cloud (Scaleway) are both EU-owned, and where the operational burden stays with the vendor. If self-hosting Appwrite feels like the right answer but the ongoing on-call is not something the team wants, Eurobase is the version of that decision that keeps the developer experience without the DevOps cost.',
+          'Neither answer is wrong. The wrong answer is picking Appwrite Cloud without noticing the AWS dependency, or picking self-hosted Appwrite without pricing the on-call time honestly.',
+        ],
+      },
+      {
+        title: 'The GDPR primitives every project ships with',
+        description:
+          'Regardless of which side of the Appwrite vs Eurobase choice you land on, if you serve EU end-users you own three GDPR obligations that most managed platforms leave as your homework: a Record of Processing Activities (Article 30), Data Subject Access Requests within 30 days (Articles 15 + 20), and an audit trail sufficient for a breach investigation. Eurobase ships all three built-in on every tier, including Free.',
+        bullets: [
+          'DSAR export (Article 15 + 20) — one click per-user or full-project zip, signed download URL that expires after 7 days, audit-logged. Appwrite = DIY.',
+          'RoPA report (Article 30) — auto-generated from the live sub-processor registry every time you download it. Appwrite = DIY.',
+          'Audit log — every admin action (schema change, user delete, key rotation, DSAR run) with actor, IP, timestamp, tamper-evident hash chain. Appwrite Cloud has activity logs; hash-chained audit is not the default shape.',
+          'Sub-processor list — public, machine-readable, one-click download. Same information Appwrite publishes, delivered as a structured Article 30 artifact rather than a marketing page.',
+          'End-user self-serve DSAR — eb.auth.exportMyData() lets your signed-in end-users request their own export from your app. Rate-limited, audit-logged, zero engineering per request.',
+        ],
+        paragraphs: [
+          'The point is not that Appwrite is non-compliant — it is that GDPR compliance for a data controller (your app) requires certain artifacts, and Eurobase produces them automatically while Appwrite leaves them as work the developer does. If you have a DPO who has to fill in a RoPA every quarter, an audit-log export they can hand to auditors, and a DSAR flow that does not turn into a fortnight-long engineering ticket, the operational time savings compound.',
+        ],
+      },
+      {
+        title: 'How your app code changes when you move from Appwrite',
+        description:
+          'The Appwrite SDK shape is not identical to the Eurobase SDK — the data-model difference means a straight import-swap is not the story. What is true is that the surface areas map cleanly: Appwrite Databases → Eurobase eb.db (with SQL semantics), Appwrite Account → eb.auth, Appwrite Storage → eb.storage, Appwrite Realtime → eb.realtime, Appwrite Functions → eb.functions. The mental model port is short; the query rewrites are the substantive work.',
+        paragraphs: [
+          'The client SDK import changes from appwrite to @eurobase/sdk. Authentication calls (create account, create session, get session) map one-to-one to eb.auth methods. Storage upload / download / list operations translate cleanly. Realtime subscriptions move from channel strings ("databases.{id}.collections.{id}.documents") to a channel-and-filter shape (channel(name).on("postgres_changes", { event, schema, table, filter })) that is closer to Supabase realtime than to Appwrite realtime — this is one of the transitions that needs handling.',
+          'The database calls change most. Appwrite\'s createDocument / getDocument / listDocuments become eb.db.from(\'table\').insert(...) / .select().eq(\'id\', ...) / .select() with SQL filters. The Appwrite Query builder (Query.equal, Query.orderDesc, Query.limit) maps to the Eurobase query builder\'s .eq() / .order() / .limit() with mostly matching semantics. Appwrite\'s Permissions (read/write/create/update/delete on collections) become PostgreSQL RLS policies — Eurobase ships preset policies (owner_access, public_read_owner_write, service_only, read_only) that cover the same common patterns without hand-writing the SQL.',
+          'The gaps to be honest about: Eurobase does not ship a first-party Flutter SDK today (JS/TS is the primary; the wire protocol works from any Postgres client or HTTP). We do not have an Appwrite migration CLI — for teams with substantial Appwrite deployments, the current path is a script the developer writes against the Appwrite REST API to read documents and eb.db.insert() them into Postgres tables. If a specific Appwrite Cloud customer wants to migrate at scale we would build the CLI subcommand.',
+        ],
+      },
+      {
+        title: 'Pricing side by side',
+        description:
+          'Appwrite Cloud Pro is $15/mo per organization with usage-based overages. Eurobase Pro is €19/mo per project with fixed caps. Self-hosted Appwrite is free plus the operational cost of running the stack.',
+        bullets: [
+          'Self-hosted — Appwrite: BSD-3-Clause, run it yourself (Docker Compose, ~8 services, MariaDB + Redis + InfluxDB + ClamAV). Eurobase: not self-hostable today.',
+          'Free tier — Appwrite Cloud: 75k monthly active users, 2 GB storage, 10 GB bandwidth, 1 concurrent connection to Realtime. Eurobase: 5k MAU, 512 MB DB, 512 MB storage, 2 GB bandwidth, 50 realtime connections, pause after 30 days idle.',
+          'Paid tier — Appwrite Pro: $15/mo per organization, usage-based overages. Eurobase Pro: €19/mo per project, fixed caps (100k MAU, 100 GB storage, 250 GB bandwidth, 10k realtime).',
+          'Enterprise / Team tier — Appwrite Scale: $599/mo. Eurobase Team: €149/mo per project (dedicated Postgres, PITR, SSO, RBAC, SOC 2 — invite-only beta today).',
+          'Billing entity — Appwrite Cloud: Appwrite (Netherlands entity). Eurobase: Eurobase OÜ (Estonia). Both simplify VAT reverse-charge for EU B2B buyers.',
+        ],
+      },
+    ],
+    rows: [
+      { feature: 'Data model', eurobase: 'PostgreSQL (tables, joins, transactions, SQL)', competitor: 'Collections + attributes (document-oriented)', highlight: true },
+      { feature: 'Direct database access', eurobase: 'Team & Legal Team tiers — rotatable postgres:// URL for Prisma, Drizzle, Payload, Directus, psql. Not exposed on Free/Pro (shared cluster).', competitor: 'Not exposed — access via SDK / REST only', highlight: true },
+      { feature: 'Infrastructure (managed)', eurobase: 'Scaleway, France (EU-owned)', competitor: 'AWS eu-central-1 (US-owned, Frankfurt region)', highlight: true },
+      { feature: 'Self-hosted option', eurobase: 'Not today', competitor: 'BSD-3-Clause, Docker Compose stack (~8 services)' },
+      { feature: 'Corporate parent (managed)', eurobase: 'Estonian OÜ', competitor: 'Netherlands entity for Appwrite; AWS = Delaware corporation', highlight: true },
+      { feature: 'CLOUD Act exposure (managed)', eurobase: 'None', competitor: 'Yes — AWS is a US corporation', highlight: true },
+      { feature: 'GDPR compliance', eurobase: 'Native — DPA, RoPA, DSAR export, audit log in every project', competitor: 'DPA available; RoPA + DSAR left to the customer' },
+      { feature: 'Auth methods', eurobase: 'Email/password, magic link, phone SMS, OAuth (6 providers)', competitor: 'Email/password, magic link, phone SMS, OAuth, anonymous, JWT' },
+      { feature: 'Row / document permissions', eurobase: 'PostgreSQL RLS with preset shapes (owner_access, service_only, read_only, …)', competitor: 'Per-document permissions (read / write / update / delete)' },
+      { feature: 'Realtime', eurobase: 'WebSocket subscriptions on Postgres changes with row-filter', competitor: 'WebSocket subscriptions on collection events' },
+      { feature: 'Edge functions', eurobase: 'Deno runtime, hosted in France (fr-par)', competitor: 'Functions runtime, hosted on AWS' },
+      { feature: 'First-party mobile SDKs', eurobase: 'JS/TS today (Flutter/React Native use the REST + Postgres wire protocol)', competitor: 'Flutter, React Native, Android, iOS, Apple platforms — first-class', highlight: true },
+      { feature: 'Vault / Secrets', eurobase: 'AES-256-GCM, per-tenant key, built-in with audit log', competitor: 'Environment variables per function' },
+      { feature: 'Free-tier idle pause', eurobase: 'After 30 days idle; single request wakes it (~30 s). Never on Pro.', competitor: 'No idle pause on Appwrite Cloud Free — different constraint model (usage caps).' },
+      { feature: 'Pricing (paid tier)', eurobase: '€19/mo per project (Pro). Team €149/mo (dedicated Postgres, invite-only beta today).', competitor: '$15/mo per organization (Pro) + usage overages. Scale $599/mo.', highlight: true },
+      { feature: 'Cron jobs', eurobase: 'Built-in scheduler with execution log', competitor: 'Function schedules (cron expression on functions)' },
+      { feature: 'Webhooks', eurobase: 'Built-in with HMAC signing + retries', competitor: 'Webhooks for events on collections + auth' },
+      { feature: 'CLI', eurobase: '50+ commands (projects, DB, storage, vault, functions, migrations, cron, webhooks)', competitor: 'CLI available' },
+      { feature: 'MCP server (AI IDEs)', eurobase: 'First-class — Claude Code, Cursor, Windsurf, Codex', competitor: 'Community MCP servers' },
+      { feature: 'Audit logging', eurobase: 'Built-in — every admin action with actor, IP, timestamp, tamper-evident hash chain', competitor: 'Activity logs (not hash-chained by default)', highlight: true },
+      { feature: 'DSAR / Article 15 export', eurobase: 'One click — per-user or full-project zip, signed URL expires in 7 days', competitor: 'DIY: read documents by permission + zip yourself' },
+      { feature: 'DPA / Article 30 record', eurobase: 'Auto-generated from actual sub-processor registry', competitor: 'DPA on request; RoPA generation left to the customer' },
+      { feature: 'Migration from Appwrite', eurobase: 'DIY today: script the Appwrite REST API → eb.db.insert(). CLI subcommand ships when a substantial Appwrite migration is requested.', competitor: '—' },
+    ],
+    sovereigntyHeadline: 'EU-run BaaS on EU-owned infrastructure',
+    sovereigntyPoints: [
+      'Eurobase infrastructure is 100 % EU-owned: Scaleway, France (fr-par). No AWS, no GCP, no Azure — not for the DB, not for storage, not for functions.',
+      'Appwrite Cloud EU region is on AWS eu-central-1 (Frankfurt). Appwrite the team is Netherlands-based, but AWS as the underlying infrastructure is a US corporation subject to the CLOUD Act. Physical residency does not neutralise jurisdictional reach through the parent.',
+      'Eurobase has zero CLOUD Act exposure. Corporate parent is an Estonian OÜ; every processor in the RoPA is EU-headquartered.',
+      'DPA, RoPA, DSAR export, and audit log are built into every project on every tier. Not paywalled — a legal obligation should not sit behind a $99/mo SKU.',
+    ],
+    faqs: [
+      {
+        question: 'Is Appwrite an EU company?',
+        answer:
+          'The Appwrite team is Netherlands-based. Appwrite Cloud is the managed offering; its EU region runs on AWS eu-central-1 (Frankfurt). So the team sits in the EU but the underlying infrastructure is US-owned (AWS). Whether that gap matters depends on your compliance posture — for regulated buyers the CLOUD Act reach through AWS is the specific thing to name in a DPIA.',
+      },
+      {
+        question: 'Where does Appwrite Cloud host my data?',
+        answer:
+          'Appwrite Cloud offers a Frankfurt region on AWS eu-central-1. Physically your data sits in Frankfurt. Jurisdictionally the operator of the underlying infrastructure is Amazon Web Services, Inc. (Delaware corporation), which is subject to the CLOUD Act. Eurobase runs the equivalent surface (auth, database, storage, realtime, functions) on Scaleway (France) — an EU-owned operator with no US parent in the chain.',
+      },
+      {
+        question: 'Is there a Postgres-based alternative to Appwrite?',
+        answer:
+          'Yes — Eurobase is a Postgres-first BaaS with auth, storage, realtime, edge functions, vault, cron, webhooks, and a CLI. The trade-off vs Appwrite is the data model: PostgreSQL tables and SQL instead of collections and attributes. That is a substantive migration when you have deeply nested documents; it is a straightforward one when your entities are naturally relational. If joins across entities, aggregations, or the Postgres analytics ecosystem (Metabase, dbt, Grafana) matter for your app, Eurobase fits.',
+      },
+      {
+        question: 'Can I self-host Eurobase like I can self-host Appwrite?',
+        answer:
+          'Not today — Eurobase is a managed platform, not a self-hostable one. The reason is that many of the sovereignty and compliance guarantees (audit-log hash chaining, sub-processor registry, DSAR pipeline, per-tenant KMS key management) are operator-side properties that lose their meaning when the user hosts. If self-hosting is a hard requirement, self-hosted Appwrite on Scaleway or Hetzner is a legitimate answer — you own the operational burden, in exchange for full sovereignty control.',
+      },
+      {
+        question: 'Does Eurobase have Flutter or React Native SDKs like Appwrite?',
+        answer:
+          'Not first-party today — JavaScript/TypeScript is the primary Eurobase SDK. Flutter and React Native apps use Eurobase via the REST endpoints and, for direct Postgres access on Team/Legal Team, via any Postgres client library. Appwrite has invested heavily in Flutter and native-mobile SDKs, and if that developer experience is the top decision factor, that is a legitimate reason to prefer Appwrite. If SQL and EU-owned infrastructure are the top factors, Eurobase is the correct trade-off.',
+      },
+      {
+        question: 'Can I migrate from Appwrite to Eurobase?',
+        answer:
+          'Not with a one-command CLI today. The path is: write a small script against the Appwrite REST API to read documents from your collections, map them to Postgres tables, and use eb.db.from(table).insert() to load them. Because collections and tables are not one-to-one (documents can be arbitrarily nested; tables have fixed columns), part of the migration is a schema design pass. If a Team-tier customer wants to migrate substantial Appwrite data at scale, we build the CLI subcommand — the pattern is already there in the eurobase import supabase implementation.',
+      },
+      {
+        question: 'Where does Eurobase host my data?',
+        answer:
+          'Scaleway fr-par (Paris, France) for everything in the critical path: managed PostgreSQL, S3-compatible object storage, and Deno edge functions. No AWS, no GCP, no Azure. Sub-processors outside the critical path — GatewayAPI (Denmark) for SMS, Mollie (Netherlands) for paid billing — are also EU-headquartered. The live sub-processor list is available in every project as a downloadable Article 30 RoPA report.',
+      },
+    ],
+    ctaHeadline: 'Postgres, EU-owned, and no AWS in the chain',
+    ctaDescription: 'A Supabase-shaped surface on an Appwrite-adjacent scope, without the AWS dependency and with GDPR primitives built into every tier. Free tier, no credit card. Pro is €19/mo per project when you go live.',
+  },
 }
