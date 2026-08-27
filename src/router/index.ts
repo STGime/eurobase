@@ -47,6 +47,11 @@ const router = createRouter({
       component: () => import('@/pages/DsarFeaturePage.vue'),
     },
     {
+      path: '/gdpr-readiness',
+      name: 'gdpr-readiness',
+      component: () => import('@/pages/GdprReadinessPage.vue'),
+    },
+    {
       path: '/faq',
       name: 'faq',
       component: () => import('@/pages/FaqPage.vue'),

@@ -77,6 +77,21 @@ import heroImage from '@/assets/images/hero-network.webp'
               {{ hero.primaryCta }}
             </a>
           </div>
+          <!-- Secondary link to the free assessment. Positioned below the
+               primary CTA (not competing with the "Sign up free" button)
+               but visible above the fold — the whole point of a lead-gen
+               quiz is that undecided visitors see it early, not that they
+               find it in the footer. -->
+          <p class="mt-4 text-sm text-text-light/80 animate-fade-in-up stagger-4">
+            Not ready to sign up?
+            <RouterLink
+              to="/gdpr-readiness"
+              class="text-accent-blue hover:text-accent-blue/80 font-medium underline underline-offset-4 decoration-accent-blue/40 hover:decoration-accent-blue/70 transition-colors"
+            >
+              Score your backend's GDPR posture first
+            </RouterLink>
+            — 3 minutes, no email required.
+          </p>
         </div>
 
         <div class="hidden lg:flex justify-center">
