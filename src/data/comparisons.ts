@@ -510,7 +510,7 @@ export const comparisons: Record<string, ComparisonData> = {
       },
     ],
     rows: [
-      { feature: 'Data model', eurobase: 'PostgreSQL (tables, joins, transactions, SQL)', competitor: 'Collections + attributes (document-oriented)', highlight: true },
+      { feature: 'Data model', eurobase: 'PostgreSQL (tables, joins, transactions, SQL, JSONB when a row wants document shape)', competitor: 'Collections (documents) + TablesDB (relational rows/columns) — dual surface as of 2025', highlight: true },
       { feature: 'Direct database access', eurobase: 'Team & Legal Team tiers — rotatable postgres:// URL for Prisma, Drizzle, Payload, Directus, psql. Not exposed on Free/Pro (shared cluster).', competitor: 'Not exposed — access via SDK / REST only', highlight: true },
       { feature: 'Infrastructure (managed)', eurobase: 'Scaleway, France (EU-owned)', competitor: 'AWS eu-central-1 (US-owned, Frankfurt region)', highlight: true },
       { feature: 'Self-hosted option', eurobase: 'Not today', competitor: 'BSD-3-Clause, Docker Compose (MariaDB + Redis + optional components)' },
