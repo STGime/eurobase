@@ -61,6 +61,11 @@ const router = createRouter({
       name: 'security',
       component: () => import('@/pages/SecurityPage.vue'),
     },
+    {
+      path: '/founder',
+      name: 'founder',
+      component: () => import('@/pages/FounderPage.vue'),
+    },
   ],
   scrollBehavior(to) {
     if (to.hash) {

@@ -1860,7 +1860,7 @@ export const nav = {
     { label: 'Market', href: '#market' },
     { label: 'Pricing', href: '#pricing' },
     { label: 'Blog', href: '#blog' },
-    { label: 'Founder', href: '#founder' },
+    { label: 'Founder', href: '/founder' },
     // Full-path routes — NavBar's handleNav dispatches on the
     // leading '/' vs '#' so these route via vue-router instead of
     // scroll-to-section.
