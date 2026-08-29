@@ -70,7 +70,11 @@
 
       <div class="mt-6 flex items-center justify-center md:justify-start">
         <a href="https://launchkiwi.com/p/eurobase" target="_blank" rel="noopener" aria-label="Featured on LaunchKiwi">
-          <img src="https://launchkiwi.com/badge-light.svg" alt="Featured on LaunchKiwi" width="198" height="62" loading="lazy" />
+          <!-- Self-hosted SVG, not launchkiwi.com/badge-light.svg — the hotlink would send every
+               visitor's IP + User-Agent to a third party the /privacy recipients list doesn't cover,
+               directly contradicting the sovereignty line right above this badge. The dofollow link
+               to LaunchKiwi is the anchor href; the image source is incidental. -->
+          <img src="/launchkiwi-badge-light.svg" alt="Featured on LaunchKiwi" width="198" height="62" loading="lazy" />
         </a>
       </div>
     </div>
