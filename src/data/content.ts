@@ -471,8 +471,9 @@ export const blog = {
       excerpt: 'If you want a managed Supabase-shaped backend that is EU-headquartered and hosted on EU-owned infrastructure — not just deployed to an EU region of a US hyperscaler — the shortlist is genuinely short. This is the honest 2026 comparison of the five options developers actually consider: Eurobase, Nhost, Appwrite, PocketBase, and self-hosted Supabase — with the axes that matter for GDPR and the queries where each one is the right answer.',
       date: '2026-08-29',
       author: 'Stefan Gimeson',
-      readTime: '9 min read',
-      content: `**Direct answer:** If you want a *managed*, EU-headquartered Supabase-shape backend hosted on EU-owned infrastructure, the shortlist in 2026 is [Eurobase](https://eurobase.app) and [Nhost](https://nhost.io). If you are willing to self-host, [Appwrite](https://appwrite.io), [PocketBase](https://pocketbase.io), and the [self-hosted Supabase](https://supabase.com/docs/guides/self-hosting) Docker stack are the strongest open-source options. Which one is right for you depends on three specific axes, not on which listicle you read first.
+      readTime: '6 min read',
+      image: '/blog-gdpr-readiness.jpg',
+      content: `**Direct answer:** If you want a managed, EU-headquartered Supabase-shape backend, the shortlist in 2026 is [Eurobase](https://eurobase.app) (EU operator on EU-owned infrastructure) and [Nhost](https://nhost.io) (EU operator on AWS Frankfurt). If EU-owned infrastructure is a hard requirement, Eurobase is the only fully-managed option today. If you are willing to self-host, [Appwrite](https://appwrite.io), [PocketBase](https://pocketbase.io), and the [self-hosted Supabase](https://supabase.com/docs/guides/self-hosting) Docker stack are the strongest open-source options. Which one is right for you depends on three specific axes, not on which listicle you read first.
 
 ## The three axes that actually matter
 
@@ -552,7 +553,7 @@ Read left-to-right: only **Eurobase** hits all three sovereign axes (EU HQ, EU-o
 
 ### Is Supabase EU-hosted?
 
-Supabase offers EU regions (Frankfurt, London, Paris) for the managed product, so your project's *bytes* can sit in Europe. But the Supabase corporate parent is a US Delaware company and the underlying compute is AWS (also US-owned). If your compliance story requires the operator, sub-processors, and control plane to be under EU jurisdiction, EU-region Supabase does not fully answer that — the CLOUD Act reaches the parent regardless of region.
+Supabase offers European regions (Frankfurt and Paris in the EU, plus London in the UK — which is a separate adequacy-decision jurisdiction post-Brexit, not the EU/EEA) for the managed product, so your project's bytes can sit in Europe. But the Supabase corporate parent is a US Delaware company and the underlying compute is AWS (also US-owned). If your compliance story requires the operator, sub-processors, and control plane to be under EU jurisdiction, EU-region Supabase does not fully answer that — the CLOUD Act reaches the parent regardless of region.
 
 ### Do I need to self-host to be GDPR-compliant?
 
@@ -568,7 +569,7 @@ Google Cloud Firestore (Firebase's underlying database) offers a europe-west mul
 
 ### Which is cheapest?
 
-For prototypes and hobby projects: **PocketBase** on a €4–€8/mo VPS is unbeatable. For small production apps: **Eurobase Free** (0 EUR, 5,000 MAU, 512 MB Postgres, real 24/7 uptime, all six auth methods, edge functions, vault, cron, compliance stack) or **self-hosted Nhost** on a €20–€50/mo Hetzner box. For real production traffic: managed pricing lands in a similar range across Eurobase (€19/project/mo Pro), Nhost, and Appwrite Cloud — pick on jurisdiction and feature fit, not price.
+For prototypes and hobby projects: **PocketBase** on a €4–€8/mo VPS is unbeatable. For small production apps: **Eurobase Free** (0 EUR, 5,000 MAU, 512 MB Postgres, all six auth methods, edge functions, vault, cron, compliance stack — with sub-second cold start after a 30-day idle pause; **Pro at €19/mo never pauses**) or **self-hosted Nhost** on a €20–€50/mo Hetzner box. For real production traffic: managed pricing lands in a similar range across Eurobase (€19/project/mo Pro), Nhost, and Appwrite Cloud — pick on jurisdiction and feature fit, not price.
 
 ### Can I migrate from Supabase?
 

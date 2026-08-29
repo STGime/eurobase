@@ -55,7 +55,10 @@ watchEffect(() => {
   if (!p) return
 
   const url = `${SITE_ORIGIN}/blog/${p.slug}`
-  const image = p.image ? `${SITE_ORIGIN}${p.image}` : `${SITE_ORIGIN}/og-image.png`
+  // Fallback uses blog-beta-testers.png (the only 1200×630 asset in public/ — canonical OG size).
+  // Previous fallback pointed at /og-image.png, which doesn't exist and produced broken share cards
+  // on any post that shipped without its own image.
+  const image = p.image ? `${SITE_ORIGIN}${p.image}` : `${SITE_ORIGIN}/blog-beta-testers.png`
   const title = `${p.title} | Eurobase Blog`
   const description = p.excerpt
 
@@ -160,15 +163,23 @@ function renderMarkdown(md: string): string {
     return match
   })
   return md
+    // Headings first — `### ` must come before `## ` or the latter's regex would eat it.
+    .replace(/^### (.+)$/gm, '<h3 class="text-lg font-semibold text-text-white mt-6 mb-3 font-heading">$1</h3>')
     .replace(/^## (.+)$/gm, '<h2 class="text-2xl font-bold text-text-white mt-10 mb-4 font-heading">$1</h2>')
+    // Bold before italic — `**x**` must resolve before the single-`*` italic rule sees the same asterisks.
     .replace(/\*\*(.+?)\*\*/g, '<strong class="text-text-white">$1</strong>')
+    // Italic — only single `*` NOT adjacent to another `*` (avoids re-matching inside bold's output).
+    .replace(/(^|[^*])\*([^\s*][^*]*?[^\s*])\*(?!\*)/g, '$1<em class="italic">$2</em>')
     .replace(/`([^`]+)`/g, '<code class="text-accent-blue/90 bg-navy-light/40 px-1 rounded text-[0.9em]">$1</code>')
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-accent-blue hover:underline">$1</a>')
     .replace(/^- (.+)$/gm, '<li class="flex items-start gap-2 text-text-light text-sm"><span class="text-accent-blue mt-1 text-xs">&#9656;</span><span>$1</span></li>')
     .replace(/((?:<li[^]*?<\/li>\n?)+)/g, '<ul class="space-y-2 my-4">$1</ul>')
-    .replace(/(?:^|\n)(?!<[hulod])((?:.(?!\n\n))+.)/g, (match) => {
+    // Paragraph wrap. Lines starting with an INLINE tag (<strong>, <em>, <a>, <code>) still need a
+    // <p> wrapper — the previous version bailed out on any leading `<`, so bold-first paragraphs
+    // rendered unstyled. Now: skip only block-level tags (h1-h6, ul, ol, li, table, div, p).
+    .replace(/(?:^|\n)(?!<(?:h[1-6]|ul|ol|li|table|thead|tbody|tr|td|th|div|p)\b)((?:.(?!\n\n))+.)/g, (match) => {
       const trimmed = match.trim()
-      if (trimmed.startsWith('<')) return match
+      if (/^<(?:h[1-6]|ul|ol|li|table|thead|tbody|tr|td|th|div|p)\b/.test(trimmed)) return match
       return `\n<p class="text-text-light leading-relaxed mb-4">${trimmed}</p>`
     })
 }
