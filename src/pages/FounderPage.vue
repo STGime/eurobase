@@ -42,6 +42,11 @@ onMounted(() => {
     [IMAGE_URL, 'property', 'og:image'],
     ['profile', 'property', 'og:type'],
     ['summary_large_image', 'name', 'twitter:card'],
+    // Twitter tags fully specified so X unfurls don't mix founder og:* with
+    // stale homepage twitter:* (previously omitted, defaulted to homepage).
+    [PAGE_TITLE, 'name', 'twitter:title'],
+    [PAGE_DESCRIPTION, 'name', 'twitter:description'],
+    [IMAGE_URL, 'name', 'twitter:image'],
   ]
   saved = {}
   saved['title'] = document.title
@@ -62,11 +67,22 @@ onBeforeUnmount(() => {
   document.title = snapshot['title'] ?? ''
   for (const key of Object.keys(snapshot)) {
     if (key === 'title' || key === 'canonical') continue
-    const [attr, name] = key.split(':') as ['name' | 'property', string]
+    // Split on the FIRST ':' only — keys are `attr:name` where the name
+    // itself often contains a ':' (og:title, twitter:card). A plain
+    // key.split(':') destructure would truncate `property:og:title` to
+    // name='og', match nothing, and silently skip the restore — leaving
+    // founder meta on every subsequent page.
+    const colonIdx = key.indexOf(':')
+    const attr = key.slice(0, colonIdx) as 'name' | 'property'
+    const name = key.slice(colonIdx + 1)
     const el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${name}"]`)
     if (!el) continue
     const original = snapshot[key]
-    if (original == null) el.removeAttribute('content')
+    // If the meta didn't exist before we visited /founder, remove the
+    // whole element on unmount — not just its content attribute. An
+    // orphaned empty <meta property="og:type"> is still wrong even if
+    // it has no value.
+    if (original == null) el.remove()
     else el.setAttribute('content', original)
   }
   const canon = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
