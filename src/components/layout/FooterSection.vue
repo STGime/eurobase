@@ -67,6 +67,12 @@
           All layers sourced from EU-owned or EU-hosted providers — zero US CLOUD Act exposure.
         </p>
       </div>
+
+      <div class="mt-6 flex items-center justify-center md:justify-start">
+        <a href="https://launchkiwi.com/p/eurobase" target="_blank" rel="noopener" aria-label="Featured on LaunchKiwi">
+          <img src="https://launchkiwi.com/badge-light.svg" alt="Featured on LaunchKiwi" width="198" height="62" loading="lazy" />
+        </a>
+      </div>
     </div>
   </footer>
 </template>
