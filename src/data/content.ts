@@ -466,6 +466,137 @@ export const blog = {
   description: 'Thoughts on European data sovereignty, cloud infrastructure, and building for developers.',
   posts: [
     {
+      slug: 'managed-eu-alternatives-to-supabase-2026',
+      title: 'Managed EU Alternatives to Supabase in 2026',
+      excerpt: 'If you want a managed Supabase-shaped backend that is EU-headquartered and hosted on EU-owned infrastructure — not just deployed to an EU region of a US hyperscaler — the shortlist is genuinely short. This is the honest 2026 comparison of the five options developers actually consider: Eurobase, Nhost, Appwrite, PocketBase, and self-hosted Supabase — with the axes that matter for GDPR and the queries where each one is the right answer.',
+      date: '2026-08-29',
+      author: 'Stefan Gimeson',
+      readTime: '9 min read',
+      content: `**Direct answer:** If you want a *managed*, EU-headquartered Supabase-shape backend hosted on EU-owned infrastructure, the shortlist in 2026 is [Eurobase](https://eurobase.app) and [Nhost](https://nhost.io). If you are willing to self-host, [Appwrite](https://appwrite.io), [PocketBase](https://pocketbase.io), and the [self-hosted Supabase](https://supabase.com/docs/guides/self-hosting) Docker stack are the strongest open-source options. Which one is right for you depends on three specific axes, not on which listicle you read first.
+
+## The three axes that actually matter
+
+Most "EU alternative to Supabase" listicles conflate three separate questions. Splitting them apart is the whole game:
+
+1. **Where does the corporate parent sit?** A US Inc. hosting in Frankfurt is still under US jurisdiction. The CLOUD Act reaches the parent, not the region. If your DPO or your customer's procurement checklist cares about jurisdictional exposure, the operator's legal home matters more than the datacentre address.
+2. **Where does the underlying compute live, and who owns it?** "AWS eu-central-1" is EU-*located* but US-*owned*. Scaleway, OVHcloud, Hetzner, Aiven are EU-owned. Both keep the bytes in Europe; only the second keeps the operator, sub-processors, and control plane in Europe.
+3. **Managed or self-hosted?** Managed is faster to ship and someone else runs the on-call rota. Self-hosted is cheaper past a certain volume and gives you full control, but you own the ops. There is no wrong answer; there is a wrong assumption that they are the same category.
+
+The rest of this post uses those three axes as the frame. No product wins all three; pick the two you care about and the choice becomes obvious.
+
+## Comparison at a glance
+
+| Product | Corporate HQ | Managed? | Managed infra | Self-host? | Core surface |
+|---|---|---|---|---|---|
+| **Eurobase** | Estonia 🇪🇪 | Yes | Scaleway 🇫🇷 (EU-owned) | No | Postgres, Auth, Storage, Edge Functions, Realtime, Vault |
+| **Nhost** | Sweden 🇸🇪 | Yes | AWS eu-central-1 (US-owned) | Yes (open-source stack) | Postgres, Hasura GraphQL, Auth, Storage, Functions |
+| **Appwrite** | US 🇺🇸 | Yes (Appwrite Cloud) | AWS (US-owned) | Yes | Database, Auth, Storage, Functions, Messaging, Realtime |
+| **PocketBase** | Bulgaria 🇧🇬 (open-source project, no corporate parent) | No | — | Yes (single Go binary) | SQLite, Auth, Storage, Realtime, Admin UI |
+| **Self-hosted Supabase** | US 🇺🇸 (source) | No | Your servers | Yes (Docker Compose) | Full Supabase stack |
+
+Read left-to-right: only **Eurobase** hits all three sovereign axes (EU HQ, EU-owned infra, managed). **Nhost** is EU-HQ and managed but the infra is AWS. **Appwrite** and **Supabase** are US-HQ but you can self-host anywhere. **PocketBase** is EU-adjacent and open-source but has no managed offering.
+
+## The candidates, honestly
+
+### Eurobase
+
+**Corporate:** Eurobase OÜ, Estonia. **Managed on:** Scaleway (Paris, France). **Open-source:** No (proprietary, planned partial open-source). **What you get:** Postgres, six auth methods, S3-compatible storage, Deno-based edge functions with TypeScript, encrypted vault, realtime WebSockets, cron and webhooks, and a compliance tab with one-click DSAR export, auto-generated Article 30 RoPA, and hash-chained audit log.
+
+**Where it wins:** the only product in this list that is EU-headquartered *and* runs on EU-owned infra *and* is fully managed. No AWS/GCP/Azure/Cloudflare anywhere in the critical path. GDPR primitives (DSAR, RoPA, audit trail, sub-processor registry) are first-class product surfaces, not a "contact sales for compliance" pack. The pricing is €0/€19/€149 per project per month for Free/Pro/Team-tier — no seat-based multiplier.
+
+**Where it does not:** proprietary today, so you cannot self-host it. Newer product than Nhost or Appwrite, so the ecosystem of framework adapters and community content is smaller. Full BYOK against a customer-controlled KMS is on the roadmap for Team-tier, not shipped today (current default is per-tenant AES-256-GCM keys held in Scaleway KMS).
+
+**Full disclosure:** I am the founder of Eurobase. This whole post exists because customers keep asking us "what should I compare you against?" and the fair answer is a real comparison, not marketing copy.
+
+### Nhost
+
+**Corporate:** Nhost AB, Sweden. **Managed on:** AWS (eu-central-1 Frankfurt for the EU region). **Open-source:** Yes (fully open-source stack). **What you get:** Postgres with an opinionated Hasura GraphQL layer on top, authentication (Hasura-JWT flow), S3-backed storage, serverless functions (Node.js).
+
+**Where it wins:** GraphQL-first is the correct choice if your frontend team already lives in Apollo Client or Relay. The open-source stack means you can self-host the entire thing on Hetzner, OVH, or your own metal — and their managed cloud is a great DX for teams that just want AWS-in-Europe under a Swedish operator. Long-established, well-documented, mature admin console.
+
+**Where it does not:** the managed cloud runs on AWS, so the "US corporate parent of the underlying infrastructure" question is a *yes* — your DPO's Chapter V transfer assessment has to account for AWS as a sub-processor, and CLOUD Act reachability applies to any AWS-hosted data. If your compliance story requires EU-owned infra end to end, Nhost's managed offering does not solve that; you need to self-host their stack on EU-owned compute.
+
+### Appwrite
+
+**Corporate:** Appwrite Inc, Delaware, USA. **Managed on:** AWS (Appwrite Cloud). **Open-source:** Yes, MIT-licensed. **What you get:** Database (NoSQL-shaped, not Postgres), auth, storage, serverless functions, messaging (email/SMS/push), realtime.
+
+**Where it wins:** enormous open-source community, mature SDKs across a huge spread of languages (Kotlin, Swift, Flutter, Apple platforms, .NET, Ruby, PHP, Deno, Python, Node) — the best cross-platform SDK coverage in this list by a wide margin. If your product spans mobile + web + edge and you self-host on EU compute (Hetzner, Scaleway, OVH), Appwrite is a legitimately excellent choice.
+
+**Where it does not:** the corporate parent is US, so managed Appwrite Cloud does not solve the CLOUD-Act question even in an EU region. The database is not Postgres, which matters if you have existing SQL, want the Postgres ecosystem (pgvector, extensions), or need standard tooling like DBeaver / DataGrip to just work.
+
+### PocketBase
+
+**Corporate:** No corporate parent — solo open-source project by Gani Georgiev (based in Bulgaria). **Managed on:** — (no managed offering). **Open-source:** Yes, MIT-licensed. **What you get:** a single Go binary that gives you SQLite + auth + storage + realtime + an admin dashboard on any server, VPS, or serverless container that can run a binary. Zero infrastructure past the binary itself.
+
+**Where it wins:** the fastest way to get a working backend on the internet in existence. \`./pocketbase serve\` and you have auth, a database, a file storage layer, and an admin UI. Perfect for prototypes, side projects, MVPs, and small production apps. Self-host wherever you like (yes, even on a €5/mo VPS in Europe).
+
+**Where it does not:** no managed offering, so *someone* has to operate it (that someone is you — backups, updates, monitoring, TLS renewal, security patching). SQLite works beautifully to a point; past low-millions of rows or if you need read replicas, connection pooling, or vector search, you are outside the tool's happy path. No compliance tooling — DSAR, RoPA, audit log, and sub-processor tracking are all your problem.
+
+### Self-hosted Supabase
+
+**Corporate:** Supabase Inc, Delaware, USA (the source). **Managed on:** your servers. **Open-source:** Yes, Apache 2.0. **What you get:** the entire Supabase stack — PostgREST, GoTrue auth, Storage API, Realtime, Studio dashboard — as a Docker Compose bundle you can put on any EU-owned server.
+
+**Where it wins:** you get the actual Supabase product surface with the actual Supabase SDK. If your codebase already assumes \`supabase-js\`, self-hosting on EU infra is a zero-change client swap (point \`createClient\` at your own URL). Every framework adapter, tutorial, and StackOverflow answer written for Supabase applies.
+
+**Where it does not:** Supabase self-hosted is a real operations job — a dozen containers, three databases (auth, storage metadata, main), Kong proxy, secrets management, backup pipeline, TLS termination, scaling story. This is not a "curl-and-go" install. If you want the Supabase surface *with* someone else running the ops rota, you are back to a managed provider — and the managed Supabase runs on AWS with a US corporate parent, so the sovereignty question returns.
+
+## Which one is right for you?
+
+- **"I want a managed Supabase-shape backend that is fully European end-to-end (operator + infra)"** → **Eurobase**.
+- **"I want a managed Postgres-and-GraphQL backend from an EU-HQ company and I am fine with AWS Frankfurt as the infra"** → **Nhost** managed cloud.
+- **"I want a Postgres backend under EU jurisdiction and I have the ops capability to self-host"** → self-host Nhost or Supabase on Hetzner / OVH / Scaleway.
+- **"I want the widest SDK spread across mobile and web and I do not use Postgres"** → **Appwrite** self-hosted on EU compute.
+- **"I want the simplest possible backend for a prototype or side project"** → **PocketBase** on a €5/mo European VPS.
+
+## Frequently asked
+
+### Is Supabase EU-hosted?
+
+Supabase offers EU regions (Frankfurt, London, Paris) for the managed product, so your project's *bytes* can sit in Europe. But the Supabase corporate parent is a US Delaware company and the underlying compute is AWS (also US-owned). If your compliance story requires the operator, sub-processors, and control plane to be under EU jurisdiction, EU-region Supabase does not fully answer that — the CLOUD Act reaches the parent regardless of region.
+
+### Do I need to self-host to be GDPR-compliant?
+
+No. GDPR compliance is about *how the data is processed and by whom*, not about who physically runs the server. A managed BaaS operated by an EU entity on EU-owned infrastructure meets the sovereignty part of GDPR without any self-hosting on your end. The managed vs self-hosted trade-off is about operational responsibility and cost, not compliance.
+
+### What is the difference between "EU-hosted" and "EU jurisdiction"?
+
+"EU-hosted" (bytes-in-EU) means the physical datacentre sits in Europe. "EU jurisdiction" (operator-in-EU) means the corporate entity operating the service is legally domiciled in the EU and its infrastructure sub-processors are too. The two often diverge — for example, AWS eu-central-1 (Frankfurt) is EU-hosted but not under EU jurisdiction because Amazon Web Services Inc is a US company subject to the CLOUD Act. For most GDPR-critical use cases (public sector, healthcare, legal, finance), procurement checklists are asking about *jurisdiction*, not just location.
+
+### Is Firebase available as an EU-hosted service?
+
+Google Cloud Firestore (Firebase's underlying database) offers a europe-west multi-region, so bytes can live in Europe. But Firebase is owned by Google (a US company), so the same jurisdictional caveats apply as with Supabase-on-AWS. If you are looking specifically for a Firebase alternative (realtime + auth + serverless), the same shortlist in this post applies — Eurobase, Nhost, Appwrite, PocketBase, self-hosted Supabase.
+
+### Which is cheapest?
+
+For prototypes and hobby projects: **PocketBase** on a €4–€8/mo VPS is unbeatable. For small production apps: **Eurobase Free** (0 EUR, 5,000 MAU, 512 MB Postgres, real 24/7 uptime, all six auth methods, edge functions, vault, cron, compliance stack) or **self-hosted Nhost** on a €20–€50/mo Hetzner box. For real production traffic: managed pricing lands in a similar range across Eurobase (€19/project/mo Pro), Nhost, and Appwrite Cloud — pick on jurisdiction and feature fit, not price.
+
+### Can I migrate from Supabase?
+
+Yes. All Postgres-based products in this list (Eurobase, Nhost, self-hosted Supabase) accept a standard \`pg_dump\` / \`pg_restore\` workflow for the database itself. The auth users table format is close enough between Supabase's GoTrue and Eurobase / Nhost's auth systems that a small migration script handles it. Storage objects are copyable via any S3-compatible sync tool (\`rclone\` works for all three). The SDK layer changes: Eurobase's SDK is Supabase-*shape* (\`createClient\`, \`.from().select()\`, \`.auth.signIn()\`) but not identical, so plan for a small refactor.
+
+### What about self-hosted Supabase on Hetzner?
+
+Popular Reddit answer and a legitimately good stack for teams with real ops capability. You get the full Supabase surface under EU jurisdiction (Hetzner is a Germany-headquartered company) and cheap compute. The trade-off is you own the on-call — backup verification, security patches for a dozen containers, upgrade orchestration when the Supabase stack releases a breaking change. That is real work. Managed EU providers exist so you do not have to do that work.
+
+## Bottom line
+
+There is no single "best" EU alternative to Supabase — there are five real options and they win on different axes. If you want the fully-managed, fully-EU option, we built Eurobase for that; if you want GraphQL-and-AWS-Frankfurt from a Swedish operator, Nhost is a great fit; if you want the best cross-platform SDKs and self-host, Appwrite; if you want the simplest possible backend, PocketBase; if you want the actual Supabase product on your own infra, self-hosted Supabase. Pick on the two axes that matter most for your project — corporate jurisdiction and infra ownership are usually the deciders — and the shortlist collapses quickly.
+
+If you want to see the specific GDPR obligations each option covers, we ship a free 10-question assessment at [/gdpr-readiness](/gdpr-readiness) that scores your current backend against Article 30, Article 15, Article 32, and Chapter V transfer mechanisms.
+
+— Stefan`,
+      references: [
+        { label: 'Eurobase', url: 'https://eurobase.app' },
+        { label: 'Nhost', url: 'https://nhost.io' },
+        { label: 'Appwrite', url: 'https://appwrite.io' },
+        { label: 'PocketBase', url: 'https://pocketbase.io' },
+        { label: 'Self-hosting Supabase', url: 'https://supabase.com/docs/guides/self-hosting' },
+        { label: 'Eurobase — GDPR Readiness assessment', url: '/gdpr-readiness' },
+        { label: 'Eurobase — Sub-processor list', url: '/privacy' },
+        { label: 'Scaleway (EU-owned cloud infrastructure)', url: 'https://scaleway.com' },
+      ],
+    },
+    {
       slug: 'storage-auth-console-fixes-this-week',
       title: 'A week of quiet fixes — storage, auth, console',
       excerpt: 'Nothing headline-grabbing, but a bunch of papercuts we shiped in the last few days that should make daily use noticeably nicer. Console-uploaded files are now deletable and downloadable. Filenames with umlauts, spaces, or commas work. SMS auth got a security hardening pass. And the "Copy URL" button on storage actually gives you a shareable link now.',
