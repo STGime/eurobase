@@ -10,7 +10,6 @@ import MarketSection from '@/components/sections/MarketSection.vue'
 import HowItWorksSection from '@/components/sections/HowItWorksSection.vue'
 import PricingSection from '@/components/sections/PricingSection.vue'
 import BlogSection from '@/components/sections/BlogSection.vue'
-import FounderSection from '@/components/sections/FounderSection.vue'
 import CtaSection from '@/components/sections/CtaSection.vue'
 </script>
 
@@ -27,7 +26,6 @@ import CtaSection from '@/components/sections/CtaSection.vue'
     <HowItWorksSection />
     <PricingSection />
     <BlogSection />
-    <FounderSection />
     <CtaSection />
   </main>
 </template>
