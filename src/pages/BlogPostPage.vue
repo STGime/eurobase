@@ -166,11 +166,20 @@ function renderMarkdown(md: string): string {
     // Headings first — `### ` must come before `## ` or the latter's regex would eat it.
     .replace(/^### (.+)$/gm, '<h3 class="text-lg font-semibold text-text-white mt-6 mb-3 font-heading">$1</h3>')
     .replace(/^## (.+)$/gm, '<h2 class="text-2xl font-bold text-text-white mt-10 mb-4 font-heading">$1</h2>')
-    // Bold before italic — `**x**` must resolve before the single-`*` italic rule sees the same asterisks.
+    // Order matters here: code → bold → italic. Code first turns `eb_sk_*` etc. into <code>…</code>,
+    // so the italic rule's `<`-exclusion actually protects those literal asterisks from pairing
+    // across emitted tags. If italic ran first it would see the raw backtick tokens and pair the
+    // `*` inside `eb_sk_*` and `eb_pk_*` into one spurious ~140-char <em>.
+    //
+    // The code rule also excludes `\n` — `[^\`\n]` — to stop the pattern from matching across a
+    // triple-backtick fence and collapsing an entire fenced block into a single inline <code> chip
+    // (that had shipped to main via #25 and mangled two existing posts; fold-in fix here).
+    .replace(/`([^`\n]+)`/g, '<code class="text-accent-blue/90 bg-navy-light/40 px-1 rounded text-[0.9em]">$1</code>')
     .replace(/\*\*(.+?)\*\*/g, '<strong class="text-text-white">$1</strong>')
-    // Italic — only single `*` NOT adjacent to another `*` (avoids re-matching inside bold's output).
-    .replace(/(^|[^*])\*([^\s*][^*]*?[^\s*])\*(?!\*)/g, '$1<em class="italic">$2</em>')
-    .replace(/`([^`]+)`/g, '<code class="text-accent-blue/90 bg-navy-light/40 px-1 rounded text-[0.9em]">$1</code>')
+    // Italic — single `*` NOT adjacent to another `*` and not spanning `<` (would swallow emitted
+    // tags) or `\n` (kept single-line to match GFM). `<`-exclusion + running after code is what
+    // keeps the two rules from interfering.
+    .replace(/(^|[^*])\*([^\s*\n<][^*\n<]*?[^\s*\n<])\*(?!\*)/g, '$1<em class="italic">$2</em>')
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-accent-blue hover:underline">$1</a>')
     .replace(/^- (.+)$/gm, '<li class="flex items-start gap-2 text-text-light text-sm"><span class="text-accent-blue mt-1 text-xs">&#9656;</span><span>$1</span></li>')
     .replace(/((?:<li[^]*?<\/li>\n?)+)/g, '<ul class="space-y-2 my-4">$1</ul>')
