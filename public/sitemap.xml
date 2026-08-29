@@ -31,6 +31,12 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/blog/managed-eu-alternatives-to-supabase-2026</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/blog/free-gdpr-readiness-assessment</loc>
     <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>

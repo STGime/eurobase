@@ -55,7 +55,10 @@ watchEffect(() => {
   if (!p) return
 
   const url = `${SITE_ORIGIN}/blog/${p.slug}`
-  const image = p.image ? `${SITE_ORIGIN}${p.image}` : `${SITE_ORIGIN}/og-image.png`
+  // Fallback uses blog-beta-testers.png (the only 1200×630 asset in public/ — canonical OG size).
+  // Previous fallback pointed at /og-image.png, which doesn't exist and produced broken share cards
+  // on any post that shipped without its own image.
+  const image = p.image ? `${SITE_ORIGIN}${p.image}` : `${SITE_ORIGIN}/blog-beta-testers.png`
   const title = `${p.title} | Eurobase Blog`
   const description = p.excerpt
 
@@ -160,15 +163,32 @@ function renderMarkdown(md: string): string {
     return match
   })
   return md
+    // Headings first — `### ` must come before `## ` or the latter's regex would eat it.
+    .replace(/^### (.+)$/gm, '<h3 class="text-lg font-semibold text-text-white mt-6 mb-3 font-heading">$1</h3>')
     .replace(/^## (.+)$/gm, '<h2 class="text-2xl font-bold text-text-white mt-10 mb-4 font-heading">$1</h2>')
+    // Order matters here: code → bold → italic. Code first turns `eb_sk_*` etc. into <code>…</code>,
+    // so the italic rule's `<`-exclusion actually protects those literal asterisks from pairing
+    // across emitted tags. If italic ran first it would see the raw backtick tokens and pair the
+    // `*` inside `eb_sk_*` and `eb_pk_*` into one spurious ~140-char <em>.
+    //
+    // The code rule also excludes `\n` — `[^\`\n]` — to stop the pattern from matching across a
+    // triple-backtick fence and collapsing an entire fenced block into a single inline <code> chip
+    // (that had shipped to main via #25 and mangled two existing posts; fold-in fix here).
+    .replace(/`([^`\n]+)`/g, '<code class="text-accent-blue/90 bg-navy-light/40 px-1 rounded text-[0.9em]">$1</code>')
     .replace(/\*\*(.+?)\*\*/g, '<strong class="text-text-white">$1</strong>')
-    .replace(/`([^`]+)`/g, '<code class="text-accent-blue/90 bg-navy-light/40 px-1 rounded text-[0.9em]">$1</code>')
+    // Italic — single `*` NOT adjacent to another `*` and not spanning `<` (would swallow emitted
+    // tags) or `\n` (kept single-line to match GFM). `<`-exclusion + running after code is what
+    // keeps the two rules from interfering.
+    .replace(/(^|[^*])\*([^\s*\n<][^*\n<]*?[^\s*\n<])\*(?!\*)/g, '$1<em class="italic">$2</em>')
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-accent-blue hover:underline">$1</a>')
     .replace(/^- (.+)$/gm, '<li class="flex items-start gap-2 text-text-light text-sm"><span class="text-accent-blue mt-1 text-xs">&#9656;</span><span>$1</span></li>')
     .replace(/((?:<li[^]*?<\/li>\n?)+)/g, '<ul class="space-y-2 my-4">$1</ul>')
-    .replace(/(?:^|\n)(?!<[hulod])((?:.(?!\n\n))+.)/g, (match) => {
+    // Paragraph wrap. Lines starting with an INLINE tag (<strong>, <em>, <a>, <code>) still need a
+    // <p> wrapper — the previous version bailed out on any leading `<`, so bold-first paragraphs
+    // rendered unstyled. Now: skip only block-level tags (h1-h6, ul, ol, li, table, div, p).
+    .replace(/(?:^|\n)(?!<(?:h[1-6]|ul|ol|li|table|thead|tbody|tr|td|th|div|p)\b)((?:.(?!\n\n))+.)/g, (match) => {
       const trimmed = match.trim()
-      if (trimmed.startsWith('<')) return match
+      if (/^<(?:h[1-6]|ul|ol|li|table|thead|tbody|tr|td|th|div|p)\b/.test(trimmed)) return match
       return `\n<p class="text-text-light leading-relaxed mb-4">${trimmed}</p>`
     })
 }
