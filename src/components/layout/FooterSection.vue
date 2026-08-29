@@ -67,16 +67,6 @@
           All layers sourced from EU-owned or EU-hosted providers — zero US CLOUD Act exposure.
         </p>
       </div>
-
-      <div class="mt-6 flex items-center justify-center md:justify-start">
-        <a href="https://launchkiwi.com/p/eurobase" target="_blank" rel="noopener" aria-label="Featured on LaunchKiwi">
-          <!-- Hotlinked from launchkiwi.com per their verifier's DOM-match requirement (self-hosted
-               copy failed verification with "Badge image not found"). Note: this sends every
-               visitor's IP + User-Agent to launchkiwi.com on every page view — trade-off accepted
-               to get the listing published. Revisit if LaunchKiwi later accepts self-hosted URLs. -->
-          <img src="https://launchkiwi.com/badge-dark.svg" alt="Featured on LaunchKiwi" width="198" height="62" loading="lazy" />
-        </a>
-      </div>
     </div>
   </footer>
 </template>
