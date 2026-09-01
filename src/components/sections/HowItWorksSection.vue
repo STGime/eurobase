@@ -10,7 +10,7 @@ const { elementRef, isVisible } = useScrollReveal()
 <template>
   <section id="how-it-works" aria-labelledby="heading-how-it-works" class="py-24 bg-navy" ref="elementRef">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center" :class="isVisible ? 'animate-fade-in-up' : 'opacity-0'">
+      <div :class="isVisible ? 'animate-fade-in-up' : 'opacity-0'">
         <SectionHeading
           id="heading-how-it-works"
           subtitle="How It Works"

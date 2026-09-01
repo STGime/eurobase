@@ -16,8 +16,12 @@ import CtaSection from '@/components/sections/CtaSection.vue'
 <template>
   <main>
     <HeroSection />
-    <ProblemSection />
+    <!-- SolutionSection moved to slot 2 so first-scroll shows features
+         (Postgres, auth, storage, realtime, edge functions, vault…) —
+         Problem section stays in the flow one down for the "why this
+         matters" beat after the reader sees the surface. -->
     <SolutionSection />
+    <ProblemSection />
     <DsarSection />
     <DifferentiatorsSection />
     <DeveloperSection />
