@@ -134,18 +134,4 @@ export const germanLegalTechDocs = {
     { label: 'GoBD Verfahrensdokumentation', slug: 'de-gobd-verfahrensdokumentation.md',
       note: 'the process documentation §146 AO expects.' },
   ] as LegalDoc[],
-  // Also rendered in the blog post at content.ts (de-legal-tech-
-  // backend). Sourced from here to prevent the two prose lists
-  // from drifting apart when scope changes (e.g. TR-ESOR moves
-  // from non-goal to integration).
-  nonGoals: [
-    { label: 'beA integration',
-      detail: 'application-side (the Anwaltssoftware layer). Not the backend’s concern.' },
-    { label: 'TR-ESOR (BSI TR-03125)',
-      detail: 'the archive-format standard for long-term signed documents. Customers plug in ArchiSafe/Governikus; Eurobase integrates but does not replace them.' },
-    { label: 'DATEV / ELSTER submission',
-      detail: 'application-side (the accounting/tax software layer).' },
-    { label: 'Actual BSI C5 or ISO 27001 certification',
-      detail: 'post-beta. The roadmaps above commit to dated milestones.' },
-  ],
 }

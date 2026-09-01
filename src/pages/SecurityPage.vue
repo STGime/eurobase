@@ -361,13 +361,6 @@ const nis2Rows: Nis2Row[] = [
             </span>
           </li>
         </ul>
-        <h3 class="text-lg font-semibold text-text-white mb-2 mt-6">Non-goals</h3>
-        <ul class="space-y-2 text-text-light">
-          <li v-for="ng in germanLegalTechDocs.nonGoals" :key="ng.label" class="flex gap-2">
-            <span class="text-accent-blue shrink-0">▸</span>
-            <span><strong>{{ ng.label }}</strong> — {{ ng.detail }}</span>
-          </li>
-        </ul>
       </section>
 
       <!-- Sub-processors + related -->
