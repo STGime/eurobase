@@ -103,8 +103,8 @@ import { legalStrings as ls } from '@/data/legalStrings'
             The Service is offered in multiple tiers as described on our pricing page. All prices are stated in Euros (EUR) and are exclusive of applicable value-added tax (VAT) unless stated otherwise.
           </p>
           <ul class="list-disc list-inside mt-2 space-y-1 text-text-muted">
-            <li>Free tier: no payment required; subject to usage limits and idle-pause after 30 days without activity.</li>
-            <li>Paid tiers: billed monthly or annually; payment due in advance.</li>
+            <li><strong>Free tier — non-commercial use only.</strong> The Free tier is provided at no charge for personal projects, learning, and development purposes. Commercial use — including production applications with paying users, revenue-generating businesses, agency or client work, and internal tools of a commercial entity — requires a Pro or higher subscription. If we identify commercial use on a Free project, we will notify the account owner by email and provide 14 days to upgrade before restricting the project. Subject to usage limits and idle-pause after 30 days without activity.</li>
+            <li>Paid tiers: billed monthly or annually; payment due in advance. Pro is priced per project.</li>
             <li>Usage overages are billed at the rates published on the pricing page.</li>
             <li>We reserve the right to change pricing with 30 days' written notice.</li>
           </ul>

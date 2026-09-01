@@ -305,7 +305,7 @@ onBeforeUnmount(() => {
             Building on Eurobase closes most of these gaps automatically
           </h2>
           <p class="text-sm text-text-light leading-relaxed mb-4">
-            Every project ships with Article 30 RoPA generation, one-click DSAR export, a hash-chained audit log, and EU-only sub-processors — regardless of tier. Free is genuinely free; Pro is €19/mo per project.
+            Every project ships with Article 30 RoPA generation, one-click DSAR export, a hash-chained audit log, and EU-only sub-processors — regardless of tier. Free is genuinely free; Pro is €25/mo per project.
           </p>
           <div class="flex flex-col sm:flex-row gap-3">
             <a

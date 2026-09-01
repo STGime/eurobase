@@ -305,19 +305,19 @@ export const howItWorks = {
 
 export const pricing = {
   headline: 'Built to Grow With You',
-  description: 'Free while you prototype, €19/mo per project when you go live, and a Team tier for the SMB stack coming later this year. No surprises, no bait-and-switch.',
+  description: 'Free for personal projects, learning, and development. €25/mo per project for commercial use. Team tier for the SMB stack. No surprises, no bait-and-switch.',
   tiers: [
     {
       name: 'Free',
       price: 'Free',
-      description: '5,000 monthly active users, 512 MB storage, 2 GB bandwidth, 50 realtime connections. All auth methods and every feature included. Projects auto-pause after 30 days idle — a single request wakes them.',
+      description: 'For personal projects, learning, and development — non-commercial use only. 5,000 monthly active users, 512 MB storage, 2 GB bandwidth, 50 realtime connections. All auth methods and every feature included. Projects auto-pause after 30 days idle — a single request wakes them.',
       icon: '\uD83D\uDE80',
       highlighted: false,
     },
     {
       name: 'Pro',
-      price: '€19/mo',
-      description: '100,000 monthly active users, 100 GB storage, 250 GB bandwidth, 10,000 realtime connections. BYO SMTP, quota alerts, priority support. Never pauses. Priced per project.',
+      price: '€25/mo',
+      description: 'For commercial use — production apps, side businesses, agency work, internal tools. 100,000 monthly active users, 100 GB storage, 250 GB bandwidth, 10,000 realtime connections. BYO SMTP, quota alerts, priority support. Never pauses. Priced per project.',
       icon: '\u26A1',
       highlighted: true,
     },
@@ -418,7 +418,7 @@ export const pricing = {
 
 export const cta = {
   headline: 'Join the Next Generation of European Infrastructure',
-  description: 'Sign up in a minute, no credit card required — Free tier is genuinely free, Pro is €19/mo per project.',
+  description: 'Sign up in a minute, no credit card required — Free tier is genuinely free, Pro is €25/mo per project.',
   primaryCta: 'Sign up free',
   secondaryCta: 'Talk to the Founders',
 }
@@ -503,7 +503,7 @@ Read left-to-right: only **Eurobase** hits all three sovereign axes (EU HQ, EU-o
 
 **Corporate:** Eurobase OÜ, Estonia. **Managed on:** Scaleway (Paris, France). **Open-source:** No (proprietary, planned partial open-source). **What you get:** Postgres, six auth methods, S3-compatible storage, Deno-based edge functions with TypeScript, encrypted vault, realtime WebSockets, cron and webhooks, and a compliance tab with one-click DSAR export, auto-generated Article 30 RoPA, and hash-chained audit log.
 
-**Where it wins:** the only product in this list that is EU-headquartered *and* runs on EU-owned infra *and* is fully managed. No AWS/GCP/Azure/Cloudflare anywhere in the critical path. GDPR primitives (DSAR, RoPA, audit trail, sub-processor registry) are first-class product surfaces, not a "contact sales for compliance" pack. The pricing is €0/€19/€149 per project per month for Free/Pro/Team-tier — no seat-based multiplier.
+**Where it wins:** the only product in this list that is EU-headquartered *and* runs on EU-owned infra *and* is fully managed. No AWS/GCP/Azure/Cloudflare anywhere in the critical path. GDPR primitives (DSAR, RoPA, audit trail, sub-processor registry) are first-class product surfaces, not a "contact sales for compliance" pack. The pricing is €0/€25/€149 per project per month for Free/Pro/Team-tier — no seat-based multiplier.
 
 **Where it does not:** proprietary today, so you cannot self-host it. Newer product than Nhost or Appwrite, so the ecosystem of framework adapters and community content is smaller. Full BYOK against a customer-controlled KMS is on the roadmap for Team-tier, not shipped today (current default is per-tenant AES-256-GCM keys held in Scaleway KMS).
 
@@ -569,7 +569,7 @@ Google Cloud Firestore (Firebase's underlying database) offers a europe-west mul
 
 ### Which is cheapest?
 
-For prototypes and hobby projects: **PocketBase** on a €4–€8/mo VPS is unbeatable. For small production apps: **Eurobase Free** (0 EUR, 5,000 MAU, 512 MB Postgres, all six auth methods, edge functions, vault, cron, compliance stack — with sub-second cold start after a 30-day idle pause; **Pro at €19/mo never pauses**) or **self-hosted Nhost** on a €20–€50/mo Hetzner box. For real production traffic: managed pricing lands in a similar range across Eurobase (€19/project/mo Pro), Nhost, and Appwrite Cloud — pick on jurisdiction and feature fit, not price.
+For prototypes and hobby projects: **PocketBase** on a €4–€8/mo VPS is unbeatable. For small production apps: **Eurobase Free** (0 EUR, 5,000 MAU, 512 MB Postgres, all six auth methods, edge functions, vault, cron, compliance stack — with sub-second cold start after a 30-day idle pause; **Pro at €25/mo never pauses**) or **self-hosted Nhost** on a €20–€50/mo Hetzner box. For real production traffic: managed pricing lands in a similar range across Eurobase (€25/project/mo Pro), Nhost, and Appwrite Cloud — pick on jurisdiction and feature fit, not price.
 
 ### Can I migrate from Supabase?
 
@@ -726,9 +726,9 @@ Free is Free for as long as your project fits inside it. 5,000 monthly active te
 
 No credit card. No feature paywall. The four numeric caps are the only thing separating Free from Pro; every binary switch is on.
 
-## Pro — €19 per project per month
+## Pro — €25 per project per month
 
-100,000 MAU, 100 GB storage, 250 GB egress, 10,000 realtime connections. BYO SMTP, quota alerts at 75% and 100%, priority support, never pauses. €19 per month, per project, billed in EUR. Priced per project rather than per organisation because our closed-beta customers overwhelmingly told us that was cleaner — one bill per production surface, no shared-pool fights inside a company.
+100,000 MAU, 100 GB storage, 250 GB egress, 10,000 realtime connections. BYO SMTP, quota alerts at 75% and 100%, priority support, never pauses. €25 per month, per project, billed in EUR. Priced per project rather than per organisation because our closed-beta customers overwhelmingly told us that was cleaner — one bill per production surface, no shared-pool fights inside a company.
 
 Payments through [Mollie](https://mollie.com) (Dutch, EU-headquartered, already in our sub-processor registry). SEPA direct debit, iDEAL, Bancontact, Sofort, plus the usual card set. Invoices land in the console the moment they clear.
 
