@@ -569,7 +569,7 @@ Google Cloud Firestore (Firebase's underlying database) offers a europe-west mul
 
 ### Which is cheapest?
 
-For prototypes and hobby projects: **PocketBase** on a €4–€8/mo VPS is unbeatable. For small production apps: **Eurobase Free** (0 EUR, 5,000 MAU, 512 MB Postgres, all six auth methods, edge functions, vault, cron, compliance stack — with sub-second cold start after a 30-day idle pause; **Pro at €25/mo never pauses**) or **self-hosted Nhost** on a €20–€50/mo Hetzner box. For real production traffic: managed pricing lands in a similar range across Eurobase (€25/project/mo Pro), Nhost, and Appwrite Cloud — pick on jurisdiction and feature fit, not price.
+For prototypes and hobby projects: **PocketBase** on a €4–€8/mo VPS is unbeatable. For personal projects, learning, and development (non-commercial): **Eurobase Free** covers 5,000 MAU, 512 MB Postgres, all six auth methods, edge functions, vault, cron, and the compliance stack — sub-second cold start after a 30-day idle pause. If you need commercial deployment, **Eurobase Pro at €25/mo per project** (or **self-hosted Nhost** on a €20–€50/mo Hetzner box, ops burden yours). For real production traffic: managed pricing lands in a similar range across Eurobase (€25/project/mo Pro), Nhost, and Appwrite Cloud — pick on jurisdiction and feature fit, not price.
 
 ### Can I migrate from Supabase?
 
@@ -720,11 +720,13 @@ If your score surprises you either way, or if there is an obligation the ten que
 
 Today the door opens to everyone. Sign up at [console.eurobase.app](https://console.eurobase.app), no invitation, no waitlist, no credit card for Free. This post is a short map of what you get, what you pay for, and what is still in flight.
 
-## Free
+## Free — personal, learning and development use
 
-Free is Free for as long as your project fits inside it. 5,000 monthly active tenant users, 512 MB Postgres, 2 GB egress, 50 concurrent realtime WebSockets, all six auth methods, edge functions, vault, cron, webhooks, and the entire compliance stack (DSAR export, Article 30 record, hash-chained audit log, sub-processor registry). Projects auto-pause after 30 days without a request and a single request wakes them in under a second.
+*Updated 2026-09: Free is now scoped to non-commercial use. Personal projects, learning, coursework, homelab experiments, open-source side projects, and development / staging environments all remain fine on Free. Commercial use — production apps with paying users, revenue-generating side businesses, client / agency work, internal tools of a commercial entity — needs Pro or higher, effective 2 October 2026 per Terms Section 8 / 12.*
 
-No credit card. No feature paywall. The four numeric caps are the only thing separating Free from Pro; every binary switch is on.
+Free is Free for as long as your project stays inside its caps and stays non-commercial. 5,000 monthly active tenant users, 512 MB Postgres, 2 GB egress, 50 concurrent realtime WebSockets, all six auth methods, edge functions, vault, cron, webhooks, and the entire compliance stack (DSAR export, Article 30 record, hash-chained audit log, sub-processor registry). Projects auto-pause after 30 days without a request and a single request wakes them in under a second.
+
+No credit card. No feature paywall. The four numeric caps + the non-commercial-use restriction are what separate Free from Pro; every binary product switch is on either way.
 
 ## Pro — €25 per project per month
 

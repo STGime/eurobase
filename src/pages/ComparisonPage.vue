@@ -103,7 +103,7 @@ watchEffect(() => {
         },
         {
           question: 'How much does Eurobase cost?',
-          answer: 'Free while you prototype (5,000 MAU, 512 MB storage, 2 GB bandwidth, 50 realtime connections). €19/mo per project when you go live. A Team tier with dedicated Postgres is €149/mo (coming soon).',
+          answer: 'Free for personal projects, learning, and development — non-commercial use only (5,000 MAU, 512 MB storage, 2 GB bandwidth, 50 realtime connections). €25/mo per project on Pro for commercial use. A Team tier with dedicated Postgres is €149/mo (coming soon).',
         },
       ]).map((f) => ({
     '@type': 'Question',
