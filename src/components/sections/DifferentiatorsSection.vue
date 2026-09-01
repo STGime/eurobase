@@ -10,7 +10,7 @@ const { elementRef, isVisible } = useScrollReveal()
 <template>
   <section id="differentiators" aria-labelledby="heading-differentiators" class="py-24 bg-navy" ref="elementRef">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12" :class="isVisible ? 'animate-fade-in-up' : 'opacity-0'">
+      <div class="mb-12" :class="isVisible ? 'animate-fade-in-up' : 'opacity-0'">
         <SectionHeading
           id="heading-differentiators"
           subtitle="Why Eurobase"

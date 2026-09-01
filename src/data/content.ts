@@ -199,24 +199,24 @@ const eb = createClient({
   apiKey: 'eb_pk_...',
 })
 
-// Sign in with OAuth
+// Sign in with OAuth — redirects the browser, no promise to await
 eb.auth.signInWithOAuth('google', {
   redirectTo: location.origin,
 })
 
-// Query with filters
-const { data } = await eb.db
+// Query with filters — every SDK call returns { data, error }
+const { data, error } = await eb.db
   .from('orders')
   .select('id', 'total', 'status')
   .eq('status', 'open')
   .limit(20)
 
-// Realtime — server-filtered by row owner
+// Realtime — INSERT/UPDATE/DELETE events, server-filtered by row owner
 eb.realtime.on('orders', '*', (event) => {
   console.log(event.type, event.record)
 })
 
-// Upload a file
+// Upload a file — returns { key, content_type, size, error }
 const { key } = await eb.storage.upload(
   \`avatars/\${user.id}.png\`,
   file,
