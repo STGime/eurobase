@@ -5,7 +5,11 @@ import heroImage from '@/assets/images/hero-network.webp'
 </script>
 
 <template>
-  <section id="hero" aria-labelledby="hero-heading" class="relative min-h-screen flex items-center overflow-hidden">
+  <!-- Dropped `min-h-screen flex items-center` — was reserving a full viewport and
+       vertically centering content, which left large dark padding between the CTA row
+       and the next section on tall displays. Inner div's py-32 keeps the hero visually
+       generous without wasting viewport. -->
+  <section id="hero" aria-labelledby="hero-heading" class="relative overflow-hidden">
     <!-- Background gradient -->
     <div class="absolute inset-0 bg-gradient-to-br from-navy via-navy to-accent-blue/10" />
     <img :src="heroImage" alt="Abstract network visualization representing European backend infrastructure" class="absolute inset-0 w-full h-full object-cover opacity-15 mix-blend-lighten" loading="eager" />
