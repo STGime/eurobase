@@ -133,7 +133,14 @@ export const faq: FaqEntry[] = [
     category: 'Product & pricing',
     question: 'How much does Eurobase cost?',
     answer:
-      'Free while you prototype (5,000 monthly active users, 512 MB storage, 2 GB bandwidth, 50 realtime connections, every feature). €19/mo per project on Pro (100,000 MAU, 100 GB storage, 250 GB bandwidth, 10,000 realtime cxns, BYO SMTP, quota alerts, never pauses). A Team tier with dedicated Postgres per project is €149/mo (coming soon).',
+      'Free for personal projects, learning, and development — non-commercial use only (5,000 monthly active users, 512 MB storage, 2 GB bandwidth, 50 realtime connections, every feature). €25/mo per project on Pro for commercial use (100,000 MAU, 100 GB storage, 250 GB bandwidth, 10,000 realtime cxns, BYO SMTP, quota alerts, never pauses). A Team tier with dedicated Postgres per project is €149/mo (coming soon).',
+  },
+  {
+    id: 'free-tier-noncommercial',
+    category: 'Product & pricing',
+    question: 'What counts as "non-commercial" on the Free tier?',
+    answer:
+      'Personal projects, learning, coursework, homelab experiments, open-source side projects, and development / staging environments — all fine on Free. Commercial use includes: production apps with paying users, revenue-generating side businesses, client / agency work, and internal tools of a commercial entity — those need Pro or higher. If we spot commercial use on a Free project, we\'ll email the account owner and give 14 days to upgrade before restricting the project. No surprises; we\'ll always tell you first.',
   },
   {
     id: 'free-tier-pause',
@@ -212,7 +219,7 @@ export const faq: FaqEntry[] = [
     category: 'Getting started',
     question: 'How do I sign up?',
     answer:
-      'Instant signup at <a href="https://console.eurobase.app" class="text-accent-blue hover:underline">console.eurobase.app</a> — no credit card required for Free, €19/mo per project for Pro. Team and Legal Team tiers are invite-only for now.',
+      'Instant signup at <a href="https://console.eurobase.app" class="text-accent-blue hover:underline">console.eurobase.app</a> — no credit card required for Free, €25/mo per project for Pro. Team and Legal Team tiers are invite-only for now.',
   },
   {
     id: 'sdk-languages',

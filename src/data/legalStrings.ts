@@ -62,15 +62,19 @@ export const legalStrings: LegalStrings = {
   // approaches the threshold; until then this reads as a plain
   // statement rather than a placeholder.
   vatNumber: 'Not VAT-registered (below Estonian €40,000 threshold)',
-  // v2 documents came into effect the same day the Estonian entity
-  // was registered — one clean anchor point for auditors reviewing
-  // consent + governing-law shift.
-  effectiveDate: '22 July 2026',
+  // v2.0 landed 22 July 2026 with the Estonian re-incorporation.
+  // v2.1 (effective 2 October 2026) narrows the Free tier to
+  // non-commercial use — that's a material change that Section 12
+  // of these Terms requires ≥30 days notice on, hence the future
+  // effective date. Both /terms and /privacy render this version
+  // stamp; /privacy content is unchanged in v2.1 but shares the
+  // stamp because they ship as one document set.
+  effectiveDate: '2 October 2026',
 
   // Locked by jurisdiction choice — do not parameterise.
   governingLaw: 'the Republic of Estonia',
   courtOfJurisdiction: 'Harju County Court (Harju Maakohus), Tallinn',
-  documentVersion: '2.0',
+  documentVersion: '2.1',
 
   supportEmail: 'contact@eurobase.app',
   noticesEmail: 'contact@eurobase.app',

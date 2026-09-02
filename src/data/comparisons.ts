@@ -44,9 +44,9 @@ export const comparisons: Record<string, ComparisonData> = {
     slug: 'supabase',
     competitor: 'Supabase',
     heroHeadline: 'Eurobase vs Supabase: the EU-sovereign Supabase alternative',
-    heroSubheadline: 'Same PostgreSQL, same DX — hosted in France, outside the CLOUD Act, GDPR-native, and €19/mo per project once you go live.',
+    heroSubheadline: 'Same PostgreSQL, same DX — hosted in France, outside the CLOUD Act, GDPR-native, and €25/mo per project once you go live.',
     metaTitle: 'Supabase EU alternative — Eurobase (Scaleway, France, GDPR-native)',
-    metaDescription: 'Looking for a Supabase EU alternative? Eurobase runs the same Postgres + auth + storage + realtime stack on Scaleway (France) under Estonian law — no CLOUD Act, no US corporate parent. GDPR-native DPA + DSAR + audit log in every project. Free tier, €19/mo Pro. Migrate from Supabase with one CLI command.',
+    metaDescription: 'Looking for a Supabase EU alternative? Eurobase runs the same Postgres + auth + storage + realtime stack on Scaleway (France) under Estonian law — no CLOUD Act, no US corporate parent. GDPR-native DPA + DSAR + audit log in every project. Free tier, €25/mo Pro. Migrate from Supabase with one CLI command.',
     sections: [
       {
         title: 'Same foundation, different jurisdiction',
@@ -126,10 +126,10 @@ export const comparisons: Record<string, ComparisonData> = {
       {
         title: 'Pricing side by side',
         description:
-          'Supabase Pro is $25/mo per organization with usage-based overages on database, storage, and bandwidth. Eurobase Pro is €19/mo per project with fixed caps at Pro-tier levels; overage is a signal to upgrade to Team rather than a surprise line item.',
+          'Supabase Pro is $25/mo per organization with usage-based overages on database, storage, and bandwidth. Eurobase Pro is €25/mo per project with fixed caps at Pro-tier levels; overage is a signal to upgrade to Team rather than a surprise line item.',
         bullets: [
           'Free tier — Supabase: 50k MAU, 500 MB DB, 1 GB storage, 5 GB bandwidth, 200 realtime, pause after 7 days idle. Eurobase: 5k MAU, 512 MB DB, 512 MB storage, 2 GB bandwidth, 50 realtime, pause after 30 days idle. Every feature included; the tighter caps trade for a longer idle window and every-tier GDPR primitives.',
-          'Paid tier — Supabase Pro: $25/mo per org, usage-based over 100k MAU / 8 GB DB / 100 GB storage / 250 GB bandwidth. Eurobase Pro: €19/mo per project, fixed 100k MAU / 100 GB storage / 250 GB bandwidth / 10k realtime.',
+          'Paid tier — Supabase Pro: $25/mo per org, usage-based over 100k MAU / 8 GB DB / 100 GB storage / 250 GB bandwidth. Eurobase Pro: €25/mo per project, fixed 100k MAU / 100 GB storage / 250 GB bandwidth / 10k realtime.',
           'Team tier — Supabase Team: $599/mo per org (SSO, log retention). Eurobase Team: €149/mo per project (dedicated Postgres, PITR, SSO, RBAC, SOC 2). Coming soon.',
           'Billing entity — Supabase: Supabase Inc. (Delaware). Eurobase: Eurobase OÜ (Estonia). Some EU procurement teams treat this as a hard requirement for VAT-reverse-charge simplicity.',
         ],
@@ -156,7 +156,7 @@ export const comparisons: Record<string, ComparisonData> = {
       // Supabase — the differentiator is the days count and the
       // sub-second wake path, not the presence/absence of pause.
       { feature: 'Free-tier idle pause', eurobase: 'After 30 days idle; single request wakes it (~30 s). Never on Pro.', competitor: 'After 7 days idle. Never on Pro.', highlight: true },
-      { feature: 'Pricing (paid tier)', eurobase: '€19/mo per project (Pro). Team tier €149/mo (dedicated Postgres) coming soon.', competitor: '$25/mo per organization (Pro) + usage-based overages', highlight: true },
+      { feature: 'Pricing (paid tier)', eurobase: '€25/mo per project (Pro). Team tier €149/mo (dedicated Postgres) coming soon.', competitor: '$25/mo per organization (Pro) + usage-based overages', highlight: true },
       { feature: 'Cron jobs', eurobase: 'Built-in scheduler with execution log', competitor: 'pg_cron extension' },
       { feature: 'Webhooks', eurobase: 'Built-in with HMAC signing + retries', competitor: 'Database webhooks (newer)' },
       { feature: 'CLI', eurobase: '50+ commands (projects, DB, storage, vault, functions, migrations, cron, webhooks)', competitor: 'CLI available' },
@@ -206,7 +206,7 @@ export const comparisons: Record<string, ComparisonData> = {
       {
         question: 'How much does Supabase cost compared to Eurobase?',
         answer:
-          'Supabase Pro is $25/mo per organization with usage-based overages on database size, storage, and bandwidth. Eurobase Pro is €19/mo per project with fixed Pro-tier caps (100k MAU, 100 GB storage, 250 GB bandwidth, 10k realtime connections). Supabase Team is $599/mo per org; Eurobase Team is €149/mo per project (coming soon, includes dedicated Postgres + SSO + RBAC). The Free tier compares roughly: Supabase 50k MAU / 500 MB DB with 7-day pause; Eurobase 5k MAU / 512 MB DB with 30-day pause plus every-tier GDPR primitives included free.',
+          'Supabase Pro is $25/mo per organization with usage-based overages on database size, storage, and bandwidth. Eurobase Pro is €25/mo per project with fixed Pro-tier caps (100k MAU, 100 GB storage, 250 GB bandwidth, 10k realtime connections). Supabase Team is $599/mo per org; Eurobase Team is €149/mo per project (coming soon, includes dedicated Postgres + SSO + RBAC). The Free tier compares roughly: Supabase 50k MAU / 500 MB DB with 7-day pause; Eurobase 5k MAU / 512 MB DB with 30-day pause plus every-tier GDPR primitives included free.',
       },
       {
         question: 'Can I migrate from Supabase to Eurobase?',
@@ -225,15 +225,15 @@ export const comparisons: Record<string, ComparisonData> = {
       },
     ],
     ctaHeadline: 'Ready to build on sovereign infrastructure?',
-    ctaDescription: 'Same Postgres, same DX, without the jurisdictional risk. Free tier, no credit card. Pro is €19/mo per project when you go live.',
+    ctaDescription: 'Same Postgres, same DX, without the jurisdictional risk. Free tier, no credit card. Pro is €25/mo per project when you go live.',
   },
   firebase: {
     slug: 'firebase',
     competitor: 'Firebase',
     heroHeadline: 'Eurobase vs Firebase: the EU-sovereign SQL alternative',
-    heroSubheadline: 'SQL instead of NoSQL. Open standards instead of lock-in. Scaleway (France) instead of Google Cloud — and €19/mo per project once you go live.',
+    heroSubheadline: 'SQL instead of NoSQL. Open standards instead of lock-in. Scaleway (France) instead of Google Cloud — and €25/mo per project once you go live.',
     metaTitle: 'Firebase EU alternative — Eurobase (Postgres, Scaleway, GDPR-native)',
-    metaDescription: 'Looking for a Firebase EU alternative? Eurobase runs PostgreSQL + auth + storage + realtime + edge functions on Scaleway (France) under Estonian law — no CLOUD Act, no Google Cloud dependency. GDPR-native DPA + DSAR + audit log in every project. Free tier, €19/mo Pro.',
+    metaDescription: 'Looking for a Firebase EU alternative? Eurobase runs PostgreSQL + auth + storage + realtime + edge functions on Scaleway (France) under Estonian law — no CLOUD Act, no Google Cloud dependency. GDPR-native DPA + DSAR + audit log in every project. Free tier, €25/mo Pro.',
     sections: [
       {
         title: 'Same job, different architecture',
@@ -314,15 +314,15 @@ export const comparisons: Record<string, ComparisonData> = {
       {
         title: 'Firebase pricing vs Eurobase pricing',
         description:
-          'Firebase Spark (free) covers small apps but caps hard at daily reads/writes and free Cloud Functions invocations. Firebase Blaze (pay-as-you-go) has no fixed monthly base and charges per Firestore read/write/delete plus storage, bandwidth, function invocations, and outbound network — which is where the horror-story bills come from. Eurobase Pro is €19/mo per project with fixed caps; overage is a signal to upgrade to Team rather than a surprise line item.',
+          'Firebase Spark (free) covers small apps but caps hard at daily reads/writes and free Cloud Functions invocations. Firebase Blaze (pay-as-you-go) has no fixed monthly base and charges per Firestore read/write/delete plus storage, bandwidth, function invocations, and outbound network — which is where the horror-story bills come from. Eurobase Pro is €25/mo per project with fixed caps; overage is a signal to upgrade to Team rather than a surprise line item.',
         bullets: [
           'Free tier — Firebase Spark: 50k Firestore reads/day, 20k writes/day, 1 GB storage, 10 GB bandwidth. Eurobase: 5k MAU, 512 MB DB, 512 MB storage, 2 GB bandwidth, 50 realtime, every-tier GDPR primitives included.',
-          'Paid tier — Firebase Blaze: pay-per-read/write/storage/bandwidth/invocation, no fixed base. Eurobase Pro: €19/mo per project, fixed 100k MAU / 100 GB storage / 250 GB bandwidth / 10k realtime.',
+          'Paid tier — Firebase Blaze: pay-per-read/write/storage/bandwidth/invocation, no fixed base. Eurobase Pro: €25/mo per project, fixed 100k MAU / 100 GB storage / 250 GB bandwidth / 10k realtime.',
           'Team / enterprise — Firebase: no fixed enterprise tier; you scale via GCP support contracts. Eurobase Team: €149/mo per project (dedicated Postgres, PITR, SSO, RBAC, SOC 2). Coming soon.',
           'Billing entity — Firebase: Google Ireland Limited or Google LLC depending on region. Eurobase: Eurobase OÜ (Estonia). Some EU procurement teams treat this as a hard requirement for VAT-reverse-charge simplicity.',
         ],
         paragraphs: [
-          "One nuance worth flagging: Firebase's pay-per-read model can be dramatically cheaper for small apps and dramatically expensive for read-heavy ones (news feeds, dashboards, real-time collaborative tools). Eurobase's fixed per-project pricing is the opposite: predictable at scale, marginally more expensive for near-idle projects. If you are running 10 near-idle side projects on Firebase, Eurobase per-project pricing will feel like a step up; if you have one high-read app on Blaze burning €400/mo, Eurobase Pro at €19/mo is a step down.",
+          "One nuance worth flagging: Firebase's pay-per-read model can be dramatically cheaper for small apps and dramatically expensive for read-heavy ones (news feeds, dashboards, real-time collaborative tools). Eurobase's fixed per-project pricing is the opposite: predictable at scale, marginally more expensive for near-idle projects. If you are running 10 near-idle side projects on Firebase, Eurobase per-project pricing will feel like a step up; if you have one high-read app on Blaze burning €400/mo, Eurobase Pro at €25/mo is a step down.",
         ],
       },
       {
@@ -355,7 +355,7 @@ export const comparisons: Record<string, ComparisonData> = {
       { feature: 'Storage', eurobase: 'S3-compatible object storage', competitor: 'Firebase Storage (GCS-backed)' },
       { feature: 'Vault / Secrets', eurobase: 'AES-256-GCM, per-tenant key, built-in', competitor: 'Google Secret Manager (separate GCP service)' },
       { feature: 'Free-tier idle pause', eurobase: 'After 30 days idle; single request wakes it (~30 s). Never on Pro.', competitor: 'No pause — hard daily quotas instead', highlight: true },
-      { feature: 'Pricing model', eurobase: 'Predictable per-plan (€19/mo Pro, fixed caps)', competitor: 'Pay-per-read/write/invocation (spike risk)', highlight: true },
+      { feature: 'Pricing model', eurobase: 'Predictable per-plan (€25/mo Pro, fixed caps)', competitor: 'Pay-per-read/write/invocation (spike risk)', highlight: true },
       { feature: 'Offline / local cache', eurobase: 'No built-in offline cache (use PowerSync/Electric on top)', competitor: 'Built-in — SDK caches queries and syncs on reconnect', highlight: true },
       { feature: 'Cron jobs', eurobase: 'Built-in scheduler with execution log', competitor: 'Cloud Scheduler (separate GCP service)' },
       { feature: 'Webhooks', eurobase: 'Built-in with HMAC signing + retries', competitor: 'DIY via Cloud Functions' },
@@ -398,7 +398,7 @@ export const comparisons: Record<string, ComparisonData> = {
       {
         question: 'How much does Firebase cost compared to Eurobase?',
         answer:
-          "Firebase Spark (free) covers small apps but caps at daily read/write and function-invocation quotas. Firebase Blaze is pay-as-you-go: per Firestore read/write/delete, storage GB-month, bandwidth GB, function invocations, and outbound network — which is where the horror-story bills come from. Eurobase Pro is €19/mo per project with fixed Pro-tier caps (100k MAU, 100 GB storage, 250 GB bandwidth). If you run 10 near-idle side projects, Firebase is cheaper. If you have one read-heavy app burning €400/mo on Blaze, Eurobase Pro is a step down.",
+          "Firebase Spark (free) covers small apps but caps at daily read/write and function-invocation quotas. Firebase Blaze is pay-as-you-go: per Firestore read/write/delete, storage GB-month, bandwidth GB, function invocations, and outbound network — which is where the horror-story bills come from. Eurobase Pro is €25/mo per project with fixed Pro-tier caps (100k MAU, 100 GB storage, 250 GB bandwidth). If you run 10 near-idle side projects, Firebase is cheaper. If you have one read-heavy app burning €400/mo on Blaze, Eurobase Pro is a step down.",
       },
       {
         question: 'Can I migrate from Firebase to Eurobase?',
@@ -417,15 +417,15 @@ export const comparisons: Record<string, ComparisonData> = {
       },
     ],
     ctaHeadline: 'Switch from NoSQL to SQL without switching continents',
-    ctaDescription: 'Get a modern backend with PostgreSQL, real SQL queries, and full EU sovereignty. Free tier, no credit card required. Pro is €19/mo per project when you go live.',
+    ctaDescription: 'Get a modern backend with PostgreSQL, real SQL queries, and full EU sovereignty. Free tier, no credit card required. Pro is €25/mo per project when you go live.',
   },
   appwrite: {
     slug: 'appwrite',
     competitor: 'Appwrite',
     heroHeadline: 'Eurobase vs Appwrite: PostgreSQL vs collections, EU-owned infra vs Appwrite Cloud on AWS',
-    heroSubheadline: 'Same open-source spirit, different data model and different infrastructure — Postgres on Scaleway (France) instead of collections on AWS, GDPR-native primitives in every project, €19/mo per project once you go live.',
+    heroSubheadline: 'Same open-source spirit, different data model and different infrastructure — Postgres on Scaleway (France) instead of collections on AWS, GDPR-native primitives in every project, €25/mo per project once you go live.',
     metaTitle: 'Appwrite EU alternative — Eurobase (Postgres, Scaleway France, GDPR-native)',
-    metaDescription: 'Looking for an Appwrite EU alternative? Eurobase runs PostgreSQL + auth + storage + realtime + edge functions on Scaleway (France) instead of Appwrite Cloud on AWS. Real SQL instead of document collections. GDPR-native DPA + DSAR + audit log in every project. Free tier, €19/mo Pro.',
+    metaDescription: 'Looking for an Appwrite EU alternative? Eurobase runs PostgreSQL + auth + storage + realtime + edge functions on Scaleway (France) instead of Appwrite Cloud on AWS. Real SQL instead of document collections. GDPR-native DPA + DSAR + audit log in every project. Free tier, €25/mo Pro.',
     sections: [
       {
         title: 'Two open-ish, developer-first stacks — two very different jurisdictional shapes',
@@ -499,11 +499,11 @@ export const comparisons: Record<string, ComparisonData> = {
       {
         title: 'Pricing side by side (post-September 2025)',
         description:
-          'Appwrite repriced Appwrite Cloud in September 2025 — Pro is now $25/mo per project (the previous $15 rate applied per team member, not per organization) with usage-based overages. Eurobase Pro is €19/mo per project with fixed caps. Self-hosted Appwrite is still free plus the operational cost of running the stack.',
+          'Appwrite repriced Appwrite Cloud in September 2025 — Pro is now $25/mo per project (the previous $15 rate applied per team member, not per organization) with usage-based overages. Eurobase Pro is €25/mo per project with fixed caps. Self-hosted Appwrite is still free plus the operational cost of running the stack.',
         bullets: [
           'Self-hosted — Appwrite: BSD-3-Clause, run it yourself (Docker Compose, MariaDB + Redis + optional components). Eurobase: not self-hostable today.',
           'Free tier — Appwrite Cloud: generous limits (250 concurrent realtime connections, 5 GB bandwidth) alongside functions, storage, and MAU caps. Eurobase: 5k MAU, 512 MB DB, 512 MB storage, 2 GB bandwidth, 50 realtime connections, pause after 30 days idle.',
-          'Paid tier — Appwrite Pro: $25/mo per project with usage-based overages. Eurobase Pro: €19/mo per project with fixed caps (100k MAU, 100 GB storage, 250 GB bandwidth, 10k realtime).',
+          'Paid tier — Appwrite Pro: $25/mo per project with usage-based overages. Eurobase Pro: €25/mo per project with fixed caps (100k MAU, 100 GB storage, 250 GB bandwidth, 10k realtime).',
           'Enterprise / Team tier — Appwrite Scale is a custom-priced tier for higher usage and support. Eurobase Team: €149/mo per project (dedicated Postgres, PITR, SSO, RBAC, SOC 2 — invite-only beta today).',
           'Billing entity — Appwrite Cloud: Appwrite Code Ltd (Israel). Eurobase: Eurobase OÜ (Estonia). Both count per project post-Sep 2025.',
         ],
@@ -524,7 +524,7 @@ export const comparisons: Record<string, ComparisonData> = {
       { feature: 'First-party mobile SDKs', eurobase: 'JS/TS today (Flutter / React Native / native iOS / native Android can call the REST endpoints; direct postgres:// wire access is Team/Legal Team only and not intended for mobile clients).', competitor: 'Flutter, React Native, Android, iOS, Apple platforms — first-class', highlight: true },
       { feature: 'Vault / Secrets', eurobase: 'AES-256-GCM, per-tenant key, built-in with audit log', competitor: 'Environment variables per function' },
       { feature: 'Free-tier idle pause', eurobase: 'After 30 days idle; single request wakes it (~30 s). Never on Pro.', competitor: 'No idle pause on Appwrite Cloud Free — different constraint model (usage caps).' },
-      { feature: 'Pricing (paid tier)', eurobase: '€19/mo per project (Pro). Team €149/mo (dedicated Postgres, invite-only beta today).', competitor: '$25/mo per project (Pro, post-Sep 2025) + usage-based overages. Scale is custom-priced.', highlight: true },
+      { feature: 'Pricing (paid tier)', eurobase: '€25/mo per project (Pro). Team €149/mo (dedicated Postgres, invite-only beta today).', competitor: '$25/mo per project (Pro, post-Sep 2025) + usage-based overages. Scale is custom-priced.', highlight: true },
       { feature: 'Cron jobs', eurobase: 'Built-in scheduler with execution log', competitor: 'Function schedules (cron expression on functions)' },
       { feature: 'Webhooks', eurobase: 'Built-in with HMAC signing + retries', competitor: 'Webhooks for events on collections + auth' },
       { feature: 'CLI', eurobase: '50+ commands (projects, DB, storage, vault, functions, migrations, cron, webhooks)', competitor: 'CLI available' },
@@ -579,6 +579,6 @@ export const comparisons: Record<string, ComparisonData> = {
       },
     ],
     ctaHeadline: 'Postgres, EU-owned, and no AWS in the chain',
-    ctaDescription: 'A Supabase-shaped surface on an Appwrite-adjacent scope, without the AWS dependency and with GDPR primitives built into every tier. Free tier, no credit card. Pro is €19/mo per project when you go live.',
+    ctaDescription: 'A Supabase-shaped surface on an Appwrite-adjacent scope, without the AWS dependency and with GDPR primitives built into every tier. Free tier, no credit card. Pro is €25/mo per project when you go live.',
   },
 }

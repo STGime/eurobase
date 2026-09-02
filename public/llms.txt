@@ -83,9 +83,10 @@ const { ok, latency_ms } = await euro.status()
 
 ## Pricing
 
-- Free: 500 MB database, 1 GB storage, 5 GB bandwidth, 10K MAU, 2 projects, 3 functions, 3 webhooks
-- Pro: 5 GB database, 50 GB storage, 100 GB bandwidth, 100K MAU, 10 projects, 25 functions, unlimited webhooks
-- Enterprise: Custom limits, dedicated infrastructure, SLA
+- Free (€0/mo): For personal projects, learning, and development — non-commercial use only. 512 MB database, 2 GB bandwidth, 5,000 MAU, 50 realtime connections, all six auth methods, edge functions, vault, cron, GDPR compliance stack. Projects auto-pause after 30 days idle. Commercial use requires Pro or higher.
+- Pro (€25/mo per project): For commercial use — production apps, side businesses, agency work, internal tools. 100 GB storage, 250 GB bandwidth, 100,000 MAU, 10,000 realtime connections, BYO SMTP, quota alerts, priority support. Never pauses. Priced per project.
+- Team (€149/mo per project): Dedicated Postgres per project (direct DATABASE_URL), 7-day scheduled backups + 7-day PITR + 1 restore/month included, SSO, RBAC, audit trail, SOC 2. For SMB teams shipping regulated software.
+- Legal Team (closed beta, contact us): Everything in Team + WORM retention + legal-hold enforcement, §50 BRAO / §257 HGB / §147 AO retention windows, signed §203 StGB staff declarations, GoBD Verfahrensdokumentation. Hand-picked German legal-tech customers.
 
 ## Links
 
