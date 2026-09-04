@@ -35,6 +35,12 @@ export interface ComparisonData {
    *  page can win rich results for the exact-match long-tail queries
    *  Search Console shows the /vs/* pages ranking for. */
   faqs?: ComparisonFaq[]
+  /** Optional internal-link block ("Related") rendered between the
+   *  sovereignty section and the FAQ. Purpose: bail the new narrow
+   *  landing pages out of orphan status (a page linked only by the
+   *  sitemap gets crawled but rarely ranks). Each entry is a
+   *  same-domain path plus visible title. */
+  relatedLinks?: { title: string; href: string; note?: string }[]
   ctaHeadline: string
   ctaDescription: string
 }
@@ -183,11 +189,9 @@ export const comparisons: Record<string, ComparisonData> = {
     // adds visible depth for on-page reading time. Keep the question
     // strings tight — they appear as-is in Google FAQ dropdowns.
     faqs: [
-      {
-        question: 'Is Supabase GDPR compliant?',
-        answer:
-          'Supabase provides a GDPR Data Processing Addendum, standard contractual clauses, and EU-region hosting (Frankfurt, Ireland). That is enough for many use cases. The gap regulated buyers flag is the CLOUD Act: Supabase Inc. is a Delaware corporation using AWS, so US authorities can compel disclosure even for EU-region data. Eurobase closes that vector by having no US corporate parent and no US-headquartered processor in the critical path.',
-      },
+      // "Is Supabase GDPR compliant?" and "Does Supabase have a DPA?"
+      // moved to dedicated pages (/vs/supabase-gdpr and /vs/supabase-dpa)
+      // so each query has exactly one FAQPage schema competing for it.
       {
         question: 'Does Supabase have EU hosting?',
         answer:
@@ -578,7 +582,280 @@ export const comparisons: Record<string, ComparisonData> = {
           'Scaleway fr-par (Paris, France) for everything in the critical path: managed PostgreSQL, S3-compatible object storage, and Deno edge functions. No AWS, no GCP, no Azure. Sub-processors outside the critical path — GatewayAPI (Denmark) for SMS, Mollie (Netherlands) for paid billing — are also EU-headquartered. The live sub-processor list is available in every project as a downloadable Article 30 RoPA report.',
       },
     ],
+    relatedLinks: [
+      { title: 'Is Supabase GDPR compliant?', href: '/vs/supabase-gdpr', note: 'DPO-eye analysis of the CLOUD Act, DSAR, and Article 30 gaps.' },
+      { title: 'Supabase DPA — anatomy and gaps', href: '/vs/supabase-dpa', note: 'What the DPA covers, the SCCs, and the sub-processor list.' },
+      { title: 'Supabase Migration CLI', href: '/blog/supabase-migration-cli', note: 'One-command import of schema, data, storage, and functions.' },
+    ],
     ctaHeadline: 'Postgres, EU-owned, and no AWS in the chain',
     ctaDescription: 'A Supabase-shaped surface on an Appwrite-adjacent scope, without the AWS dependency and with GDPR primitives built into every tier. Free tier, no credit card. Pro is €25/mo per project when you go live.',
+  },
+
+  // Narrow-intent landing pages carved out of the main /vs/supabase
+  // page so exact-match queries have a dedicated answer. Search
+  // Console (Sep 2026) shows "supabase gdpr" 51 imp, "is supabase
+  // gdpr compliant" 45 imp, "supabase dpa" 57 imp — all with no
+  // dedicated page currently ranking. Content deliberately does NOT
+  // duplicate /vs/supabase (that page compares features); these
+  // answer the *legal* question directly and expand on the specific
+  // artefact (GDPR compliance posture vs. the DPA document itself).
+
+  'supabase-gdpr': {
+    slug: 'supabase-gdpr',
+    competitor: 'Supabase',
+    heroHeadline: 'Is Supabase GDPR compliant? A DPO-eye view of what is covered and what is not',
+    heroSubheadline: 'Yes — Supabase ships a Data Processing Addendum and EU regions. The gap most compliance teams flag is jurisdictional: Supabase Inc. is a Delaware corporation subject to the CLOUD Act, so a DPA cannot fully close the vector. Here is what that means in practice, and how a fully EU-native alternative closes it.',
+    metaTitle: 'Is Supabase GDPR compliant? — the DPO view (2026)',
+    metaDescription: 'Short answer: yes, with a caveat. Supabase provides a DPA, SCCs and EU regions — but Supabase Inc. is a US corporation under the CLOUD Act. Full DPO-view of what a Supabase deployment covers under GDPR, and where an EU-native alternative fits.',
+    sections: [
+      {
+        title: 'The short answer',
+        description:
+          'Yes, Supabase is GDPR compliant in the sense every compliance workflow uses that phrase: it signs a Data Processing Addendum, offers Standard Contractual Clauses, publishes a sub-processor list, and lets you pin projects to Frankfurt or Ireland so personal data physically stays in the EEA. For most SaaS teams that closes the ticket.',
+        paragraphs: [
+          'The reason "is Supabase GDPR compliant?" keeps appearing in Search Console is that compliance-literate buyers know the ticket-close and the DPO-review are different conversations. The DPO cares about three things a marketing "GDPR ✓" badge cannot cover: the operator\'s corporate jurisdiction, the concrete DSAR fulfilment path, and the Article 30 Record of Processing Activities you have to maintain yourself.',
+          'This page is the honest DPO-view of Supabase against those three axes — what it covers, what it delegates back to you, and where a fully EU-native alternative like Eurobase changes the answer.',
+        ],
+      },
+      {
+        title: 'What a Supabase deployment covers under GDPR',
+        description:
+          'Supabase\'s public compliance surface, as of 2026, is genuinely solid for a US-headquartered vendor. If your risk model treats US jurisdiction as acceptable and your DPO signs off on Standard Contractual Clauses, most of GDPR closes cleanly.',
+        bullets: [
+          'Article 28 (Processor) — signed DPA available, with SCCs as the transfer mechanism.',
+          'Article 32 (Security of processing) — encryption at rest and in transit, MFA on the console, audit-friendly logging.',
+          'Article 33/34 (Breach notification) — commitment to notify without undue delay.',
+          'Physical residency — Frankfurt (eu-central-1) or Ireland (eu-west-1) project regions hold DB, storage, and default edge-function bytes inside the EEA.',
+          'Sub-processor list — published; you can subscribe to change notices.',
+        ],
+      },
+      {
+        title: 'The CLOUD Act problem a DPA cannot override',
+        description:
+          'Article 44+ of the GDPR requires that international transfers only happen when the destination provides "essentially equivalent" protection. Since the CJEU Schrems II decision (July 2020), the EDPB has held that a transfer mechanism (SCCs, EU-US DPF) is only valid where the recipient can actually resist compelled disclosure — which providers subject to CLOUD Act and FISA §702 cannot.',
+        paragraphs: [
+          'The CLOUD Act (18 U.S.C. §2713, 2018) empowers US authorities to compel a US-headquartered provider to produce data "within such provider\'s possession, custody, or control" — regardless of the physical location of the disks. The disk-in-Frankfurt argument does not enter the analysis; only the corporate parent does. Supabase Inc. is a Delaware C-corp. Vercel (a Supabase sub-processor) is a Delaware C-corp. AWS (Supabase infrastructure) is a Washington corporation. Each is a valid target.',
+          'This was underlined publicly when Microsoft France testified under oath at the French Senate in June 2025 that they cannot guarantee EU data stays out of US reach when the parent is compellable. The same reasoning applies to every US-parented provider in the RoPA. The DPA is a contract; the CLOUD Act is a statute — statutes win.',
+          'For most private-sector SaaS deployments that risk is theoretical enough to accept. For regulated buyers — healthcare, fintech, gov-tech, legal-tech, education, defence — it is often disqualifying. If your DPO has flagged this vector, no combination of DPA + EU region + SCCs solves it. The only fix is removing the US-parent hop, which is what an EU-native processor like Eurobase is for.',
+        ],
+      },
+      {
+        title: 'DSAR mechanics — where the compliance burden lands on your team',
+        description:
+          'GDPR Articles 15 (right of access) and 20 (right to portability) give data subjects a right to their personal data on a 30-day clock. On Supabase, the mechanics are yours to build: walk auth.users, join every table with a user_id column, gather Storage files, zip them, deliver, audit-log. Every DSAR is an engineering ticket.',
+        paragraphs: [
+          'Industry surveys put the average cost of a self-served DSAR around $1,500 and 8–12 hours of engineering per request. Request volume has grown roughly 246% over 2023-2025 in EU-facing SaaS. The load is real. Supabase does not gate this poorly — they simply do not ship a DSAR primitive; every Supabase deployment writes it themselves or buys a third-party privacy-ops layer.',
+          'Eurobase treats DSAR as first-class product surface. eb.auth.exportMyData() lets an end-user trigger their own export from your app. The console has one-click per-user and full-project export. Every export is audit-logged with actor, IP, and timestamp; download links are signed and expire after 7 days. Same 30-day statutory clock, but the fulfilment is a click instead of a sprint.',
+        ],
+      },
+      {
+        title: 'Article 30 RoPA — the record you have to keep either way',
+        description:
+          'Article 30 requires every controller (and processor) to maintain a Record of Processing Activities: purpose of processing, categories of data subjects, categories of personal data, recipients, transfers, retention. This applies whether or not you use Supabase, Eurobase, or roll your own.',
+        paragraphs: [
+          'On Supabase you write it yourself, keep it current when sub-processors change, and re-export it whenever your DPO asks. The Supabase sub-processor list is the source; the RoPA is your document.',
+          'On Eurobase the sub-processor registry is a live database table (sub_processors), and every project\'s Compliance tab renders a downloadable Article 30 RoPA report that pulls from that table plus your Project-level processing metadata. Add a new sub-processor via migration → the RoPA report updates on next download; account owners are emailed 30 days before activation so the standard controller objection window applies.',
+        ],
+      },
+      {
+        title: 'If your DPO says "no US parent" — the practical checklist',
+        description:
+          'When the compliance filter includes "EU corporate parent" as a hard requirement, the market shortens. Here is the practical decision path we\'ve seen in regulated-industry procurement over 2024–2026:',
+        bullets: [
+          '(1) Do you need Postgres only? OVHcloud Managed Database and Scaleway Managed Database both give you sovereign Postgres with no auth / storage / realtime layer. Cheapest fit if you already own the rest.',
+          '(2) Do you need the full Supabase-shaped surface? Eurobase is the mainstream managed option (Estonian OÜ operator, Scaleway fr-par infrastructure, DSAR + RoPA + audit-log first-class).',
+          '(3) Do you need SOC 2 Type II attestation today? Eurobase has SOC 2 on the Team-tier roadmap; if the attestation is a procurement blocker right now, Supabase Team ($599/mo) already ships it — but you\'d be trading the sovereignty answer for the paperwork.',
+          '(4) Do you need self-host? PocketBase (SQLite) or Nhost (Postgres) are the mainstream options. Ops burden yours.',
+        ],
+      },
+    ],
+    rows: [
+      { feature: 'Signed DPA', eurobase: 'Yes — available on request from dpo@eurobase.app (self-service copy at /dpa planned for GA); standard terms need no counter-signature', competitor: 'Yes — DPA available on request or via dashboard' },
+      { feature: 'Standard Contractual Clauses', eurobase: 'Not required (intra-EU transfer)', competitor: 'Required for non-EEA transfers; EU-US Data Privacy Framework used where available' },
+      { feature: 'Corporate parent jurisdiction', eurobase: 'Estonia (EU member state)', competitor: 'United States (Delaware)', highlight: true },
+      { feature: 'CLOUD Act exposure', eurobase: 'None', competitor: 'Yes — parent is a US corporation', highlight: true },
+      { feature: 'Sub-processor list — % EU', eurobase: '100% (Scaleway/FR, GatewayAPI/DK, Mollie/NL)', competitor: 'Partial (AWS/US, Vercel/US, others)' },
+      { feature: 'Article 30 RoPA', eurobase: 'Auto-generated per project from live sub-processor registry', competitor: 'You maintain manually' },
+      { feature: 'Article 15/20 DSAR export', eurobase: 'One-click per-user and full-project — every tier', competitor: 'You build the SQL + join pipeline' },
+      { feature: 'Tamper-evident audit log', eurobase: 'Hash-chained, every admin action, actor + IP + timestamp — every tier', competitor: 'Available on paid tier (log retention)' },
+      { feature: 'Breach notification commitment', eurobase: 'Yes — without undue delay per Article 33', competitor: 'Yes — without undue delay per Article 33' },
+      { feature: 'DPO contact address', eurobase: 'dpo@eurobase.app', competitor: 'privacy@supabase.io' },
+    ],
+    sovereigntyHeadline: 'GDPR is a system, not a checkbox',
+    sovereigntyPoints: [
+      'A signed DPA answers Article 28. It does not answer whether the operator can resist a compelled-disclosure order — that is a jurisdiction question.',
+      'EU-region hosting answers physical residency. It does not answer parent jurisdiction — a Delaware corp with EU disks is still compellable in Delaware.',
+      'Eurobase removes the US-parent hop entirely: Estonian OÜ operator, 100% EU-headquartered sub-processors, EU-only bytes.',
+      'DSAR, RoPA, audit log — the primitives GDPR requires you to keep — are first-class product surfaces on every tier, not paid add-ons.',
+    ],
+    faqs: [
+      {
+        question: 'Is Supabase GDPR compliant?',
+        answer:
+          'Yes, in the ordinary sense — Supabase provides a Data Processing Addendum, Standard Contractual Clauses, EU regions (Frankfurt and Ireland), and a published sub-processor list. That is enough to close the compliance ticket for most SaaS deployments. The DPO-level caveat is the CLOUD Act: Supabase Inc. is a Delaware corporation, and no contract between you and Supabase can override the statute that lets US authorities compel Supabase to produce data. For regulated buyers where "EU corporate parent" is a hard requirement, this is why an EU-native alternative such as Eurobase is worth evaluating.',
+      },
+      {
+        question: 'Does Supabase\'s EU region solve the CLOUD Act issue?',
+        answer:
+          'No. Pinning a project to Frankfurt or Ireland keeps the physical bytes inside the EEA, which satisfies the residency dimension of GDPR. It does not solve the jurisdictional dimension — Supabase Inc. remains a Delaware C-corp compellable under US law regardless of where its customers\' data physically sits. The Microsoft France Senate testimony (June 2025) put this on the public record: EU-region hosting operated by a US parent cannot guarantee data stays out of US reach.',
+      },
+      {
+        question: 'What does GDPR Article 30 require?',
+        answer:
+          'Article 30 requires every controller (and processor) to maintain a Record of Processing Activities (RoPA) — a live document listing: purpose of each processing operation, categories of data subjects and personal data, recipients (including sub-processors), any international transfers with their legal basis, envisaged retention periods, and a general description of technical/organisational security measures. Supabase gives you the raw ingredients (sub-processor list, DPA); you assemble and maintain the RoPA. Eurobase auto-generates the Article 30 RoPA report per project from a live sub-processors table.',
+      },
+      {
+        question: 'Can I fulfil a DSAR on Supabase in 30 days?',
+        answer:
+          'Yes, but the mechanics are yours. Supabase does not ship a Data Subject Access Request primitive: to answer Article 15 (right of access) or Article 20 (portability), you walk auth.users, join every table that references the user_id, gather any Storage files owned by that user, zip the whole thing, hand it off with a signed download link, and log the fulfilment. Industry benchmarks put this at 8–12 engineering hours per request. Eurobase ships one-click DSAR export in the console and eb.auth.exportMyData() in the SDK — same 30-day statutory clock, one-click fulfilment.',
+      },
+      {
+        question: 'Is there a GDPR-native Supabase alternative?',
+        answer:
+          'Yes — Eurobase. Same Postgres + auth + storage + realtime + edge functions surface, operated by Eurobase OÜ (Estonian registry code 17557586, Ahtri 12, Tallinn), running exclusively on Scaleway fr-par (France). No US corporate parent, no US-headquartered sub-processor in the critical path. DSAR export, Article 30 RoPA, tamper-evident audit log, and sub-processor registry are first-class product surfaces on every tier including Free. Migration from Supabase uses the eurobase import supabase CLI.',
+      },
+    ],
+    relatedLinks: [
+      { title: 'Supabase DPA — anatomy and gaps', href: '/vs/supabase-dpa', note: 'What the DPA does not cover: SCCs, sub-processors, Article 28 vs 30.' },
+      { title: 'Eurobase vs Supabase (general)', href: '/vs/supabase', note: 'Full feature comparison, migration path, pricing side by side.' },
+      { title: 'DSAR feature deep-dive', href: '/features/dsar', note: 'How one-click GDPR Article 15+20 export works in the product.' },
+      { title: 'GDPR readiness assessment', href: '/gdpr-readiness', note: '10 questions your DPO will ask you — 3 minutes, no email.' },
+    ],
+    ctaHeadline: 'Skip the CLOUD Act homework',
+    ctaDescription: 'Eurobase gives you the same Supabase-shaped platform under Estonian law, with GDPR primitives — DSAR, RoPA, audit log — built into every tier. Free tier, no credit card. Pro is €25/mo per project.',
+  },
+
+  'supabase-dpa': {
+    slug: 'supabase-dpa',
+    competitor: 'Supabase',
+    heroHeadline: 'Supabase DPA — what it covers, what it does not, and where an EU-native alternative fits',
+    heroSubheadline: 'Supabase provides a signed GDPR Data Processing Addendum with Standard Contractual Clauses. A DPA is essential — but it is a contract, not a shield against statutes. Here is how the Supabase DPA works, what your legal team should check for, and why regulated buyers still want an EU-parent processor.',
+    metaTitle: 'Supabase DPA — anatomy, SCCs, sub-processors, gaps (2026)',
+    metaDescription: 'Supabase DPA explained: how to sign it, what the Standard Contractual Clauses cover, which sub-processors it lists, and the CLOUD Act gap a DPA cannot fix. Plus how the Eurobase DPA differs for EU-parent procurement requirements.',
+    sections: [
+      {
+        title: 'What a DPA is (and what it is not)',
+        description:
+          'A Data Processing Addendum is the Article 28 contract between you (the controller) and your processor. It defines the scope of processing, the security obligations, the sub-processor rules, breach-notification timelines, transfer mechanisms for non-EEA destinations, and the return/deletion of data at end of contract.',
+        paragraphs: [
+          'What a DPA is not: an override of statutes that bind the processor. If your processor is subject to the CLOUD Act, FISA §702, or a national-security letter regime, the DPA cannot promise the operator will refuse a lawful order in the jurisdiction that binds them. This is why "we have a DPA" and "we are outside US reach" are different claims.',
+          'The distinction matters for procurement. A private-sector B2B SaaS with private-sector customers can usually accept SCCs + DPA as sufficient. A processor of health, legal, defence, or public-sector data often cannot — because the sectoral rules (BRAO for German lawyers, GoBD for German tax records, HDS for French health) add residency-plus-jurisdiction obligations on top of GDPR.',
+        ],
+      },
+      {
+        title: 'How to sign the Supabase DPA',
+        description:
+          'Supabase Inc. makes their GDPR Data Processing Addendum available via the dashboard for paid plans; a copy is also linked from the compliance page. It is a click-to-accept contract for the standard terms; custom modifications (e.g., additional data-subject notification obligations, insurance requirements) are negotiated separately for Enterprise tier.',
+        bullets: [
+          'Access — dashboard → Organization Settings → Data Processing Agreement (paid plans).',
+          'Format — click-to-accept for standard terms; PDF export available.',
+          'Counter-signature — not required for standard terms; required for custom modifications.',
+          'Effective date — the date you click accept.',
+          'Retention — Supabase retains the accepted version and the ID of the accepting user for audit.',
+        ],
+      },
+      {
+        title: 'Standard Contractual Clauses in the Supabase DPA',
+        description:
+          'Because Supabase Inc. is a US entity and AWS (its infrastructure provider) is also US, personal data flowing to a Supabase project is deemed transferred to a non-adequate country under GDPR Chapter V. The transfer mechanism the Supabase DPA uses is the EU Commission\'s 2021 Standard Contractual Clauses (Module 2: controller to processor), with the EU-US Data Privacy Framework as the primary basis where the processor is DPF-certified.',
+        paragraphs: [
+          'The SCCs impose specific obligations on the recipient: notify the controller if requests from public authorities are received (Clause 15), assist with data-subject rights (Clause 10), use only approved sub-processors (Clause 9), and undergo audits (Clause 8.9). All of this is standard and well-tested.',
+          'What SCCs cannot do post-Schrems-II is guarantee that a US authority will not compel disclosure through the CLOUD Act or a §2703(d) order. The CJEU\'s Schrems II decision (July 2020) held that SCCs alone are insufficient where the recipient country\'s law does not provide "essentially equivalent" protection to GDPR. The EDPB\'s 2021 supplementary-measures guidance made clear that transfers to CLOUD-Act-reachable providers require additional technical measures (typically end-to-end encryption where the operator has no key access) — which for a managed BaaS like Supabase is not achievable end-to-end.',
+        ],
+      },
+      {
+        title: 'Sub-processor list under the Supabase DPA',
+        description:
+          'Article 28 requires the processor to disclose sub-processors, obtain the controller\'s authorisation, and provide notice of changes so the controller can object. The Supabase sub-processor list is public — the main entries relevant to a compliance review are Amazon Web Services, Inc. (US) for compute, storage, and database hosting; Vercel Inc. (US) for the dashboard and marketing site; GitHub, Inc. (US, Microsoft subsidiary) for code hosting and CI/CD; Stripe, Inc. (US) for payment processing; plus a rotating list of communications and analytics providers, most US-headquartered.',
+        paragraphs: [
+          'For an EU controller, every sub-processor is another entry in your Article 30 RoPA and another transfer that needs its own basis. If your legal team objects to any of the above on jurisdictional grounds, your options under the DPA are: object during the 30-day notice window (Supabase may or may not accommodate) or terminate the service. There is no "select only EU sub-processors" toggle.',
+          'Eurobase\'s sub-processor list is fully EU-headquartered: Scaleway SAS (France) for hosting, database, storage, and edge functions; GatewayAPI (Denmark) for SMS; Mollie B.V. (Netherlands) for paid billing when it switches on. The list is auto-generated from a live database table (sub_processors) and exposed as a downloadable Article 30 RoPA report in every project.',
+        ],
+        bullets: [
+          'Sub-processors under EU jurisdiction — Supabase: partial (AWS, Vercel, GitHub, Stripe are US). Eurobase: 100%.',
+          'Sub-processor change notice window — Supabase: 30 days. Eurobase: 30 days.',
+          'Article 30 RoPA report — Supabase: you maintain it manually. Eurobase: auto-generated per project from the live registry.',
+        ],
+      },
+      {
+        title: 'Article 28 (processor) vs Article 30 (RoPA) — two different obligations',
+        description:
+          'The DPA satisfies Article 28. It does not satisfy Article 30. Both apply, and they are frequently conflated in compliance-page marketing copy — including sometimes on our own pages.',
+        paragraphs: [
+          'Article 28 is the processor contract — the DPA. Signed once, updated when material terms change. Both Supabase and Eurobase provide it.',
+          'Article 30 is the Record of Processing Activities you maintain. It lists purposes, categories of data, sub-processors with transfer basis, retention periods. It updates whenever your sub-processor set or processing purposes change. Supabase gives you the raw ingredients; you assemble the record. Eurobase generates the report automatically from a live sub-processors table in every project\'s Compliance tab.',
+          'A "DPA report" is an ambiguous term — sometimes it means "give me the signed DPA PDF", sometimes it means "give me the Article 30 RoPA for our deployment". Our own product surfaces have historically named these inconsistently; we corrected the DSAR & Compliance card copy in September 2026 to clarify that the auto-generated report is a RoPA (Article 30), not a DPA (Article 28).',
+        ],
+      },
+      {
+        title: 'When the Supabase DPA is enough, and when it is not',
+        description:
+          'Ranking based on regulated-industry procurement patterns we have seen over 2024–2026:',
+        bullets: [
+          'Consumer SaaS, US-first, EU users welcome — Supabase DPA + SCCs + EU region is typically enough. Ship it.',
+          'B2B SaaS selling to European SMBs, no regulated data — same as above, usually.',
+          'Health/legal/fintech/defence/gov-tech — the DPO usually flags "EU parent" as a hard requirement, and no DPA closes the CLOUD Act vector. Eurobase or an EU-parent alternative is the honest recommendation.',
+          'German legal-tech (Kanzlei, RA-Micro adjacent) — §203 StGB, §43e BRAO, §257 HGB, §147 AO all layer sectoral requirements that go beyond GDPR. Eurobase Legal Team tier is in closed beta specifically for this segment.',
+        ],
+      },
+    ],
+    rows: [
+      { feature: 'DPA available', eurobase: 'Yes — on request from dpo@eurobase.app (self-service copy at /dpa planned for GA)', competitor: 'Yes — dashboard (paid), on request otherwise' },
+      { feature: 'Counter-signature for standard terms', eurobase: 'Not required for standard terms', competitor: 'Click-to-accept in dashboard' },
+      { feature: 'Standard Contractual Clauses', eurobase: 'Not required (intra-EU transfer)', competitor: 'Required — SCCs Module 2, DPF where applicable' },
+      { feature: 'Sub-processor jurisdiction', eurobase: '100% EU (FR / DK / NL)', competitor: 'Mixed — AWS/Vercel/GitHub/Stripe are US', highlight: true },
+      { feature: 'Sub-processor change notice window', eurobase: '30 days', competitor: '30 days' },
+      { feature: 'Auto-generated Article 30 RoPA report', eurobase: 'Yes — per project, downloadable JSON + PDF', competitor: 'No — you maintain manually' },
+      { feature: 'DSAR (Art. 15/20) mechanism in DPA', eurobase: 'Referenced + one-click in-product export', competitor: 'Referenced — mechanism you build' },
+      { feature: 'Data-return / deletion at contract end', eurobase: '30-day export window, 90-day backup purge', competitor: '90-day access, then deletion' },
+      { feature: 'Breach notification', eurobase: 'Without undue delay, ≤72h to controller', competitor: 'Without undue delay' },
+      { feature: 'CLOUD Act reach through processor', eurobase: 'None', competitor: 'Yes — Delaware parent + US sub-processors', highlight: true },
+    ],
+    sovereigntyHeadline: 'A DPA is a contract. A statute is a statute.',
+    sovereigntyPoints: [
+      'Supabase Inc. publishes a solid Article 28 DPA. So does every other reputable US processor. Where their DPA cannot help you is in the jurisdiction they operate under.',
+      'The CLOUD Act (2018) and FISA §702 bind the operator regardless of contract terms. The Microsoft France Senate testimony (June 2025) made this explicit and public.',
+      'Eurobase\'s DPA is signed under Estonian law, executed by Eurobase OÜ (registry 17557586), against sub-processors that are all EU-headquartered. No US hop, no CLOUD Act reach.',
+      'DPA + Article 30 RoPA + Article 15/20 DSAR are all first-class product surfaces, not paid add-ons.',
+    ],
+    faqs: [
+      {
+        question: 'Does Supabase have a DPA?',
+        answer:
+          'Yes. Supabase Inc. publishes a GDPR Data Processing Addendum with Standard Contractual Clauses. It is accessible from the dashboard for paid plans and on request otherwise. It is a click-to-accept contract for standard terms; Enterprise-tier customers negotiate custom modifications.',
+      },
+      {
+        question: 'How do I get the Supabase DPA signed?',
+        answer:
+          'On a paid plan, open the Supabase dashboard → Organization Settings → Data Processing Agreement, review the terms, and click accept. The dashboard records the accepting user and the acceptance timestamp for audit. For Free-tier or pre-signup review, request a copy from privacy@supabase.io.',
+      },
+      {
+        question: 'Does the Supabase DPA include Standard Contractual Clauses?',
+        answer:
+          'Yes. Because Supabase Inc. is a US entity, personal data flows to a non-adequate country under GDPR Chapter V. The DPA incorporates the EU Commission\'s 2021 Standard Contractual Clauses (Module 2: controller to processor) as the transfer mechanism, with the EU-US Data Privacy Framework used where the processor is DPF-certified. Since Schrems II (2020), SCCs alone are not sufficient where the recipient country\'s law permits compelled disclosure — supplementary measures may be required for high-sensitivity data.',
+      },
+      {
+        question: 'Is a Supabase DPA enough for GDPR compliance?',
+        answer:
+          'For most SaaS deployments, yes — the DPA + SCCs + EU-region hosting closes the standard compliance ticket. For regulated deployments (healthcare, legal, fintech, defence, gov-tech), the DPO typically flags the CLOUD Act as an unclosed vector, because a DPA is a contract and the CLOUD Act is a statute — statutes override. In that case an EU-parent processor like Eurobase is the practical answer.',
+      },
+      {
+        question: 'Which sub-processors does Supabase list in its DPA?',
+        answer:
+          'The Supabase sub-processor list includes Amazon Web Services (US) for infrastructure, Vercel (US) for dashboard, GitHub (US, Microsoft) for code hosting, Stripe (US) for payments, and a rotating list of communications and analytics providers, most of which are US-headquartered. Under Article 30 each of these adds a transfer-mechanism entry to your RoPA.',
+      },
+      {
+        question: 'What DPA does Eurobase provide?',
+        answer:
+          'Eurobase\'s DPA is signed by Eurobase OÜ (Estonian registry code 17557586, Ahtri 12, Tallinn) as processor, available on request from dpo@eurobase.app; a self-service copy at /dpa is planned for general availability. Because operations stay intra-EU (Estonian operator with EU-headquartered sub-processors in France, Denmark, and the Netherlands), no SCCs or DPF are required. The full sub-processor list (Scaleway/FR, GatewayAPI/DK, Mollie/NL) is auto-exposed as a downloadable Article 30 RoPA report in every project\'s Compliance tab.',
+      },
+    ],
+    relatedLinks: [
+      { title: 'Is Supabase GDPR compliant?', href: '/vs/supabase-gdpr', note: 'DPO-eye analysis of the CLOUD Act, DSAR, and Article 30 gaps.' },
+      { title: 'Eurobase vs Supabase (general)', href: '/vs/supabase', note: 'Full feature comparison and Supabase migration path.' },
+      { title: 'DSAR feature deep-dive', href: '/features/dsar', note: 'How one-click GDPR Article 15+20 export works in the product.' },
+    ],
+    ctaHeadline: 'A DPA that does not need a CLOUD Act footnote',
+    ctaDescription: 'Eurobase\'s DPA is signed under Estonian law, executed against 100% EU-headquartered sub-processors. Postgres, auth, storage, realtime, edge functions — all EU-native. Free tier, no credit card. Pro is €25/mo per project.',
   },
 }
