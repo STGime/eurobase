@@ -55,10 +55,11 @@ watchEffect(() => {
   if (!p) return
 
   const url = `${SITE_ORIGIN}/blog/${p.slug}`
-  // Fallback uses blog-beta-testers.png (the only 1200×630 asset in public/ — canonical OG size).
-  // Previous fallback pointed at /og-image.png, which doesn't exist and produced broken share cards
-  // on any post that shipped without its own image.
-  const image = p.image ? `${SITE_ORIGIN}${p.image}` : `${SITE_ORIGIN}/blog-beta-testers.png`
+  // Fallback: use the branded /og-image.png (1200×630, the site's canonical
+  // share card). Prior fallback was blog-beta-testers.png as a workaround
+  // when og-image.png did not yet exist in public/ — that gap was closed
+  // when the real branded card shipped.
+  const image = p.image ? `${SITE_ORIGIN}${p.image}` : `${SITE_ORIGIN}/og-image.png`
   const title = `${p.title} | Eurobase Blog`
   const description = p.excerpt
 

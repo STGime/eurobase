@@ -23,6 +23,9 @@
     <meta property="og:title" content="Eurobase — The Sovereign, GDPR-Native BaaS for Europe" />
     <meta property="og:description" content="One-click DSAR, Article 30 RoPA, tamper-evident audit trail — GDPR primitives no other Supabase/Firebase alternative ships. Postgres, auth, storage, realtime — hosted in France. Free, €25/mo Pro." />
     <meta property="og:image" content="https://eurobase.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Eurobase — The Sovereign, GDPR-Native BaaS for Europe" />
     <meta property="og:site_name" content="Eurobase" />
     <meta property="og:locale" content="en_US" />
     <!-- Secondary locale — signals the German-market relevance of the
@@ -301,22 +304,6 @@
         },
         {
           "@type": "Question",
-          "name": "Is Supabase GDPR compliant?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, in the ordinary sense — Supabase provides a Data Processing Addendum, Standard Contractual Clauses, EU regions (Frankfurt and Ireland), and a published sub-processor list. That is enough to close the compliance ticket for most SaaS deployments. The DPO-level caveat is the CLOUD Act: Supabase Inc. is a Delaware corporation, so US authorities can compel Supabase to produce data even for EU-region projects — a DPA is a contract and cannot override that statute. For regulated buyers requiring an EU corporate parent, an EU-native alternative like Eurobase closes the vector. See eurobase.app/vs/supabase-gdpr for the DPO-eye analysis."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Does Supabase have a DPA?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. Supabase Inc. publishes a GDPR Data Processing Addendum with Standard Contractual Clauses (Module 2 controller-to-processor, 2021 SCCs). Available via the Supabase dashboard for paid plans and on request otherwise; click-to-accept for standard terms, negotiated for Enterprise. Post-Schrems II, SCCs alone are not sufficient where the recipient country's law permits compelled disclosure — supplementary measures may be needed for high-sensitivity data. See eurobase.app/vs/supabase-dpa for the DPA anatomy and how the Eurobase DPA (signed under Estonian law, no SCCs required) compares."
-          }
-        },
-        {
-          "@type": "Question",
           "name": "What backend does a German legal-tech / Kanzlei-facing product actually need?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -521,7 +508,7 @@
           "headline": "We Just Saw the AI Kill-Switch in Action — And Why It Makes EU Sovereignty Non-Negotiable",
           "description": "On June 12th 2026 the US government forced Anthropic to shut down Fable 5 and Mythos 5 worldwide. A kill-switch is no longer hypothetical — and it makes the case for EU-sovereign infrastructure impossible to ignore.",
           "url": "https://eurobase.app/blog/ai-kill-switch-eu-sovereignty",
-          "image": "https://eurobase.app/og-image.png",
+          "image": "https://eurobase.app/blog-ai-kill-switch.jpg",
           "datePublished": "2026-06-15T09:00:00+00:00",
           "author": { "@type": "Person", "name": "Stefan Gimeson", "url": "https://www.linkedin.com/company/eurobase-baas" },
           "publisher": { "@type": "Organization", "name": "Eurobase", "url": "https://eurobase.app" },
@@ -550,7 +537,7 @@
           "headline": "First Beta Testers Are Building on Eurobase — Here's What's Ready",
           "description": "This week we onboard the first beta testers onto Eurobase. A full backend platform — auth, Postgres, storage, realtime, edge functions, vault, cron, webhooks — running entirely on EU infrastructure.",
           "url": "https://eurobase.app/blog/first-beta-testers-are-building-on-eurobase",
-          "image": "https://eurobase.app/og-image.png",
+          "image": "https://eurobase.app/blog-beta-testers.png",
           "datePublished": "2026-04-24T09:00:00+00:00",
           "author": {
             "@type": "Person",
@@ -568,7 +555,7 @@
           "headline": "Eurobase Now Speaks MCP: AI-Native Backend Operations, Sovereign by Default",
           "description": "Claude Code, Codex, Cursor, and Windsurf can now operate your Eurobase project directly — list tables, run SQL, manage Vault, invoke functions — through a hosted MCP server that never leaves EU soil.",
           "url": "https://eurobase.app/blog/eurobase-mcp-server-ai-native-sovereign-backend",
-          "image": "https://eurobase.app/og-image.png",
+          "image": "https://eurobase.app/blog-mcp-launch.jpg",
           "datePublished": "2026-04-28T09:00:00+00:00",
           "author": {
             "@type": "Person",
@@ -586,7 +573,7 @@
           "headline": "Four Ways to Run Server-Side Code on Eurobase: When to Pick Which",
           "description": "Cron Jobs, RPC, Database Triggers, and Edge Functions all live on Eurobase. They look similar from a distance but each has a specific job. Today we shipped the missing UI for the fourth, and a comparison table so you stop guessing.",
           "url": "https://eurobase.app/blog/four-ways-to-run-server-side-code",
-          "image": "https://eurobase.app/og-image.png",
+          "image": "https://eurobase.app/blog-four-functions.jpg",
           "datePublished": "2026-04-29T09:00:00+00:00",
           "author": {
             "@type": "Person",
@@ -604,7 +591,7 @@
           "headline": "The Adequacy Carousel: Why Your EU Data Strategy Shouldn't Depend on the Next US Privacy Framework",
           "description": "The EU-US Data Privacy Framework was upheld in September 2025, appealed in October 2025, and goes back to the CJEU in 2026. A four-level test that gives you a sovereignty answer the next adequacy framework can't take away.",
           "url": "https://eurobase.app/blog/adequacy-carousel-four-level-test",
-          "image": "https://eurobase.app/og-image.png",
+          "image": "https://eurobase.app/blog-adequacy-carousel.jpg",
           "datePublished": "2026-05-04T09:00:00+00:00",
           "author": {
             "@type": "Person",
@@ -622,7 +609,7 @@
           "headline": "Six Security Fixes in Twenty-Four Hours",
           "description": "A multi-tenant security review on Eurobase. Six findings — five Critical, one High. All closed in production within a day, with regression tests and four new defensive layers. Here is exactly what we found and what we shipped.",
           "url": "https://eurobase.app/blog/six-security-fixes-in-twenty-four-hours",
-          "image": "https://eurobase.app/og-image.png",
+          "image": "https://eurobase.app/blog-six-security-fixes.png",
           "datePublished": "2026-05-08T09:00:00+00:00",
           "author": {
             "@type": "Person",

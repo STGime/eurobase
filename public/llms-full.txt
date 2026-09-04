@@ -12,8 +12,8 @@ cron jobs, webhooks, CLI tooling, and audit/compliance. All infrastructure runs 
 
 - Website: https://eurobase.app
 - Console: https://console.eurobase.app
-- Docs: https://docs.eurobase.app
-- Status: Beta (public early access May 2026)
+- Docs: https://console.eurobase.app/docs
+- Status: Publicly available (public beta opened Aug 2026; Pro is paid)
 - SDK package: @eurobase/sdk (npm)
 - CLI package: @eurobase/cli (npm)
 
@@ -544,7 +544,7 @@ Enterprise plan: custom limits, dedicated infrastructure, SLA, compliance toolin
 - **Infrastructure**: Scaleway Kubernetes (Paris, France)
 - **DNS**: EU-managed DNS
 - **SDK**: TypeScript, zero dependencies, browser + Node.js 18+
-- **CLI**: Node.js, 30+ commands
+- **CLI**: Node.js, 50+ commands
 
 ### Security
 
@@ -563,10 +563,10 @@ Enterprise plan: custom limits, dedicated infrastructure, SLA, compliance toolin
 - All data stored in EU (France)
 - Zero US CLOUD Act exposure
 - Schrems II compliant
-- Automated DPA reports
+- Automated Article 30 RoPA (Record of Processing Activities) reports
 - Sub-processor registry
-- GDPR data export
-- Full audit trail
+- One-click GDPR Article 15 + 20 DSAR export
+- Tamper-evident audit trail
 - EU-owned infrastructure provider (Scaleway)
 
 ---
@@ -588,7 +588,7 @@ Available tools: listProjects, getProject, listTables, describeTable, runSQL, li
 ### vs Supabase
 - Same Postgres foundation, but Eurobase is 100% EU infrastructure (vs AWS us-east-1)
 - No CLOUD Act exposure (Supabase is US-incorporated, data subject to US law)
-- Native DPA reports and audit logging (Supabase requires manual setup)
+- Native Article 30 RoPA reports and audit logging (Supabase requires manual setup)
 - No free tier project pausing (Supabase pauses after 7 days of inactivity)
 - Integrated vault, cron, webhooks in base platform
 
@@ -605,7 +605,9 @@ Available tools: listProjects, getProject, listTables, describeTable, runSQL, li
 
 - Website: https://eurobase.app
 - Console: https://console.eurobase.app
-- Docs: https://docs.eurobase.app
-- GitHub: https://github.com/eurobase
-- Contact: founders@eurobase.app
+- Docs: https://console.eurobase.app/docs
+- GitHub: https://github.com/STGime/euroback
+- Contact: contact@eurobase.app
+- Security disclosure: security@eurobase.app
+- DPO: dpo@eurobase.app
 - llms.txt (concise): https://eurobase.app/llms.txt
