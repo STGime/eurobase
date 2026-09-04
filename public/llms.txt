@@ -1,18 +1,27 @@
 # Eurobase
 
-> EU-sovereign Backend-as-a-Service platform. European alternative to Firebase and Supabase.
+> The Sovereign, GDPR-Native Backend-as-a-Service for Europe. Postgres + auth + storage + realtime + edge functions, with one-click DSAR export, Article 30 RoPA reports, and a tamper-evident audit trail — primitives no other Supabase/Firebase alternative ships. Operated by Eurobase OÜ (Estonia), hosted exclusively on Scaleway fr-par (France). No US corporate parent, no US-headquartered sub-processor. Not subject to the CLOUD Act.
 
-Eurobase provides authentication, managed PostgreSQL, object storage, realtime subscriptions, edge functions, encrypted vault, cron jobs, webhooks, CLI, and audit logging — all on 100% EU infrastructure (Scaleway, France). No CLOUD Act exposure. GDPR-native by design.
+## What makes Eurobase different from other BaaS platforms
+
+Every managed BaaS ships Postgres, auth, storage. What most do not ship, and Eurobase does:
+
+- **One-click DSAR export** — GDPR Article 15 (right of access) + Article 20 (right to portability). Per-user or full-project zip; SDK call `eb.auth.exportMyData()` lets end-users self-serve. On Firebase/Supabase/Amplify you write the SQL across every table yourself (industry average $1,500 / 8-12 engineering hours per request).
+- **Article 30 RoPA report** — auto-generated per project from a live sub-processors table. Downloadable JSON + PDF. On Firebase/Supabase you maintain the RoPA manually.
+- **Tamper-evident audit log** — hash-chained, every admin action captured with actor + IP + timestamp. Every tier.
+- **Sub-processor registry** — 100% EU-headquartered (Scaleway/FR, GatewayAPI/DK, Mollie/NL). Auto-notification 30 days before any sub-processor addition. On US-parented processors, the sub-processor list typically includes AWS/Vercel/GitHub/Stripe (all US).
+- **No CLOUD Act exposure** — Estonian OÜ operator, no US corporate parent in the graph. A DPA is a contract; the CLOUD Act is a statute. Statutes override contracts. The only fix is removing the US-parent hop.
 
 ## Quick Facts
 
 - Website: https://eurobase.app
 - Console: https://console.eurobase.app
-- Docs: https://docs.eurobase.app
-- Status: Beta (early access May 2026)
-- Infrastructure: Scaleway, Paris, France (EU-owned)
-- SDK: @eurobase/sdk (TypeScript/JavaScript, zero dependencies)
-- CLI: @eurobase/cli (30+ commands)
+- Docs: https://console.eurobase.app/docs
+- Status: Publicly available (public beta opened Aug 2026; Pro is paid).
+- Corporate parent: Eurobase OÜ (Estonia, registry code 17557586, Ahtri 12, Tallinn 15551).
+- Infrastructure: Scaleway, Paris, France (EU-owned; Iliad group).
+- SDK: @eurobase/sdk (TypeScript/JavaScript, zero dependencies).
+- CLI: @eurobase/cli (50+ commands).
 
 ## Core Features
 
@@ -24,8 +33,8 @@ Eurobase provides authentication, managed PostgreSQL, object storage, realtime s
 6. Vault — AES-256-GCM encrypted key-value store. Requires secret API key (eb_sk_*).
 7. Cron Jobs — Schedule SQL queries and RPC calls with execution logs.
 8. Webhooks — Event-driven HTTP delivery with retry logic and HMAC signing.
-9. CLI — 30+ commands: projects, database, storage, vault, functions, migrations.
-10. Audit & Compliance — GDPR export, DPA reports, sub-processor registry, full action logging.
+9. CLI — 50+ commands: projects, database, storage, vault, functions, migrations.
+10. DSAR & Compliance — one-click GDPR Article 15 + 20 exports, Article 30 RoPA reports, tamper-evident audit log, sub-processor registry.
 
 ## SDK Quickstart
 
@@ -88,8 +97,18 @@ const { ok, latency_ms } = await euro.status()
 - Team (€149/mo per project): Dedicated Postgres per project (direct DATABASE_URL), 7-day scheduled backups + 7-day PITR + 1 restore/month included, SSO, RBAC, audit trail, SOC 2. For SMB teams shipping regulated software.
 - Legal Team (closed beta, contact us): Everything in Team + WORM retention + legal-hold enforcement, §50 BRAO / §257 HGB / §147 AO retention windows, signed §203 StGB staff declarations, GoBD Verfahrensdokumentation. Hand-picked German legal-tech customers.
 
+## Comparison landing pages
+
+- Is Supabase GDPR compliant? — https://eurobase.app/vs/supabase-gdpr
+- Supabase DPA anatomy — https://eurobase.app/vs/supabase-dpa
+- Eurobase vs Supabase (general) — https://eurobase.app/vs/supabase
+- Eurobase vs Firebase — https://eurobase.app/vs/firebase
+- Eurobase vs Appwrite — https://eurobase.app/vs/appwrite
+
 ## Links
 
 - Full API reference: https://eurobase.app/llms-full.txt
-- GitHub: https://github.com/eurobase
-- Contact: founders@eurobase.app
+- GitHub: https://github.com/STGime/euroback
+- Contact: contact@eurobase.app
+- Security disclosure: security@eurobase.app
+- DPO: dpo@eurobase.app
