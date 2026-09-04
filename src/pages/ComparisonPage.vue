@@ -255,6 +255,21 @@ onBeforeUnmount(() => {
         </div>
       </section>
 
+      <!-- Related — internal-link block. Rendered only when the
+           comparison data provides relatedLinks; existing pages
+           without the field render unchanged. Bails narrow /vs/*
+           pages out of orphan-page status by giving them ≥1 non-
+           sitemap inbound link from a semantically related page. -->
+      <section v-if="comparison.relatedLinks && comparison.relatedLinks.length" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <h2 class="text-xl font-bold text-text-white mb-4 font-heading">Related reading</h2>
+        <ul class="space-y-2">
+          <li v-for="link in comparison.relatedLinks" :key="link.href">
+            <RouterLink :to="link.href" class="text-accent-blue hover:underline font-medium">{{ link.title }}</RouterLink>
+            <span v-if="link.note" class="text-text-light">&nbsp;— {{ link.note }}</span>
+          </li>
+        </ul>
+      </section>
+
       <!-- Visible FAQ — same content as the FAQPage JSON-LD so
            Google sees them aligned. These questions are drawn
            directly from Search Console long-tails ("is supabase
