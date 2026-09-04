@@ -114,10 +114,10 @@ jobs:
 
       # Real credential check — `scw config dump` exits 1 on a fresh runner
       # because no config file exists (env-only auth is fine but dump wants
-      # the file). `account project get` actually calls the API and
-      # verifies the four SCW_* env vars are valid.
+      # the file). `account project list` needs no arguments and calls the
+      # API, so it verifies the four SCW_* env vars actually authenticate.
       - name: Verify Scaleway credentials
-        run: scw account project get ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
+        run: scw account project list
 
       # Single synchronization point. `update registry-image=…` changes the
       # container's image and, since the container is running, Scaleway
