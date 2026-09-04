@@ -46,16 +46,34 @@ on:
   #     branches: [main]
   workflow_dispatch:
 
+# Serialize deploys so two dispatches (or two rapid merges once push:main
+# is enabled) can't race and leave the older sha live. cancel-in-progress
+# is false because cancelling mid-deploy leaves the container in a bad
+# state — let each deploy finish, then run the newer one.
+concurrency:
+  group: scaleway-marketing-deploy
+  cancel-in-progress: false
+
 env:
   SCW_REGION: fr-par
   CR_NAMESPACE: eurobase-marketing
   IMAGE_NAME: eurobase
+  SCW_VERSION: "2.41.0"
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+
+    # Job-level env — scw reads these directly, no need to configure a
+    # config file. Applied to every step.
+    env:
+      SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
+      SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
+      SCW_DEFAULT_ORGANIZATION_ID: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
+      SCW_DEFAULT_PROJECT_ID: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
+      SCW_DEFAULT_REGION: fr-par
 
     steps:
       - name: Checkout
@@ -84,62 +102,52 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Install Scaleway CLI
+      # Pinned binary from the tagged GitHub release. Not `curl … master |
+      # sh` — that pipes whatever master serves today into a shell that
+      # then holds SCW_SECRET_KEY. Version check after install fails loud
+      # if the binary isn't the pinned version.
+      - name: Install Scaleway CLI (pinned v${{ env.SCW_VERSION }})
         run: |
-          curl -sSL https://raw.githubusercontent.com/scaleway/scaleway-cli/master/scripts/get.sh | sh -s -- -b /usr/local/bin
-          scw version
+          curl -fsSL -o /tmp/scw \
+            "https://github.com/scaleway/scaleway-cli/releases/download/v${SCW_VERSION}/scaleway-cli_${SCW_VERSION}_linux_amd64"
+          chmod +x /tmp/scw
+          sudo mv /tmp/scw /usr/local/bin/scw
+          scw version | tee /dev/stderr | grep -q "v${SCW_VERSION}" \
+            || { echo "scw version pin mismatch"; exit 1; }
 
-      - name: Configure Scaleway CLI
-        env:
-          SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
-          SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
-          SCW_DEFAULT_ORGANIZATION_ID: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
-          SCW_DEFAULT_PROJECT_ID: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
-          SCW_DEFAULT_REGION: ${{ env.SCW_REGION }}
-        run: scw config dump
+      # Real credential check — `scw config dump` exits 1 on a fresh runner
+      # because no config file exists (env-only auth is fine but dump wants
+      # the file). `account project get` actually calls the API and
+      # verifies the four SCW_* env vars are valid.
+      - name: Verify Scaleway credentials
+        run: scw account project get ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
 
-      - name: Point container at the new image
-        env:
-          SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
-          SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
-          SCW_DEFAULT_ORGANIZATION_ID: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
-          SCW_DEFAULT_PROJECT_ID: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
-          SCW_DEFAULT_REGION: ${{ env.SCW_REGION }}
+      # Single synchronization point. `update registry-image=…` changes the
+      # container's image and, since the container is running, Scaleway
+      # queues a redeploy automatically. `--wait` blocks until the container
+      # reaches a terminal state (ready or error). No second `deploy` call
+      # (that races with the implicit redeploy) and no hand-rolled poll
+      # (which false-greens on stale "ready" and hides "error").
+      - name: Update image and wait for deploy
         run: |
           scw container container update ${{ secrets.SCW_CONTAINER_ID }} \
-            registry-image=rg.${{ env.SCW_REGION }}.scw.cloud/${{ env.CR_NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-
-      - name: Trigger deploy
-        env:
-          SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
-          SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
-          SCW_DEFAULT_ORGANIZATION_ID: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
-          SCW_DEFAULT_PROJECT_ID: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
-          SCW_DEFAULT_REGION: ${{ env.SCW_REGION }}
-        run: |
-          scw container container deploy ${{ secrets.SCW_CONTAINER_ID }}
+            registry-image=rg.${SCW_REGION}.scw.cloud/${CR_NAMESPACE}/${IMAGE_NAME}:${GITHUB_SHA} \
+            --wait
+          # `--wait` returns 0 on terminal state, not necessarily healthy —
+          # confirm the terminal state is `ready`, print API error_message
+          # if not.
+          status=$(scw container container get ${{ secrets.SCW_CONTAINER_ID }} -o json | jq -r .status)
+          echo "post-deploy status=$status"
+          if [ "$status" != "ready" ]; then
+            scw container container get ${{ secrets.SCW_CONTAINER_ID }} -o json \
+              | jq -r '"error_message: " + (.error_message // "(none)")'
+            exit 1
+          fi
 
       - name: Smoke-test the deployed container
-        env:
-          SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
-          SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
-          SCW_DEFAULT_ORGANIZATION_ID: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
-          SCW_DEFAULT_PROJECT_ID: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
-          SCW_DEFAULT_REGION: ${{ env.SCW_REGION }}
         run: |
-          # Wait until the container reports "ready" (poll for up to 3 min).
-          for i in $(seq 1 36); do
-            status=$(scw container container get ${{ secrets.SCW_CONTAINER_ID }} -o json | jq -r .status)
-            echo "attempt $i: status=$status"
-            [ "$status" = "ready" ] && break
-            sleep 5
-          done
-          [ "$status" = "ready" ] || { echo "container not ready after 3 min"; exit 1; }
-
-          # Fetch its endpoint and hit the root.
           endpoint=$(scw container container get ${{ secrets.SCW_CONTAINER_ID }} -o json | jq -r .domain_name)
           echo "endpoint=https://$endpoint"
           curl -fsS -I "https://$endpoint/" | head -5
-          curl -fsS "https://$endpoint/" | grep -q '<title>Eurobase' || {
-            echo "index did not render the expected title"; exit 1;
-          }
+          curl -fsS "https://$endpoint/" | grep -q '<title>Eurobase' \
+            || { echo "index did not render the expected title"; exit 1; }
