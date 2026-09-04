@@ -1,0 +1,145 @@
+# Build the marketing site container, push it to Scaleway Container Registry,
+# and deploy to a Scaleway Serverless Container in fr-par.
+#
+# Sovereignty cutover Phase 1a. See docs/runbooks/sovereignty-cutover.md in
+# the euroback repo. This workflow does NOT wire the container to
+# eurobase.app — that happens in Phase 2a after the preview endpoint has
+# been smoke-tested.
+#
+# ---
+# One-time bootstrap (before this workflow can run):
+#   1. Create Container Registry namespace:
+#        scw registry namespace create name=eurobase-marketing region=fr-par
+#   2. Create Serverless Containers namespace:
+#        scw container namespace create name=eurobase-marketing region=fr-par
+#   3. Create the Serverless Container (initial deploy uses a placeholder
+#      image; the first workflow run replaces it with the real one):
+#        scw container container create \
+#          namespace-id=<from-step-2> \
+#          name=eurobase-marketing \
+#          registry-image=rg.fr-par.scw.cloud/eurobase-marketing/eurobase:bootstrap \
+#          port=8080 \
+#          min-scale=0 max-scale=3 \
+#          memory-limit=512 \
+#          region=fr-par
+#   4. Add the container ID to the SCW_CONTAINER_ID GitHub secret.
+#   5. Push a bootstrap image once (locally) so the container has something
+#      to deploy on its first workflow run — or accept that the first push
+#      to main after this PR merges will fail once and succeed on rerun.
+#
+# ---
+# Required GitHub secrets (Settings → Secrets and variables → Actions):
+#   SCW_ACCESS_KEY               — Scaleway API access key (starts SCW…)
+#   SCW_SECRET_KEY               — Scaleway API secret key (UUID)
+#   SCW_DEFAULT_ORGANIZATION_ID  — organization ID (UUID)
+#   SCW_DEFAULT_PROJECT_ID       — project ID (UUID)
+#   SCW_CONTAINER_ID             — container ID from bootstrap step 3 (UUID)
+#   VITE_NEON_DATABASE_URL       — build-time DB URL for Vite (same value
+#                                  used today in cloudbuild.yaml)
+
+name: Deploy marketing site (Scaleway)
+
+on:
+  # Manual-only until the container is bootstrapped and preview-verified.
+  # After Phase 1a smoke-test passes, add:
+  #   push:
+  #     branches: [main]
+  workflow_dispatch:
+
+env:
+  SCW_REGION: fr-par
+  CR_NAMESPACE: eurobase-marketing
+  IMAGE_NAME: eurobase
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Scaleway Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: rg.${{ env.SCW_REGION }}.scw.cloud/${{ env.CR_NAMESPACE }}
+          username: nologin
+          password: ${{ secrets.SCW_SECRET_KEY }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            rg.${{ env.SCW_REGION }}.scw.cloud/${{ env.CR_NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            rg.${{ env.SCW_REGION }}.scw.cloud/${{ env.CR_NAMESPACE }}/${{ env.IMAGE_NAME }}:latest
+          build-args: |
+            VITE_NEON_DATABASE_URL=${{ secrets.VITE_NEON_DATABASE_URL }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Install Scaleway CLI
+        run: |
+          curl -sSL https://raw.githubusercontent.com/scaleway/scaleway-cli/master/scripts/get.sh | sh -s -- -b /usr/local/bin
+          scw version
+
+      - name: Configure Scaleway CLI
+        env:
+          SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
+          SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
+          SCW_DEFAULT_ORGANIZATION_ID: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
+          SCW_DEFAULT_PROJECT_ID: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
+          SCW_DEFAULT_REGION: ${{ env.SCW_REGION }}
+        run: scw config dump
+
+      - name: Point container at the new image
+        env:
+          SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
+          SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
+          SCW_DEFAULT_ORGANIZATION_ID: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
+          SCW_DEFAULT_PROJECT_ID: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
+          SCW_DEFAULT_REGION: ${{ env.SCW_REGION }}
+        run: |
+          scw container container update ${{ secrets.SCW_CONTAINER_ID }} \
+            registry-image=rg.${{ env.SCW_REGION }}.scw.cloud/${{ env.CR_NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+      - name: Trigger deploy
+        env:
+          SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
+          SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
+          SCW_DEFAULT_ORGANIZATION_ID: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
+          SCW_DEFAULT_PROJECT_ID: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
+          SCW_DEFAULT_REGION: ${{ env.SCW_REGION }}
+        run: |
+          scw container container deploy ${{ secrets.SCW_CONTAINER_ID }}
+
+      - name: Smoke-test the deployed container
+        env:
+          SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
+          SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
+          SCW_DEFAULT_ORGANIZATION_ID: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
+          SCW_DEFAULT_PROJECT_ID: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
+          SCW_DEFAULT_REGION: ${{ env.SCW_REGION }}
+        run: |
+          # Wait until the container reports "ready" (poll for up to 3 min).
+          for i in $(seq 1 36); do
+            status=$(scw container container get ${{ secrets.SCW_CONTAINER_ID }} -o json | jq -r .status)
+            echo "attempt $i: status=$status"
+            [ "$status" = "ready" ] && break
+            sleep 5
+          done
+          [ "$status" = "ready" ] || { echo "container not ready after 3 min"; exit 1; }
+
+          # Fetch its endpoint and hit the root.
+          endpoint=$(scw container container get ${{ secrets.SCW_CONTAINER_ID }} -o json | jq -r .domain_name)
+          echo "endpoint=https://$endpoint"
+          curl -fsS -I "https://$endpoint/" | head -5
+          curl -fsS "https://$endpoint/" | grep -q '<title>Eurobase' || {
+            echo "index did not render the expected title"; exit 1;
+          }
