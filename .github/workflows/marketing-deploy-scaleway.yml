@@ -38,10 +38,8 @@
 name: Deploy marketing site (Scaleway)
 
 on:
-  # Manual-only until the container is bootstrapped and preview-verified.
-  # After Phase 1a smoke-test passes, add:
-  #   push:
-  #     branches: [main]
+  push:
+    branches: [main]
   workflow_dispatch:
 
 # Serialize deploys so two dispatches (or two rapid merges once push:main
