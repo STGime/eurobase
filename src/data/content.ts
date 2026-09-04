@@ -1,7 +1,7 @@
 export const hero = {
-  headline: 'Eurobase — The Sovereign BaaS for Europe',
-  subheadline: 'Auth, database, storage, realtime, functions, cron, vault, webhooks, and CLI — fully EU-native, zero US jurisdiction, zero DevOps.',
-  tagline: 'Firebase simplicity. Postgres power. European sovereignty. Sign up in a minute — no credit card.',
+  headline: 'Eurobase — The Sovereign, GDPR-Native BaaS for Europe',
+  subheadline: 'Auth, database, storage, realtime, functions, plus one-click DSAR export, Article 30 RoPA, and a tamper-evident audit trail — fully EU-native, zero US jurisdiction, zero DevOps.',
+  tagline: 'Firebase simplicity. Postgres power. GDPR primitives built in. European sovereignty. Sign up in a minute — no credit card.',
   primaryCta: 'Sign up free',
   secondaryCta: 'Explore the Platform',
 }
@@ -95,7 +95,7 @@ export const solution = {
     { name: 'Webhooks', icon: '\uD83D\uDD17', color: '#6A1B9A', description: 'Event-driven delivery with retry logic and HMAC signing' },
     { name: 'CLI Tool', icon: '\u2328\uFE0F', color: '#1565C0', description: '50+ commands for projects, database, storage, vault, functions, and migrations' },
     { name: 'MCP Server', icon: '🤖', color: '#3949AB', description: 'AI IDE integration (Claude Code, Cursor, Codex, Windsurf): list tables, run SQL, manage Vault, invoke functions' },
-    { name: 'DSAR & Compliance', icon: '📋', color: '#AD1457', description: 'One-click GDPR Article 15 + 20 exports, Article 30 DPA reports, tamper-evident audit log, sub-processor registry' },
+    { name: 'DSAR & Compliance', icon: '📋', color: '#AD1457', description: 'One-click GDPR Article 15 + 20 exports, Article 30 RoPA reports, tamper-evident audit log, sub-processor registry' },
     // Supabase → Eurobase migration CLI. Code has shipped on main
     // but is being validated end-to-end (see #278 in the backend
     // repo). Marketing card carries `comingSoon: true` so the UI
@@ -1301,7 +1301,7 @@ If you've been hand-rolling triggers via the SQL editor or wondering whether you
         { label: 'Eurobase Console — Documentation', url: 'https://console.eurobase.app/docs' },
         { label: 'PostgreSQL — CREATE TRIGGER', url: 'https://www.postgresql.org/docs/current/sql-createtrigger.html' },
         { label: 'PostgreSQL — Trigger Procedures (PL/pgSQL)', url: 'https://www.postgresql.org/docs/current/plpgsql-trigger.html' },
-        { label: 'Eurobase — The Sovereign BaaS for Europe', url: 'https://eurobase.app' },
+        { label: 'Eurobase — The Sovereign, GDPR-Native BaaS for Europe', url: 'https://eurobase.app' },
       ],
     },
     {
@@ -1397,7 +1397,7 @@ If you're a beta tester building with AI, this is the piece you've been asking f
 [Sign in to your console](https://console.eurobase.app) to mint a PAT and connect, or [request beta access](/#cta) if you don't have a project yet.`,
       references: [
         { label: 'Model Context Protocol — Specification', url: 'https://modelcontextprotocol.io' },
-        { label: 'Eurobase — The Sovereign BaaS for Europe', url: 'https://eurobase.app' },
+        { label: 'Eurobase — The Sovereign, GDPR-Native BaaS for Europe', url: 'https://eurobase.app' },
         { label: 'Anthropic — Introducing the Model Context Protocol', url: 'https://www.anthropic.com/news/model-context-protocol' },
         { label: 'U.S. Congress — CLOUD Act (H.R. 4943)', url: 'https://www.congress.gov/bill/115th-congress/house-bill/4943' },
       ],
@@ -1481,7 +1481,7 @@ If you're a developer, founder, or team that wants to build on sovereign EU infr
 
 [Request access today](/#cta).`,
       references: [
-        { label: 'Eurobase — The Sovereign BaaS for Europe', url: 'https://eurobase.app' },
+        { label: 'Eurobase — The Sovereign, GDPR-Native BaaS for Europe', url: 'https://eurobase.app' },
         { label: 'Scaleway — European Cloud Provider', url: 'https://www.scaleway.com' },
         { label: 'U.S. Congress — CLOUD Act (H.R. 4943)', url: 'https://www.congress.gov/bill/115th-congress/house-bill/4943' },
       ],

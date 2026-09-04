@@ -33,7 +33,7 @@ import heroImage from '@/assets/images/hero-network.webp'
             class="inline-block mb-6 animate-fade-in-up"
           >
             <img
-              alt="Eurobase - The Sovereign BaaS for Europe | Product Hunt"
+              alt="Eurobase - The Sovereign, GDPR-Native BaaS for Europe | Product Hunt"
               width="250"
               height="54"
               src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1191233&amp;theme=light&amp;t=1787728446785"
