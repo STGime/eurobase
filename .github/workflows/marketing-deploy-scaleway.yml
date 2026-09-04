@@ -34,8 +34,6 @@
 #   SCW_DEFAULT_ORGANIZATION_ID  — organization ID (UUID)
 #   SCW_DEFAULT_PROJECT_ID       — project ID (UUID)
 #   SCW_CONTAINER_ID             — container ID from bootstrap step 3 (UUID)
-#   VITE_NEON_DATABASE_URL       — build-time DB URL for Vite (same value
-#                                  used today in cloudbuild.yaml)
 
 name: Deploy marketing site (Scaleway)
 
@@ -97,8 +95,6 @@ jobs:
           tags: |
             rg.${{ env.SCW_REGION }}.scw.cloud/${{ env.CR_NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
             rg.${{ env.SCW_REGION }}.scw.cloud/${{ env.CR_NAMESPACE }}/${{ env.IMAGE_NAME }}:latest
-          build-args: |
-            VITE_NEON_DATABASE_URL=${{ secrets.VITE_NEON_DATABASE_URL }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 

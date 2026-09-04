@@ -84,41 +84,9 @@ h1, h2, h3, h4, h5, h6 {
 .stagger-6 { animation-delay: 0.6s; }
 .stagger-7 { animation-delay: 0.7s; }
 
-/* Modal transitions */
-.modal-enter-active {
-  transition: opacity 0.25s ease-out;
-}
-.modal-enter-active > div:last-child {
-  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
-}
-.modal-leave-active {
-  transition: opacity 0.2s ease-in;
-}
-.modal-leave-active > div:last-child {
-  transition: opacity 0.2s ease-in, transform 0.2s ease-in;
-}
-.modal-enter-from,
-.modal-leave-to {
-  opacity: 0;
-}
-.modal-enter-from > div:last-child {
-  opacity: 0;
-  transform: scale(0.95) translateY(8px);
-}
-.modal-leave-to > div:last-child {
-  opacity: 0;
-  transform: scale(0.97);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-in-up,
   .animate-float {
     animation: none;
-  }
-  .modal-enter-active,
-  .modal-leave-active,
-  .modal-enter-active > div:last-child,
-  .modal-leave-active > div:last-child {
-    transition: none;
   }
 }
