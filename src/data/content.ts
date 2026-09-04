@@ -1,7 +1,7 @@
 export const hero = {
-  headline: 'Eurobase — The Sovereign BaaS for Europe',
-  subheadline: 'Auth, database, storage, realtime, functions, cron, vault, webhooks, and CLI — fully EU-native, zero US jurisdiction, zero DevOps.',
-  tagline: 'Firebase simplicity. Postgres power. European sovereignty. Sign up in a minute — no credit card.',
+  headline: 'Eurobase — The Sovereign, GDPR-Native BaaS for Europe',
+  subheadline: 'Auth, database, storage, realtime, functions, plus one-click DSAR export, Article 30 RoPA, and a tamper-evident audit trail — fully EU-native, zero US jurisdiction, zero DevOps.',
+  tagline: 'Firebase simplicity. Postgres power. GDPR primitives built in. European sovereignty. Sign up in a minute — no credit card.',
   primaryCta: 'Sign up free',
   secondaryCta: 'Explore the Platform',
 }
@@ -1301,7 +1301,7 @@ If you've been hand-rolling triggers via the SQL editor or wondering whether you
         { label: 'Eurobase Console — Documentation', url: 'https://console.eurobase.app/docs' },
         { label: 'PostgreSQL — CREATE TRIGGER', url: 'https://www.postgresql.org/docs/current/sql-createtrigger.html' },
         { label: 'PostgreSQL — Trigger Procedures (PL/pgSQL)', url: 'https://www.postgresql.org/docs/current/plpgsql-trigger.html' },
-        { label: 'Eurobase — The Sovereign BaaS for Europe', url: 'https://eurobase.app' },
+        { label: 'Eurobase — The Sovereign, GDPR-Native BaaS for Europe', url: 'https://eurobase.app' },
       ],
     },
     {
@@ -1397,7 +1397,7 @@ If you're a beta tester building with AI, this is the piece you've been asking f
 [Sign in to your console](https://console.eurobase.app) to mint a PAT and connect, or [request beta access](/#cta) if you don't have a project yet.`,
       references: [
         { label: 'Model Context Protocol — Specification', url: 'https://modelcontextprotocol.io' },
-        { label: 'Eurobase — The Sovereign BaaS for Europe', url: 'https://eurobase.app' },
+        { label: 'Eurobase — The Sovereign, GDPR-Native BaaS for Europe', url: 'https://eurobase.app' },
         { label: 'Anthropic — Introducing the Model Context Protocol', url: 'https://www.anthropic.com/news/model-context-protocol' },
         { label: 'U.S. Congress — CLOUD Act (H.R. 4943)', url: 'https://www.congress.gov/bill/115th-congress/house-bill/4943' },
       ],
@@ -1481,7 +1481,7 @@ If you're a developer, founder, or team that wants to build on sovereign EU infr
 
 [Request access today](/#cta).`,
       references: [
-        { label: 'Eurobase — The Sovereign BaaS for Europe', url: 'https://eurobase.app' },
+        { label: 'Eurobase — The Sovereign, GDPR-Native BaaS for Europe', url: 'https://eurobase.app' },
         { label: 'Scaleway — European Cloud Provider', url: 'https://www.scaleway.com' },
         { label: 'U.S. Congress — CLOUD Act (H.R. 4943)', url: 'https://www.congress.gov/bill/115th-congress/house-bill/4943' },
       ],
