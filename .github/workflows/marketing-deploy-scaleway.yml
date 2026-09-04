@@ -108,7 +108,8 @@ jobs:
             "https://github.com/scaleway/scaleway-cli/releases/download/v${SCW_VERSION}/scaleway-cli_${SCW_VERSION}_linux_amd64"
           chmod +x /tmp/scw
           sudo mv /tmp/scw /usr/local/bin/scw
-          scw version | tee /dev/stderr | grep -q "v${SCW_VERSION}" \
+          # `scw version` prints "Version    2.41.0" (no leading v).
+          scw version | tee /dev/stderr | grep -qE "^Version[[:space:]]+${SCW_VERSION}\b" \
             || { echo "scw version pin mismatch"; exit 1; }
 
       # Real credential check — `scw config dump` exits 1 on a fresh runner
