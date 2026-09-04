@@ -210,6 +210,13 @@ onBeforeUnmount(() => {
             <span>{{ bullet }}</span>
           </li>
         </ul>
+        <!-- Optional "read more" pointer — one-line link to a dedicated
+             deeper page. Purpose: put the internal link where a reader
+             just finished the relevant section (not buried at the end
+             of the whole page in relatedLinks). -->
+        <p v-if="section.readMore" class="mt-4">
+          <RouterLink :to="section.readMore.href" class="text-accent-blue hover:underline font-medium">{{ section.readMore.text }} →</RouterLink>
+        </p>
       </section>
 
       <!-- Comparison Table -->

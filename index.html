@@ -288,6 +288,22 @@
         },
         {
           "@type": "Question",
+          "name": "Is Supabase GDPR compliant?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes in the ordinary sense — Supabase ships a signed DPA, Standard Contractual Clauses, EU regions (Frankfurt, Ireland), and a published sub-processor list. That closes the ticket for most SaaS deployments. The DPO-level caveat is jurisdictional: Supabase Inc. is a Delaware corporation, so US authorities can compel disclosure under the CLOUD Act even for EU-region projects — a DPA is a contract and cannot override that statute. See eurobase.app/vs/supabase-gdpr for the DPO-eye analysis of what a Supabase deployment covers under Articles 28/30/32 and where an EU-native alternative fits."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Supabase have a DPA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Supabase Inc. publishes a GDPR Data Processing Addendum with Standard Contractual Clauses (Module 2 controller-to-processor, 2021 SCCs). Available via the Supabase dashboard for paid plans and on request otherwise; click-to-accept for standard terms, negotiated for Enterprise. Post-Schrems II, SCCs alone are not sufficient where the recipient country's law permits compelled disclosure. See eurobase.app/vs/supabase-dpa for the DPA anatomy — the sub-processor list, the Article 28 vs 30 distinction, and how the Eurobase DPA (signed under Estonian law, no SCCs required) compares."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Is Eurobase free to use?",
           "acceptedAnswer": {
             "@type": "Answer",
