@@ -99,6 +99,20 @@ export const faq: FaqEntry[] = [
       'It gets you physical data residency in the EEA and a standard SCC-based DPA — a competent baseline, but not immunity from the CLOUD Act. Because Supabase Inc. is a Delaware corporation using AWS, US authorities can compel data access even for EU-region deployments. <a href="/blog/supabase-gdpr-dpa-eu-region" class="text-accent-blue hover:underline">Read the full post →</a>',
   },
   {
+    id: 'supabase-gdpr-compliant',
+    category: 'Supabase alternative',
+    question: 'Is Supabase GDPR compliant?',
+    answer:
+      'Yes in the ordinary sense — Supabase ships a signed DPA, Standard Contractual Clauses, EU regions (Frankfurt, Ireland), and a published sub-processor list. That closes the ticket for most SaaS deployments. The DPO-level caveat is jurisdictional: Supabase Inc. is a Delaware corporation, so US authorities can compel disclosure under the CLOUD Act even for EU-region projects — a DPA is a contract and cannot override that statute. See the <a href="/vs/supabase-gdpr" class="text-accent-blue hover:underline">DPO-eye analysis</a> for what a Supabase deployment covers under Articles 28/30/32 and where an EU-native alternative fits.',
+  },
+  {
+    id: 'supabase-dpa',
+    category: 'Supabase alternative',
+    question: 'Does Supabase have a DPA?',
+    answer:
+      'Yes. Supabase Inc. publishes a GDPR Data Processing Addendum with Standard Contractual Clauses (Module 2 controller-to-processor, 2021 SCCs). Available via the Supabase dashboard for paid plans and on request otherwise; click-to-accept for standard terms, negotiated for Enterprise. Post-Schrems II, SCCs alone are not sufficient where the recipient country\'s law permits compelled disclosure. See <a href="/vs/supabase-dpa" class="text-accent-blue hover:underline">the DPA anatomy</a> for the sub-processor list, the Article 28 vs 30 distinction, and how the Eurobase DPA (Estonian law, no SCCs required) compares.',
+  },
+  {
     id: 'migrate-from-supabase',
     category: 'Supabase alternative',
     question: 'How do I migrate from Supabase to Eurobase?',

@@ -13,6 +13,10 @@ export interface ComparisonSection {
   paragraphs?: string[]
   /** Optional bulleted takeaway list under the paragraphs. */
   bullets?: string[]
+  /** Optional "read more" link rendered as a single line under the section
+   *  content. Use for pointing at deeper dedicated pages (e.g. from the
+   *  general /vs/supabase GDPR section into /vs/supabase-gdpr). */
+  readMore?: { text: string; href: string }
 }
 
 export interface ComparisonFaq {
@@ -80,6 +84,7 @@ export const comparisons: Record<string, ComparisonData> = {
           'Built-in DSAR export (Art. 15 + 20): Supabase = DIY SQL. Eurobase = one click on every tier, free included.',
           'Article 30 RoPA report: Supabase = you write it. Eurobase = auto-generated from live sub-processor registry.',
         ],
+        readMore: { text: 'Read the full DPO-eye analysis: Is Supabase GDPR compliant?', href: '/vs/supabase-gdpr' },
       },
       {
         title: 'The Supabase EU region: what physical residency does — and does not — do',
@@ -90,6 +95,7 @@ export const comparisons: Record<string, ComparisonData> = {
           'The Microsoft France testimony under oath at the French Senate in June 2025 made this concrete: Microsoft France said they cannot guarantee that data stored in their EU regions stays out of US reach, because the Redmond parent can be compelled by a US warrant regardless. The same logic applies to every US-headquartered provider — Supabase, Vercel, MongoDB, Snowflake, Datadog — whether or not they run EU regions.',
           'Eurobase closes this vector by removing the US-parent from the graph. Eurobase OÜ is an Estonian company. Scaleway is a French company (a subsidiary of Iliad, French). GatewayAPI is Danish. Mollie is Dutch. No hop in the critical path goes through a jurisdiction outside the EEA. That is the difference between "our data is in Europe" and "our provider is Europe."',
         ],
+        readMore: { text: 'Deeper dive: the Supabase DPA — what it covers, what it does not, and the Article 28 vs 30 distinction', href: '/vs/supabase-dpa' },
       },
       {
         title: 'Looking for a Supabase EU alternative? Three questions that decide it',
