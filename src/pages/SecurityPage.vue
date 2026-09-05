@@ -284,6 +284,34 @@ const nis2Rows: Nis2Row[] = [
         </ul>
       </section>
 
+      <!-- Backup & recovery — filled from a real measurement.
+           Placeholders below are updated after each monthly regression run.
+           To fill placeholders after `scripts/ops/monthly-backup-pitr-test.sh`:
+             sed -i '' \
+               -e 's/{{RPO_MEASURED_SECONDS}}/<Xs>/g' \
+               -e 's/{{RTO_MEASURED_SECONDS}}/<Ys>/g' \
+               -e 's/{{MEASURED_DATE}}/YYYY-MM-DD/g' \
+               src/pages/SecurityPage.vue \
+               ~/euroback/docs/legal/v2/dpa.md
+           (same three tokens are used in both files — one sed run
+           updates the /security page + DPA together.) -->
+      <section id="backup-recovery" class="mb-16 scroll-mt-20">
+        <h2 class="text-2xl font-bold text-text-white mb-4 font-heading">Backup &amp; recovery</h2>
+        <p class="text-text-light leading-relaxed mb-4">
+          Team-tier dedicated Postgres instances carry <strong>7-day scheduled backups plus 7-day continuous point-in-time recovery</strong> (WAL archiving), with 1 self-service restore per calendar month included. Free and Pro tiers share a managed instance without customer-selectable restore; Eurobase restores the shared instance to its own recovery targets in a disaster scenario.
+        </p>
+        <p class="text-text-light leading-relaxed mb-4">
+          The numbers below are measured, not aspirational. Every value comes from the same runbook and script an operator can run against a throwaway Scaleway RDB instance in ~30 minutes — <a href="https://github.com/STGime/euroback/blob/main/docs/runbooks/backup-pitr-test.md" class="text-accent-blue hover:underline">docs/runbooks/backup-pitr-test.md</a>.
+        </p>
+        <ul v-pre class="space-y-3 text-text-light leading-relaxed">
+          <li class="flex gap-3"><span class="text-accent-blue font-mono text-sm mt-1 min-w-24">RPO</span><span><strong>Measured maximum data loss on unplanned failover: <code class="text-accent-gold">{{RPO_MEASURED_SECONDS}}s</code></strong>. Continuous WAL archiving; anything committed longer than this window ago is durable through a recovery. Test executed {{MEASURED_DATE}}.</span></li>
+          <li class="flex gap-3"><span class="text-accent-blue font-mono text-sm mt-1 min-w-24">RTO</span><span><strong>Measured restore time at ~5 MB dataset: <code class="text-accent-gold">{{RTO_MEASURED_SECONDS}}s</code></strong> (fixed provisioning + plumbing overhead — the baseline that dominates at small data volumes). Restore time increases with database size; for workloads above ~100 MB we provide a bespoke measurement on request. Test executed {{MEASURED_DATE}}.</span></li>
+        </ul>
+        <p class="text-text-light leading-relaxed mt-4">
+          An automated monthly regression job re-measures both numbers on the 1st of every month and alerts on drift; the runbook covers scenarios T1–T8 including cross-project isolation and ciphertext-in-EU verification.
+        </p>
+      </section>
+
       <!-- CVD -->
       <section id="cvd" class="mb-16 scroll-mt-20">
         <h2 class="text-2xl font-bold text-text-white mb-4 font-heading">Coordinated Vulnerability Disclosure</h2>
