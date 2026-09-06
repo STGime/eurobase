@@ -24,10 +24,10 @@ const PAGE_DESC_LONG =
   'How Eurobase secures customer data: sub-processor list, encryption, incident-response SLAs, Coordinated Vulnerability Disclosure policy, ISMS-lite aligned to NIS2 Article 21 and GDPR Article 32. German legal-tech dossier: BSI C5 roadmap, ISO 27001 SoA, IT-Grundschutz self-declaration, NIS2 + AI Act positioning.'
 const PAGE_URL = `${SITE_ORIGIN}/security`
 
-// Bumped for the #316 legal-tech dossier addition so crawlers
+// Bumped when the page content materially changes so crawlers
 // re-index. Keep in sync with public/sitemap.xml's <lastmod> for
 // /security.
-const PAGE_MODIFIED = '2026-08-10'
+const PAGE_MODIFIED = '2026-09-06'
 
 function findOrCreateMeta(attr: 'name' | 'property', key: string): HTMLMetaElement {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`)
@@ -147,7 +147,7 @@ interface Nis2Row {
 const nis2Rows: Nis2Row[] = [
   { id: 'a', requirement: 'Risk analysis + information system security policies', status: 'shipped', notes: 'Written ISMS-lite; risk register reviewed annually.' },
   { id: 'b', requirement: 'Incident handling', status: 'shipped', notes: 'Console-side data-breach register with 24h / 72h SLA workflow; internal on-call rota + runbooks.' },
-  { id: 'c', requirement: 'Business continuity + crisis management', status: 'shipped', notes: 'Documented RTO/RPO; hourly Postgres backups + nightly cross-region snapshot; quarterly DR drill.' },
+  { id: 'c', requirement: 'Business continuity + crisis management', status: 'shipped', notes: 'Measured RTO/RPO published below in Backup & recovery; daily Postgres backups + 7-day continuous point-in-time recovery via WAL archiving; monthly regression test (script + CronJob scaffolded, on operator demand today, automated once the ops image lands).' },
   { id: 'd', requirement: 'Supply-chain security', status: 'shipped', notes: 'Public sub-processor register with region + CLOUD-Act flags; 30-day advance notice on additions.' },
   { id: 'e', requirement: 'Security in acquisition, development, maintenance + vulnerability handling', status: 'shipped', notes: 'Dependabot, static analysis, mandatory PR review, staged rollouts; CVD policy below.' },
   { id: 'f', requirement: 'Policies to assess effectiveness of the risk-management measures', status: 'partial', notes: 'Annual ISMS review + post-incident review formalised; independent audit deferred to ISO 27001 track.' },
@@ -282,6 +282,31 @@ const nis2Rows: Nis2Row[] = [
           <li class="flex gap-3"><span class="text-accent-blue font-mono text-sm mt-1 min-w-16">72 h</span><span><strong>Formal incident notification.</strong> Notice to affected customers with initial assessment and known-facts summary. Regulatory notification when GDPR Article 33 thresholds are met — to the Estonian Data Protection Inspectorate (<em>Andmekaitse Inspektsioon</em>).</span></li>
           <li class="flex gap-3"><span class="text-accent-blue font-mono text-sm mt-1 min-w-16">30 d</span><span><strong>Final report.</strong> Root cause, corrective actions, lessons learned. Anonymised post-mortem published on <a href="/#blog" class="text-accent-blue hover:underline">/blog</a> if impact was material.</span></li>
         </ul>
+      </section>
+
+      <!-- Backup & recovery — the numbers below are placeholders filled
+           after each `scripts/ops/monthly-backup-pitr-test.sh` run. The
+           fill workflow (which tokens, which sed command) lives in the
+           runbook, deliberately NOT in this comment: describing the sed
+           patterns here would self-corrupt on the next fill because the
+           same tokens appear in the section body. See
+           docs/runbooks/backup-pitr-test.md § "Publishing measured
+           numbers" for the fill procedure. -->
+      <section id="backup-recovery" class="mb-16 scroll-mt-20">
+        <h2 class="text-2xl font-bold text-text-white mb-4 font-heading">Backup &amp; recovery</h2>
+        <p class="text-text-light leading-relaxed mb-4">
+          Team-tier dedicated Postgres instances carry <strong>daily scheduled backups with 7-day retention plus 7-day continuous point-in-time recovery</strong> (WAL archiving), with 1 self-service restore per calendar month included. Free and Pro tiers share a managed instance without customer-selectable restore; Eurobase restores the shared instance to its own recovery targets in a disaster scenario.
+        </p>
+        <p class="text-text-light leading-relaxed mb-4">
+          The numbers below are measured, not aspirational. Every value comes from the same runbook and script an operator can run against a throwaway Scaleway RDB instance in ~30 minutes — <a href="https://github.com/STGime/euroback/blob/main/docs/runbooks/backup-pitr-test.md" target="_blank" rel="noopener" class="text-accent-blue hover:underline">docs/runbooks/backup-pitr-test.md</a>.
+        </p>
+        <ul v-pre class="space-y-3 text-text-light leading-relaxed">
+          <li class="flex gap-3"><span class="text-accent-blue font-mono text-sm mt-1 min-w-24">RPO</span><span><strong>Measured maximum data loss on unplanned failover: <code class="text-accent-gold">{{RPO_MEASURED_SECONDS}}s</code></strong>. Continuous WAL archiving; anything committed longer than this window ago is durable through a recovery. Test executed {{MEASURED_DATE}}.</span></li>
+          <li class="flex gap-3"><span class="text-accent-blue font-mono text-sm mt-1 min-w-24">RTO</span><span><strong>Measured restore time at ~5 MB dataset: <code class="text-accent-gold">{{RTO_MEASURED_SECONDS}}s</code></strong> (fixed provisioning + plumbing overhead — the baseline that dominates at small data volumes). Restore time increases with database size; for workloads above ~100 MB we provide a bespoke measurement on request. Test executed {{MEASURED_DATE}}.</span></li>
+        </ul>
+        <p class="text-text-light leading-relaxed mt-4">
+          An automated monthly regression job (Kubernetes CronJob) is scaffolded to re-measure both numbers on the 1st of every month and alert on drift; today it runs on operator demand until the ops image build lands. The runbook covers scenarios T1–T8 including cross-project isolation and backup-ciphertext-in-EU verification.
+        </p>
       </section>
 
       <!-- CVD -->
