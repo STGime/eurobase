@@ -72,6 +72,12 @@ export const routes: RouteRecordRaw[] = [
 ]
 
 export const scrollBehavior: RouterScrollBehavior = (to) => {
+  // No-op during SSG — vite-ssg's `mock: true` installs a jsdom
+  // window that does NOT implement scrollTo, and vue-router calls
+  // scrollBehavior once per rendered route, so without this guard
+  // every build logs 163 "Not implemented" warnings. `typeof window`
+  // wouldn't work (the mock defines it); use vite's SSR sentinel.
+  if (import.meta.env.SSR) return false
   if (to.hash) {
     return { el: to.hash, behavior: 'smooth' }
   }
@@ -79,10 +85,12 @@ export const scrollBehavior: RouterScrollBehavior = (to) => {
 }
 
 // Client-only afterEach — vite-ssg calls the setup fn with a router
-// instance on both client + server; this hook only fires in a browser
-// (window guard so it no-ops during SSG), matching the old behavior.
+// instance on both client + server, and its `mock: true` gives us a
+// jsdom `window`, so a `typeof window` guard would run this during
+// SSG too (and log "Not implemented: Window's scrollTo" per route).
+// Use vite's SSR sentinel instead.
 export function installClientNavGuards(router: Router) {
-  if (typeof window === 'undefined') return
+  if (import.meta.env.SSR) return
   router.afterEach((to) => {
     if (!to.hash) {
       window.scrollTo({ top: 0, behavior: 'instant' })
