@@ -397,7 +397,7 @@ export const pricing = {
         title: 'Team',
         rows: [
           { feature: 'Dedicated Postgres (direct DATABASE_URL)', values: [undefined, undefined, 'Invite-only beta', 'Invite-only beta'] },
-          { feature: 'Daily backups + on-demand snapshots (7-day retention)', values: [undefined, undefined, '\u2713', '\u2713'] },
+          { feature: 'Daily backups + on-demand snapshots', values: [undefined, undefined, '7-day retention', '30-day retention'] },
           { feature: 'SSO, RBAC, org-level roles', values: [undefined, undefined, '\u2713', '\u2713'] },
           { feature: 'SOC 2 Type II', values: [undefined, undefined, 'Coming soon', 'Coming soon'] },
         ],
