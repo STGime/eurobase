@@ -324,7 +324,7 @@ export const pricing = {
     {
       name: 'Team',
       price: '€149/mo',
-      description: 'Dedicated Postgres per project (direct DATABASE_URL), 7-day scheduled backups + 7-day point-in-time recovery + 1 restore/month included, SSO, RBAC, audit trail, SOC 2. For teams shipping regulated SMB software.',
+      description: 'Dedicated Postgres per project (direct DATABASE_URL), 7-day retention on daily scheduled backups + on-demand snapshots + 1 restore/month included, SSO, RBAC, audit trail, SOC 2. For teams shipping regulated SMB software.',
       icon: '\uD83C\uDFE2',
       highlighted: false,
       comingSoon: true,
@@ -397,7 +397,7 @@ export const pricing = {
         title: 'Team',
         rows: [
           { feature: 'Dedicated Postgres (direct DATABASE_URL)', values: [undefined, undefined, 'Invite-only beta', 'Invite-only beta'] },
-          { feature: 'Backups + point-in-time recovery', values: [undefined, undefined, '\u2713', '\u2713'] },
+          { feature: 'Daily backups + on-demand snapshots', values: [undefined, undefined, '7-day retention', '30-day retention'] },
           { feature: 'SSO, RBAC, org-level roles', values: [undefined, undefined, '\u2713', '\u2713'] },
           { feature: 'SOC 2 Type II', values: [undefined, undefined, 'Coming soon', 'Coming soon'] },
         ],
@@ -740,7 +740,7 @@ Overages don't blackout your users. If you cross 100 GB storage or 250 GB egress
 
 Dedicated Postgres per project, direct \`DATABASE_URL\` for [Payload](https://payloadcms.com) / [Prisma](https://www.prisma.io) / [Drizzle](https://orm.drizzle.team) stacks, SSO, RBAC. The [infrastructure is built and running](/blog/legaltech-backend-what-a-german-kanzlei-actually-needs); pricing is now locked at €149/mo per project.
 
-**Data guarantees.** Scaleway RDB native scheduled backups (daily, 7-day retention) plus 7-day point-in-time recovery. **1 restore per calendar month is included** — snapshot-based or PITR, either counts against the same cap. Additional restores are a support conversation until we roll out usage-based billing.
+**Data guarantees.** Scaleway RDB native scheduled backups (daily, 7-day retention), plus on-demand snapshots the customer can take before risky migrations. **1 restore per calendar month is included** — from either a scheduled backup or an on-demand snapshot, either counts against the same cap. Additional restores are a support conversation until we roll out usage-based billing.
 
 The higher-retention story lives on the [Legal Team](#legal-team) tier for compliance customers — 30-day scheduled backup retention alongside WORM object storage, retention holds, and 10-year audit-log retention.
 
@@ -822,7 +822,7 @@ That gets a general SaaS to a GDPR-defensible posture. It does not, by itself, m
 
 ## What is landing in the Legal Team tier (weeks, not quarters)
 
-The base Team tier ships a dedicated Postgres instance per project, backup/PITR, and a direct \`DATABASE_URL\` for Payload / Prisma / Drizzle stacks — the last of those [merged this morning](https://github.com/STGime/euroback/pull/336). On top of that, the **Legal Team** tier layers the four blockers above:
+The base Team tier ships a dedicated Postgres instance per project, daily scheduled backups with on-demand snapshots, and a direct \`DATABASE_URL\` for Payload / Prisma / Drizzle stacks — the last of those [merged this morning](https://github.com/STGime/euroback/pull/336). On top of that, the **Legal Team** tier layers the four blockers above:
 
 **§203 / §43e paperwork surface.** A signed *de-legal-tech-addendum* extends the DPA with §43e BRAO clauses and a §203 StGB Verschwiegenheitsverpflichtung template. Every Eurobase staff member with data access signs an individual declaration; the register is queryable via a public read endpoint so your firm can pull it into its own §43e audit file. A signed staff registry means your customer's compliance officer does not have to trust our marketing.
 

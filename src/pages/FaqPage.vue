@@ -20,9 +20,25 @@ function toggle(id: string) {
   open.value = { ...open.value, [id]: !open.value[id] }
 }
 
+// Aliases keep old deep-links working after an entry is renamed.
+// #backups-pitr → #backups: renamed when PITR was dropped from the
+// Team-tier surface (Scaleway removed customer-triggerable PITR — see
+// euroback#520). External links from the Team-tier pricing card + DPA
+// v2 shipped with the old anchor.
+const hashAliases: Record<string, string> = {
+  'backups-pitr': 'backups',
+}
+
 onMounted(() => {
-  const hash = route.hash.replace(/^#/, '')
-  if (hash) open.value = { ...open.value, [hash]: true }
+  const raw = route.hash.replace(/^#/, '')
+  const hash = hashAliases[raw] ?? raw
+  if (hash) {
+    open.value = { ...open.value, [hash]: true }
+    if (hash !== raw) {
+      const el = document.getElementById(hash)
+      if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' })
+    }
+  }
 })
 
 // ── SEO: per-page head + FAQPage JSON-LD ────────────────────────

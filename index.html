@@ -72,7 +72,7 @@
           "priceCurrency": "EUR",
           "price": "149",
           "availability": "https://schema.org/PreOrder",
-          "description": "€149/mo per project (coming soon). Dedicated Postgres, point-in-time recovery, SSO, RBAC, SOC 2. For teams shipping regulated SMB software."
+          "description": "€149/mo per project (coming soon). Dedicated Postgres, daily backups + on-demand snapshots (7-day retention) with 1 restore/month included, SSO, RBAC, SOC 2. For teams shipping regulated SMB software."
         },
         {
           "@type": "Offer",
@@ -376,10 +376,10 @@
         },
         {
           "@type": "Question",
-          "name": "Are automatic backups and point-in-time recovery included?",
+          "name": "Are automatic backups included?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Free and Pro projects share a pooled Postgres cluster (Scaleway Managed Database, France) with cluster-level snapshots (daily, 7-day retention). Restores go through support. Per-project point-in-time recovery, second-level precision, and console-triggered restore land on the Team tier — Team gets dedicated Postgres per project, which is what PITR requires. On every tier, `eurobase db dump` produces a standard pg_dump you can export anywhere at any time — the first-line reversibility guarantee independent of us."
+            "text": "Free and Pro projects share a pooled Postgres cluster (Scaleway Managed Database, France) with cluster-level snapshots (daily, 7-day retention). Restores go through support. Team tier gets dedicated Postgres per project with daily scheduled backups (7-day retention) plus customer-triggered on-demand snapshots and 1 self-service restore per calendar month — from either source, either counts against the same cap. On every tier, `eurobase db dump` produces a standard pg_dump you can export anywhere at any time — the first-line reversibility guarantee independent of us."
           }
         },
         {
@@ -720,7 +720,7 @@
         <ul>
           <li><strong>Free</strong> — 5,000 MAU, 512 MB storage, 2 GB bandwidth, 50 realtime connections, every feature. Projects auto-pause after 30 days idle. No credit card required.</li>
           <li><strong>Pro (€25/mo per project)</strong> — 100,000 MAU, 100 GB storage, 250 GB bandwidth, 10,000 realtime connections. BYO SMTP, quota alerts, priority support. Never pauses.</li>
-          <li><strong>Team (€149/mo — coming soon)</strong> — Dedicated Postgres per project, backups + PITR, SSO, RBAC, SOC 2.</li>
+          <li><strong>Team (€149/mo — coming soon)</strong> — Dedicated Postgres per project, daily backups + on-demand snapshots (7-day retention) with 1 restore/month included, SSO, RBAC, SOC 2.</li>
         </ul>
         <p>Closed-beta testers get founder-friendly pricing locked in when the Pro tier opens.</p>
 
