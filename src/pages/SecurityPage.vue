@@ -147,7 +147,7 @@ interface Nis2Row {
 const nis2Rows: Nis2Row[] = [
   { id: 'a', requirement: 'Risk analysis + information system security policies', status: 'shipped', notes: 'Written ISMS-lite; risk register reviewed annually.' },
   { id: 'b', requirement: 'Incident handling', status: 'shipped', notes: 'Console-side data-breach register with 24h / 72h SLA workflow; internal on-call rota + runbooks.' },
-  { id: 'c', requirement: 'Business continuity + crisis management', status: 'shipped', notes: 'Measured RTO/RPO published below in Backup & recovery; daily Postgres backups + 7-day continuous point-in-time recovery via WAL archiving; automated monthly regression test (see docs/runbooks/backup-pitr-test.md).' },
+  { id: 'c', requirement: 'Business continuity + crisis management', status: 'shipped', notes: 'Measured RTO/RPO published below in Backup & recovery; daily Postgres backups + 7-day continuous point-in-time recovery via WAL archiving; monthly regression test (script + CronJob scaffolded, on operator demand today, automated once the ops image lands).' },
   { id: 'd', requirement: 'Supply-chain security', status: 'shipped', notes: 'Public sub-processor register with region + CLOUD-Act flags; 30-day advance notice on additions.' },
   { id: 'e', requirement: 'Security in acquisition, development, maintenance + vulnerability handling', status: 'shipped', notes: 'Dependabot, static analysis, mandatory PR review, staged rollouts; CVD policy below.' },
   { id: 'f', requirement: 'Policies to assess effectiveness of the risk-management measures', status: 'partial', notes: 'Annual ISMS review + post-incident review formalised; independent audit deferred to ISO 27001 track.' },
