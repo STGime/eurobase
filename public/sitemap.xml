@@ -37,6 +37,12 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/blog/marcos-dsar-12-hours-vs-30-seconds</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/blog/managed-eu-alternatives-to-supabase-2026</loc>
     <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>

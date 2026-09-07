@@ -466,6 +466,98 @@ export const blog = {
   description: 'Thoughts on European data sovereignty, cloud infrastructure, and building for developers.',
   posts: [
     {
+      slug: 'marcos-dsar-12-hours-vs-30-seconds',
+      title: 'Marco\'s DSAR: a Tuesday email, a 12-hour engineering job, and 30 seconds on Eurobase',
+      excerpt: 'A customer asks a small EU fintech for a copy of all the data they hold on him. Walk through the DIY workflow (SQL across a dozen tables, format, sign, log, audit) — then the same job on Eurobase (one click). Same legal outcome. 8-12 hours vs 30 seconds. Plus what happens two weeks later when the customer asks for the DPA and the sub-processor list.',
+      date: '2026-09-07',
+      author: 'Stefan Gimeson',
+      readTime: '5 min read',
+      image: '/blog-marcos-dsar.jpg',
+      content: `## The Tuesday email
+
+Marco runs product at a small EU fintech — five people, a mobile app, a payments backend, a few thousand paying customers. On a Tuesday morning he opens an email from one of them:
+
+> Hi, under Article 15 of the GDPR, please send me a copy of all the personal data you hold about me.
+
+Perfectly polite. Perfectly legal. Statutory response window: **30 days**.
+
+He forwards it to his CTO, who sighs.
+
+## The old workflow (8-12 hours, and it costs about $1,500)
+
+Here is what the CTO's checklist actually looks like, on a stack that isn't Eurobase. Every SaaS team that has ever answered a DSAR by hand has written some version of this:
+
+1. **Log into the database.** Write a \`SELECT\` on the users table by email. Get the user_id.
+2. **Walk every table with a user_id column.** Transactions. Notifications. Support tickets. Session logs. Device tokens. Preferences. Referrals. Consent records. Each one gets its own query, its own CSV. On a mature app, that is a dozen tables. Miss one and the DSAR is incomplete — which is itself a GDPR violation.
+3. **Check storage.** Did the customer upload an ID document during KYC? A profile picture? A signed contract PDF? \`aws s3 ls\`, filter by user prefix, download.
+4. **Scrub anything that shouldn't be exported.** Internal notes on the support tickets. Other customers' rows that leaked into a JOIN. The GDPR gives the *data subject* their data — not everyone else's.
+5. **Format it.** GDPR Article 20 says machine-readable **and** commonly used. So JSON or CSV, not a screenshot. Zip it.
+6. **Set up a secure download link that expires.** You can't email 40 MB of PII as an attachment. So a signed S3 URL with a 7-day expiry.
+7. **Log the request in the RoPA.** Article 30 says you have to keep a record of every processing activity — including the DSAR fulfilment itself. Google Doc, spreadsheet, whatever.
+8. **Log the export in the audit trail.** Who exported the data? When? From which IP? If a regulator ever asks whether Marco's team has appropriate access controls, this is the evidence.
+9. **Send it.** Secure channel, not personal email.
+
+Industry surveys put the average cost of one DSAR at [around $1,500](https://iapp.org/news/a/the-cost-of-dsar-fulfillment-is-going-up) — 8-12 hours of engineering time, plus a bit of legal review. Volume is up **246%** in the two years to 2024. Marco's five-person team can absorb one a quarter. Five a month is a full engineer's week gone every quarter.
+
+## The Eurobase workflow (30 seconds, one click)
+
+Marco doesn't call the CTO. He opens the console.
+
+1. **Projects → Compliance tab → Request Single-User Export.**
+2. Searches for the customer by email (or pastes their user UUID).
+3. Picks **JSON** or **CSV**, clicks **Export User Data**.
+
+The console does what the CTO's checklist did for the rows part — atomically, in one operation:
+
+- **The auth record.** Email, sign-in history, MFA state.
+- **Every tenant table with a \`user_id\` column.** Eurobase auto-discovers those tables at export time (\`DiscoverUserTables\`) and pulls the rows keyed to that customer — across every table with the right shape, no re-plumbing per DSAR.
+- **Retention holds naming this subject** — filtered so no other subject's identifiers leak (Article 15(4) compliance detail most homegrown exports miss).
+- **Presigned download link,** 1-hour expiry — Marco downloads it, verifies, then attaches or re-hosts for the customer via whatever secure channel his team already uses.
+
+Two side effects, both required, both automatic:
+
+- The **Article 30 RoPA** row is created — \`export_type=article_15\`, subject_email, timestamp, exported_by (Marco's platform user ID). Rate-limited to 1 export per user per 24 hours.
+- The **audit log** is stamped — actor, IP, timestamp, file size. Hash-chained so a future export can't be back-dated without breaking the chain.
+
+What's out of scope today (worth flagging honestly): storage-object walk for the subject's uploaded files, and packaging the export into a customer-facing HTML index. Both are on the roadmap; the rows + auth + retention-hold path is what actually ships, and it's the load-bearing part of Article 15 anyway.
+
+Cost: 30 seconds and one click.
+
+## Two weeks later: the DPA request
+
+Same customer emails back:
+
+> Great, thanks. Now I also need your Data Processing Agreement and a list of every sub-processor that touches my data.
+
+On the old workflow: Marco's team keeps a Google Doc "sub-processor list" that is usually out of date because nobody updates it when a new tool gets added. Someone from legal reviews it before sending. Two or three days.
+
+On Eurobase: **Compliance tab → Article 30 report → Download PDF.**
+
+The report is regenerated **from live project configuration** on every download. Every sub-processor Eurobase uses is listed with:
+
+- **Region flag** (EU/US)
+- **CLOUD-Act exposure flag** (green/amber/red)
+- **Purpose** ("email delivery", "SMS OTP", "managed Postgres", etc.)
+- **What data reaches them** ("email address only", "no PII", "encrypted-at-rest DB backups")
+
+No stale spreadsheet. No legal-review anxiety. Marco hands it over. Done again.
+
+## Why this matters
+
+DSAR volume up 246% in two years. Every EU SaaS is on the hook — not just the big ones. Miss a request or fumble the format and the [supervisory-authority risk](https://gdpr.eu/fines/) is up to €20 million or 4% of global annual turnover, whichever is higher.
+
+Every other backend platform makes GDPR your problem. You write the SQL. You maintain the sub-processor doc. You audit your own audit log.
+
+Eurobase ships the compliance stack as a **first-class platform feature** — DSAR, RoPA, hash-chained audit log, sub-processor registry. Not middleware you assemble. Not a spreadsheet you maintain. Marco's team gets back the eight hours to build the product they were hired to build.
+
+## Try it yourself
+
+- **[Sign up](https://console.eurobase.app/login?signup=1)** — the Compliance tab is on your first project.
+- **[Read the DSAR feature page](/features/dsar)** for the technical shape.
+- **[Take the free GDPR Backend Readiness Assessment](/gdpr-readiness)** — 10 questions, 3 minutes, no signup. Scores your current backend against the ten obligations that actually get audited.`,
+      references: [],
+    },
+    {
       slug: 'managed-eu-alternatives-to-supabase-2026',
       title: 'Managed EU Alternatives to Supabase in 2026',
       excerpt: 'If you want a managed Supabase-shaped backend that is EU-headquartered and hosted on EU-owned infrastructure — not just deployed to an EU region of a US hyperscaler — the shortlist is genuinely short. This is the honest 2026 comparison of the five options developers actually consider: Eurobase, Nhost, Appwrite, PocketBase, and self-hosted Supabase — with the axes that matter for GDPR and the queries where each one is the right answer.',
