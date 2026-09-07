@@ -8,11 +8,17 @@ import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 // rate-limits by IP + email and fires a Discord ping to ops.
 //
 // Deliberately no client-side email format validation beyond
-// "contains @" — the server owns the strict validator and returns
-// specific field errors. Any client-side second guess drifts from
-// the server contract over time.
+// non-empty presence — the server owns the strict validator
+// (mail.ParseAddress + canonicalisation) and returns field-specific
+// 400s. Any client-side second guess drifts from the server contract
+// over time.
 
-const API_URL = 'https://api.eurobase.app/platform/public/contact'
+// API base — env override so `npm run dev` doesn't ping production
+// Discord. Wire VITE_CONTACT_API in a .env.local for staging or a
+// tunneled backend.
+const API_URL =
+  (import.meta.env.VITE_CONTACT_API as string | undefined) ||
+  'https://api.eurobase.app/platform/public/contact'
 
 const open = ref(false)
 const submitting = ref(false)
@@ -27,18 +33,47 @@ const message = ref('')
 // keyboard user can start typing immediately.
 const emailInputEl = ref<HTMLInputElement | null>(null)
 
+// Track the DOM element that had focus before opening so we can
+// restore focus on close — required-for-aria-modal correctness.
+let previouslyFocused: HTMLElement | null = null
+
+// Success timer needs to be tracked so a manual close-then-reopen
+// doesn't get snapped shut by the stale timer, and so unmount doesn't
+// leak it. Cleared in closeWidget, resetForm, and onBeforeUnmount.
+let successTimer: ReturnType<typeof setTimeout> | null = null
+function clearSuccessTimer() {
+  if (successTimer !== null) {
+    clearTimeout(successTimer)
+    successTimer = null
+  }
+}
+
 async function openWidget() {
+  previouslyFocused = (document.activeElement as HTMLElement) ?? null
   open.value = true
   errorMsg.value = null
+  // Body-scroll lock while the modal is up — matters most on the
+  // mobile bottom-sheet layout where the page underneath can scroll
+  // past the widget.
+  document.body.style.overflow = 'hidden'
   await nextTick()
   emailInputEl.value?.focus()
 }
 
 function closeWidget() {
   open.value = false
+  clearSuccessTimer()
+  document.body.style.overflow = ''
+  // Restore focus to whatever launched the modal (usually the "Contact
+  // us" trigger button). Fire-and-forget — if the element is gone,
+  // the browser silently no-ops.
+  if (previouslyFocused && typeof previouslyFocused.focus === 'function') {
+    previouslyFocused.focus()
+  }
+  previouslyFocused = null
   // Preserve the draft in state if the user closes without sending
   // — reopening restores what they typed. Only cleared on a real
-  // successful submit.
+  // successful submit (via resetForm).
 }
 
 function resetForm() {
@@ -47,6 +82,7 @@ function resetForm() {
   message.value = ''
   submitted.value = false
   errorMsg.value = null
+  clearSuccessTimer()
 }
 
 async function submit(e: Event) {
@@ -81,7 +117,11 @@ async function submit(e: Event) {
       submitted.value = true
       // Reset the input state after a short delay so the "sent"
       // confirmation reads for a beat before the widget auto-hides.
-      setTimeout(() => {
+      // Timer is tracked so manual close-then-reopen doesn't fire a
+      // stale close on the new session (reviewer finding).
+      clearSuccessTimer()
+      successTimer = setTimeout(() => {
+        successTimer = null
         resetForm()
         closeWidget()
       }, 2400)
@@ -111,6 +151,10 @@ async function submit(e: Event) {
 }
 
 function onKeydown(e: KeyboardEvent) {
+  // Skip while an IME composition is active (CJK / Vietnamese /
+  // dead-key input) — Escape during composition means "cancel this
+  // half-typed character", not "close the modal".
+  if (e.isComposing || e.keyCode === 229) return
   if (e.key === 'Escape' && open.value) {
     closeWidget()
   }
@@ -121,6 +165,12 @@ onMounted(() => {
 })
 onBeforeUnmount(() => {
   window.removeEventListener('keydown', onKeydown)
+  clearSuccessTimer()
+  // Belt-and-braces: restore body scroll on route-change unmount too,
+  // in case the widget goes away while open.
+  if (open.value) {
+    document.body.style.overflow = ''
+  }
 })
 </script>
 
@@ -244,7 +294,12 @@ onBeforeUnmount(() => {
         <div class="flex items-center justify-between gap-3 pt-1">
           <p class="text-[10px] text-text-light/50 leading-tight">
             By sending you accept our
-            <a href="/privacy" class="underline hover:text-text-light/80">privacy notice</a>.
+            <a
+              href="/privacy"
+              target="_blank"
+              rel="noopener"
+              class="underline hover:text-text-light/80"
+            >privacy notice</a>.
           </p>
           <button
             type="submit"
