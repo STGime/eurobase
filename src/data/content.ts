@@ -324,7 +324,7 @@ export const pricing = {
     {
       name: 'Team',
       price: '€149/mo',
-      description: 'Dedicated Postgres per project (direct DATABASE_URL), 7-day retention on daily scheduled backups + on-demand snapshots + 1 restore/month included, SSO, RBAC, audit trail, SOC 2. For teams shipping regulated SMB software.',
+      description: 'Dedicated Postgres per project (direct DATABASE_URL), 7-day retention on daily scheduled backups + on-demand snapshots + 1 restore/month included, SSO, RBAC, audit trail. SOC 2 Type II coming soon. For teams shipping regulated SMB software.',
       icon: '\uD83C\uDFE2',
       highlighted: false,
       comingSoon: true,
