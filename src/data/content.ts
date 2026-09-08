@@ -324,7 +324,7 @@ export const pricing = {
     {
       name: 'Team',
       price: '€149/mo',
-      description: 'Dedicated Postgres per project (PostgreSQL 16 on 2 vCPU / 4 GB RAM, 10 GB Scaleway Block Storage 5k IOPS, France, online-resizable up and out). Direct DATABASE_URL, 7-day retention on daily scheduled backups + on-demand snapshots + 1 restore/month included, SSO, RBAC, audit trail. SOC 2 Type II coming soon. For teams shipping regulated SMB software.',
+      description: 'Dedicated Postgres per project (PostgreSQL 16 on 2 vCPU / 4 GB RAM, 50 GB Scaleway Block Storage 5k IOPS, France). Direct DATABASE_URL, 7-day retention on daily scheduled backups + on-demand snapshots + 1 restore/month included, SSO, RBAC, audit trail. SOC 2 Type II coming soon. For teams shipping regulated SMB software.',
       icon: '\uD83C\uDFE2',
       highlighted: false,
       comingSoon: true,
@@ -830,7 +830,7 @@ Overages don't blackout your users. If you cross 100 GB storage or 250 GB egress
 
 ## Team — €149/mo per project
 
-Dedicated Postgres per project (PostgreSQL 16 on 2 vCPU / 4 GB RAM, 10 GB Scaleway Block Storage 5k IOPS, France, online-resizable in both compute and storage), direct \`DATABASE_URL\` for [Payload](https://payloadcms.com) / [Prisma](https://www.prisma.io) / [Drizzle](https://orm.drizzle.team) stacks, SSO, RBAC. The [infrastructure is built and running](/blog/legaltech-backend-what-a-german-kanzlei-actually-needs); pricing is now locked at €149/mo per project. Grow past the starter shape and we resize online — no migration downtime.
+Dedicated Postgres per project (PostgreSQL 16 on 2 vCPU / 4 GB RAM, 50 GB Scaleway Block Storage 5k IOPS, France), direct \`DATABASE_URL\` for [Payload](https://payloadcms.com) / [Prisma](https://www.prisma.io) / [Drizzle](https://orm.drizzle.team) stacks, SSO, RBAC. The [infrastructure is built and running](/blog/legaltech-backend-what-a-german-kanzlei-actually-needs); pricing is now locked at €149/mo per project.
 
 **Data guarantees.** Scaleway RDB native scheduled backups (daily, 7-day retention), plus on-demand snapshots the customer can take before risky migrations. **1 restore per calendar month is included** — from either a scheduled backup or an on-demand snapshot, either counts against the same cap. Additional restores are a support conversation until we roll out usage-based billing.
 
