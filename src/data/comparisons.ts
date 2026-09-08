@@ -142,7 +142,7 @@ export const comparisons: Record<string, ComparisonData> = {
         bullets: [
           'Free tier — Supabase: 50k MAU, 500 MB DB, 1 GB storage, 5 GB bandwidth, 200 realtime, pause after 7 days idle. Eurobase: 5k MAU, 512 MB DB, 512 MB storage, 2 GB bandwidth, 50 realtime, pause after 30 days idle. Every feature included; the tighter caps trade for a longer idle window and every-tier GDPR primitives.',
           'Paid tier — Supabase Pro: $25/mo per org, usage-based over 100k MAU / 8 GB DB / 100 GB storage / 250 GB bandwidth. Eurobase Pro: €25/mo per project, fixed 100k MAU / 100 GB storage / 250 GB bandwidth / 10k realtime.',
-          'Team tier — Supabase Team: $599/mo per org (SSO, log retention). Eurobase Team: €149/mo per project (dedicated Postgres, daily backups + on-demand snapshots, SSO, RBAC, audit trail; SOC 2 Type II coming soon). Coming soon.',
+          'Team tier — Supabase Team: $599/mo per org (SSO, log retention). Eurobase Team: €149/mo per project (dedicated PostgreSQL 16 on 2 vCPU / 4 GB RAM / 50 GB SSD, daily backups + on-demand snapshots, SSO, RBAC, audit trail; SOC 2 Type II coming soon). Coming soon.',
           'Billing entity — Supabase: Supabase Inc. (Delaware). Eurobase: Eurobase OÜ (Estonia). Some EU procurement teams treat this as a hard requirement for VAT-reverse-charge simplicity.',
         ],
         paragraphs: [
@@ -328,7 +328,7 @@ export const comparisons: Record<string, ComparisonData> = {
         bullets: [
           'Free tier — Firebase Spark: 50k Firestore reads/day, 20k writes/day, 1 GB storage, 10 GB bandwidth. Eurobase: 5k MAU, 512 MB DB, 512 MB storage, 2 GB bandwidth, 50 realtime, every-tier GDPR primitives included.',
           'Paid tier — Firebase Blaze: pay-per-read/write/storage/bandwidth/invocation, no fixed base. Eurobase Pro: €25/mo per project, fixed 100k MAU / 100 GB storage / 250 GB bandwidth / 10k realtime.',
-          'Team / enterprise — Firebase: no fixed enterprise tier; you scale via GCP support contracts. Eurobase Team: €149/mo per project (dedicated Postgres, daily backups + on-demand snapshots, SSO, RBAC, audit trail; SOC 2 Type II coming soon). Coming soon.',
+          'Team / enterprise — Firebase: no fixed enterprise tier; you scale via GCP support contracts. Eurobase Team: €149/mo per project (dedicated PostgreSQL 16 on 2 vCPU / 4 GB RAM / 50 GB SSD, daily backups + on-demand snapshots, SSO, RBAC, audit trail; SOC 2 Type II coming soon). Coming soon.',
           'Billing entity — Firebase: Google Ireland Limited or Google LLC depending on region. Eurobase: Eurobase OÜ (Estonia). Some EU procurement teams treat this as a hard requirement for VAT-reverse-charge simplicity.',
         ],
         paragraphs: [
