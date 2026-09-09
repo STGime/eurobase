@@ -27,10 +27,14 @@ import path from 'node:path'
 // nothing else until search engines have re-verified.
 const INDEXNOW_KEY = '1089efee4e22c7bbb677b67862a5845c'
 const HOST = 'eurobase.app'
+// sitemap.xml is a hand-maintained static asset in public/ — vite
+// copies it into dist/ verbatim at build time. Read it straight from
+// the checkout so this script can run on a bare CI runner without a
+// vite build first (saves ~3-5 min per deploy).
 const SITEMAP_PATH = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '..',
-  'dist',
+  'public',
   'sitemap.xml',
 )
 
@@ -47,6 +51,24 @@ function warn(msg) {
   console.warn(`[indexnow] ${msg}`)
 }
 
+// decodeXmlEntities handles the 5 XML-predefined entities that can
+// legally appear inside a <loc> body per the sitemap protocol. Any
+// URL containing `&` (e.g. `?utm=x&utm_content=y`) is escaped to
+// `&amp;` in the sitemap, and submitting the escaped form to
+// IndexNow would signal a URL that doesn't exist. Numeric character
+// references (`&#38;`, `&#x26;`) also handled for completeness even
+// though our vite-emitted sitemap doesn't use them today.
+function decodeXmlEntities(s) {
+  return s
+    .replace(/&#([0-9]+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/&#x([0-9a-fA-F]+);/g, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&amp;/g, '&') // MUST be last — decoded output can't be re-scanned
+}
+
 function parseSitemap(xml) {
   // Deliberate: don't pull in a full XML parser for a
   // fixed-shape sitemap that we generate ourselves. Regex against
@@ -54,7 +76,7 @@ function parseSitemap(xml) {
   // third-party or add nested <sitemapindex>, switch to a real
   // parser.
   const matches = [...xml.matchAll(/<loc>\s*([^<\s]+)\s*<\/loc>/g)]
-  return matches.map((m) => m[1])
+  return matches.map((m) => decodeXmlEntities(m[1]))
 }
 
 async function main() {
@@ -65,37 +87,37 @@ async function main() {
     xml = await readFile(SITEMAP_PATH, 'utf8')
   } catch (err) {
     warn(`could not read ${SITEMAP_PATH}: ${err.message}`)
-    warn('did you run `npm run build` first?')
     process.exit(1)
   }
 
-  const urls = parseSitemap(xml)
-  if (urls.length === 0) {
+  const parsed = parseSitemap(xml)
+  if (parsed.length === 0) {
     warn('sitemap.xml parsed but zero <loc> entries found — refusing to submit')
     process.exit(1)
   }
 
-  // Basic sanity: everything should be under HOST. A stray external
-  // URL in the sitemap wouldn't be rejected by IndexNow but wastes
-  // quota + signals to the engines that our sitemap isn't tightly
-  // scoped.
-  const stray = urls.filter((u) => {
+  // Single-pass hostname partition. Everything not under HOST goes
+  // into `stray` and is logged so a rogue external URL surfaces at
+  // deploy time rather than silently wasting IndexNow quota. Also
+  // avoids the duplicated inverse-predicate pattern the review round
+  // flagged.
+  const submitUrls = []
+  const stray = []
+  for (const u of parsed) {
     try {
-      return new URL(u).hostname !== HOST
+      if (new URL(u).hostname === HOST) submitUrls.push(u)
+      else stray.push(u)
     } catch {
-      return true
+      stray.push(u)
     }
-  })
-  if (stray.length > 0) {
-    warn(`${stray.length} non-${HOST} URLs in sitemap; skipping them`)
   }
-  const submitUrls = urls.filter((u) => {
-    try {
-      return new URL(u).hostname === HOST
-    } catch {
-      return false
-    }
-  })
+  if (stray.length > 0) {
+    warn(`${stray.length} non-${HOST} URL(s) in sitemap; skipping — first: ${stray[0]}`)
+  }
+  if (submitUrls.length === 0) {
+    warn(`sitemap has ${parsed.length} entries but zero belong to ${HOST} — refusing to submit`)
+    process.exit(1)
+  }
 
   const payload = {
     host: HOST,

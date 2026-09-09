@@ -1,10 +1,11 @@
 # Build the marketing site container, push it to Scaleway Container Registry,
 # and deploy to a Scaleway Serverless Container in fr-par.
 #
-# Sovereignty cutover Phase 1a. See docs/runbooks/sovereignty-cutover.md in
-# the euroback repo. This workflow does NOT wire the container to
-# eurobase.app — that happens in Phase 2a after the preview endpoint has
-# been smoke-tested.
+# Sovereignty cutover Phase 1a shipped 2026-09-04 and the custom domain
+# was wired up shortly after (Phase 2a is done — eurobase.app now
+# resolves to this container). Existing cloudbuild.yaml in the repo is
+# the legacy Google Cloud Run path that this workflow superseded; leave
+# it dormant for now, delete when the Google project itself is torn down.
 #
 # ---
 # One-time bootstrap (before this workflow can run):
@@ -149,27 +150,17 @@ jobs:
 
       # IndexNow push — actively notify Bing / DuckDuckGo / Yandex /
       # Ecosia / Yep / Naver / Seznam of every URL in the sitemap.
-      # continue-on-error: the aggregator being briefly down (or the
-      # ownership token file taking a moment to propagate) should not
-      # take a marketing deploy down with it. The script exit code
-      # still shows red in the job log if IndexNow rejected, so ops
-      # sees regressions.
       #
-      # Needs `dist/` from the local build — re-run to ensure the
-      # sitemap this workflow submits matches the image we just
-      # pushed (no drift if the docker build changed the sitemap).
+      # The sitemap.xml is a hand-maintained static file at
+      # public/sitemap.xml (vite copies public/* into dist/*), so we
+      # can read it straight from the checkout — no vite build needed
+      # on the runner.
+      #
+      # NOT wrapped in continue-on-error: a red step here means
+      # IndexNow is rejecting our submissions (ownership file wrong,
+      # sitemap malformed, key untrusted). We want that visible on
+      # the deploy page and blocking, not swallowed. On genuine
+      # aggregator outages, retry the deploy — this is a marketing
+      # site, no urgency.
       - name: Notify IndexNow (Bing, DuckDuckGo, Yandex, Ecosia, ...)
-        continue-on-error: true
-        run: |
-          # Node 20+ (default on ubuntu-24.04 runners) has native
-          # fetch(), so no npm install here.
-          if [ ! -f dist/sitemap.xml ]; then
-            # The docker/build-push-action step above runs inside a
-            # buildkit sandbox and doesn't produce dist/ on the host.
-            # Re-run vite locally to regenerate the same sitemap.xml
-            # the image was built with (deterministic — no timestamp
-            # in the sitemap or JSON-LD).
-            npm ci --no-audit --no-fund
-            npm run build
-          fi
-          node scripts/indexnow-notify.mjs
+        run: node scripts/indexnow-notify.mjs
