@@ -1193,7 +1193,7 @@ If you want to see the exact DPA + RoPA output for a real Eurobase project, [sig
       date: '2026-06-18',
       author: 'Stefan Gimeson',
       readTime: '5 min read',
-      content: `A single GDPR Data Subject Access Request — a DSAR — costs the average company around $1,524 to fulfil manually ([Gartner](https://www.gartner.com/en/newsroom/press-releases/2019-02-27-gartner-survey-shows-organizations-are-slow-to-adva); the figure has ticked upward from the earlier $1,406 estimate as scope and staff cost have grown). Someone exports a CSV, searches the support tool, digs through application logs, stitches it together, and hopes nothing was missed. Eight to twelve hours per request. And volume is up more than 70% since 2021, with [DataGrail's 2024 Data Privacy Trends report](https://www.datagrail.io/resources/reports/2024-data-privacy-trends/) clocking a 246% jump in two years.
+      content: `A single GDPR Data Subject Access Request — a DSAR — costs the average company around $1,524 to fulfil manually ([Gartner via K2view](https://www.k2view.com/blog/data-subject-access-request-processing); the figure has ticked upward from the earlier $1,406 estimate as scope and staff cost have grown). Someone exports a CSV, searches the support tool, digs through application logs, stitches it together, and hopes nothing was missed. Eight to twelve hours per request. And volume is up more than 70% since 2021, with [DataGrail's 2024 Data Privacy Trends report](https://www.datagrail.io/blog/privacy-trends/privacy-trends-2024/) clocking a 246% jump in two years.
 
 That's the operational tax most teams quietly pay — and the one we kept seeing small EU teams treat as a fire drill. Discovered two weeks before launch, hand-rolled into a spreadsheet, left to rot. So we built the answer into the platform.
 
@@ -1231,9 +1231,11 @@ This is what we mean when we say Eurobase is GDPR-native. Not a privacy policy o
 
 If you're a developer, founder, or CTO who's been quietly dreading what your DSAR response looks like under load — that's the cost centre we made into a function call. [Sign up](https://console.eurobase.app/login?signup=1) — the Compliance tab is on your first project.`,
       references: [
-        { label: 'Gartner — average manual DSAR fulfilment cost ~$1,524 (updated from the $1,406 figure in the 2019 note)', url: 'https://www.gartner.com/en/newsroom/press-releases/2019-02-27-gartner-survey-shows-organizations-are-slow-to-adva' },
-        { label: 'DataGrail — 2024 Data Privacy Trends Report (246% year-over-year rise in DSR volume)', url: 'https://www.datagrail.io/resources/reports/2024-data-privacy-trends/' },
-        { label: 'PrivacyEngine — Worldwide DSAR Statistics (2025 aggregate view)', url: 'https://www.privacyengine.io/worldwide-dsar-statistics/' },
+        { label: 'K2view — DSAR processing analysis citing Gartner $1,524 manual-fulfilment cost', url: 'https://www.k2view.com/blog/data-subject-access-request-processing' },
+        { label: 'CIO Dive — 58% of companies fail to meet GDPR request deadlines (Gartner survey coverage)', url: 'https://www.ciodive.com/news/58-of-companies-fail-to-meet-gdprs-data-request-deadlines/568416/' },
+        { label: 'DataGrail — 2024 Data Privacy Trends: DSRs +246% in two years', url: 'https://www.datagrail.io/blog/privacy-trends/privacy-trends-2024/' },
+        { label: 'DataGrail press release — worldwide surge in data privacy requests', url: 'https://www.datagrail.io/press/datagrail-reports-worldwide-surge-in-data-privacy-requests/' },
+        { label: 'PrivacyEngine — Worldwide DSAR Statistics (aggregate view)', url: 'https://www.privacyengine.io/worldwide-dsar-statistics/' },
         { label: 'EUR-Lex — GDPR (Regulation 2016/679, Art. 15, 20, 30)', url: 'https://eur-lex.europa.eu/eli/reg/2016/679/oj' },
         { label: 'U.S. Congress — CLOUD Act (H.R. 4943)', url: 'https://www.congress.gov/bill/115th-congress/house-bill/4943' },
         { label: 'Sénat — Audition de Microsoft France sur la souveraineté numérique', url: 'https://www.senat.fr/compte-rendu-commissions/commission-d-enquete-commande-publique.html' },
