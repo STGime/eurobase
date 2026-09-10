@@ -76,7 +76,7 @@ export const problem = {
     { id: 3, text: 'AP News / heise — Karim Khan Microsoft mailbox disabled after US sanctions (May 2025); ICC dropped Microsoft 365 in Oct 2025', url: 'https://apnews.com/article/icc-microsoft-karim-khan-us-sanctions-6ea6e1d1c8ff0a2cee02c6cbb0c4a2a2' },
     { id: 4, text: 'Public Sénat / next.ink — Microsoft France concedes under oath (June 2025) that EU data cannot be guaranteed beyond US reach', url: 'https://next.ink/brief_article/microsoft-france-reconnait-devant-le-senat-ne-pas-pouvoir-garantir-la-souverainete-des-donnees/' },
     { id: 5, text: 'CJEU — Schrems II ruling (Case C-311/18, 16 July 2020) invalidating the EU-US Privacy Shield; second Schrems challenge on file against the 2023 DPF', url: 'https://curia.europa.eu/juris/liste.jsf?num=C-311/18' },
-    { id: 6, text: 'Eurobase blog — "The €1,500 GDPR Tax": how much a DIY Article 15 export actually costs (breakdown of the 8-12 hour engineering + legal review estimate)', url: '/blog/compliance-tab-dsar-ropa-audit-log' },
+    { id: 6, text: 'Eurobase blog — "The $1,524 GDPR Tax": how much a DIY Article 15 export actually costs (Gartner + DataGrail breakdown of the 8-12 hour engineering + legal review estimate)', url: '/blog/compliance-tab-dsar-ropa-audit-log' },
     { id: 7, text: 'Eurobase — Supabase / Firebase comparison pages (feature-by-feature parity, EU-hosting caveats, sovereignty story)', url: '/vs/supabase' },
   ],
 }
@@ -151,7 +151,7 @@ export const dsar = {
       { value: '30 days', label: 'Statutory deadline (GDPR Art. 12)', detail: 'Miss it = supervisory-authority risk', color: '#7B1FA2' },
       { value: '€20M', label: 'GDPR maximum administrative fine', detail: 'or 4% of global annual turnover', color: '#C62828' },
     ],
-    footnoteSource: { id: 1, text: 'Eurobase blog — "The $1,500 GDPR Tax"', url: '/blog/compliance-tab-dsar-ropa-audit-log' },
+    footnoteSource: { id: 1, text: 'Eurobase blog — "The $1,524 GDPR Tax"', url: '/blog/compliance-tab-dsar-ropa-audit-log' },
   },
   gap: {
     title: 'Built-in elsewhere? No.',
@@ -995,7 +995,7 @@ The DPF question only exists for your stack if your data crosses into US legal r
 
 Wolf is right that our data deserves better than the agreement it currently has. But Europe has spent twenty-five years and three frameworks trying to negotiate trust into a relationship whose statutes forbid it. At some point the better agreement is the one you stop needing.
 
-If you would rather read the next adequacy ruling as an observer than as a stakeholder, [join the early access programme](/#cta).`,
+If you would rather read the next adequacy ruling as an observer than as a stakeholder, [sign up free](https://console.eurobase.app/login?signup=1).`,
       references: [
         { label: 'heise online — EU-US data transfer: Our data deserves a better agreement (Ulrich Wolf)', url: 'https://www.heise.de/en/opinion/EU-US-data-transfer-Our-data-deserves-a-better-agreement-11378463.html' },
         { label: 'Euronews — Trump\'s sanctions on ICC halt tribunal\'s work, staffers claim', url: 'https://www.euronews.com/2025/05/15/trumps-sanctions-on-icc-halt-tribunals-work-staffers-claim' },
@@ -1072,7 +1072,7 @@ None of this is new regulation. Article 15 was published in 2016. Article 30 has
 
 ## Try the assess command yourself
 
-If you have a Supabase project you want a read of, [request beta access](/#cta) and we will send you the CLI + a one-page walkthrough. The assess subcommand is read-only, safe against production. You get a plan; you decide whether to move.
+If you have a Supabase project you want a read of, [sign up](https://console.eurobase.app/login?signup=1) and grab the CLI from the docs. The assess subcommand is read-only, safe against production. You get a plan; you decide whether to move.
 
 If moving is not on the table this quarter, that is fine — but running \`assess\` gives you a document you can hand your CTO / DPO next time the question comes up. "Here is what we would need to move, here is how long it would take, here is what we would need to touch." That answer is worth having even if the migration itself waits.
 
@@ -1176,7 +1176,7 @@ If those last three do not matter to your business, an EU-region Supabase projec
 
 Eurobase is what that structural change looks like in practice. Same Postgres, same DX, same SDK shape as Supabase; different corporate parent, different infrastructure floor, different failure modes.
 
-If you want to see the exact DPA + RoPA output for a real Eurobase project, [request beta access](/#cta). If you are actively evaluating a migration, [read the Supabase-vs-Eurobase comparison](/vs/supabase) or take a look at the [\`eurobase import supabase\`](/vs/supabase#feature-comparison) CLI — schema, data, storage, and functions imports are already shipping, auth users is next.`,
+If you want to see the exact DPA + RoPA output for a real Eurobase project, [sign up free](https://console.eurobase.app/login?signup=1). If you are actively evaluating a migration, [read the Supabase-vs-Eurobase comparison](/vs/supabase) or take a look at the [\`eurobase import supabase\`](/vs/supabase#feature-comparison) CLI — schema, data, storage, and functions imports are already shipping, auth users is next.`,
       references: [
         { label: 'EUR-Lex — GDPR (Regulation 2016/679, Art. 15, 20, 30)', url: 'https://eur-lex.europa.eu/eli/reg/2016/679/oj' },
         { label: 'U.S. Congress — CLOUD Act (H.R. 4943)', url: 'https://www.congress.gov/bill/115th-congress/house-bill/4943' },
@@ -1188,12 +1188,12 @@ If you want to see the exact DPA + RoPA output for a real Eurobase project, [req
     },
     {
       slug: 'compliance-tab-dsar-ropa-audit-log',
-      title: 'The $1,500 GDPR Tax: Why DSAR Fulfilment Belongs in Your Platform, Not Your Spreadsheet',
-      excerpt: 'A single Data Subject Access Request costs the average company around $1,500 to fulfil — 8–12 hours of someone\'s week spent stitching CSVs together. Volume is up 246% in two years. Eurobase puts Article 15 export, RoPA, and a tamper-evident audit log on the Compliance tab of every project, by default.',
+      title: 'The $1,524 GDPR Tax: Why DSAR Fulfilment Belongs in Your Platform, Not Your Spreadsheet',
+      excerpt: 'A single Data Subject Access Request costs the average company around $1,524 to fulfil manually (Gartner) — 8–12 hours of someone\'s week spent stitching CSVs together. Volume is up 246% in two years (DataGrail). Eurobase puts Article 15 export, RoPA, and a tamper-evident audit log on the Compliance tab of every project, by default.',
       date: '2026-06-18',
       author: 'Stefan Gimeson',
       readTime: '5 min read',
-      content: `A single GDPR Data Subject Access Request — a DSAR — costs the average company around $1,500 to fulfil ([Gartner, 2019](https://www.gartner.com/en/newsroom/press-releases/2019-02-27-gartner-survey-shows-organizations-are-slow-to-adva)). Someone exports a CSV, searches the support tool, digs through application logs, stitches it together, and hopes nothing was missed. Eight to twelve hours per request. And volume is up more than 70% since 2021, with one [2024 industry survey](https://www.datagrail.io/resources/reports/2024-data-privacy-trends/) clocking a 246% jump in two years.
+      content: `A single GDPR Data Subject Access Request — a DSAR — costs the average company around $1,524 to fulfil manually ([Gartner](https://www.gartner.com/en/newsroom/press-releases/2019-02-27-gartner-survey-shows-organizations-are-slow-to-adva); the figure has ticked upward from the earlier $1,406 estimate as scope and staff cost have grown). Someone exports a CSV, searches the support tool, digs through application logs, stitches it together, and hopes nothing was missed. Eight to twelve hours per request. And volume is up more than 70% since 2021, with [DataGrail's 2024 Data Privacy Trends report](https://www.datagrail.io/resources/reports/2024-data-privacy-trends/) clocking a 246% jump in two years.
 
 That's the operational tax most teams quietly pay — and the one we kept seeing small EU teams treat as a fire drill. Discovered two weeks before launch, hand-rolled into a spreadsheet, left to rot. So we built the answer into the platform.
 
@@ -1231,8 +1231,9 @@ This is what we mean when we say Eurobase is GDPR-native. Not a privacy policy o
 
 If you're a developer, founder, or CTO who's been quietly dreading what your DSAR response looks like under load — that's the cost centre we made into a function call. [Sign up](https://console.eurobase.app/login?signup=1) — the Compliance tab is on your first project.`,
       references: [
-        { label: 'Gartner — average DSAR fulfilment cost $1,406 (2019 research note; widely cited as ~$1,500)', url: 'https://www.gartner.com/en/newsroom/press-releases/2019-02-27-gartner-survey-shows-organizations-are-slow-to-adva' },
+        { label: 'Gartner — average manual DSAR fulfilment cost ~$1,524 (updated from the $1,406 figure in the 2019 note)', url: 'https://www.gartner.com/en/newsroom/press-releases/2019-02-27-gartner-survey-shows-organizations-are-slow-to-adva' },
         { label: 'DataGrail — 2024 Data Privacy Trends Report (246% year-over-year rise in DSR volume)', url: 'https://www.datagrail.io/resources/reports/2024-data-privacy-trends/' },
+        { label: 'PrivacyEngine — Worldwide DSAR Statistics (2025 aggregate view)', url: 'https://www.privacyengine.io/worldwide-dsar-statistics/' },
         { label: 'EUR-Lex — GDPR (Regulation 2016/679, Art. 15, 20, 30)', url: 'https://eur-lex.europa.eu/eli/reg/2016/679/oj' },
         { label: 'U.S. Congress — CLOUD Act (H.R. 4943)', url: 'https://www.congress.gov/bill/115th-congress/house-bill/4943' },
         { label: 'Sénat — Audition de Microsoft France sur la souveraineté numérique', url: 'https://www.senat.fr/compte-rendu-commissions/commission-d-enquete-commande-publique.html' },
@@ -1287,7 +1288,7 @@ That is why we built Eurobase: a fully EU-native Backend-as-a-Service (BaaS) pla
 
 Build on foundations you actually control.
 
-What happens to your product if your provider goes dark tomorrow? [Join the early access program](/#cta).`,
+What happens to your product if your provider goes dark tomorrow? [Sign up free](https://console.eurobase.app/login?signup=1).`,
       references: [
         { label: 'heise online — US government forces shutdown of Anthropic\'s AI Fable 5 and Mythos 5', url: 'https://www.heise.de/en/news/US-government-forces-shutdown-of-Anthropic-s-AI-Fable-5-and-Mythos-5-11331146.html' },
         { label: 'EUR-Lex — EU Artificial Intelligence Act (Regulation 2024/1689)', url: 'https://eur-lex.europa.eu/eli/reg/2024/1689/oj' },
@@ -1343,7 +1344,7 @@ That's why we created Eurobase — a fully EU-native Backend-as-a-Service platfo
 
 Auth, Postgres, Storage, Realtime, Serverless Functions — all on European infrastructure. Zero DevOps. GDPR by design, not as an afterthought.
 
-If you're a developer, founder, or enterprise decision-maker who needs a sovereign backend — we'd love to hear from you. [Join the early access program](/#cta).`,
+If you're a developer, founder, or enterprise decision-maker who needs a sovereign backend — [sign up free](https://console.eurobase.app/login?signup=1).`,
       references: [
         { label: 'Synergy Research Group — European cloud providers: local market share now holds steady at 15%', url: 'https://www.srgresearch.com/articles/european-cloud-providers-local-market-share-now-holds-steady-at-15' },
         { label: 'EUR-Lex — General Data Protection Regulation (GDPR)', url: 'https://eur-lex.europa.eu/eli/reg/2016/679/oj' },
@@ -1388,7 +1389,7 @@ All four runtimes stay inside Europe. Cron, RPC, and Triggers run inside your pr
 
 - Full comparison table and per-runtime walkthrough: <a href="https://console.eurobase.app/docs#edge-functions">console.eurobase.app/docs → Edge Functions chapter</a>
 - The new Triggers panel: open any table on the Database tab in your project, scroll past the row data, expand the **Triggers** strip below **Indexes**.
-- Don't have a Eurobase project yet? [Request beta access](/#cta).
+- Don't have a Eurobase project yet? [Sign up free](https://console.eurobase.app/login?signup=1).
 
 If you've been hand-rolling triggers via the SQL editor or wondering whether your "send confirmation email" logic belongs in an RPC or an Edge Function, the answers are now built into the platform. Ship faster, with the right tool.`,
       references: [
@@ -1488,7 +1489,7 @@ Tool coverage is where we expect the most rapid iteration based on beta feedback
 
 If you're a beta tester building with AI, this is the piece you've been asking for. If you've been waiting for sovereign AI tooling that doesn't quietly route through the US, it's here.
 
-[Sign in to your console](https://console.eurobase.app) to mint a PAT and connect, or [request beta access](/#cta) if you don't have a project yet.`,
+[Sign in to your console](https://console.eurobase.app) to mint a PAT and connect, or [sign up free](https://console.eurobase.app/login?signup=1) if you don't have a project yet.`,
       references: [
         { label: 'Model Context Protocol — Specification', url: 'https://modelcontextprotocol.io' },
         { label: 'Eurobase — The Sovereign, GDPR-Native BaaS for Europe', url: 'https://eurobase.app' },
@@ -1677,7 +1678,7 @@ The four-level test is vendor-agnostic. Print it, take it to your CTO, your CISO
 
 Adequacy frameworks come and go. Where your vendor is established does not.
 
-If you'd like a backend that's L4 by default, [join the early access programme](/#cta).`,
+If you'd like a backend that's L4 by default, [sign up free](https://console.eurobase.app/login?signup=1).`,
       references: [
         { label: 'noyb — Appeal of the EU-US Data Privacy Framework to the CJEU', url: 'https://noyb.eu/en/eu-us-data-transfers-time-prepare-more-trouble-come' },
         { label: 'European Commission — EU-US data transfers (DPF status)', url: 'https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/eu-us-data-transfers_en' },
