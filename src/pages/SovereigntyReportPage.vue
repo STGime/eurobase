@@ -180,7 +180,7 @@ function displayReason(card: ReportCard): string {
           <ul class="space-y-2">
             <li v-for="swap in report.alternatives" :key="swap.from_slug" class="rounded-lg bg-navy-card border border-navy-light p-3 text-sm">
               For your <strong class="capitalize">{{ swap.category }}</strong>:
-              <span class="text-text-muted">consider</span>
+              <span class="text-text-muted">consider </span>
               <span v-for="(alt, i) in swap.alternatives" :key="alt">
                 <router-link :to="`/sovereignty-check/vendors/${alt}`" class="text-accent-blue hover:underline">
                   {{ getVendor(alt)?.name ?? alt }}
