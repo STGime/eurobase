@@ -12,6 +12,241 @@ import type { Vendor } from './sovereignty-types'
 
 export const rawVendors: Vendor[] = [
   {
+    "slug": "adyen",
+    "name": "Adyen",
+    "category": "payments",
+    "contracting_entity": "Adyen N.V.",
+    "ultimate_parent": "Adyen N.V.",
+    "parent_jurisdiction": "NL",
+    "entity_jurisdiction": "NL",
+    "hosting_regions": [
+      "eu",
+      "us",
+      "ap"
+    ],
+    "subprocessors": [],
+    "eu_alternatives": [],
+    "transfer_mechanism": "none",
+    "operational_access_regions": [
+      "EU"
+    ],
+    "ratings": {
+      "entity_control": "green",
+      "data_location": "green",
+      "operational_access": "green",
+      "subprocessor_chain": "green",
+      "transfer_mechanism": "green",
+      "overall": "green"
+    },
+    "one_line_reason": "Dutch N.V. publicly listed on Euronext Amsterdam. Regulated as a bank by DNB; operates its own core payments infrastructure. No US corporate control.\n",
+    "sources": [
+      "https://www.adyen.com/legal",
+      "https://www.adyen.com/policies-and-disclaimer/privacy-policy",
+      "https://www.adyen.com/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Adyen serves global merchants and has US datacentres for local acquiring, but the contracting entity is Dutch and EU customer data is processed under Dutch jurisdiction by default.\n"
+  },
+  {
+    "slug": "aiven",
+    "name": "Aiven",
+    "category": "db",
+    "contracting_entity": "Aiven Oy",
+    "ultimate_parent": "Aiven Oy",
+    "parent_jurisdiction": "FI",
+    "entity_jurisdiction": "FI",
+    "hosting_regions": [
+      "global-multi-cloud"
+    ],
+    "subprocessors": [
+      "aws",
+      "gcp",
+      "azure"
+    ],
+    "eu_alternatives": [],
+    "transfer_mechanism": "none",
+    "operational_access_regions": [
+      "EU"
+    ],
+    "ratings": {
+      "entity_control": "green",
+      "data_location": "amber",
+      "operational_access": "green",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "green",
+      "overall": "amber"
+    },
+    "one_line_reason": "Finnish OY, EU-hosted contracting entity and EU-only support ops. Runs on AWS / GCP / Azure — so the underlying hyperscaler's exposure cascades in, but the Finnish anchor sets it apart from pure-US managed-DB vendors.\n",
+    "sources": [
+      "https://aiven.io/dpa",
+      "https://aiven.io/subprocessors",
+      "https://aiven.io/privacy"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Choose an EU region on a green subprocessor (Aiven does offer Scaleway-adjacent options) and the effective exposure drops sharply — this rating captures the default AWS-backed path.\n"
+  },
+  {
+    "slug": "amplitude",
+    "name": "Amplitude",
+    "category": "analytics",
+    "contracting_entity": "Amplitude, Inc.",
+    "ultimate_parent": "Amplitude, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us",
+      "eu"
+    ],
+    "subprocessors": [
+      "gcp"
+    ],
+    "eu_alternatives": [
+      "plausible",
+      "posthog"
+    ],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "US-listed corporation (NASDAQ: AMPL) running on Google Cloud. EU residency exists on enterprise plans; the contracting entity remains US-based and CLOUD-Act-exposed.\n",
+    "sources": [
+      "https://amplitude.com/legal",
+      "https://amplitude.com/security",
+      "https://amplitude.com/trust"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "anthropic",
+    "name": "Anthropic (Claude)",
+    "category": "ai",
+    "contracting_entity": "Anthropic, PBC",
+    "ultimate_parent": "Anthropic, PBC",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us"
+    ],
+    "subprocessors": [
+      "aws",
+      "gcp"
+    ],
+    "eu_alternatives": [
+      "mistral"
+    ],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "red",
+      "operational_access": "red",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Delaware public benefit corporation; inference runs on AWS Trainium and GCP TPUs, primarily in US regions. No EU region for the direct API today.\n",
+    "sources": [
+      "https://www.anthropic.com/legal/commercial-terms",
+      "https://trust.anthropic.com/",
+      "https://www.anthropic.com/legal/privacy"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Bedrock and Vertex re-sales of Claude in EU regions ride on the respective hyperscaler's own entity — those inherit AWS / GCP's rating, not Anthropic's.\n"
+  },
+  {
+    "slug": "appwrite",
+    "name": "Appwrite",
+    "category": "baas",
+    "contracting_entity": "Appwrite, Inc.",
+    "ultimate_parent": "Appwrite, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "fra",
+      "nyc",
+      "sfo",
+      "blr"
+    ],
+    "subprocessors": [
+      "gcp"
+    ],
+    "eu_alternatives": [
+      "eurobase"
+    ],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "IL",
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Appwrite Cloud is a Delaware corporation with headquarters in Tel Aviv, running on Google Cloud. Frankfurt region available; the US contracting entity and GCP dependency both apply.\n",
+    "sources": [
+      "https://appwrite.io/policy/privacy",
+      "https://appwrite.io/policy/terms",
+      "https://appwrite.io/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Self-hosted Appwrite (OSS) on your own EU infrastructure is a green path. This rating covers Appwrite Cloud only.\n"
+  },
+  {
+    "slug": "auth0",
+    "name": "Auth0 (Okta)",
+    "category": "auth",
+    "contracting_entity": "Auth0, Inc.",
+    "ultimate_parent": "Okta, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us",
+      "eu",
+      "au"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "eurobase"
+    ],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Auth0 is an Okta subsidiary; both entities are US-incorporated. EU tenant region on AWS Frankfurt is available but does not remove Okta's US jurisdiction over the contract.\n",
+    "sources": [
+      "https://www.okta.com/trust/",
+      "https://www.okta.com/agreements/",
+      "https://auth0.com/docs/secure/data-privacy-and-compliance"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
     "slug": "aws",
     "name": "Amazon Web Services",
     "category": "hosting",
@@ -56,6 +291,232 @@ export const rawVendors: Vendor[] = [
     "notes": "AWS European Sovereign Cloud (announced 2023, launching in Brandenburg) may change this rating for that specific offering once GA and independent verification is possible.\n"
   },
   {
+    "slug": "backblaze",
+    "name": "Backblaze B2",
+    "category": "storage",
+    "contracting_entity": "Backblaze, Inc.",
+    "ultimate_parent": "Backblaze, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us-west",
+      "eu-central"
+    ],
+    "subprocessors": [],
+    "eu_alternatives": [
+      "scaleway"
+    ],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "green",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "NASDAQ-listed US corporation (BLZE). EU-Central region on their own hardware in Amsterdam, but the corporate entity's US anchor puts contracts under the CLOUD Act.\n",
+    "sources": [
+      "https://www.backblaze.com/company/dpa.html",
+      "https://www.backblaze.com/company/subprocessors.html",
+      "https://www.backblaze.com/company/privacy.html"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "bugsnag",
+    "name": "Bugsnag",
+    "category": "error",
+    "contracting_entity": "SmartBear Software Inc.",
+    "ultimate_parent": "SmartBear Software Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us",
+      "eu"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "US",
+      "GB"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Bugsnag was acquired by SmartBear (US) in 2021. EU region available on Enterprise plans; the US contracting entity is what the CLOUD Act reaches.\n",
+    "sources": [
+      "https://smartbear.com/legal/data-processing-addendum/",
+      "https://smartbear.com/privacy/",
+      "https://www.bugsnag.com/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "buildkite",
+    "name": "Buildkite",
+    "category": "ci",
+    "contracting_entity": "Buildkite Pty Ltd",
+    "ultimate_parent": "Buildkite Pty Ltd",
+    "parent_jurisdiction": "AU",
+    "entity_jurisdiction": "AU",
+    "hosting_regions": [
+      "au",
+      "us"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "AU",
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "amber",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "amber"
+    },
+    "one_line_reason": "Australian Pty Ltd; control plane on AWS. Because Buildkite's model runs agents on your own infrastructure, build artifacts and code can stay in your EU environment even though the control plane does not.\n",
+    "sources": [
+      "https://buildkite.com/about/legal",
+      "https://buildkite.com/security",
+      "https://buildkite.com/about"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Hybrid architecture: source code, secrets, and build outputs live on customer-managed agents; the control plane sees only metadata + job orchestration. Materially reduces data exposure.\n"
+  },
+  {
+    "slug": "bunny",
+    "name": "Bunny.net",
+    "category": "cdn",
+    "contracting_entity": "BunnyWay d.o.o.",
+    "ultimate_parent": "BunnyWay d.o.o.",
+    "parent_jurisdiction": "SI",
+    "entity_jurisdiction": "SI",
+    "hosting_regions": [
+      "global-edge"
+    ],
+    "subprocessors": [],
+    "eu_alternatives": [],
+    "transfer_mechanism": "none",
+    "operational_access_regions": [
+      "SI",
+      "EU"
+    ],
+    "ratings": {
+      "entity_control": "green",
+      "data_location": "green",
+      "operational_access": "green",
+      "subprocessor_chain": "green",
+      "transfer_mechanism": "green",
+      "overall": "green"
+    },
+    "one_line_reason": "Slovenian d.o.o., no US parent or subsidiary in the chain. Edge network is global but the contracting entity and control plane sit inside the EU.\n",
+    "sources": [
+      "https://bunny.net/gdpr/",
+      "https://bunny.net/privacy/",
+      "https://bunny.net/about/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Edge PoPs include US locations; content cached at a US edge is technically transient there, but no contract or corporate anchor is US-based.\n"
+  },
+  {
+    "slug": "circleci",
+    "name": "CircleCI",
+    "category": "ci",
+    "contracting_entity": "Circle Internet Services, Inc.",
+    "ultimate_parent": "Circle Internet Services, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us"
+    ],
+    "subprocessors": [
+      "aws",
+      "gcp"
+    ],
+    "eu_alternatives": [
+      "gitlab-ci"
+    ],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "red",
+      "operational_access": "red",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Delaware corporation on AWS and GCP US regions. No EU cloud tenancy option; the 2023 incident disclosure confirmed all customer secrets sit in US-controlled stores.\n",
+    "sources": [
+      "https://circleci.com/",
+      "https://circleci.com/security/",
+      "https://circleci.com/privacy/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "clerk",
+    "name": "Clerk",
+    "category": "auth",
+    "contracting_entity": "Clerk Inc.",
+    "ultimate_parent": "Clerk Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us",
+      "eu"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "eurobase"
+    ],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Delaware corporation on AWS. EU region added in 2024 for Business+ plans; the entity is US and support staff sit in the US.\n",
+    "sources": [
+      "https://clerk.com/legal/dpa",
+      "https://clerk.com/legal/subprocessors",
+      "https://clerk.com/privacy"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
     "slug": "cloudflare",
     "name": "Cloudflare",
     "category": "cdn",
@@ -69,7 +530,7 @@ export const rawVendors: Vendor[] = [
     "subprocessors": [],
     "eu_alternatives": [
       "bunny",
-      "fastly-eu"
+      "keycdn"
     ],
     "transfer_mechanism": "SCCs+TIA",
     "operational_access_regions": [
@@ -88,11 +549,142 @@ export const rawVendors: Vendor[] = [
     "one_line_reason": "US-incorporated (Cloudflare, Inc.); the Data Localization Suite is a meaningful mitigation on the data-location + processing dimensions, but the parent-jurisdiction fact is unchanged and the CLOUD Act still reaches the entity. Overall red by the \"worst dimension wins\" rule.\n",
     "sources": [
       "https://www.cloudflare.com/trust-hub/gdpr/",
-      "https://blog.cloudflare.com/data-localization-suite/",
+      "https://www.cloudflare.com/en-gb/data-localization/",
       "https://www.cloudflare.com/cloudflare-customer-dpa/"
     ],
     "last_reviewed": "2026-09-11",
     "notes": "Cloudflare's Data Localization Suite is an amber-worthy mitigation for the data-location dimension but does not change the entity-control fundamental. Include the Suite pricing in any recommendation to a buyer who ends up here.\n"
+  },
+  {
+    "slug": "cockroach",
+    "name": "CockroachDB Cloud",
+    "category": "db",
+    "contracting_entity": "Cockroach Labs, Inc.",
+    "ultimate_parent": "Cockroach Labs, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us",
+      "eu",
+      "ap"
+    ],
+    "subprocessors": [
+      "aws",
+      "gcp",
+      "azure"
+    ],
+    "eu_alternatives": [
+      "aiven"
+    ],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Delaware corporation. Serverless and Dedicated tiers run on AWS / GCP / Azure. EU regions available; the corporate entity's US anchor remains.\n",
+    "sources": [
+      "https://www.cockroachlabs.com/docs/cockroachcloud/security-overview",
+      "https://www.cockroachlabs.com/",
+      "https://www.cockroachlabs.com/privacy/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Self-hosted CockroachDB on EU hardware is a green path; the Cloud service is what this rates.\n"
+  },
+  {
+    "slug": "datadog",
+    "name": "Datadog",
+    "category": "monitoring",
+    "contracting_entity": "Datadog, Inc.",
+    "ultimate_parent": "Datadog, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us1",
+      "us3",
+      "us5",
+      "eu1",
+      "ap1"
+    ],
+    "subprocessors": [
+      "aws",
+      "gcp",
+      "azure"
+    ],
+    "eu_alternatives": [
+      "grafana-cloud"
+    ],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "NASDAQ-listed US corporation. EU1 site is on AWS Frankfurt but ingest, alerting, and support operations are US-anchored. Logs, traces, metrics all subject to CLOUD Act at the entity.\n",
+    "sources": [
+      "https://www.datadoghq.com/legal/data-processing-addendum/",
+      "https://www.datadoghq.com/legal/",
+      "https://www.datadoghq.com/legal/privacy/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "digitalocean",
+    "name": "DigitalOcean",
+    "category": "hosting",
+    "contracting_entity": "DigitalOcean, LLC",
+    "ultimate_parent": "DigitalOcean Holdings, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "nyc",
+      "sfo",
+      "ams",
+      "fra",
+      "lon",
+      "sgp"
+    ],
+    "subprocessors": [],
+    "eu_alternatives": [
+      "scaleway",
+      "hetzner",
+      "ovhcloud"
+    ],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US",
+      "CA",
+      "IN"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "green",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "NYSE-listed US corporation (DOCN). Amsterdam, Frankfurt, and London regions available; the Delaware entity anchors CLOUD Act exposure regardless of droplet location.\n",
+    "sources": [
+      "https://www.digitalocean.com/legal/data-processing-agreement",
+      "https://www.digitalocean.com/legal",
+      "https://www.digitalocean.com/legal/privacy-policy"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
   },
   {
     "slug": "eurobase",
@@ -133,6 +725,81 @@ export const rawVendors: Vendor[] = [
     "notes": "This dataset is maintained by Eurobase OÜ and Eurobase is graded here. The checker's UI must render a visible conflict-of-interest banner on this vendor page. If you are reviewing this rating and disagree, please open an issue — grading ourselves green while denying others the same grade would destroy the credibility of the dataset the first time someone noticed.\n"
   },
   {
+    "slug": "fastly",
+    "name": "Fastly",
+    "category": "cdn",
+    "contracting_entity": "Fastly, Inc.",
+    "ultimate_parent": "Fastly, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "global-edge"
+    ],
+    "subprocessors": [],
+    "eu_alternatives": [
+      "bunny",
+      "keycdn"
+    ],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "green",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "NYSE-listed US corporation (FSLY). Global edge network but the corporate entity and control plane are US-based, so CLOUD Act applies to logs and any origin-shielding.\n",
+    "sources": [
+      "https://www.fastly.com/trust",
+      "https://www.fastly.com/privacy",
+      "https://www.fastly.com/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "fathom",
+    "name": "Fathom Analytics",
+    "category": "analytics",
+    "contracting_entity": "Conva Ventures Inc.",
+    "ultimate_parent": "Conva Ventures Inc.",
+    "parent_jurisdiction": "CA",
+    "entity_jurisdiction": "CA",
+    "hosting_regions": [
+      "eu",
+      "us",
+      "ca"
+    ],
+    "subprocessors": [],
+    "eu_alternatives": [
+      "plausible"
+    ],
+    "transfer_mechanism": "adequacy",
+    "operational_access_regions": [
+      "CA"
+    ],
+    "ratings": {
+      "entity_control": "amber",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "green",
+      "transfer_mechanism": "green",
+      "overall": "amber"
+    },
+    "one_line_reason": "Canadian entity (BC), covered by the EU-Canada adequacy decision. Not subject to the CLOUD Act, but Canadian production access still counts as a cross-border transfer.\n",
+    "sources": [
+      "https://usefathom.com/legal/dpa",
+      "https://usefathom.com/privacy",
+      "https://usefathom.com/about"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Canada has an EU adequacy decision (PIPEDA-covered orgs). Rated amber not green because the ultimate parent isn't EU — a change to Canada's status by the Commission would flip this.\n"
+  },
+  {
     "slug": "firebase",
     "name": "Firebase",
     "category": "baas",
@@ -164,7 +831,7 @@ export const rawVendors: Vendor[] = [
       "entity_control": "red",
       "data_location": "amber",
       "operational_access": "red",
-      "subprocessor_chain": "red",
+      "subprocessor_chain": "amber",
       "transfer_mechanism": "amber",
       "overall": "red"
     },
@@ -173,6 +840,40 @@ export const rawVendors: Vendor[] = [
       "https://firebase.google.com/support/privacy",
       "https://cloud.google.com/terms/data-processing-addendum",
       "https://policies.google.com/privacy"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "gatewayapi",
+    "name": "GatewayAPI",
+    "category": "communication",
+    "contracting_entity": "GatewayAPI ApS",
+    "ultimate_parent": "GatewayAPI ApS",
+    "parent_jurisdiction": "DK",
+    "entity_jurisdiction": "DK",
+    "hosting_regions": [
+      "dk"
+    ],
+    "subprocessors": [],
+    "eu_alternatives": [],
+    "transfer_mechanism": "none",
+    "operational_access_regions": [
+      "EU"
+    ],
+    "ratings": {
+      "entity_control": "green",
+      "data_location": "green",
+      "operational_access": "green",
+      "subprocessor_chain": "green",
+      "transfer_mechanism": "green",
+      "overall": "green"
+    },
+    "one_line_reason": "Danish ApS, servers and operations in Denmark. SMS and voice with Danish contracting entity — no US corporate control anywhere in the chain.\n",
+    "sources": [
+      "https://gatewayapi.com/",
+      "https://gatewayapi.com/blog/",
+      "https://gatewayapi.com/pricing/"
     ],
     "last_reviewed": "2026-09-11",
     "notes": null
@@ -223,6 +924,156 @@ export const rawVendors: Vendor[] = [
     "notes": null
   },
   {
+    "slug": "github-actions",
+    "name": "GitHub Actions",
+    "category": "ci",
+    "contracting_entity": "GitHub, Inc.",
+    "ultimate_parent": "Microsoft Corporation",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us",
+      "eu"
+    ],
+    "subprocessors": [
+      "azure"
+    ],
+    "eu_alternatives": [
+      "gitlab-ci"
+    ],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "GitHub, Inc. is a Microsoft subsidiary; both are US corporations. Actions runners live on Azure — jurisdiction, control plane, and secrets storage all sit under US law.\n",
+    "sources": [
+      "https://docs.github.com/en/site-policy/privacy-policies/github-data-protection-agreement",
+      "https://docs.github.com/en/site-policy/privacy-policies/github-subprocessors",
+      "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Self-hosted runners on your own EU infrastructure remove data-location and subprocessor risk but the control plane (workflow orchestration, secrets storage) remains with GitHub.\n"
+  },
+  {
+    "slug": "gitlab-ci",
+    "name": "GitLab CI (SaaS)",
+    "category": "ci",
+    "contracting_entity": "GitLab Inc.",
+    "ultimate_parent": "GitLab Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us"
+    ],
+    "subprocessors": [
+      "gcp"
+    ],
+    "eu_alternatives": [],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "red",
+      "operational_access": "red",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "GitLab.com is a Delaware corporation on GCP US regions. Self-managed GitLab on EU-hosted infrastructure avoids all of this exposure entirely — many teams pick that path for sovereignty.\n",
+    "sources": [
+      "https://about.gitlab.com/handbook/legal/data-processing-agreement/",
+      "https://about.gitlab.com/handbook/legal/",
+      "https://about.gitlab.com/privacy/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "This entry rates the SaaS (GitLab.com), not the self-managed product. Self-managed on Hetzner or Scaleway is a fully green sovereignty path.\n"
+  },
+  {
+    "slug": "grafana-cloud",
+    "name": "Grafana Cloud",
+    "category": "monitoring",
+    "contracting_entity": "Grafana Labs, Inc.",
+    "ultimate_parent": "Grafana Labs, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us",
+      "eu",
+      "au"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US",
+      "SE"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Grafana Labs is Delaware-incorporated even though a large share of engineering is in Sweden. EU region on AWS Frankfurt available; the contracting entity anchors CLOUD Act exposure.\n",
+    "sources": [
+      "https://grafana.com/legal/",
+      "https://grafana.com/security/",
+      "https://grafana.com/legal/privacy-policy/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Self-hosted Grafana + Loki + Mimir + Tempo is a fully sovereign path; only the SaaS is rated here.\n"
+  },
+  {
+    "slug": "groq",
+    "name": "Groq",
+    "category": "ai",
+    "contracting_entity": "Groq, Inc.",
+    "ultimate_parent": "Groq, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us"
+    ],
+    "subprocessors": [],
+    "eu_alternatives": [
+      "mistral"
+    ],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "red",
+      "operational_access": "red",
+      "subprocessor_chain": "green",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Delaware corporation running its own LPU hardware in US datacenters. Fast inference, but the jurisdiction is unchanged from any US LLM provider.\n",
+    "sources": [
+      "https://groq.com/terms-of-use/",
+      "https://groq.com/privacy-policy/",
+      "https://console.groq.com/docs/legal"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
     "slug": "hetzner",
     "name": "Hetzner",
     "category": "hosting",
@@ -260,6 +1111,312 @@ export const rawVendors: Vendor[] = [
     "notes": "US datacenter in Hillsboro (hil) was added in 2024 for US customers. Any workload placed there loses the sovereignty benefit — the datacenter location matters for that region-specific service even though the contracting entity stays German.\n"
   },
   {
+    "slug": "honeycomb",
+    "name": "Honeycomb",
+    "category": "monitoring",
+    "contracting_entity": "Hound Technology, Inc.",
+    "ultimate_parent": "Hound Technology, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us",
+      "eu"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "grafana-cloud"
+    ],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Delaware corporation (dba Honeycomb.io). EU region on AWS Ireland is available; the US entity and the AWS EMEA hyperscaler dependency both apply.\n",
+    "sources": [
+      "https://www.honeycomb.io/",
+      "https://www.honeycomb.io/security",
+      "https://www.honeycomb.io/privacy"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "keycdn",
+    "name": "KeyCDN",
+    "category": "cdn",
+    "contracting_entity": "proinity LLC",
+    "ultimate_parent": "proinity LLC",
+    "parent_jurisdiction": "CH",
+    "entity_jurisdiction": "CH",
+    "hosting_regions": [
+      "global-edge"
+    ],
+    "subprocessors": [],
+    "eu_alternatives": [
+      "bunny"
+    ],
+    "transfer_mechanism": "adequacy",
+    "operational_access_regions": [
+      "CH",
+      "EU"
+    ],
+    "ratings": {
+      "entity_control": "green",
+      "data_location": "green",
+      "operational_access": "green",
+      "subprocessor_chain": "green",
+      "transfer_mechanism": "green",
+      "overall": "green"
+    },
+    "one_line_reason": "Swiss LLC (proinity), no US corporate ownership. Switzerland holds an EU adequacy decision so transfers are lawful without SCCs; edge PoPs are worldwide but the anchor is Zurich.\n",
+    "sources": [
+      "https://www.keycdn.com/legal",
+      "https://www.keycdn.com/privacy",
+      "https://www.keycdn.com/about"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "kinde",
+    "name": "Kinde",
+    "category": "auth",
+    "contracting_entity": "Kinde Pty Ltd",
+    "ultimate_parent": "Kinde Pty Ltd",
+    "parent_jurisdiction": "AU",
+    "entity_jurisdiction": "AU",
+    "hosting_regions": [
+      "au",
+      "us",
+      "eu"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "eurobase"
+    ],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "AU"
+    ],
+    "ratings": {
+      "entity_control": "amber",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "amber"
+    },
+    "one_line_reason": "Australian Pty Ltd — not subject to the CLOUD Act, but Australia has no EU adequacy decision. EU region on AWS reduces data-location risk; entity risk sits with Australian law.\n",
+    "sources": [
+      "https://kinde.com/security/",
+      "https://kinde.com/privacy-policy/",
+      "https://kinde.com/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Rated amber not red because CLOUD Act does not reach Australian corporates. Rated amber not green because AU lacks EU adequacy — SCCs+TIA required for transfers of EU personal data.\n"
+  },
+  {
+    "slug": "lemonsqueezy",
+    "name": "Lemon Squeezy",
+    "category": "payments",
+    "contracting_entity": "LemonSqueezy, LLC",
+    "ultimate_parent": "Stripe, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "mollie"
+    ],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "red",
+      "operational_access": "red",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Acquired by Stripe in July 2024; ultimate parent is now Stripe, Inc. (Delaware). US LLC on AWS US regions. Same CLOUD Act exposure as Stripe itself.\n",
+    "sources": [
+      "https://www.lemonsqueezy.com/dpa",
+      "https://www.lemonsqueezy.com/terms",
+      "https://www.lemonsqueezy.com/privacy"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Pre-2024 Lemon Squeezy operated as an independent US company; the acquisition consolidated jurisdictional risk with Stripe.\n"
+  },
+  {
+    "slug": "mailgun",
+    "name": "Mailgun",
+    "category": "email",
+    "contracting_entity": "Mailgun Technologies, Inc.",
+    "ultimate_parent": "Sinch AB",
+    "parent_jurisdiction": "SE",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us-east-1",
+      "eu-west-1"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "mailjet",
+      "scaleway"
+    ],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "US",
+      "EU"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Ultimate parent Sinch AB is Swedish, but Mailgun's contracting entity remains a Delaware corporation that must comply with the CLOUD Act regardless. EU region available but shared US infrastructure remains.\n",
+    "sources": [
+      "https://www.mailgun.com/legal/dpa/",
+      "https://www.mailgun.com/",
+      "https://www.mailgun.com/privacy-policy/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Interesting case for the \"parent shields subsidiary\" myth — Sinch's Swedish ownership does not remove Mailgun's US corporate exposure. The contracting entity is the anchor.\n"
+  },
+  {
+    "slug": "mailjet",
+    "name": "Mailjet",
+    "category": "email",
+    "contracting_entity": "Mailjet SAS",
+    "ultimate_parent": "Sinch AB",
+    "parent_jurisdiction": "SE",
+    "entity_jurisdiction": "FR",
+    "hosting_regions": [
+      "fr",
+      "be"
+    ],
+    "subprocessors": [],
+    "eu_alternatives": [],
+    "transfer_mechanism": "none",
+    "operational_access_regions": [
+      "EU"
+    ],
+    "ratings": {
+      "entity_control": "green",
+      "data_location": "green",
+      "operational_access": "green",
+      "subprocessor_chain": "green",
+      "transfer_mechanism": "green",
+      "overall": "green"
+    },
+    "one_line_reason": "French SAS with a Swedish parent (Sinch AB); infrastructure in France and Belgium, operations EU-only. No US corporate entity in the chain.\n",
+    "sources": [
+      "https://www.mailjet.com/gdpr/",
+      "https://www.mailjet.com/security-privacy/",
+      "https://www.mailjet.com/privacy-policy/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "mistral",
+    "name": "Mistral AI",
+    "category": "ai",
+    "contracting_entity": "Mistral AI SAS",
+    "ultimate_parent": "Mistral AI SAS",
+    "parent_jurisdiction": "FR",
+    "entity_jurisdiction": "FR",
+    "hosting_regions": [
+      "fr",
+      "eu"
+    ],
+    "subprocessors": [],
+    "eu_alternatives": [],
+    "transfer_mechanism": "none",
+    "operational_access_regions": [
+      "EU"
+    ],
+    "ratings": {
+      "entity_control": "green",
+      "data_location": "green",
+      "operational_access": "green",
+      "subprocessor_chain": "green",
+      "transfer_mechanism": "green",
+      "overall": "green"
+    },
+    "one_line_reason": "French SAS; La Plateforme (Mistral's own inference platform) runs in EU regions. No US corporate control over the contracting entity.\n",
+    "sources": [
+      "https://mistral.ai/terms/",
+      "https://mistral.ai/privacy-policy/",
+      "https://help.mistral.ai/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "When consumed via Azure, AWS Bedrock, or GCP Vertex the rating flips to that hyperscaler's — those aren't Mistral's contracting entity, they're Microsoft / Amazon / Google.\n"
+  },
+  {
+    "slug": "mixpanel",
+    "name": "Mixpanel",
+    "category": "analytics",
+    "contracting_entity": "Mixpanel, Inc.",
+    "ultimate_parent": "Mixpanel, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us",
+      "eu"
+    ],
+    "subprocessors": [
+      "gcp"
+    ],
+    "eu_alternatives": [
+      "plausible",
+      "posthog"
+    ],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US",
+      "IN"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Delaware corporation on Google Cloud, EU residency available on higher plans. US and Indian operational access is standard for the Cloud tier.\n",
+    "sources": [
+      "https://mixpanel.com/legal/dpa/",
+      "https://mixpanel.com/legal/subprocessors/",
+      "https://mixpanel.com/legal/privacy-policy/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
     "slug": "mollie",
     "name": "Mollie",
     "category": "payments",
@@ -287,11 +1444,517 @@ export const rawVendors: Vendor[] = [
     "one_line_reason": "Dutch B.V., privately owned, EU-hosted, EU-operated. Card + iDEAL + SEPA processing without a US payment schemes intermediary in the contract path.\n",
     "sources": [
       "https://www.mollie.com/legal/privacy",
-      "https://www.mollie.com/legal/dpa",
+      "https://www.mollie.com/gb/privacy",
       "https://www.mollie.com/en/about"
     ],
     "last_reviewed": "2026-09-11",
     "notes": null
+  },
+  {
+    "slug": "neon",
+    "name": "Neon",
+    "category": "db",
+    "contracting_entity": "Neon Inc.",
+    "ultimate_parent": "Databricks, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us-east-1",
+      "us-west-2",
+      "eu-central-1",
+      "ap-southeast-1"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "eurobase",
+      "aiven"
+    ],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Acquired by Databricks in May 2025; ultimate parent is now a Delaware corporation. EU-Central region on AWS Frankfurt available; the US entity anchor stands.\n",
+    "sources": [
+      "https://neon.tech/dpa",
+      "https://neon.tech/subprocessors",
+      "https://neon.tech/privacy-policy"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Pre-Databricks Neon operated under its own Delaware entity — the acquisition consolidated but did not change jurisdiction.\n"
+  },
+  {
+    "slug": "newrelic",
+    "name": "New Relic",
+    "category": "monitoring",
+    "contracting_entity": "New Relic, Inc.",
+    "ultimate_parent": "New Relic, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us",
+      "eu"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "grafana-cloud"
+    ],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "US",
+      "IN"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Delaware corporation, private since Francisco Partners' 2023 take-private. EU region on AWS Dublin available; the contracting entity remains US.\n",
+    "sources": [
+      "https://newrelic.com/termsandconditions",
+      "https://newrelic.com/security",
+      "https://newrelic.com/termsandconditions/privacy"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "openai",
+    "name": "OpenAI",
+    "category": "ai",
+    "contracting_entity": "OpenAI, LLC",
+    "ultimate_parent": "OpenAI, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us"
+    ],
+    "subprocessors": [
+      "azure"
+    ],
+    "eu_alternatives": [
+      "mistral"
+    ],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "red",
+      "operational_access": "red",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "US LLC running on Microsoft Azure US regions. Zero-data-retention API mode reduces retention risk but does not change jurisdiction — inference still runs on US-controlled infrastructure.\n",
+    "sources": [
+      "https://openai.com/policies/data-processing-addendum/",
+      "https://trust.openai.com/",
+      "https://openai.com/policies/privacy-policy/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "OpenAI announced EU data residency for some ChatGPT Enterprise / API customers in 2024; enable it explicitly per account. Even with EU residency, the corporate anchor stays US.\n"
+  },
+  {
+    "slug": "ovhcloud",
+    "name": "OVHcloud",
+    "category": "hosting",
+    "contracting_entity": "OVH SAS",
+    "ultimate_parent": "OVH Groupe SA",
+    "parent_jurisdiction": "FR",
+    "entity_jurisdiction": "FR",
+    "hosting_regions": [
+      "gra",
+      "sbg",
+      "rbx",
+      "waw",
+      "fra"
+    ],
+    "subprocessors": [],
+    "eu_alternatives": [],
+    "transfer_mechanism": "none",
+    "operational_access_regions": [
+      "EU"
+    ],
+    "ratings": {
+      "entity_control": "green",
+      "data_location": "green",
+      "operational_access": "green",
+      "subprocessor_chain": "green",
+      "transfer_mechanism": "green",
+      "overall": "green"
+    },
+    "one_line_reason": "French SAS, ultimate parent OVH Groupe SA (publicly listed on Euronext Paris). Datacentres in Roubaix, Gravelines, Strasbourg, Frankfurt, Warsaw. No US corporate control.\n",
+    "sources": [
+      "https://us.ovhcloud.com/legal/data-processing-agreement/",
+      "https://www.ovhcloud.com/en/",
+      "https://www.ovhcloud.com/en/about-us/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "OVHcloud also operates datacentres in Canada, US, Singapore, Australia. Workloads placed outside the EU regions lose the data-location benefit even though the entity remains French.\n"
+  },
+  {
+    "slug": "paddle",
+    "name": "Paddle",
+    "category": "payments",
+    "contracting_entity": "Paddle.com Market Ltd",
+    "ultimate_parent": "Paddle.com Market Ltd",
+    "parent_jurisdiction": "GB",
+    "entity_jurisdiction": "GB",
+    "hosting_regions": [
+      "eu-west"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "mollie"
+    ],
+    "transfer_mechanism": "adequacy",
+    "operational_access_regions": [
+      "GB",
+      "EU"
+    ],
+    "ratings": {
+      "entity_control": "green",
+      "data_location": "amber",
+      "operational_access": "green",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "green",
+      "overall": "amber"
+    },
+    "one_line_reason": "UK limited company, EU-Ireland hosting on AWS. UK adequacy decision covers transfers, so no SCCs needed. AWS EMEA dependency drags subprocessor chain to amber.\n",
+    "sources": [
+      "https://www.paddle.com/legal",
+      "https://www.paddle.com/legal/privacy",
+      "https://www.paddle.com/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "UK adequacy is under Commission review (expires 2026). If not renewed, this entry moves to amber on transfer_mechanism.\n"
+  },
+  {
+    "slug": "planetscale",
+    "name": "PlanetScale",
+    "category": "db",
+    "contracting_entity": "PlanetScale, Inc.",
+    "ultimate_parent": "PlanetScale, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us-east",
+      "us-west",
+      "eu-west",
+      "ap-south"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "eurobase",
+      "aiven"
+    ],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Delaware corporation on AWS, EU-West-1 region available. Contracting entity's US anchor keeps CLOUD Act exposure regardless of chosen region.\n",
+    "sources": [
+      "https://planetscale.com/legal/data-processing-addendum",
+      "https://planetscale.com/legal/subprocessors",
+      "https://planetscale.com/legal/privacy"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "plausible",
+    "name": "Plausible Analytics",
+    "category": "analytics",
+    "contracting_entity": "Plausible Insights OÜ",
+    "ultimate_parent": "Plausible Insights OÜ",
+    "parent_jurisdiction": "EE",
+    "entity_jurisdiction": "EE",
+    "hosting_regions": [
+      "de"
+    ],
+    "subprocessors": [],
+    "eu_alternatives": [],
+    "transfer_mechanism": "none",
+    "operational_access_regions": [
+      "EU"
+    ],
+    "ratings": {
+      "entity_control": "green",
+      "data_location": "green",
+      "operational_access": "green",
+      "subprocessor_chain": "green",
+      "transfer_mechanism": "green",
+      "overall": "green"
+    },
+    "one_line_reason": "Estonian OÜ, servers in Germany (Hetzner), remote team but no US corporate entity anywhere. Explicitly built as a GDPR-first alternative to Google Analytics.\n",
+    "sources": [
+      "https://plausible.io/dpa",
+      "https://plausible.io/data-policy",
+      "https://plausible.io/about"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "posthog",
+    "name": "PostHog",
+    "category": "analytics",
+    "contracting_entity": "PostHog Inc.",
+    "ultimate_parent": "PostHog Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us-east-1",
+      "eu-central-1"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "plausible",
+      "fathom"
+    ],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US",
+      "GB"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Delaware-incorporated with London ops; EU region on AWS Frankfurt available. Self-hostable OSS avoids the exposure entirely; the Cloud offering does not.\n",
+    "sources": [
+      "https://posthog.com/dpa",
+      "https://posthog.com/handbook/company/security#subprocessors",
+      "https://posthog.com/privacy"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Self-hosting is a green path; the Cloud SaaS is what the rating applies to.\n"
+  },
+  {
+    "slug": "postmark",
+    "name": "Postmark",
+    "category": "email",
+    "contracting_entity": "ActiveCampaign, LLC",
+    "ultimate_parent": "ActiveCampaign, LLC",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us-east"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "mailjet",
+      "scaleway"
+    ],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "red",
+      "operational_access": "red",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Postmark (Wildbit) was acquired by ActiveCampaign in 2022. Contracting entity and infrastructure are US-only; no EU region option. Every message body transits US datacenters.\n",
+    "sources": [
+      "https://postmarkapp.com/dpa",
+      "https://postmarkapp.com/privacy-policy",
+      "https://www.activecampaign.com/legal"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "r2",
+    "name": "Cloudflare R2",
+    "category": "storage",
+    "contracting_entity": "Cloudflare, Inc.",
+    "ultimate_parent": "Cloudflare, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "global-distributed"
+    ],
+    "subprocessors": [],
+    "eu_alternatives": [
+      "scaleway"
+    ],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "red",
+      "subprocessor_chain": "green",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "R2 is a Cloudflare-operated object store. Location hints can pin data to EU jurisdictions, but Cloudflare, Inc. is Delaware-incorporated and subject to the CLOUD Act.\n",
+    "sources": [
+      "https://www.cloudflare.com/cloudflare-customer-dpa/",
+      "https://www.cloudflare.com/en-gb/gdpr/introduction/",
+      "https://developers.cloudflare.com/r2/reference/data-location/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "resend",
+    "name": "Resend",
+    "category": "email",
+    "contracting_entity": "Resend, Inc.",
+    "ultimate_parent": "Resend, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us-east-1",
+      "eu-west-1"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "mailjet",
+      "scaleway"
+    ],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Resend, Inc. is Delaware-incorporated and subject to the CLOUD Act. EU region is available on paid plans but runs on AWS, and support staff are US-based.\n",
+    "sources": [
+      "https://resend.com/legal/dpa",
+      "https://resend.com/legal/subprocessors",
+      "https://resend.com/legal/privacy-policy"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "rollbar",
+    "name": "Rollbar",
+    "category": "error",
+    "contracting_entity": "Rollbar, Inc.",
+    "ultimate_parent": "Rollbar, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "red",
+      "operational_access": "red",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "US corporation running on AWS US-East. No EU regional option — every event payload transits the US, which the CLOUD Act reaches directly.\n",
+    "sources": [
+      "https://rollbar.com/legal/dpa/",
+      "https://rollbar.com/",
+      "https://rollbar.com/privacy/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "s3",
+    "name": "Amazon S3",
+    "category": "storage",
+    "contracting_entity": "Amazon Web Services EMEA SARL",
+    "ultimate_parent": "Amazon.com, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "EU",
+    "hosting_regions": [
+      "us-east-1",
+      "eu-west-1",
+      "eu-central-1",
+      "eu-west-3",
+      "ap-southeast-1"
+    ],
+    "subprocessors": [],
+    "eu_alternatives": [
+      "scaleway"
+    ],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US",
+      "IE"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "green",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Amazon S3 inherits AWS's exposure: the Luxembourg contracting entity's ultimate parent (Amazon.com, Inc.) is US-incorporated, so an S3 EU-region bucket is still reachable under the CLOUD Act.\n",
+    "sources": [
+      "https://aws.amazon.com/service-terms/",
+      "https://aws.amazon.com/compliance/gdpr-center/",
+      "https://aws.amazon.com/compliance/sub-processors/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Rated separately from `aws` because users search \"is S3 GDPR-compliant\" as a distinct query. The rating mirrors AWS's per the corporate anchor.\n"
   },
   {
     "slug": "scaleway",
@@ -322,12 +1985,131 @@ export const rawVendors: Vendor[] = [
     },
     "one_line_reason": "French SAS, ultimate parent Iliad (publicly listed on Euronext Paris), datacentres and operations in France, Netherlands, and Poland. No US corporate control anywhere in the chain.\n",
     "sources": [
-      "https://www.scaleway.com/en/dpa/",
+      "https://www.scaleway.com/en/contracts/",
       "https://www.scaleway.com/en/security-and-compliance/",
-      "https://www.scaleway.com/en/about/"
+      "https://www.scaleway.com/en/about-us/"
     ],
     "last_reviewed": "2026-09-11",
     "notes": null
+  },
+  {
+    "slug": "sendgrid",
+    "name": "SendGrid (Twilio)",
+    "category": "email",
+    "contracting_entity": "Twilio Inc.",
+    "ultimate_parent": "Twilio Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us",
+      "eu"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "mailjet",
+      "scaleway"
+    ],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US",
+      "IE"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "SendGrid is a Twilio product; contracting entity is Twilio Inc. (Delaware) and subject to the CLOUD Act. An EU regional address is available but does not shield the parent's jurisdiction.\n",
+    "sources": [
+      "https://www.twilio.com/en-us/legal/data-protection-addendum",
+      "https://www.twilio.com/en-us/legal/sub-processors",
+      "https://sendgrid.com/en-us/legal/privacy-policy"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "sentry",
+    "name": "Sentry",
+    "category": "error",
+    "contracting_entity": "Functional Software, Inc.",
+    "ultimate_parent": "Functional Software, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us",
+      "eu"
+    ],
+    "subprocessors": [
+      "gcp"
+    ],
+    "eu_alternatives": [],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Delaware corp; EU region on Google Cloud Frankfurt is available on Business plans. Contracting entity remains US-based and stack traces / event payloads reach it.\n",
+    "sources": [
+      "https://sentry.io/legal/dpa/",
+      "https://sentry.io/legal/subprocessors/",
+      "https://sentry.io/privacy/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Self-hosted Sentry (OSS) is a green path; the SaaS is what the rating applies to.\n"
+  },
+  {
+    "slug": "sinch",
+    "name": "Sinch",
+    "category": "communication",
+    "contracting_entity": "Sinch AB",
+    "ultimate_parent": "Sinch AB",
+    "parent_jurisdiction": "SE",
+    "entity_jurisdiction": "SE",
+    "hosting_regions": [
+      "eu",
+      "us",
+      "ap"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "gatewayapi"
+    ],
+    "transfer_mechanism": "none",
+    "operational_access_regions": [
+      "EU",
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "green",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "green",
+      "overall": "amber"
+    },
+    "one_line_reason": "Swedish AB publicly listed on Nasdaq Stockholm. Ultimate parent is EU; some infrastructure rides on AWS, some on Sinch's own network. Route-dependent — check per product line.\n",
+    "sources": [
+      "https://www.sinch.com/legal/",
+      "https://www.sinch.com/legal/privacy-notice/",
+      "https://www.sinch.com/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Sinch's US subsidiaries (Mailgun, Mailjet-US) are US corporations subject to CLOUD Act despite the Swedish parent. This entry rates the Sinch AB contracting relationship itself.\n"
   },
   {
     "slug": "stripe",
@@ -408,9 +2190,128 @@ export const rawVendors: Vendor[] = [
     },
     "one_line_reason": "Contracting entity Supabase, Inc. is US-incorporated and subject to the CLOUD Act regardless of the EU region configured; runs on AWS as sole hyperscaler subprocessor.\n",
     "sources": [
-      "https://supabase.com/docs/guides/platform/data-storage",
+      "https://supabase.com/legal",
       "https://supabase.com/legal/dpa",
-      "https://supabase.com/dashboard/org/[org_id]/subprocessors"
+      "https://supabase.com/privacy"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "timescale",
+    "name": "Timescale Cloud",
+    "category": "db",
+    "contracting_entity": "Timescale, Inc.",
+    "ultimate_parent": "Timescale, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us-east-1",
+      "us-west-2",
+      "eu-central-1",
+      "eu-west-1"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "aiven"
+    ],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Delaware corporation running on AWS. Managed TimescaleDB / PostgreSQL with EU-Central and EU-West regions; the US contracting entity puts it under the CLOUD Act regardless.\n",
+    "sources": [
+      "https://www.timescale.com/legal/dpa",
+      "https://www.timescale.com/legal/subprocessors",
+      "https://www.timescale.com/legal/privacy"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": "Self-hosted TimescaleDB (the extension) on EU hardware is a green path. Only the Cloud SaaS is what this rating covers.\n"
+  },
+  {
+    "slug": "together",
+    "name": "Together AI",
+    "category": "ai",
+    "contracting_entity": "Together Computer, Inc.",
+    "ultimate_parent": "Together Computer, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us"
+    ],
+    "subprocessors": [],
+    "eu_alternatives": [
+      "mistral"
+    ],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "red",
+      "operational_access": "red",
+      "subprocessor_chain": "green",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "US corporation offering open-model inference. Runs on Together's own GPU clusters (subprocessor chain is clean) but the corporate entity and datacenters are US-based.\n",
+    "sources": [
+      "https://www.together.ai/terms-of-service",
+      "https://www.together.ai/privacy",
+      "https://www.together.ai/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "twilio",
+    "name": "Twilio",
+    "category": "communication",
+    "contracting_entity": "Twilio Inc.",
+    "ultimate_parent": "Twilio Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us",
+      "eu",
+      "au"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "sinch",
+      "gatewayapi"
+    ],
+    "transfer_mechanism": "DPF",
+    "operational_access_regions": [
+      "US",
+      "IE"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "NYSE-listed US corporation (TWLO). EU regional endpoint on AWS Ireland exists; message bodies and CDRs still transit a US-controlled contracting entity.\n",
+    "sources": [
+      "https://www.twilio.com/en-us/legal/data-protection-addendum",
+      "https://www.twilio.com/en-us/legal/sub-processors",
+      "https://www.twilio.com/en-us/legal/privacy"
     ],
     "last_reviewed": "2026-09-11",
     "notes": null
@@ -435,7 +2336,7 @@ export const rawVendors: Vendor[] = [
     ],
     "eu_alternatives": [
       "scaleway",
-      "netlify-eu"
+      "ovhcloud"
     ],
     "transfer_mechanism": "SCCs",
     "operational_access_regions": [
@@ -445,15 +2346,91 @@ export const rawVendors: Vendor[] = [
       "entity_control": "red",
       "data_location": "amber",
       "operational_access": "red",
-      "subprocessor_chain": "red",
+      "subprocessor_chain": "amber",
       "transfer_mechanism": "amber",
       "overall": "red"
     },
     "one_line_reason": "Vercel Inc. (US) contracting entity, runs on AWS (US-owned control plane). EU region is available for edge caching but the platform's control plane is US-jurisdictional.\n",
     "sources": [
       "https://vercel.com/legal/dpa",
-      "https://vercel.com/legal/subprocessors",
+      "https://vercel.com/legal",
       "https://vercel.com/docs/edge-network/regions"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "wasabi",
+    "name": "Wasabi",
+    "category": "storage",
+    "contracting_entity": "Wasabi Technologies, Inc.",
+    "ultimate_parent": "Wasabi Technologies, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us-east",
+      "eu-central",
+      "eu-west"
+    ],
+    "subprocessors": [],
+    "eu_alternatives": [
+      "scaleway"
+    ],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "amber",
+      "operational_access": "amber",
+      "subprocessor_chain": "green",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Delaware corporation with EU regions in Amsterdam, London, and Paris. Pinning a bucket to EU-Central still leaves the contracting entity subject to the CLOUD Act.\n",
+    "sources": [
+      "https://wasabi.com/legal/",
+      "https://wasabi.com/legal",
+      "https://wasabi.com/"
+    ],
+    "last_reviewed": "2026-09-11",
+    "notes": null
+  },
+  {
+    "slug": "workos",
+    "name": "WorkOS",
+    "category": "auth",
+    "contracting_entity": "WorkOS, Inc.",
+    "ultimate_parent": "WorkOS, Inc.",
+    "parent_jurisdiction": "US",
+    "entity_jurisdiction": "US",
+    "hosting_regions": [
+      "us"
+    ],
+    "subprocessors": [
+      "aws"
+    ],
+    "eu_alternatives": [
+      "eurobase"
+    ],
+    "transfer_mechanism": "SCCs+TIA",
+    "operational_access_regions": [
+      "US"
+    ],
+    "ratings": {
+      "entity_control": "red",
+      "data_location": "red",
+      "operational_access": "red",
+      "subprocessor_chain": "amber",
+      "transfer_mechanism": "amber",
+      "overall": "red"
+    },
+    "one_line_reason": "Delaware corporation running on AWS US regions. No EU tenancy option today; SSO / SCIM traffic transits US infrastructure.\n",
+    "sources": [
+      "https://workos.com/legal/dpa",
+      "https://workos.com/legal/subprocessors",
+      "https://workos.com/legal/privacy"
     ],
     "last_reviewed": "2026-09-11",
     "notes": null
