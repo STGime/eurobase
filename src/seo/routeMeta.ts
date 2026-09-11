@@ -14,9 +14,19 @@
 // before the alias plugin is installed.
 import { blog } from '../data/content'
 import { comparisons } from '../data/comparisons'
+import { vendors as sovereigntyVendors, getVendor as getSovereigntyVendor } from '../data/sovereignty'
 
 const SITE_ORIGIN = 'https://eurobase.app'
 const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/og-image.png`
+
+// Slice at `max` chars but backtrack to the last word boundary so
+// meta descriptions don't cut mid-word (e.g. `...on the "worst `).
+// Appends an ellipsis only when the string was actually shortened.
+function truncateAtWord(s: string, max: number): string {
+  if (s.length <= max) return s
+  const cut = s.slice(0, max - 1).replace(/\s+\S*$/, '')
+  return cut + '…'
+}
 
 export interface RouteMeta {
   title: string
@@ -78,6 +88,33 @@ const staticRouteMeta: Record<string, Omit<RouteMeta, 'canonical' | 'ogType'>> =
       'Score your backend against 10 concrete GDPR obligations in 3 minutes. Article 15 DSAR, Article 30 RoPA, sub-processor discipline, breach notification, encryption at rest, audit trail, retention, EU residency. No signup. Free.',
     ogImage: DEFAULT_OG_IMAGE,
   },
+  '/sovereignty-check': {
+    title: 'CLOUD Act Exposure Checker — Sovereignty Check | Eurobase',
+    description:
+      "Free tool: pick your stack, see which vendors a US authority can legally reach under the CLOUD Act — regardless of which region you configured. Open dataset with sources. No signup.",
+    ogTitle: 'CLOUD Act Exposure Checker — see which parts of your stack are legally reachable',
+    ogDescription:
+      "Firebase / Supabase EU region is not GDPR-safe when the corporate parent is US. Pick your stack, get a red/amber/green score for jurisdictional exposure. Free, open dataset.",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  '/sovereignty-check/methodology': {
+    title: 'Methodology — Sovereignty Check | Eurobase',
+    description:
+      "How the CLOUD Act Exposure Checker rates vendors: five orthogonal dimensions (entity control, data location, operational access, subprocessor chain, transfer mechanism), worst-wins rule, severity modifier, conflict-of-interest disclosure. Written for citing.",
+    ogTitle: 'Methodology — CLOUD Act Exposure Checker',
+    ogDescription:
+      "The rating model behind the Sovereignty Check: five dimensions, worst-wins, cited sources, MIT-licensed open dataset.",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  '/sovereignty-check/vendors': {
+    title: 'Vendor ratings — Sovereignty Check | Eurobase',
+    description:
+      "Every vendor rating in the open sovereignty-vendors dataset — five-dimension CLOUD Act exposure score with cited sources. EU-hosted alternatives suggested per category.",
+    ogTitle: 'Vendor ratings — CLOUD Act exposure by vendor',
+    ogDescription:
+      "Browse every vendor in the open dataset: red/amber/green sovereignty score, sources, EU alternatives.",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
 }
 
 // Return metadata for a given route path (as vite-ssg would generate,
@@ -126,6 +163,37 @@ export function getRouteMeta(routePath: string): RouteMeta | null {
     }
   }
 
+  // Per-vendor SEO pages (/sovereignty-check/vendors/<slug>).
+  // Highest-leverage SEO move in the growth spec — 100 vendors →
+  // 100 indexed pages targeting "is X GDPR compliant" and
+  // "EU alternative to X" queries. Each page's title + description
+  // includes the vendor name so long-tail queries have a landing.
+  const vendorMatch = path.match(/^\/sovereignty-check\/vendors\/(.+)$/)
+  if (vendorMatch) {
+    const slug = vendorMatch[1]!
+    const v = getSovereigntyVendor(slug)
+    if (!v) return null
+    const title = `Is ${v.name} GDPR-safe? CLOUD Act exposure and EU alternatives | Eurobase`
+    const reason = v.one_line_reason.trim().replace(/\s+/g, ' ')
+    const altsSuffix =
+      v.eu_alternatives && v.eu_alternatives.length
+        ? ` EU alternatives: ${v.eu_alternatives.join(', ')}.`
+        : ''
+    const description = truncateAtWord(
+      `${v.name} — ${v.ratings.overall.toUpperCase()} on the CLOUD Act Exposure Checker. ${reason}${altsSuffix}`,
+      300,
+    )
+    return {
+      title,
+      description,
+      canonical: `${SITE_ORIGIN}/sovereignty-check/vendors/${v.slug}`,
+      ogTitle: title,
+      ogDescription: description,
+      ogImage: DEFAULT_OG_IMAGE,
+      ogType: 'article',
+    }
+  }
+
   const staticMeta = staticRouteMeta[path]
   if (staticMeta) {
     return {
@@ -157,5 +225,6 @@ export function getDynamicRoutes(): string[] {
   return [
     ...blog.posts.map((p) => `/blog/${p.slug}`),
     ...Object.keys(comparisons).map((slug) => `/vs/${slug}`),
+    ...sovereigntyVendors.map((v) => `/sovereignty-check/vendors/${v.slug}`),
   ]
 }

@@ -4,6 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "build:sovereignty-data": "node scripts/build-sovereignty-data.mjs",
+    "predev": "npm run build:sovereignty-data",
+    "prebuild": "npm run build:sovereignty-data",
     "dev": "vite",
     "build": "vue-tsc -b && vite-ssg build",
     "preview": "vite preview"
@@ -26,6 +29,7 @@
     "typescript": "~5.9.3",
     "vite": "^7.3.1",
     "vue-tsc": "^3.1.5",
-    "world-atlas": "^2.0.2"
+    "world-atlas": "^2.0.2",
+    "yaml": "^2.9.0"
   }
 }

@@ -1,0 +1,3 @@
+[submodule "src/data/sovereignty-vendors"]
+	path = src/data/sovereignty-vendors
+	url = https://github.com/STGime/sovereignty-vendors.git

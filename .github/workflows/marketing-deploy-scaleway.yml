@@ -75,6 +75,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Submodules host the sovereignty-vendors dataset that the
+          # prebuild script reads to emit src/data/sovereignty-generated.ts.
+          # Without this, `npm run prebuild` inside the Docker build fails
+          # loud (missing vendors/*.yaml) and the deploy fails on first run
+          # after this line lands.
+          submodules: true
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
