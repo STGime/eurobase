@@ -49,7 +49,7 @@ import heroImage from '@/assets/images/hero-network.webp'
                pages, blog canonical intros, /vs/*). Say it a hundred
                times. -->
           <p class="text-accent-gold font-semibold text-sm uppercase tracking-wider mb-4 animate-fade-in-up">
-            ⚠️ Firebase / Supabase EU region ≠ GDPR-safe
+            ⚠️ Firebase / Supabase EU region is not GDPR-safe
           </p>
           <h1 id="hero-heading" class="text-4xl md:text-5xl lg:text-6xl font-bold text-text-white leading-tight mb-6 font-heading animate-fade-in-up stagger-1">
             {{ hero.headline }}

@@ -54,7 +54,7 @@ export const comparisons: Record<string, ComparisonData> = {
     slug: 'supabase',
     competitor: 'Supabase',
     heroHeadline: 'Eurobase vs Supabase: the EU-sovereign Supabase alternative',
-    heroSubheadline: 'Same PostgreSQL, same DX — hosted in France, outside the CLOUD Act, GDPR-native, and €25/mo per project once you go live.',
+    heroSubheadline: 'Supabase EU region is not GDPR-safe — US-owned means CLOUD Act reach. Eurobase: same PostgreSQL, same DX, EU company, hosted in France, GDPR-native. Migrate off Supabase in an afternoon. €25/mo per project once you go live.',
     metaTitle: 'Supabase EU alternative — Eurobase (Scaleway, France, GDPR-native)',
     metaDescription: 'Looking for a Supabase EU alternative? Eurobase runs the same Postgres + auth + storage + realtime stack on Scaleway (France) under Estonian law — no CLOUD Act, no US corporate parent. GDPR-native DPA + DSAR + audit log in every project. Free tier, €25/mo Pro. Migrate from Supabase with one CLI command.',
     sections: [
@@ -241,7 +241,7 @@ export const comparisons: Record<string, ComparisonData> = {
     slug: 'firebase',
     competitor: 'Firebase',
     heroHeadline: 'Eurobase vs Firebase: the EU-sovereign SQL alternative',
-    heroSubheadline: 'SQL instead of NoSQL. Open standards instead of lock-in. Scaleway (France) instead of Google Cloud — and €25/mo per project once you go live.',
+    heroSubheadline: 'Firebase EU region is not GDPR-safe — Google-owned means CLOUD Act reach. Eurobase: SQL instead of NoSQL, open standards instead of lock-in, Scaleway (France) instead of Google Cloud, EU company. Migrate off Firebase in an afternoon. €25/mo per project once you go live.',
     metaTitle: 'Firebase EU alternative — Eurobase (Postgres, Scaleway, GDPR-native)',
     metaDescription: 'Looking for a Firebase EU alternative? Eurobase runs PostgreSQL + auth + storage + realtime + edge functions on Scaleway (France) under Estonian law — no CLOUD Act, no Google Cloud dependency. GDPR-native DPA + DSAR + audit log in every project. Free tier, €25/mo Pro.',
     sections: [
