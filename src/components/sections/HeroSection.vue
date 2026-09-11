@@ -40,8 +40,16 @@ import heroImage from '@/assets/images/hero-network.webp'
             />
           </a>
 
+          <!-- Positioning eyebrow — the fear before the fix. Replaces
+               the earlier "EU-Native Backend-as-a-Service" line which
+               was a feature statement, not a hook. What converts is a
+               fear the buyer already half-knows plus a fix they can
+               act on. Fear here, fix in the H1 + subheadline below.
+               Same line permeates every marketing surface (comparison
+               pages, blog canonical intros, /vs/*). Say it a hundred
+               times. -->
           <p class="text-accent-gold font-semibold text-sm uppercase tracking-wider mb-4 animate-fade-in-up">
-            🇪🇺 EU-Native Backend-as-a-Service
+            ⚠️ Firebase / Supabase EU region ≠ GDPR-safe
           </p>
           <h1 id="hero-heading" class="text-4xl md:text-5xl lg:text-6xl font-bold text-text-white leading-tight mb-6 font-heading animate-fade-in-up stagger-1">
             {{ hero.headline }}
