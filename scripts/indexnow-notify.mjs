@@ -27,10 +27,11 @@ import path from 'node:path'
 // nothing else until search engines have re-verified.
 const INDEXNOW_KEY = '1089efee4e22c7bbb677b67862a5845c'
 const HOST = 'eurobase.app'
-// sitemap.xml is a hand-maintained static asset in public/ — vite
-// copies it into dist/ verbatim at build time. Read it straight from
-// the checkout so this script can run on a bare CI runner without a
-// vite build first (saves ~3-5 min per deploy).
+// sitemap.xml is regenerated from source data by
+// scripts/build-sitemap.mjs (prebuild step) and copied into dist/
+// by vite. The IndexNow workflow calls that script itself before
+// reading the file below, so a bare CI runner can push to IndexNow
+// without a full vite build first (saves ~3-5 min per deploy).
 const SITEMAP_PATH = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '..',

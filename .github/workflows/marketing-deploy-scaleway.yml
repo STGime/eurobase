@@ -158,10 +158,11 @@ jobs:
       # IndexNow push — actively notify Bing / DuckDuckGo / Yandex /
       # Ecosia / Yep / Naver / Seznam of every URL in the sitemap.
       #
-      # The sitemap.xml is a hand-maintained static file at
-      # public/sitemap.xml (vite copies public/* into dist/*), so we
-      # can read it straight from the checkout — no vite build needed
-      # on the runner.
+      # sitemap.xml is regenerated from source data by
+      # scripts/build-sitemap.mjs (also run as `prebuild` inside the
+      # Docker image). Regenerating on the runner too avoids reading
+      # a stale checked-in copy, and keeps IndexNow off the critical
+      # path of the vite build.
       #
       # NOT wrapped in continue-on-error: a red step here means
       # IndexNow is rejecting our submissions (ownership file wrong,
@@ -170,4 +171,10 @@ jobs:
       # aggregator outages, retry the deploy — this is a marketing
       # site, no urgency.
       - name: Notify IndexNow (Bing, DuckDuckGo, Yandex, Ecosia, ...)
-        run: node scripts/indexnow-notify.mjs
+        run: |
+          # `yaml` is the only dep the sitemap builder needs — install
+          # it in one lightweight command so we don't `npm ci` the
+          # whole 500 MB devDependencies tree just to write an XML file.
+          npm install --no-save --no-audit --no-fund yaml
+          node scripts/build-sitemap.mjs
+          node scripts/indexnow-notify.mjs
