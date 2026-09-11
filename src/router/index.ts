@@ -59,6 +59,34 @@ export const routes: RouteRecordRaw[] = [
     name: 'faq',
     component: () => import('@/pages/FaqPage.vue'),
   },
+  // Sovereignty Check (CLOUD Act Exposure Checker) — Tool 1 of the
+  // growth spec. Landing + picker, methodology page (the citable
+  // one), vendor index, per-vendor detail, and permalink-share.
+  {
+    path: '/sovereignty-check',
+    name: 'sovereignty-check',
+    component: () => import('@/pages/SovereigntyCheckLandingPage.vue'),
+  },
+  {
+    path: '/sovereignty-check/methodology',
+    name: 'sovereignty-methodology',
+    component: () => import('@/pages/SovereigntyMethodologyPage.vue'),
+  },
+  {
+    path: '/sovereignty-check/vendors',
+    name: 'sovereignty-vendors-index',
+    component: () => import('@/pages/SovereigntyVendorIndexPage.vue'),
+  },
+  {
+    path: '/sovereignty-check/vendors/:slug',
+    name: 'sovereignty-vendor',
+    component: () => import('@/pages/SovereigntyVendorDetailPage.vue'),
+  },
+  {
+    path: '/sovereignty-check/r/:hash',
+    name: 'sovereignty-report',
+    component: () => import('@/pages/SovereigntyReportPage.vue'),
+  },
   {
     path: '/security',
     name: 'security',
