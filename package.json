@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "build:sovereignty-data": "node scripts/build-sovereignty-data.mjs",
-    "predev": "npm run build:sovereignty-data",
-    "prebuild": "npm run build:sovereignty-data",
+    "build:sitemap": "node scripts/build-sitemap.mjs",
+    "predev": "npm run build:sovereignty-data && npm run build:sitemap",
+    "prebuild": "npm run build:sovereignty-data && npm run build:sitemap",
     "dev": "vite",
     "build": "vue-tsc -b && vite-ssg build",
     "preview": "vite preview"
