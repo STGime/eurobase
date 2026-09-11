@@ -52,14 +52,32 @@ const staticRoutes = [
 // Extract blog posts from src/data/content.ts. Each post has a
 // `slug: '...'` and a `date: '...'` line; capture both so the
 // sitemap's <lastmod> reflects the post's real publish date.
+//
+// Cross-checks the two-field regex against a slug-only count so a
+// future schema change (e.g. a post that flips `date:` above `slug:`)
+// fails LOUD rather than silently dropping from the sitemap.
 function extractBlog() {
   const src = readFileSync(join(ROOT, 'src', 'data', 'content.ts'), 'utf8')
   const posts = []
-  // Non-greedy: match each post-object's slug + date, in either order.
+  // Non-greedy: match each post's slug + date. Requires slug BEFORE
+  // date within the same object literal, which every current post
+  // satisfies; the length-check below catches drift.
   const re = /slug:\s*'([a-z0-9-]+)'[\s\S]*?date:\s*'(\d{4}-\d{2}-\d{2})'/g
   let m
   while ((m = re.exec(src)) !== null) {
     posts.push({ slug: m[1], date: m[2] })
+  }
+  // Belt-and-braces: count blog post slugs a second way and assert
+  // parity. Blog posts live at 6-space indent inside the `posts:`
+  // array, which distinguishes them from interface field defaults
+  // and other slug-shaped strings elsewhere in the file.
+  const slugOnly = src.match(/^      slug: '[a-z0-9-]+'/gm) ?? []
+  if (posts.length !== slugOnly.length) {
+    throw new Error(
+      `content.ts: blog regex found ${posts.length} slug+date pairs but ` +
+        `${slugOnly.length} standalone slugs — schema may have drifted. ` +
+        `Update scripts/build-sitemap.mjs regex.`,
+    )
   }
   return posts
 }
@@ -87,7 +105,13 @@ function extractVendors() {
   for (const f of files.sort()) {
     const data = parseYaml(readFileSync(join(dir, f), 'utf8'))
     if (data && typeof data.slug === 'string') {
-      out.push({ slug: data.slug, lastmod: data.last_reviewed || TODAY })
+      // Force string coercion: if a future yaml parser mode returned
+      // a Date object for last_reviewed (YAML 1.1 timestamp casting),
+      // `.toISOString()` would land as a garbled datetime in XML.
+      // Validate the shape we actually want.
+      const raw = String(data.last_reviewed ?? '')
+      const lastmod = /^\d{4}-\d{2}-\d{2}$/.test(raw) ? raw : TODAY
+      out.push({ slug: data.slug, lastmod })
     }
   }
   return out
@@ -130,7 +154,11 @@ for (const v of extractVendors()) {
       path: `/sovereignty-check/vendors/${v.slug}`,
       lastmod: v.lastmod,
       changefreq: 'monthly',
-      priority: '0.7',
+      // 0.8 (matches blog posts) not 0.7 — these ARE the SEO surface
+      // for "is X GDPR safe" and "EU alternative to X" long-tail
+      // queries. Vendor index at 0.9 still ranks higher because it's
+      // the destination page for category-level searches.
+      priority: '0.8',
     }),
   )
 }
