@@ -14,7 +14,14 @@
 import { rawVendors } from './sovereignty-generated'
 import type { RatingColor, Vendor } from './sovereignty-types'
 
-export type { RatingColor, Ratings, Vendor } from './sovereignty-types'
+export type {
+  RatingColor,
+  Ratings,
+  Vendor,
+  Report,
+  ReportCard,
+  ReportSwap,
+} from './sovereignty-types'
 
 function loadVendors(): Vendor[] {
   const out: Vendor[] = [...rawVendors]

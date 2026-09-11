@@ -8,45 +8,15 @@
 
 import { ref, watch, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { ratingBadgeClass, getVendor, type RatingColor } from '@/data/sovereignty'
+import {
+  ratingBadgeClass,
+  getVendor,
+  type Report,
+  type ReportCard,
+} from '@/data/sovereignty'
+import { usePageTitle } from '@/composables/usePageTitle'
 
-interface Card {
-  slug: string
-  name: string
-  category: string
-  overall: RatingColor
-  one_line_reason: string
-  parent_jurisdiction: string
-  ratings: {
-    entity_control: RatingColor
-    data_location: RatingColor
-    operational_access: RatingColor
-    subprocessor_chain: RatingColor
-    transfer_mechanism: RatingColor
-    overall: RatingColor
-  }
-  self_disclosure?: boolean
-}
-
-interface Swap {
-  from_slug: string
-  category: string
-  alternatives: string[]
-}
-
-interface Report {
-  hash: string
-  overall: RatingColor
-  exposure_percent: number
-  red_count: number
-  amber_count: number
-  green_count: number
-  severity_modifier?: string
-  cards: Card[]
-  alternatives: Swap[]
-  unknown_slugs?: string[]
-  created_at: string
-}
+usePageTitle('Shared report — Sovereignty Check | Eurobase')
 
 const route = useRoute()
 const report = ref<Report | null>(null)
@@ -92,7 +62,7 @@ async function copyLink() {
   }
 }
 
-function displayReason(card: Card): string {
+function displayReason(card: ReportCard): string {
   // Prefer the on-card reason (persisted); fall back to the vendor
   // DB if the persisted card didn't include it. Historical rows
   // from before a schema tweak might not have the field.

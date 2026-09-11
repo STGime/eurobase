@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import { usePageTitle } from '@/composables/usePageTitle'
+
+usePageTitle('Methodology — Sovereignty Check | Eurobase')
+</script>
+
 <template>
   <main class="min-h-screen bg-navy-deep text-text-white">
     <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 prose prose-invert prose-neutral">

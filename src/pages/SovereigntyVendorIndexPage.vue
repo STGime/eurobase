@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { vendors, CATEGORY_LABELS, ratingBadgeClass } from '@/data/sovereignty'
+import { usePageTitle } from '@/composables/usePageTitle'
+
+usePageTitle('Vendor ratings — Sovereignty Check | Eurobase')
 
 const filter = ref('')
 

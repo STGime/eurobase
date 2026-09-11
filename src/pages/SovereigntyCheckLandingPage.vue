@@ -15,6 +15,9 @@ import {
   type Vendor,
   type RatingColor,
 } from '@/data/sovereignty'
+import { usePageTitle } from '@/composables/usePageTitle'
+
+usePageTitle('CLOUD Act Exposure Checker — Sovereignty Check | Eurobase')
 
 const router = useRouter()
 const groups = vendorsByCategory()

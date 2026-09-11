@@ -1,10 +1,22 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { getVendor, ratingBadgeClass, ratingLabel, CATEGORY_LABELS, type Vendor } from '@/data/sovereignty'
+import { usePageTitle } from '@/composables/usePageTitle'
 
 const route = useRoute()
 const vendor = computed<Vendor | undefined>(() => getVendor(String(route.params.slug ?? '')))
+
+// Per-vendor tab title on SPA nav — matches the SEO title emitted
+// by routeMeta.ts for the pre-rendered HTML so the two paths agree.
+const DEFAULT_TITLE = 'Vendor — Sovereignty Check | Eurobase'
+usePageTitle(DEFAULT_TITLE)
+watchEffect(() => {
+  if (import.meta.env.SSR) return
+  const v = vendor.value
+  if (!v) return
+  document.title = `Is ${v.name} GDPR-safe? CLOUD Act exposure and EU alternatives | Eurobase`
+})
 </script>
 
 <template>

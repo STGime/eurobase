@@ -34,3 +34,38 @@ export interface Vendor {
   notes?: string | null
   self_disclosure?: boolean
 }
+
+// Persisted-report shapes. Mirrors the JSON emitted by the Go
+// backend's internal/sovereignty package. Kept here (not inlined in
+// the report page) so drift with the backend is visible in one
+// place: change these when internal/sovereignty/score.go changes.
+export interface ReportCard {
+  slug: string
+  name: string
+  category: string
+  overall: RatingColor
+  one_line_reason: string
+  parent_jurisdiction: string
+  ratings: Ratings
+  self_disclosure?: boolean
+}
+
+export interface ReportSwap {
+  from_slug: string
+  category: string
+  alternatives: string[]
+}
+
+export interface Report {
+  hash: string
+  overall: RatingColor
+  exposure_percent: number
+  red_count: number
+  amber_count: number
+  green_count: number
+  severity_modifier?: string
+  cards: ReportCard[]
+  alternatives: ReportSwap[]
+  unknown_slugs?: string[]
+  created_at: string
+}

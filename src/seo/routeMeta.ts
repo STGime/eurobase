@@ -19,6 +19,15 @@ import { vendors as sovereigntyVendors, getVendor as getSovereigntyVendor } from
 const SITE_ORIGIN = 'https://eurobase.app'
 const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/og-image.png`
 
+// Slice at `max` chars but backtrack to the last word boundary so
+// meta descriptions don't cut mid-word (e.g. `...on the "worst `).
+// Appends an ellipsis only when the string was actually shortened.
+function truncateAtWord(s: string, max: number): string {
+  if (s.length <= max) return s
+  const cut = s.slice(0, max - 1).replace(/\s+\S*$/, '')
+  return cut + '…'
+}
+
 export interface RouteMeta {
   title: string
   description: string
@@ -166,11 +175,14 @@ export function getRouteMeta(routePath: string): RouteMeta | null {
     if (!v) return null
     const title = `Is ${v.name} GDPR-safe? CLOUD Act exposure and EU alternatives | Eurobase`
     const reason = v.one_line_reason.trim().replace(/\s+/g, ' ')
-    const description = `${v.name} — ${v.ratings.overall.toUpperCase()} on the CLOUD Act Exposure Checker. ${reason} ${
+    const altsSuffix =
       v.eu_alternatives && v.eu_alternatives.length
-        ? 'EU alternatives: ' + v.eu_alternatives.join(', ') + '.'
+        ? ` EU alternatives: ${v.eu_alternatives.join(', ')}.`
         : ''
-    }`.slice(0, 300)
+    const description = truncateAtWord(
+      `${v.name} — ${v.ratings.overall.toUpperCase()} on the CLOUD Act Exposure Checker. ${reason}${altsSuffix}`,
+      300,
+    )
     return {
       title,
       description,
