@@ -296,6 +296,30 @@
         },
         {
           "@type": "Question",
+          "name": "What are the limits for auth emails (verification, password reset, magic link) on Pro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No throughput cap from our side when you use BYO SMTP. Verification, password-reset, and magic-link emails all route through the same dispatcher: if a verified custom SMTP sender is configured on your project, the send goes through your provider and skips our platform sender entirely — your provider's limits apply, not ours. Without BYO SMTP, sends go through our platform TEM; there's no hourly project cap enforced today. Rate-limits page in the console shows what applies."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I send verification or password-reset emails to thousands of users at once on Eurobase?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — no recipient-count limit. Distributed real users each come from their own IP, so the two anti-abuse throttles that do apply don't bite a real user base: signup/signin is capped per-IP (up to 30 per 5 minutes on Pro), and token verifications are capped per-IP (up to 150 per 5 minutes on Pro). Password-reset volume itself is unbounded from our side. Pair Pro with BYO SMTP (SendGrid, Postmark, Amazon SES, Scaleway TEM) and your provider is the only ceiling."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I fully customize verification, password-reset, and magic-link emails on Eurobase?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes on Pro and above — subject line and HTML body are independently customizable per template type (verification, password_reset, magic_link). Templates are picked up automatically on every send with no code change. Free tier uses the default templates."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Does Eurobase support German legal-tech retention (§50 BRAO / §257 HGB / §147 AO)?",
           "acceptedAnswer": {
             "@type": "Answer",

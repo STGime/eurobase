@@ -171,6 +171,27 @@ export const faq: FaqEntry[] = [
       'Email/password, magic-link email, phone SMS OTP, and six OAuth providers (Google, GitHub, LinkedIn, Apple, Microsoft, Discord). SAML is on the roadmap for the Team tier. All methods are on every tier — no paid gating for basic auth.',
   },
   {
+    id: 'auth-email-limits',
+    category: 'Product & pricing',
+    question: 'What are the limits for auth emails (verification, password reset, magic link) on Pro?',
+    answer:
+      '<strong>No throughput cap from our side</strong> when you use BYO SMTP. Verification, password-reset, and magic-link emails all route through the same dispatcher: if a verified custom SMTP sender is configured on your project, the send goes through your provider and skips our platform sender entirely — your provider\'s limits apply, not ours. Without BYO SMTP, sends go through our platform TEM; there\'s no hourly project cap enforced today (a Pro upgrade is the right shape for any real production volume). Rate-limits page in the console shows what applies.',
+  },
+  {
+    id: 'auth-email-volume',
+    category: 'Product & pricing',
+    question: 'Can I send verification or password-reset emails to thousands of users at once?',
+    answer:
+      '<strong>Yes — no recipient-count limit.</strong> Distributed real users each come from their own IP, so the two anti-abuse throttles that <em>do</em> apply don\'t bite a real user base: signup/signin is capped per-IP (up to 30 per 5 minutes on Pro), and token verifications are capped per-IP (up to 150 per 5 minutes on Pro). Password-reset volume itself is unbounded from our side. Pair Pro with BYO SMTP (SendGrid, Postmark, Amazon SES, Scaleway TEM) and your provider is the only ceiling.',
+  },
+  {
+    id: 'auth-email-templates',
+    category: 'Product & pricing',
+    question: 'Can I fully customize verification, password-reset, and magic-link emails?',
+    answer:
+      '<strong>Yes on Pro and above</strong> — subject line and HTML body are independently customizable per template type (<code class="text-accent-gold">verification</code>, <code class="text-accent-gold">password_reset</code>, <code class="text-accent-gold">magic_link</code>). Templates are picked up automatically on every send with no code change. Free tier uses the default templates.',
+  },
+  {
     id: 'backups',
     category: 'Product & pricing',
     question: 'Are automatic backups included?',
