@@ -203,6 +203,20 @@ async function submit() {
           </button>
         </div>
       </div>
+      <!-- Bottom-of-list CTA mirror — 112 vendors is a long scroll,
+           so repeat the sticky-top submit at the end so the user
+           doesn't have to scroll back up after finishing selection. -->
+      <div class="mt-8 flex justify-center">
+        <button
+          type="button"
+          :disabled="submitting || picks.length === 0"
+          class="inline-flex items-center px-5 py-2 rounded-lg font-semibold text-sm bg-accent-blue text-white hover:bg-accent-blue-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          @click="submit"
+        >
+          {{ submitting ? 'Generating report…' : `See my exposure (${picks.length}) →` }}
+        </button>
+      </div>
+
       <p class="text-xs text-text-muted mt-4">
         Vendor not listed?
         <a
