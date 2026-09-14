@@ -125,6 +125,40 @@ function displayReason(card: ReportCard): string {
           </router-link>
         </div>
 
+        <!-- How to read this — dimension legend -->
+        <details class="mb-6 rounded-xl bg-navy-card border border-navy-light" open>
+          <summary class="cursor-pointer list-none px-5 py-3 flex items-center justify-between gap-2 select-none">
+            <span class="text-sm font-semibold">How to read the badges on each vendor</span>
+            <span class="text-xs text-text-muted">tap to toggle</span>
+          </summary>
+          <div class="px-5 pb-4 pt-1 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm">
+            <div>
+              <div class="uppercase tracking-wider text-[10px] text-text-muted mb-0.5">Entity</div>
+              <div class="text-text-light">Who ultimately owns the vendor and which government can compel them (US parent = CLOUD Act exposure, regardless of where servers sit).</div>
+            </div>
+            <div>
+              <div class="uppercase tracking-wider text-[10px] text-text-muted mb-0.5">Location</div>
+              <div class="text-text-light">Where your data physically lives at rest. EU region ≠ EU protection if the operator is US-controlled.</div>
+            </div>
+            <div>
+              <div class="uppercase tracking-wider text-[10px] text-text-muted mb-0.5">Op access</div>
+              <div class="text-text-light">Which countries' support/SRE staff can reach production data during incidents. Follow-the-sun rotations often mean US or IN access.</div>
+            </div>
+            <div>
+              <div class="uppercase tracking-wider text-[10px] text-text-muted mb-0.5">Subproc</div>
+              <div class="text-text-light">Downstream subprocessors in the delivery chain — chiefly whether AWS / GCP / Azure / Cloudflare is underneath.</div>
+            </div>
+            <div class="sm:col-span-2">
+              <div class="uppercase tracking-wider text-[10px] text-text-muted mb-0.5">Transfer</div>
+              <div class="text-text-light">The legal instrument covering EU→non-EU data transfers (SCCs, DPF, adequacy, or none). Post-Schrems II, SCCs alone aren't a full defence against US surveillance law.</div>
+            </div>
+          </div>
+          <div class="px-5 pb-4 text-xs text-text-muted">
+            Each badge is red / amber / green. Overall rating uses the worst dimension (worst-wins).
+            <router-link to="/sovereignty-check/methodology" class="text-accent-blue hover:underline">Read the full methodology →</router-link>
+          </div>
+        </details>
+
         <!-- Vendor cards -->
         <div class="space-y-4">
           <article
