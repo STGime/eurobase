@@ -317,14 +317,14 @@ export const pricing = {
     {
       name: 'Pro',
       price: '€25/mo',
-      description: 'For commercial use — production apps, side businesses, agency work, internal tools. 100,000 monthly active users, 100 GB storage, 250 GB bandwidth, 10,000 realtime connections. BYO SMTP, quota alerts, priority support. Never pauses. Priced per project.',
+      description: 'For commercial use — production apps, side businesses, agency work, internal tools. 100,000 monthly active users, 100 GB storage, 250 GB bandwidth, 10,000 realtime connections. BYO SMTP, priority support. Never pauses. Priced per project.',
       icon: '\u26A1',
       highlighted: true,
     },
     {
       name: 'Team',
       price: '€149/mo',
-      description: 'Dedicated Postgres per project (PostgreSQL 16 on 2 vCPU / 4 GB RAM, 50 GB Scaleway Block Storage 5k IOPS, France). Direct DATABASE_URL, 7-day retention on daily scheduled backups + on-demand snapshots + 1 restore/month included, SSO, RBAC, audit trail. SOC 2 Type II coming soon. For teams shipping regulated SMB software.',
+      description: 'Priced per organisation: SSO (OIDC), organisations + invites, RBAC, priority support, and one bundled Team-tier project with dedicated Postgres (PostgreSQL 16 on 2 vCPU / 4 GB RAM, 50 GB Scaleway Block Storage 5k IOPS, France) and direct DATABASE_URL. Additional projects attach at their per-project rate (€25/mo Pro shared cluster, €89/mo extra Team dedicated PG, €0 Free). 7-day retention on daily scheduled backups + on-demand snapshots + 1 restore/month included. SOC 2 Type II coming soon. For teams shipping regulated SMB software.',
       icon: '\uD83C\uDFE2',
       highlighted: false,
       comingSoon: true,
@@ -390,7 +390,8 @@ export const pricing = {
           { feature: 'Postgres, Auth, Storage, Realtime, Functions', values: ['\u2713', '\u2713', '\u2713', '\u2713'] },
           { feature: 'DSAR export (Article 15 + 20)', values: ['\u2713', '\u2713', '\u2713', '\u2713'] },
           { feature: 'Article 30 RoPA + hash-chained audit log', values: ['\u2713', '\u2713', '\u2713', '\u2713'] },
-          { feature: 'BYO SMTP, quota alerts, priority support', values: [undefined, '\u2713', '\u2713', '\u2713'] },
+          { feature: 'BYO SMTP, priority support', values: [undefined, '\u2713', '\u2713', '\u2713'] },
+          { feature: 'Slack / webhook quota alerts', values: [undefined, 'Coming soon', 'Coming soon', 'Coming soon'] },
         ],
       },
       {
@@ -822,15 +823,15 @@ No credit card. No feature paywall. The four numeric caps + the non-commercial-u
 
 ## Pro — €25 per project per month
 
-100,000 MAU, 100 GB storage, 250 GB egress, 10,000 realtime connections. BYO SMTP, quota alerts at 75% and 100%, priority support, never pauses. €25 per month, per project, billed in EUR. Priced per project rather than per organisation because our closed-beta customers overwhelmingly told us that was cleaner — one bill per production surface, no shared-pool fights inside a company.
+100,000 MAU, 100 GB storage, 250 GB egress, 10,000 realtime connections. BYO SMTP, priority support, never pauses. €25 per month, per project, billed in EUR. Priced per project rather than per organisation because our closed-beta customers overwhelmingly told us that was cleaner — one bill per production surface, no shared-pool fights inside a company.
 
 Payments through [Mollie](https://mollie.com) (Dutch, EU-headquartered, already in our sub-processor registry). SEPA direct debit, iDEAL, Bancontact, Sofort, plus the usual card set. Invoices land in the console the moment they clear.
 
-Overages don't blackout your users. If you cross 100 GB storage or 250 GB egress on Pro, you get email alerts at 75% and 100%, a 14-day soft-grace window where writes keep working while you decide, and only then a hard cap on the affected module — and even then reads always continue. No overnight blackout. No per-GB metering surprises. If you're heading past those caps regularly, Team is the tier for you.
+Overages don't blackout your users. If you cross 100 GB storage or 250 GB egress on Pro, you get a 14-day soft-grace window where writes keep working while you decide, and only then a hard cap on the affected module — and even then reads always continue. No overnight blackout. No per-GB metering surprises. If you're heading past those caps regularly, Team is the tier for you. (Slack / webhook alerts at 80% are on the immediate roadmap — until they ship, watch the usage gauges in the console.)
 
-## Team — €149/mo per project
+## Team — €149/mo per organisation
 
-Dedicated Postgres per project (PostgreSQL 16 on 2 vCPU / 4 GB RAM, 50 GB Scaleway Block Storage 5k IOPS, France), direct \`DATABASE_URL\` for [Payload](https://payloadcms.com) / [Prisma](https://www.prisma.io) / [Drizzle](https://orm.drizzle.team) stacks, SSO, RBAC. The [infrastructure is built and running](/blog/legaltech-backend-what-a-german-kanzlei-actually-needs); pricing is now locked at €149/mo per project.
+Priced per organisation, not per project. €149/mo buys an org with SSO (OIDC — Google Workspace, Microsoft Entra ID, Okta, Authentik, or any OIDC IdP), organisations + invites, RBAC, priority support, and **one bundled Team-tier project** with dedicated Postgres (PostgreSQL 16 on 2 vCPU / 4 GB RAM, 50 GB Scaleway Block Storage 5k IOPS, France) and direct \`DATABASE_URL\` for [Payload](https://payloadcms.com) / [Prisma](https://www.prisma.io) / [Drizzle](https://orm.drizzle.team) stacks. Attach additional projects at their per-project rate: **€25/mo Pro** (shared cluster — plenty for internal tooling up to 100 k MAU), **€89/mo extra Team** (dedicated Postgres — only for apps that need it), **€0 Free** (staging, scratch). The [infrastructure is built and running](/blog/legaltech-backend-what-a-german-kanzlei-actually-needs); pricing is now locked at €149/mo per organisation.
 
 **Data guarantees.** Scaleway RDB native scheduled backups (daily, 7-day retention), plus on-demand snapshots the customer can take before risky migrations. **1 restore per calendar month is included** — from either a scheduled backup or an on-demand snapshot, either counts against the same cap. Additional restores are a support conversation until we roll out usage-based billing.
 
