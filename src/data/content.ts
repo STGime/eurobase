@@ -391,6 +391,7 @@ export const pricing = {
           { feature: 'DSAR export (Article 15 + 20)', values: ['\u2713', '\u2713', '\u2713', '\u2713'] },
           { feature: 'Article 30 RoPA + hash-chained audit log', values: ['\u2713', '\u2713', '\u2713', '\u2713'] },
           { feature: 'BYO SMTP, priority support', values: [undefined, '\u2713', '\u2713', '\u2713'] },
+          { feature: 'Email usage alerts (80% / 90% / 100% of quota)', values: [undefined, '\u2713', '\u2713', '\u2713'] },
           { feature: 'Slack / webhook quota alerts', values: [undefined, 'Coming soon', 'Coming soon', 'Coming soon'] },
         ],
       },
@@ -827,7 +828,7 @@ No credit card. No feature paywall. The four numeric caps + the non-commercial-u
 
 Payments through [Mollie](https://mollie.com) (Dutch, EU-headquartered, already in our sub-processor registry). SEPA direct debit, iDEAL, Bancontact, Sofort, plus the usual card set. Invoices land in the console the moment they clear.
 
-Overages don't blackout your users. If you cross 100 GB storage or 250 GB egress on Pro, you get a 14-day soft-grace window where writes keep working while you decide, and only then a hard cap on the affected module — and even then reads always continue. No overnight blackout. No per-GB metering surprises. If you're heading past those caps regularly, Team is the tier for you. (Slack / webhook alerts at 80% are on the immediate roadmap — until they ship, watch the usage gauges in the console.)
+Overages don't blackout your users. If you cross 100 GB storage or 250 GB egress on Pro, you get **email alerts to the project owner at 80%, 90%, and 100%** of any quota (re-armed when usage drops back below the threshold), a 14-day soft-grace window where writes keep working while you decide, and only then a hard cap on the affected module — and even then reads always continue. No overnight blackout. No per-GB metering surprises. If you're heading past those caps regularly, Team is the tier for you. (Slack / webhook alerts are on the roadmap for teams that route ops elsewhere than email.)
 
 ## Team — €149/mo per organisation
 
