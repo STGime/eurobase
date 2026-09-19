@@ -105,7 +105,7 @@ export const solution = {
     // commit. Framed as auditability + portability (the two things
     // customers actually ask about) rather than "open source" —
     // BUSL isn't OSI-open, and we don't want to overclaim.
-    { name: 'Source on GitHub', icon: '🔍', color: '#546E7A', description: 'Every line of platform code is public — audit it, PR it, self-host for internal use. SDK + MCP under MIT; backend BUSL → Apache 2.0 after 4 years.' },
+    { name: 'Source on GitHub', icon: '🔍', color: '#546E7A', description: 'Every line of platform code is public — audit it, PR it, self-host for internal use. SDK + MCP under MIT; backend BUSL → Apache 2.0 after 4 years.', href: 'https://github.com/STGime/euroback' },
     // Supabase → Eurobase migration CLI. Code has shipped on main
     // but is being validated end-to-end (see #278 in the backend
     // repo). Marketing card carries `comingSoon: true` so the UI

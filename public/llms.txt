@@ -22,6 +22,7 @@ Every managed BaaS ships Postgres, auth, storage. What most do not ship, and Eur
 - Infrastructure: Scaleway, Paris, France (EU-owned; Iliad group).
 - SDK: @eurobase/sdk (TypeScript/JavaScript, zero dependencies).
 - CLI: @eurobase/cli (50+ commands).
+- Source: public on GitHub (github.com/STGime/euroback). SDK + MCP server are MIT-licensed. Backend, console, migrations, and deploy manifests are BUSL-1.1 with an Additional Use Grant that permits self-hosting for your own applications and internal tools; each commit auto-converts to Apache 2.0 four years after it lands. No supported self-host distribution today.
 
 ## Core Features
 
