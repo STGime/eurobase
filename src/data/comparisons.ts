@@ -511,7 +511,7 @@ export const comparisons: Record<string, ComparisonData> = {
         description:
           'Appwrite repriced Appwrite Cloud in September 2025 — Pro is now $25/mo per project (the previous $15 rate applied per team member, not per organization) with usage-based overages. Eurobase Pro is €25/mo per project with fixed caps. Self-hosted Appwrite is still free plus the operational cost of running the stack.',
         bullets: [
-          'Self-hosted — Appwrite: BSD-3-Clause, run it yourself (Docker Compose, MariaDB + Redis + optional components). Eurobase: not self-hostable today.',
+          'Self-hosted — Appwrite: BSD-3-Clause, run it yourself (Docker Compose, MariaDB + Redis + optional components). Eurobase: source is public on GitHub under BUSL-1.1 with an Additional Use Grant permitting self-hosting for your own apps and internal tools (backend converts to Apache 2.0 four years after each commit; SDK + MCP server are MIT). We do not offer a supported self-host distribution today, but the code is not a black box.',
           'Free tier — Appwrite Cloud: generous limits (250 concurrent realtime connections, 5 GB bandwidth) alongside functions, storage, and MAU caps. Eurobase: 5k MAU, 512 MB DB, 512 MB storage, 2 GB bandwidth, 50 realtime connections, pause after 30 days idle.',
           'Paid tier — Appwrite Pro: $25/mo per project with usage-based overages. Eurobase Pro: €25/mo per project with fixed caps (100k MAU, 100 GB storage, 250 GB bandwidth, 10k realtime).',
           'Enterprise / Team tier — Appwrite Scale is a custom-priced tier for higher usage and support. Eurobase Team: €149/mo per project (dedicated Postgres, daily backups + on-demand snapshots, SSO, RBAC, audit trail; SOC 2 Type II coming soon — invite-only beta today).',
@@ -523,7 +523,7 @@ export const comparisons: Record<string, ComparisonData> = {
       { feature: 'Data model', eurobase: 'PostgreSQL (tables, joins, transactions, SQL, JSONB when a row wants document shape)', competitor: 'Collections (documents) + TablesDB (relational rows/columns) — dual surface as of 2025', highlight: true },
       { feature: 'Direct database access', eurobase: 'Team & Legal Team tiers — rotatable postgres:// URL for Prisma, Drizzle, Payload, Directus, psql. Not exposed on Free/Pro (shared cluster).', competitor: 'Not exposed — access via SDK / REST only', highlight: true },
       { feature: 'Infrastructure (managed)', eurobase: 'Scaleway, France (EU-owned)', competitor: 'AWS eu-central-1 (US-owned, Frankfurt region)', highlight: true },
-      { feature: 'Self-hosted option', eurobase: 'Not today', competitor: 'BSD-3-Clause, Docker Compose (MariaDB + Redis + optional components)' },
+      { feature: 'Self-hosted option', eurobase: 'Source public on GitHub (BUSL-1.1, Additional Use Grant permits own-app / internal-tool self-hosting; auto-converts to Apache 2.0 after 4y). No supported self-host distribution yet.', competitor: 'BSD-3-Clause, Docker Compose (MariaDB + Redis + optional components)' },
       { feature: 'Corporate parent (managed)', eurobase: 'Estonian OÜ (EU member state)', competitor: 'Appwrite Code Ltd (Tel Aviv, Israel — EU adequacy decision applies); AWS = Delaware corporation', highlight: true },
       { feature: 'CLOUD Act exposure (managed)', eurobase: 'None', competitor: 'Yes — AWS is a US corporation', highlight: true },
       { feature: 'GDPR compliance', eurobase: 'Native — DPA, RoPA, DSAR export, audit log in every project', competitor: 'DPA available; RoPA + DSAR left to the customer' },
@@ -570,7 +570,7 @@ export const comparisons: Record<string, ComparisonData> = {
       {
         question: 'Can I self-host Eurobase like I can self-host Appwrite?',
         answer:
-          'Not today — Eurobase is a managed platform, not a self-hostable one. The reason is that many of the sovereignty and compliance guarantees (audit-log hash chaining, sub-processor registry, DSAR pipeline, per-tenant KMS key management) are operator-side properties that lose their meaning when the user hosts. If self-hosting is a hard requirement, self-hosted Appwrite on Scaleway or Hetzner is a legitimate answer — you own the operational burden, in exchange for full sovereignty control.',
+          'The source is public on GitHub (github.com/STGime/euroback). SDK + MCP server are MIT; the platform backend, console, migrations, and deploy manifests are BUSL-1.1 with an Additional Use Grant that permits self-hosting for your own apps and internal tools (the grant excludes offering it as a competing managed BaaS). Each backend commit auto-converts to Apache 2.0 four years after it lands. What we do not have yet is a supported self-host distribution — no packaged installer, no reference Terraform, no upgrade tooling — because most of the sovereignty and compliance guarantees (audit-log hash chaining, sub-processor registry, DSAR pipeline, per-tenant KMS key management) are operator-side properties that need operator-side runtime to deliver. If a supported self-host is a hard requirement today, self-hosted Appwrite on Scaleway or Hetzner is a legitimate answer — you own the operational burden, in exchange for a supported self-host path.',
       },
       {
         question: 'Does Eurobase have Flutter or React Native SDKs like Appwrite?',

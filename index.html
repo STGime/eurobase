@@ -469,7 +469,7 @@
           "name": "What happens to my data — and my app code — if Eurobase ceases operations?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Data reversibility, four lines of defence. (1) Standard formats: Postgres + S3-compatible = migration to any host (Scaleway direct, OVH, Aiven, self-hosted) is documented, not a rewrite. (2) Export CLI: eurobase export produces a full dump (schema + data + storage + functions). (3) Open source at v1: we commit to open-sourcing the code under a permissive licence at v1 (targeted end 2026); self-hosting becomes a real Plan B. (4) On shutdown: 90-day notice + 90 additional days of read-only service to finalise export. App-code reversibility, two mitigations: (a) @eurobase/sdk is shape-parity with supabase-js, so migrating away is search-replace on imports, not query-site rewrites. (b) On Team tier, the direct DATABASE_URL means your app can talk to Postgres with Payload / Prisma / Drizzle / psql — no Eurobase code in the client at all — so migration is a hostname change."
+            "text": "Data reversibility, four lines of defence. (1) Standard formats: Postgres + S3-compatible = migration to any host (Scaleway direct, OVH, Aiven, self-hosted) is documented, not a rewrite. (2) Export CLI: eurobase export produces a full dump (schema + data + storage + functions). (3) Source is public today: platform code lives on github.com/STGime/euroback under BUSL-1.1, with an Additional Use Grant that permits self-hosting for your own apps and internal tools; each commit auto-converts to Apache 2.0 four years after it lands. SDK + MCP server are MIT. What is not shipped yet is a supported self-host distribution. (4) On shutdown: 90-day notice + 90 additional days of read-only service to finalise export. App-code reversibility, two mitigations: (a) @eurobase/sdk is shape-parity with supabase-js, so migrating away is search-replace on imports, not query-site rewrites. (b) On Team tier, the direct DATABASE_URL means your app can talk to Postgres with Payload / Prisma / Drizzle / psql — no Eurobase code in the client at all — so migration is a hostname change."
           }
         },
         {
@@ -477,7 +477,7 @@
           "name": "How big is the Eurobase team, and how are you funded?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Core team: founder + two long-term freelancers, all EU-based. Bootstrapped, with EU-Sovereign-Cloud grant applications in flight and preliminary angel conversations. The way to size that risk is not our reassurances — it is the reversibility guarantee (Postgres dump + open-source at v1 + standard S3). If we sink, you migrate to Scaleway direct in a weekend using the export CLI."
+            "text": "Core team: founder + two long-term freelancers, all EU-based. Bootstrapped, with EU-Sovereign-Cloud grant applications in flight and preliminary angel conversations. The way to size that risk is not our reassurances — it is the reversibility guarantee (Postgres dump + standard S3 + source public on GitHub under BUSL, auto-Apache 2.0 after four years). If we sink, you migrate to Scaleway direct in a weekend using the export CLI."
           }
         }
       ]

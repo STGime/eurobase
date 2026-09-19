@@ -38,9 +38,21 @@ const { elementRef, isVisible } = useScrollReveal()
           >
             Coming soon
           </span>
-          <div class="text-3xl mb-3">{{ feature.icon }}</div>
-          <h3 class="text-text-white font-semibold mb-1">{{ feature.name }}</h3>
-          <p class="text-text-muted text-sm">{{ feature.description }}</p>
+          <!-- Cards with an href render their body as an anchor so the
+               whole tile is clickable. Without this, the "Source on
+               GitHub" card would invite "audit it, PR it" and then
+               dead-end with no path to the repo. External-link hint
+               emoji sits inline with the title. -->
+          <component
+            :is="'href' in feature && feature.href ? 'a' : 'div'"
+            v-bind="'href' in feature && feature.href ? { href: feature.href, target: '_blank', rel: 'noopener noreferrer', class: 'block hover:opacity-80 transition-opacity' } : {}"
+          >
+            <div class="text-3xl mb-3">{{ feature.icon }}</div>
+            <h3 class="text-text-white font-semibold mb-1">
+              {{ feature.name }}<span v-if="'href' in feature && feature.href" class="ml-1 text-text-muted text-xs">↗</span>
+            </h3>
+            <p class="text-text-muted text-sm">{{ feature.description }}</p>
+          </component>
         </AccentCard>
       </div>
 

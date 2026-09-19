@@ -96,6 +96,16 @@ export const solution = {
     { name: 'CLI Tool', icon: '\u2328\uFE0F', color: '#1565C0', description: '50+ commands for projects, database, storage, vault, functions, and migrations' },
     { name: 'MCP Server', icon: '🤖', color: '#3949AB', description: 'AI IDE integration (Claude Code, Cursor, Codex, Windsurf): list tables, run SQL, manage Vault, invoke functions' },
     { name: 'DSAR & Compliance', icon: '📋', color: '#AD1457', description: 'One-click GDPR Article 15 + 20 exports, Article 30 RoPA reports, tamper-evident audit log, sub-processor registry' },
+    // "Source on GitHub" card — trust signal, not a feature bullet.
+    // The whole platform (Go backend, console, migrations, deploy
+    // manifests) is on github.com/STGime/euroback under BUSL-1.1
+    // with an Additional Use Grant that permits self-hosting for
+    // your own apps and internal tools; the SDK and MCP server are
+    // MIT. BUSL auto-converts to Apache 2.0 four years after each
+    // commit. Framed as auditability + portability (the two things
+    // customers actually ask about) rather than "open source" —
+    // BUSL isn't OSI-open, and we don't want to overclaim.
+    { name: 'Source on GitHub', icon: '🔍', color: '#546E7A', description: 'Every line of platform code is public — audit it, PR it, self-host for internal use. SDK + MCP under MIT; backend BUSL → Apache 2.0 after 4 years.', href: 'https://github.com/STGime/euroback' },
     // Supabase → Eurobase migration CLI. Code has shipped on main
     // but is being validated end-to-end (see #278 in the backend
     // repo). Marketing card carries `comingSoon: true` so the UI
