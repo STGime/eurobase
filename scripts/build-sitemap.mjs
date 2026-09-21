@@ -88,7 +88,11 @@ const staticRoutes = [
   // Static txt files served from public/ verbatim.
   { path: '/llms.txt', changefreq: 'weekly', priority: '0.7', src: ['public/llms.txt'] },
   { path: '/llms-full.txt', changefreq: 'weekly', priority: '0.7', src: ['public/llms-full.txt'] },
-].map((r) => ({ ...r, lastmod: lastmodFor(r.path, r.src) }))
+]
+  // Static files (llms.txt, llms-full.txt) are only listed while they
+  // actually exist in public/, so a rename can't ship a 404 in the sitemap.
+  .filter((r) => !r.path.endsWith('.txt') || existsSync(join(ROOT, 'public', r.path)))
+  .map((r) => ({ ...r, lastmod: lastmodFor(r.path, r.src) }))
 
 // Extract blog posts from src/data/content.ts. Each post has a
 // `slug: '...'` and a `date: '...'` line; capture both so the
@@ -151,7 +155,11 @@ function extractVendors() {
       // `.toISOString()` would land as a garbled datetime in XML.
       // Validate the shape we actually want.
       const raw = String(data.last_reviewed ?? '')
-      const lastmod = /^\d{4}-\d{2}-\d{2}$/.test(raw) ? raw : TODAY
+      // Malformed/missing last_reviewed: reuse the snapshot like every
+      // other route before stamping today.
+      const lastmod = /^\d{4}-\d{2}-\d{2}$/.test(raw)
+        ? raw
+        : (snapshot[`/sovereignty-check/vendors/${data.slug}`] ?? TODAY)
       out.push({ slug: data.slug, lastmod })
     }
   }
