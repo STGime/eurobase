@@ -15,7 +15,8 @@
 //
 // Run automatically via the `prebuild` and `predev` npm scripts.
 
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parse as parseYaml } from 'yaml'
@@ -25,29 +26,73 @@ const ROOT = dirname(HERE)
 const SITE_ORIGIN = 'https://eurobase.app'
 const OUT = join(ROOT, 'public', 'sitemap.xml')
 
-// Today's date, YYYY-MM-DD. Vendor / blog pages use their own dates
-// where we can extract them; everything else uses today.
+// Today's date, YYYY-MM-DD — the last-resort <lastmod>.
 const TODAY = new Date().toISOString().slice(0, 10)
+
+// Per-route <lastmod> from git: the date of the last commit that touched
+// the route's source files. Stamping every page "today" on every build
+// tells crawlers everything changed daily, which they learn to discount,
+// and it feeds IndexNow the same lie.
+//
+// Where git history is missing (the Docker build stage has no git and a
+// depth-1 checkout has one commit), fall back to public/route-lastmod.json
+// — a snapshot this script writes whenever git DID answer (the CI runner,
+// checked out with fetch-depth: 0, runs it before the Docker build so the
+// snapshot is in the build context) — and finally to TODAY.
+const LASTMOD_SNAPSHOT = join(ROOT, 'public', 'route-lastmod.json')
+const snapshot = existsSync(LASTMOD_SNAPSHOT)
+  ? JSON.parse(readFileSync(LASTMOD_SNAPSHOT, 'utf8'))
+  : {}
+const fresh = {}
+let gitAvailable = true
+function gitDate(paths) {
+  if (!gitAvailable) return null
+  try {
+    const out = execFileSync('git', ['log', '-1', '--format=%cs', '--', ...paths], {
+      cwd: ROOT,
+      stdio: ['ignore', 'pipe', 'ignore'],
+    })
+      .toString()
+      .trim()
+    return /^\d{4}-\d{2}-\d{2}$/.test(out) ? out : null
+  } catch {
+    gitAvailable = false
+    return null
+  }
+}
+function lastmodFor(route, paths) {
+  const d = gitDate(paths)
+  if (d) {
+    fresh[route] = d
+    return d
+  }
+  return snapshot[route] ?? TODAY
+}
 
 // Curated static-route metadata. Every non-generated route lives
 // here so priority + changefreq hints stay hand-tuned.
+// `src` lists the files whose last commit dates the route.
 const staticRoutes = [
-  { path: '/', changefreq: 'weekly', priority: '1.0', lastmod: TODAY },
-  { path: '/features/dsar', changefreq: 'monthly', priority: '0.95', lastmod: TODAY },
-  { path: '/gdpr-readiness', changefreq: 'monthly', priority: '0.95', lastmod: TODAY },
-  { path: '/sovereignty-check', changefreq: 'monthly', priority: '0.95', lastmod: TODAY },
-  { path: '/sovereignty-check/methodology', changefreq: 'monthly', priority: '0.9', lastmod: TODAY },
-  { path: '/sovereignty-check/vendors', changefreq: 'weekly', priority: '0.9', lastmod: TODAY },
-  { path: '/faq', changefreq: 'monthly', priority: '0.85', lastmod: TODAY },
-  { path: '/founder', changefreq: 'monthly', priority: '0.85', lastmod: TODAY },
-  { path: '/security', changefreq: 'monthly', priority: '0.85', lastmod: TODAY },
-  { path: '/privacy', changefreq: 'yearly', priority: '0.6', lastmod: TODAY },
-  { path: '/terms', changefreq: 'yearly', priority: '0.6', lastmod: TODAY },
-  { path: '/legal', changefreq: 'yearly', priority: '0.6', lastmod: TODAY },
+  { path: '/', changefreq: 'weekly', priority: '1.0', src: ['src/pages/HomePage.vue', 'src/components/sections', 'index.html'] },
+  { path: '/features/dsar', changefreq: 'monthly', priority: '0.95', src: ['src/pages/DsarFeaturePage.vue'] },
+  { path: '/gdpr-readiness', changefreq: 'monthly', priority: '0.95', src: ['src/pages/GdprReadinessPage.vue'] },
+  { path: '/sovereignty-check', changefreq: 'monthly', priority: '0.95', src: ['src/pages/SovereigntyCheckLandingPage.vue'] },
+  { path: '/sovereignty-check/methodology', changefreq: 'monthly', priority: '0.9', src: ['src/pages/SovereigntyMethodologyPage.vue'] },
+  { path: '/sovereignty-check/vendors', changefreq: 'weekly', priority: '0.9', src: ['src/pages/SovereigntyVendorIndexPage.vue', 'src/data/sovereignty-vendors'] },
+  { path: '/faq', changefreq: 'monthly', priority: '0.85', src: ['src/pages/FaqPage.vue', 'src/data/faq.ts', 'src/data/faq'] },
+  { path: '/founder', changefreq: 'monthly', priority: '0.85', src: ['src/pages/FounderPage.vue'] },
+  { path: '/security', changefreq: 'monthly', priority: '0.85', src: ['src/pages/SecurityPage.vue'] },
+  { path: '/privacy', changefreq: 'yearly', priority: '0.6', src: ['src/pages/PrivacyPage.vue'] },
+  { path: '/terms', changefreq: 'yearly', priority: '0.6', src: ['src/pages/TermsPage.vue'] },
+  { path: '/legal', changefreq: 'yearly', priority: '0.6', src: ['src/pages/LegalNoticePage.vue'] },
   // Static txt files served from public/ verbatim.
-  { path: '/llms.txt', changefreq: 'weekly', priority: '0.7', lastmod: TODAY },
-  { path: '/llms-full.txt', changefreq: 'weekly', priority: '0.7', lastmod: TODAY },
+  { path: '/llms.txt', changefreq: 'weekly', priority: '0.7', src: ['public/llms.txt'] },
+  { path: '/llms-full.txt', changefreq: 'weekly', priority: '0.7', src: ['public/llms-full.txt'] },
 ]
+  // Static files (llms.txt, llms-full.txt) are only listed while they
+  // actually exist in public/, so a rename can't ship a 404 in the sitemap.
+  .filter((r) => !r.path.endsWith('.txt') || existsSync(join(ROOT, 'public', r.path)))
+  .map((r) => ({ ...r, lastmod: lastmodFor(r.path, r.src) }))
 
 // Extract blog posts from src/data/content.ts. Each post has a
 // `slug: '...'` and a `date: '...'` line; capture both so the
@@ -110,7 +155,13 @@ function extractVendors() {
       // `.toISOString()` would land as a garbled datetime in XML.
       // Validate the shape we actually want.
       const raw = String(data.last_reviewed ?? '')
-      const lastmod = /^\d{4}-\d{2}-\d{2}$/.test(raw) ? raw : TODAY
+      // Malformed/missing last_reviewed: fall through the same
+      // git -> snapshot -> today chain as every other route, dated by
+      // the last commit that moved the submodule pointer (the parent
+      // repo does not track files inside the submodule).
+      const lastmod = /^\d{4}-\d{2}-\d{2}$/.test(raw)
+        ? raw
+        : lastmodFor(`/sovereignty-check/vendors/${data.slug}`, ['src/data/sovereignty-vendors'])
       out.push({ slug: data.slug, lastmod })
     }
   }
@@ -142,7 +193,7 @@ for (const slug of extractComparisons()) {
   entries.push(
     xmlEntry({
       path: `/vs/${slug}`,
-      lastmod: TODAY,
+      lastmod: lastmodFor(`/vs/${slug}`, ['src/data/comparisons.ts', 'src/pages/ComparisonPage.vue']),
       changefreq: 'monthly',
       priority: '0.9',
     }),
@@ -173,4 +224,9 @@ ${entries.join('\n')}
 </urlset>
 `
 writeFileSync(OUT, xml)
+// Persist git-derived dates so a later git-less run (Docker build) reuses
+// them instead of falling back to TODAY.
+if (Object.keys(fresh).length > 0) {
+  writeFileSync(LASTMOD_SNAPSHOT, JSON.stringify({ ...snapshot, ...fresh }, null, 2) + '\n')
+}
 console.log(`✅ wrote ${entries.length} URLs → ${OUT.replace(ROOT + '/', '')}`)

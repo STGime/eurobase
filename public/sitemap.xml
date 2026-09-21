@@ -6,25 +6,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://eurobase.app/</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://eurobase.app/features/dsar</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
     <loc>https://eurobase.app/gdpr-readiness</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
     <loc>https://eurobase.app/sovereignty-check</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
@@ -36,55 +36,55 @@
   </url>
   <url>
     <loc>https://eurobase.app/sovereignty-check/vendors</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eurobase.app/faq</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://eurobase.app/founder</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://eurobase.app/security</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://eurobase.app/privacy</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-07-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eurobase.app/terms</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eurobase.app/legal</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-07-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eurobase.app/llms.txt</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eurobase.app/llms-full.txt</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -204,33 +204,39 @@
   </url>
   <url>
     <loc>https://eurobase.app/vs/supabase</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eurobase.app/vs/firebase</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eurobase.app/vs/appwrite</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eurobase.app/vs/supabase-gdpr</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eurobase.app/vs/supabase-dpa</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/ably</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/adyen</loc>
@@ -240,6 +246,30 @@
   </url>
   <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/aiven</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/akamai</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/aleph-alpha</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/algolia</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/amazon-ses</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -275,7 +305,37 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/axiom</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/azure-blob</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/azure</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/backblaze</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/bird</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/brevo</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -299,6 +359,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/checkly</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/checkout-com</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/circleci</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
@@ -311,13 +383,43 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/clickhouse</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/cloudflare</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/cloudfront</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/cockroach</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/codemagic</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/cohere</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/couchbase</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -335,7 +437,19 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/discord</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/eurobase</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/exoscale</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -359,6 +473,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/fly</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/gatewayapi</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
@@ -371,6 +491,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/gcs</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/github-actions</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
@@ -378,6 +504,18 @@
   </url>
   <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/gitlab-ci</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/gocardless</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/google-analytics</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -407,6 +545,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/huggingface</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/infobip</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/ionos</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/keycdn</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
@@ -419,7 +575,31 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/klarna</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/lemonsqueezy</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/linode</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/livekit</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/logrocket</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -432,6 +612,18 @@
   </url>
   <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/mailjet</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/matomo</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/meilisearch</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -455,6 +647,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/mongodb</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/mux</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/neon</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
@@ -467,7 +671,19 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/nhost</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/openai</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/ory</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -480,6 +696,24 @@
   </url>
   <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/paddle</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/pagerduty</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/paypal</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/perplexity</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -510,6 +744,30 @@
   </url>
   <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/r2</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/raygun</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/redis</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/render</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/replicate</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -551,7 +809,25 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/simpleanalytics</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/sinch</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/slack</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/statuspage</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -563,7 +839,19 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/stytch</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/supabase</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/teamcity-cloud</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -587,6 +875,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/upcloud</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/vercel</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
@@ -600,6 +894,12 @@
   </url>
   <url>
     <loc>https://eurobase.app/sovereignty-check/vendors/workos</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/sovereignty-check/vendors/yugabyte</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

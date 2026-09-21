@@ -2,4 +2,25 @@ User-agent: *
 Allow: /
 Allow: /llms.txt
 Allow: /llms-full.txt
+
+# AI crawlers and answer engines are explicitly welcome. Being cited by
+# them for "EU-sovereign backend" / "GDPR-safe Supabase alternative" is
+# a growing share of traffic, and llms.txt is written for them.
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Bingbot
+Allow: /
+
 Sitemap: https://eurobase.app/sitemap.xml

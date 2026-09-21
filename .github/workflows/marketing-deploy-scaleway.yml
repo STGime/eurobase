@@ -76,6 +76,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          # Full history so scripts/build-sitemap.mjs can derive each
+          # route's <lastmod> from the last commit that touched its
+          # source. A depth-1 checkout would stamp every page "today".
+          fetch-depth: 0
           # Submodules host the sovereignty-vendors dataset that the
           # prebuild script reads to emit src/data/sovereignty-generated.ts.
           # Without this, `npm run prebuild` inside the Docker build fails
