@@ -155,11 +155,13 @@ function extractVendors() {
       // `.toISOString()` would land as a garbled datetime in XML.
       // Validate the shape we actually want.
       const raw = String(data.last_reviewed ?? '')
-      // Malformed/missing last_reviewed: reuse the snapshot like every
-      // other route before stamping today.
+      // Malformed/missing last_reviewed: fall through the same
+      // git -> snapshot -> today chain as every other route, dated by
+      // the last commit that moved the submodule pointer (the parent
+      // repo does not track files inside the submodule).
       const lastmod = /^\d{4}-\d{2}-\d{2}$/.test(raw)
         ? raw
-        : (snapshot[`/sovereignty-check/vendors/${data.slug}`] ?? TODAY)
+        : lastmodFor(`/sovereignty-check/vendors/${data.slug}`, ['src/data/sovereignty-vendors'])
       out.push({ slug: data.slug, lastmod })
     }
   }
