@@ -23,6 +23,14 @@
   --font-family-body: "Inter", "Calibri", system-ui, sans-serif;
 }
 
+/* Height of the fixed site nav (NavBar.vue). Anything that sits under
+   it — sticky toolbars, scroll-margin for in-page anchors — reads this
+   variable instead of hard-coding 4rem, so a taller nav (alert bar,
+   mobile banner) can't silently overlap them. */
+:root {
+  --nav-h: 4rem;
+}
+
 html {
   scroll-behavior: smooth;
 }
