@@ -496,6 +496,7 @@ export const blog = {
       date: '2026-09-22',
       author: 'Stefan Gimeson',
       readTime: '4 min read',
+      image: '/blog-sovereignty-check.jpg',
       content: `The trap most European teams walk into is thinking "EU region" means "EU jurisdiction". A US-headquartered vendor with a Frankfurt datacentre is still a US company subject to the CLOUD Act, and the moment a US authority serves a valid warrant on the parent, the region on your control panel becomes decoration. That is the gap we built [/sovereignty-check](/sovereignty-check) to make visible — the closest thing to a straight answer we have found for the question "which parts of my stack could my competitor's compliance officer point at during procurement?" — free, no signup, sixty seconds, shareable permalink.
 
 The tool is small and the dataset is large. Pick the vendors you use from a grid of 112 (Firebase, Supabase, Auth0, Twilio, SendGrid, Stripe, Vercel, Cloudflare, AWS, Datadog, and a hundred others we found in the wild). Each carries a red/amber/green rating on five seperate dimensions — corporate parent, data location, operational access, subprocessor chain, transfer mechanism — plus an "overall" that uses worst-wins. The overall exposure percentage on your report is the share of your picked stack that we rate red at the overall level. So a stack of ten vendors with three reds returns 30% exposed. The percentage is a headline; the specifics under it are the argument.
