@@ -47,7 +47,7 @@ function closeMobileMenu() {
     :class="y > 50 ? 'bg-navy/95 backdrop-blur-md shadow-lg shadow-black/20' : 'bg-transparent'"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
+      <div class="flex items-center justify-between h-[var(--nav-h)]">
         <a href="#" class="inline-block" @click.prevent="handleLogoClick">
           <span class="text-xl font-bold text-text-white font-heading">euro</span><span class="text-xl font-bold text-accent-gold font-heading">base</span>
         </a>

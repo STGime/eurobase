@@ -44,6 +44,27 @@ const SEVERITY_OPTIONS = [
   { value: 'children', label: "Children's data" },
 ] as const
 
+// Roving arrow keys for the severity radiogroup, matching the native
+// <select> it replaced: Left/Up and Right/Down move selection and focus,
+// Home/End jump to the ends. Roving tabindex: Tab lands on the selected
+// option, arrows move within the group.
+function onSeverityKeydown(e: KeyboardEvent, index: number) {
+  const last = SEVERITY_OPTIONS.length - 1
+  let next: number | null = null
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = index === last ? 0 : index + 1
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = index === 0 ? last : index - 1
+  else if (e.key === 'Home') next = 0
+  else if (e.key === 'End') next = last
+  if (next === null) return
+  e.preventDefault()
+  const opt = SEVERITY_OPTIONS[next]
+  if (!opt) return
+  severity.value = opt.value
+  const group = (e.currentTarget as HTMLElement).parentElement
+  const buttons = group?.querySelectorAll<HTMLButtonElement>('[role="radio"]')
+  buttons?.[next]?.focus()
+}
+
 function toggle(slug: string) {
   const next = new Set(selected.value)
   if (next.has(slug)) next.delete(slug)
@@ -72,7 +93,7 @@ const visibleGroups = computed(() => {
       vendors: g.vendors.filter(
         (v) =>
           v.name.toLowerCase().includes(q) ||
-          v.slug.includes(q) ||
+          v.slug.toLowerCase().includes(q) ||
           v.ultimate_parent.toLowerCase().includes(q) ||
           g.label.toLowerCase().includes(q),
       ),
@@ -195,8 +216,9 @@ async function submit() {
       </div>
     </section>
 
-    <!-- Sticky toolbar: search + live score + CTA. top-16 clears the fixed nav. -->
-    <section class="sticky top-16 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
+    <!-- Sticky toolbar: search + live score + CTA. Sits directly under the
+         fixed nav; --nav-h is defined in assets/main.css and consumed by NavBar.vue. -->
+    <section class="sticky top-[var(--nav-h)] z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-3 md:gap-5 flex-wrap">
         <label class="relative flex-1 min-w-[12rem]">
           <span class="sr-only">Search vendors</span>
@@ -258,11 +280,13 @@ async function submit() {
           </div>
           <div class="mt-3 md:mt-0 flex flex-wrap gap-2" role="radiogroup" aria-label="Data category">
             <button
-              v-for="opt in SEVERITY_OPTIONS"
+              v-for="(opt, i) in SEVERITY_OPTIONS"
               :key="opt.value"
               type="button"
               role="radio"
               :aria-checked="severity === opt.value"
+              :tabindex="severity === opt.value ? 0 : -1"
+              @keydown="onSeverityKeydown($event, i)"
               class="rounded-full px-3.5 py-1.5 text-sm font-medium ring-1 ring-inset transition-colors cursor-pointer"
               :class="severity === opt.value
                 ? 'bg-navy text-white ring-navy'
@@ -294,7 +318,7 @@ async function submit() {
         v-for="group in visibleGroups"
         :id="`cat-${group.category}`"
         :key="group.category"
-        class="mb-12 scroll-mt-36"
+        class="mb-12 scroll-mt-[calc(var(--nav-h)+5rem)]"
       >
         <div class="flex items-baseline justify-between gap-4 mb-4">
           <h2 class="text-xl font-bold font-heading text-slate-900">
