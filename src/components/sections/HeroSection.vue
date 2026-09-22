@@ -89,20 +89,31 @@ import heroImage from '@/assets/images/hero-network.webp'
               {{ hero.primaryCta }}
             </a>
           </div>
-          <!-- Secondary link to the free assessment. Positioned below the
-               primary CTA (not competing with the "Sign up free" button)
-               but visible above the fold — the whole point of a lead-gen
-               quiz is that undecided visitors see it early, not that they
-               find it in the footer. -->
+          <!-- Secondary links to the two free lead-gen tools. Positioned
+               below the primary CTA (not competing with the "Sign up
+               free" button) but visible above the fold — the whole point
+               of a lead-gen tool is that undecided visitors see it early,
+               not that they find it in the footer. /sovereignty-check
+               (vendor-level CLOUD Act audit, 60 seconds) and
+               /gdpr-readiness (backend-level 10-question quiz, 3 minutes)
+               answer the two adjacent questions that come up before a
+               procurement conversation, so they sit next to each other. -->
           <p class="mt-4 text-sm text-text-light/80 animate-fade-in-up stagger-4">
-            Not ready to sign up?
+            Not ready to sign up? Try a free check first:
+            <RouterLink
+              to="/sovereignty-check"
+              class="text-accent-blue hover:text-accent-blue/80 font-medium underline underline-offset-4 decoration-accent-blue/40 hover:decoration-accent-blue/70 transition-colors"
+            >
+              Which of your vendors can a US authority legally reach?
+            </RouterLink>
+            (60 seconds), or
             <RouterLink
               to="/gdpr-readiness"
               class="text-accent-blue hover:text-accent-blue/80 font-medium underline underline-offset-4 decoration-accent-blue/40 hover:decoration-accent-blue/70 transition-colors"
             >
-              Score your backend's GDPR posture first
+              score your backend's GDPR posture
             </RouterLink>
-            — 3 minutes, no email required.
+            (3 minutes, 10 questions). No email required either way.
           </p>
         </div>
 

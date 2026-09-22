@@ -490,6 +490,39 @@ export const blog = {
   description: 'Thoughts on European data sovereignty, cloud infrastructure, and building for developers.',
   posts: [
     {
+      slug: 'sovereignty-check-60-second-cloud-act-audit',
+      title: 'Which parts of your stack can a US authority legally reach? A 60-second check',
+      excerpt: 'We rated 112 SaaS vendors — Postgres providers, auth stacks, storage, email, analytics — on five separate dimensions each: corporate parent, data residency, operational access, subprocessor chain, transfer mechanism. The tool at /sovereignty-check lets you tick the ones you use and get a shareable exposure percentage back in about sixty seconds. Free, no signup. Here is what the tool does, what the data says, and where it fits in the flow.',
+      date: '2026-09-22',
+      author: 'Stefan Gimeson',
+      readTime: '4 min read',
+      content: `The trap most European teams walk into is thinking "EU region" means "EU jurisdiction". A US-headquartered vendor with a Frankfurt datacentre is still a US company subject to the CLOUD Act, and the moment a US authority serves a valid warrant on the parent, the region on your control panel becomes decoration. That is the gap we built [/sovereignty-check](/sovereignty-check) to make visible — the closest thing to a straight answer we have found for the question "which parts of my stack could my competitor's compliance officer point at during procurement?" — free, no signup, sixty seconds, shareable permalink.
+
+The tool is small and the dataset is large. Pick the vendors you use from a grid of 112 (Firebase, Supabase, Auth0, Twilio, SendGrid, Stripe, Vercel, Cloudflare, AWS, Datadog, and a hundred others we found in the wild). Each carries a red/amber/green rating on five seperate dimensions — corporate parent, data location, operational access, subprocessor chain, transfer mechanism — plus an "overall" that uses worst-wins. The overall exposure percentage on your report is the share of your picked stack that we rate red at the overall level. So a stack of ten vendors with three reds returns 30% exposed. The percentage is a headline; the specifics under it are the argument.
+
+A red on "corporate parent" is different from a red on "operational access". The first says the CLOUD Act reaches your vendor's parent even without touching the servers — the region on your dashboard is not the shield you thought it was. The second says an on-call engineer in the wrong timezone can pull production data during an incident, which is a Chapter V transfer question in its own right. Both cost you sleep during a Schrems II conversation; they cost you different things, and mitigations look different. The report tells you which is which, per vendor, with the one-line reason we recorded in the dataset and links to sources.
+
+A few honest observations from the data itself. The auth category is the worst-rated on average — Firebase Auth, Auth0, Clerk, Kinde all cluster in the red zone at the parent level, and the "EU region" option is not universally available. The email category is nearly as bad; most transactional email is a US-parent play (SendGrid, Postmark, Mailgun), with only a handful of EU-headquartered alternatives (Mailjet in France, GatewayAPI in Denmark for SMS). Storage and Postgres are the two categories where "EU alternative" is a real choice rather than a marketing angle — Scaleway, OVHcloud, Hetzner, Aiven all deliver production-grade managed offerings from EU parents. Analytics is the category most teams forget: Plausible and Simple Analytics are cited less often than Mixpanel and Amplitude, and that single shift can move a report by ten to fifteen points.
+
+We are careful about what we do not claim. This is not legal advice; it is a research aid that surfaces the shape of a stack a DPO or a procurement officer will ask about eventually, so you can get ahead of the conversation. Nothing in the report should be read as an accusation — every vendor listed operates legally. What the tool measures is jurisdictional exposure under the specific reading of Chapter V of the GDPR after Schrems II, which is the reading most European regulators default to. If your buyer or your customer does not care about that reading, this tool will not change their mind. If they do, the report is the shortcut past a three-day audit.
+
+Where does it fit in the flow? Two places. If you have never signed up for Eurobase and want a first data point, take the check anonymously and bookmark the permalink. If you already have a project on Eurobase, the check is a natural pair to the readiness assessment at [/gdpr-readiness](/gdpr-readiness) — one measures your vendors, the other measures your obligations. Both are free and both drop you back at your own inbox rather than a sales sequence. Together they are the two questions a compliance officer will actually ask, answered before the meeting instead of during it.
+
+One caveat we want to keep visible: the dataset is open on GitHub, and we do get things wrong. Vendors change what they do, some restructure their parent, some quietly move a datacentre. If your vendor moved its parent to Ireland last quarter, or you have a source that contradicts our rating, please open a PR. The dataset lives at [github.com/STGime/sovereignty-vendors](https://github.com/STGime/sovereignty-vendors) under MIT. We recieve corrections regularly and merge fast — the tool is only useful if the data behind it stays honest.
+
+Try it: [/sovereignty-check](/sovereignty-check). Sixty seconds. Shareable permalink. No email.
+
+— Stefan`,
+      references: [
+        { label: 'Sovereignty Check — the tool', url: '/sovereignty-check' },
+        { label: 'Sovereignty methodology (how ratings are assigned)', url: '/sovereignty-check/methodology' },
+        { label: 'Vendor index — browse the 112-vendor dataset', url: '/sovereignty-check/vendors' },
+        { label: 'GDPR Readiness assessment (companion tool)', url: '/gdpr-readiness' },
+        { label: 'Public dataset on GitHub', url: 'https://github.com/STGime/sovereignty-vendors' },
+        { label: 'Schrems II ruling (CJEU)', url: 'https://curia.europa.eu/juris/document/document.jsf?docid=228677' },
+      ],
+    },
+    {
       slug: 'marcos-dsar-12-hours-vs-30-seconds',
       title: 'Marco\'s DSAR: a Tuesday email, a 12-hour engineering job, and 30 seconds on Eurobase',
       excerpt: 'A customer asks a small EU fintech for a copy of all the data they hold on him. Walk through the DIY workflow (SQL across a dozen tables, format, sign, log, audit) — then the same job on Eurobase (one click). Same legal outcome. 8-12 hours vs 30 seconds. Plus what happens two weeks later when the customer asks for the DPA and the sub-processor list.',
