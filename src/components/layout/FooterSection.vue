@@ -23,7 +23,8 @@
           <ul class="space-y-2">
             <li><a href="/#solution" class="text-text-muted text-sm hover:text-text-white transition-colors">Features</a></li>
             <li><a href="/#pricing" class="text-text-muted text-sm hover:text-text-white transition-colors">Pricing</a></li>
-            <li><a href="/#developers" class="text-text-muted text-sm hover:text-text-white transition-colors">Documentation</a></li>
+            <li><a href="https://console.eurobase.app/docs" class="text-text-muted text-sm hover:text-text-white transition-colors">Documentation</a></li>
+            <li><RouterLink to="/sovereignty-check" class="text-text-muted text-sm hover:text-text-white transition-colors">Sovereignty check (CLOUD Act exposure)</RouterLink></li>
             <li><RouterLink to="/gdpr-readiness" class="text-text-muted text-sm hover:text-text-white transition-colors">GDPR Readiness quiz</RouterLink></li>
           </ul>
         </div>
