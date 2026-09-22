@@ -334,10 +334,10 @@ export const pricing = {
     {
       name: 'Team',
       price: '€149/mo',
-      description: 'Priced per organisation: SSO (OIDC), organisations + invites, RBAC, priority support, and one bundled Team-tier project with dedicated Postgres (PostgreSQL 16 on 2 vCPU / 4 GB RAM, 50 GB Scaleway Block Storage 5k IOPS, France) and direct DATABASE_URL. Additional projects attach at their per-project rate (€25/mo Pro shared cluster, €89/mo extra Team dedicated PG, €0 Free). 7-day retention on daily scheduled backups + on-demand snapshots + 1 restore/month included. SOC 2 Type II coming soon. For teams shipping regulated SMB software.',
+      description: 'Priced per organisation: SSO (OIDC) with enforceable SSO-only sign-in, organisations + email-notified invites, org-level admin / member roles, priority support, and one bundled Team-tier project with dedicated Postgres (PostgreSQL 16 on 2 vCPU / 4 GB RAM, 50 GB Scaleway Block Storage 5k IOPS, France) and direct DATABASE_URL. Additional projects attach at their per-project rate (€25/mo Pro shared cluster, €89/mo extra Team dedicated PG, €0 Free) and share one bill under the org. 7-day retention on daily scheduled backups + on-demand snapshots + 1 restore/month included. Per-project RBAC and SAML SSO coming soon. For teams shipping regulated SMB software.',
       icon: '\uD83C\uDFE2',
       highlighted: false,
-      comingSoon: true,
+      closedBeta: true,
     },
     // Legal Team is closed beta — priced on request while paperwork
     // (§203 StGB / §43e BRAO staff declarations, GoBD Verfahrens-
@@ -375,7 +375,8 @@ export const pricing = {
   recentShipments: {
     heading: 'Shipped recently',
     items: [
-      { label: 'Payment-first Pro checkout', detail: 'Card details captured before signup — no dangling accounts if the payment fails.' },
+      { label: 'Team orgs + SSO enforcement', detail: 'One org per user, auto-attach projects at create, email-notified invites, org-level SSO-only switch. Mix Team + Pro + Free projects under one bill.' },
+      { label: 'Payment-first Pro checkout', detail: 'Card details captured before signup — no dangling accounts if the payment fails. Now also carries org_id through to Mollie so a Pro project can be created directly into your org.' },
       { label: 'Dedicated Postgres on Team', detail: 'Rotatable postgres:// URL for Payload, Prisma, Drizzle, Directus and psql (invite-only beta).' },
       { label: 'Test-mode billing rehearsal', detail: 'Full Mollie test-mode dry-run of the checkout + invoicing surface before you touch a live card.' },
       { label: 'Legal Team preview', detail: 'German legal-tech dossier + Legal Team tier backing docs.', href: '/security#de-legaltech' },
@@ -410,7 +411,17 @@ export const pricing = {
         rows: [
           { feature: 'Dedicated Postgres (direct DATABASE_URL)', values: [undefined, undefined, 'Invite-only beta', 'Invite-only beta'] },
           { feature: 'Daily backups + on-demand snapshots', values: [undefined, undefined, '7-day retention', '30-day retention'] },
-          { feature: 'SSO, RBAC, org-level roles', values: [undefined, undefined, '\u2713', '\u2713'] },
+          // SSO / orgs split intentionally into one row per capability
+          // \u2014 the previous single "SSO, RBAC, org-level roles" row read
+          // as "per-project RBAC lives on Team today", which it doesn't
+          // (that stays Coming soon; only org-level roles ship).
+          { feature: 'SSO (OIDC) \u2014 Google Workspace, Microsoft Entra ID, Okta, Authentik', values: [undefined, undefined, '\u2713', '\u2713'] },
+          { feature: 'Enforce SSO for org members (password sign-in refused)', values: [undefined, undefined, '\u2713', '\u2713'] },
+          { feature: 'Organizations + invites (email-notified)', values: [undefined, undefined, '\u2713', '\u2713'] },
+          { feature: 'Org-level roles (admin / member)', values: [undefined, undefined, '\u2713', '\u2713'] },
+          { feature: 'Mix Team / Pro / Free projects under one org (one bill)', values: [undefined, undefined, '\u2713', '\u2713'] },
+          { feature: 'SSO (SAML)', values: [undefined, undefined, 'Coming soon', 'Coming soon'] },
+          { feature: 'Per-project RBAC (Owner / Admin / Developer / Read-only)', values: [undefined, undefined, 'Coming soon', 'Coming soon'] },
           { feature: 'SOC 2 Type II', values: [undefined, undefined, 'Coming soon', 'Coming soon'] },
         ],
       },
