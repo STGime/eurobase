@@ -5,14 +5,22 @@
 // (developer pool, /platform/public/sovereignty/report/{hash}). If
 // the hash is bad or the report is gone we show a not-found panel
 // with a link back to the picker.
+//
+// Layout mirrors the checker landing page: a navy hero band (the site
+// nav is fixed + transparent with white text) carrying the score, then
+// a light content area with square vendor tiles.
 
 import { ref, watch, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import {
-  ratingBadgeClass,
+  ratingChipClass,
+  ratingDotClass,
+  jurisdictionFlag,
   getVendor,
+  CATEGORY_LABELS,
   type Report,
   type ReportCard,
+  type RatingColor,
 } from '@/data/sovereignty'
 import { usePageTitle } from '@/composables/usePageTitle'
 
@@ -25,6 +33,21 @@ const loading = ref(true)
 const copied = ref(false)
 
 const hash = computed(() => String(route.params.hash ?? ''))
+
+const SEVERITY_LABELS: Record<string, string> = {
+  health: 'Health data (Art. 9 GDPR)',
+  legal: 'Legal / attorney-client',
+  financial: 'Financial account details',
+  children: "Children's data",
+}
+
+const DIMENSIONS = [
+  ['Entity', 'entity_control'],
+  ['Location', 'data_location'],
+  ['Access', 'operational_access'],
+  ['Subproc', 'subprocessor_chain'],
+  ['Transfer', 'transfer_mechanism'],
+] as const
 
 async function load(h: string) {
   loading.value = true
@@ -62,6 +85,18 @@ async function copyLink() {
   }
 }
 
+// Worst first, so the vendors that produced the score lead the grid.
+// Stable within a bucket (keeps the order the user picked in).
+const sortedCards = computed<ReportCard[]>(() => {
+  const rank = (c: RatingColor) => (c === 'red' ? 0 : c === 'amber' ? 1 : 2)
+  return [...(report.value?.cards ?? [])].sort((a, b) => rank(a.overall) - rank(b.overall))
+})
+
+function pct(n: number): string {
+  const total = report.value?.cards.length ?? 0
+  return total === 0 ? '0%' : `${(n / total) * 100}%`
+}
+
 function displayReason(card: ReportCard): string {
   // Prefer the on-card reason (persisted); fall back to the vendor
   // DB if the persisted card didn't include it. Historical rows
@@ -70,171 +105,306 @@ function displayReason(card: ReportCard): string {
   const v = getVendor(card.slug)
   return v?.one_line_reason?.trim() ?? ''
 }
+
+// The persisted card carries the jurisdiction; the parent's name
+// comes from the current dataset (falls back to the jurisdiction
+// alone for a vendor that has since left the dataset).
+function ownerLine(card: ReportCard): string {
+  return getVendor(card.slug)?.ultimate_parent.trim() ?? card.parent_jurisdiction
+}
+
+function categoryLabel(key: string): string {
+  return CATEGORY_LABELS[key] ?? key
+}
+
+function createdOn(iso: string): string {
+  const d = new Date(iso)
+  return Number.isNaN(d.getTime()) ? '' : d.toISOString().slice(0, 10)
+}
 </script>
 
 <template>
-  <main class="min-h-screen bg-navy-deep text-text-white">
-    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
-      <router-link to="/sovereignty-check" class="text-accent-blue text-sm hover:underline mb-6 inline-block">
-        &larr; Score another stack
-      </router-link>
-
-      <div v-if="loading" class="text-text-muted py-16 text-center">Loading report…</div>
-
-      <div v-else-if="error" class="rounded-xl bg-red-900/20 border border-red-500/40 p-6">
-        <h1 class="text-xl font-bold mb-2">Report unavailable</h1>
-        <p class="text-red-200">{{ error }}</p>
-        <router-link to="/sovereignty-check" class="mt-4 inline-block text-accent-blue hover:underline">
-          Start a fresh check →
-        </router-link>
+  <main class="min-h-screen bg-slate-50 text-slate-900">
+    <!-- Hero: stays navy so the fixed, transparent site nav is readable. -->
+    <section class="relative overflow-hidden bg-navy text-white">
+      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div class="absolute -top-32 left-1/2 h-96 w-[48rem] -translate-x-1/2 rounded-full bg-accent-blue/30 blur-3xl"></div>
+        <div class="absolute -bottom-40 -right-20 h-80 w-80 rounded-full bg-accent-gold/15 blur-3xl"></div>
       </div>
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12">
+        <router-link to="/sovereignty-check" class="inline-flex items-center gap-1 text-sm text-text-light hover:text-white transition-colors">
+          &larr; Score another stack
+        </router-link>
 
-      <template v-else-if="report">
-        <div class="flex items-baseline gap-4 flex-wrap mb-2">
-          <h1 class="text-4xl md:text-6xl font-bold font-heading leading-tight">
-            {{ report.exposure_percent }}% exposed
-          </h1>
-          <span
-            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-bold uppercase tracking-wider"
-            :class="ratingBadgeClass(report.overall)"
-          >
-            {{ report.overall }}
-          </span>
-        </div>
-        <p class="text-text-muted mb-6">
-          {{ report.red_count }} red · {{ report.amber_count }} amber · {{ report.green_count }} green
-          <template v-if="report.severity_modifier">
-            · severity: <strong>{{ report.severity_modifier }}</strong>
-          </template>
-        </p>
+        <div v-if="loading" class="py-16 text-center text-text-muted" aria-live="polite">Loading report…</div>
 
-        <!-- Share row -->
-        <div class="flex flex-wrap items-center gap-3 mb-8">
-          <button
-            type="button"
-            class="inline-flex items-center gap-2 rounded-lg border border-navy-light bg-navy-card px-4 py-2 text-sm hover:bg-navy-lighter transition-colors"
-            @click="copyLink"
-          >
-            {{ copied ? '✓ Link copied' : 'Copy shareable link' }}
-          </button>
+        <div v-else-if="error" class="mt-6 rounded-2xl bg-white/5 ring-1 ring-red-400/40 p-6">
+          <h1 class="text-xl font-bold font-heading mb-2">Report unavailable</h1>
+          <p class="text-red-200">{{ error }}</p>
           <router-link
             to="/sovereignty-check"
-            class="inline-flex items-center rounded-lg border border-navy-light bg-navy-card px-4 py-2 text-sm hover:bg-navy-lighter transition-colors"
+            class="mt-5 inline-flex items-center px-5 py-2 rounded-lg font-semibold text-sm bg-accent-blue text-white hover:bg-accent-blue-hover transition-colors"
+          >
+            Start a fresh check →
+          </router-link>
+        </div>
+
+        <template v-else-if="report">
+          <div class="mt-6 md:flex md:items-end md:justify-between md:gap-8">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-accent-gold mb-3">Shared exposure report</p>
+              <div class="flex items-center gap-4 flex-wrap">
+                <h1 class="text-5xl md:text-7xl font-bold font-heading leading-none tabular-nums">
+                  {{ report.exposure_percent }}%
+                </h1>
+                <div>
+                  <span
+                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-bold uppercase tracking-wider"
+                    :class="ratingChipClass(report.overall)"
+                  >
+                    {{ report.overall }}
+                  </span>
+                  <p class="mt-2 text-lg text-text-light">
+                    of this stack is reachable by a US authority
+                  </p>
+                </div>
+              </div>
+              <p v-if="report.severity_modifier" class="mt-3 text-sm text-text-muted">
+                Thresholds tightened for
+                <strong class="text-text-light">{{ SEVERITY_LABELS[report.severity_modifier] ?? report.severity_modifier }}</strong>:
+                amber ratings count as red.
+              </p>
+            </div>
+
+            <div class="mt-6 md:mt-0 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                class="inline-flex items-center gap-2 rounded-lg bg-accent-blue px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-accent-blue/25 hover:bg-accent-blue-hover transition-colors cursor-pointer"
+                @click="copyLink"
+              >
+                {{ copied ? '✓ Link copied' : 'Copy shareable link' }}
+              </button>
+              <router-link
+                to="/sovereignty-check"
+                class="inline-flex items-center rounded-lg bg-white/10 ring-1 ring-white/15 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/15 transition-colors"
+              >
+                Score another stack
+              </router-link>
+            </div>
+          </div>
+
+          <!-- Score breakdown -->
+          <div class="mt-8 rounded-xl bg-white/5 ring-1 ring-white/10 p-4 md:p-5">
+            <div class="flex h-2.5 overflow-hidden rounded-full bg-white/10" aria-hidden="true">
+              <span class="bg-red-500" :style="{ width: pct(report.red_count) }"></span>
+              <span class="bg-amber-400" :style="{ width: pct(report.amber_count) }"></span>
+              <span class="bg-emerald-500" :style="{ width: pct(report.green_count) }"></span>
+            </div>
+            <dl class="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
+              <div>
+                <dt class="text-[11px] uppercase tracking-wider text-text-muted">Vendors scored</dt>
+                <dd class="mt-0.5 text-xl font-bold font-heading tabular-nums">{{ report.cards.length }}</dd>
+              </div>
+              <div>
+                <dt class="text-[11px] uppercase tracking-wider text-text-muted">Red · CLOUD Act exposure</dt>
+                <dd class="mt-0.5 flex items-center gap-2 text-xl font-bold font-heading tabular-nums"><span class="h-2.5 w-2.5 rounded-full bg-red-500"></span>{{ report.red_count }}</dd>
+              </div>
+              <div>
+                <dt class="text-[11px] uppercase tracking-wider text-text-muted">Amber · mitigations</dt>
+                <dd class="mt-0.5 flex items-center gap-2 text-xl font-bold font-heading tabular-nums"><span class="h-2.5 w-2.5 rounded-full bg-amber-400"></span>{{ report.amber_count }}</dd>
+              </div>
+              <div>
+                <dt class="text-[11px] uppercase tracking-wider text-text-muted">Green · EU jurisdiction</dt>
+                <dd class="mt-0.5 flex items-center gap-2 text-xl font-bold font-heading tabular-nums"><span class="h-2.5 w-2.5 rounded-full bg-emerald-500"></span>{{ report.green_count }}</dd>
+              </div>
+            </dl>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <section v-if="report && !loading && !error" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
+      <!-- How to read this — dimension legend -->
+      <details class="rounded-2xl bg-white border border-slate-200 shadow-sm" open>
+        <summary class="cursor-pointer list-none px-5 py-4 flex items-center justify-between gap-2 select-none">
+          <span class="text-sm font-semibold text-slate-900">How to read the five badges on each vendor</span>
+          <span class="text-xs text-slate-400">tap to toggle</span>
+        </summary>
+        <div class="px-5 pb-4 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 text-sm">
+          <div>
+            <div class="uppercase tracking-wider text-[10px] font-semibold text-slate-400 mb-0.5">Entity</div>
+            <div class="text-slate-600">Who ultimately owns the vendor and which government can compel them (US parent = CLOUD Act exposure, regardless of where servers sit).</div>
+          </div>
+          <div>
+            <div class="uppercase tracking-wider text-[10px] font-semibold text-slate-400 mb-0.5">Location</div>
+            <div class="text-slate-600">Where your data physically lives at rest. EU region ≠ EU protection if the operator is US-controlled.</div>
+          </div>
+          <div>
+            <div class="uppercase tracking-wider text-[10px] font-semibold text-slate-400 mb-0.5">Access</div>
+            <div class="text-slate-600">Which countries' support/SRE staff can reach production data during incidents. Follow-the-sun rotations often mean US or IN access.</div>
+          </div>
+          <div>
+            <div class="uppercase tracking-wider text-[10px] font-semibold text-slate-400 mb-0.5">Subproc</div>
+            <div class="text-slate-600">Downstream subprocessors in the delivery chain — chiefly whether AWS / GCP / Azure / Cloudflare is underneath.</div>
+          </div>
+          <div class="sm:col-span-2">
+            <div class="uppercase tracking-wider text-[10px] font-semibold text-slate-400 mb-0.5">Transfer</div>
+            <div class="text-slate-600">The legal instrument covering EU→non-EU data transfers (SCCs, DPF, adequacy, or none). Post-Schrems II, SCCs alone aren't a full defence against US surveillance law.</div>
+          </div>
+        </div>
+        <div class="px-5 pb-4 text-xs text-slate-500">
+          Each badge is red / amber / green. The overall rating uses the worst dimension (worst-wins).
+          <router-link to="/sovereignty-check/methodology" class="text-accent-blue hover:underline">Read the full methodology →</router-link>
+        </div>
+      </details>
+
+      <!-- Vendor tiles -->
+      <div class="mt-10 flex items-baseline justify-between gap-4 mb-4">
+        <h2 class="text-xl font-bold font-heading text-slate-900">
+          Your stack
+          <span class="ml-1 text-sm font-medium text-slate-400 tabular-nums">{{ report.cards.length }}</span>
+        </h2>
+        <p class="text-xs text-slate-500">Worst rating first</p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+        <article
+          v-for="card in sortedCards"
+          :key="card.slug"
+          class="group relative flex h-full w-full md:aspect-square flex-col overflow-hidden rounded-2xl border-2 bg-white p-3.5 shadow-sm"
+          :class="card.overall === 'red' ? 'border-red-200' : card.overall === 'amber' ? 'border-amber-200' : 'border-emerald-200'"
+        >
+          <div class="flex items-center justify-between gap-2">
+            <span
+              class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider"
+              :class="ratingChipClass(card.overall)"
+            >
+              {{ card.overall }}
+            </span>
+            <span class="text-[11px] text-slate-400 truncate">{{ categoryLabel(card.category) }}</span>
+          </div>
+
+          <h3 class="mt-3 text-[15px] font-semibold leading-snug text-slate-900 line-clamp-2">
+            <router-link :to="`/sovereignty-check/vendors/${card.slug}`" class="hover:text-accent-blue transition-colors">
+              {{ card.name }}
+            </router-link>
+          </h3>
+          <p class="mt-1 text-xs text-slate-500 truncate">
+            <span aria-hidden="true">{{ jurisdictionFlag(card.parent_jurisdiction) }}</span>
+            <span class="sr-only">Parent jurisdiction {{ card.parent_jurisdiction }}.</span>
+            {{ ownerLine(card) }}
+          </p>
+          <span
+            v-if="card.self_disclosure"
+            class="mt-1.5 inline-flex w-fit items-center rounded-full bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider"
+            title="Eurobase maintains this dataset and grades itself here — see methodology"
+          >
+            Self-disclosed COI
+          </span>
+
+          <p class="mt-2 text-[11px] leading-snug text-slate-500 line-clamp-3 md:line-clamp-6" :title="displayReason(card)">
+            {{ displayReason(card) }}
+          </p>
+
+          <!-- Five dimensions -->
+          <ul class="mt-auto pt-3 grid grid-cols-5 gap-1" aria-label="Rating by dimension">
+            <li
+              v-for="[label, key] in DIMENSIONS"
+              :key="key"
+              class="flex flex-col items-center gap-1 rounded-md bg-slate-50 px-0.5 py-1.5"
+              :title="`${label}: ${card.ratings[key]}`"
+            >
+              <span class="h-2.5 w-2.5 rounded-full" :class="ratingDotClass(card.ratings[key])"></span>
+              <span class="text-[8px] leading-none uppercase tracking-wide text-slate-500" aria-hidden="true">
+                <span class="sm:hidden">{{ label.charAt(0) }}</span><span class="hidden sm:inline">{{ label }}</span>
+              </span>
+              <span class="sr-only">{{ label }}: {{ card.ratings[key] }}</span>
+            </li>
+          </ul>
+        </article>
+      </div>
+
+      <!-- Swap suggestions -->
+      <div v-if="report.alternatives.length" class="mt-12">
+        <div class="flex items-baseline justify-between gap-4 mb-4">
+          <h2 class="text-xl font-bold font-heading text-slate-900">Swap ideas</h2>
+          <p class="text-xs text-slate-500">EU-headquartered options in the same category</p>
+        </div>
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <li
+            v-for="swap in report.alternatives"
+            :key="swap.from_slug"
+            class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4"
+          >
+            <p class="text-sm text-slate-600">
+              Instead of
+              <router-link :to="`/sovereignty-check/vendors/${swap.from_slug}`" class="font-semibold text-slate-900 hover:text-accent-blue">
+                {{ getVendor(swap.from_slug)?.name ?? swap.from_slug }}
+              </router-link>
+              <span class="ml-1 text-slate-400">· {{ categoryLabel(swap.category) }}</span>
+            </p>
+            <div class="mt-2 flex flex-wrap gap-2">
+              <router-link
+                v-for="alt in swap.alternatives"
+                :key="alt"
+                :to="`/sovereignty-check/vendors/${alt}`"
+                class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 text-emerald-800 ring-1 ring-inset ring-emerald-200 px-3 py-1 text-sm font-medium hover:bg-emerald-100 transition-colors"
+              >
+                <span aria-hidden="true">{{ jurisdictionFlag(getVendor(alt)?.parent_jurisdiction ?? '') }}</span>
+                {{ getVendor(alt)?.name ?? alt }}
+              </router-link>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <p v-if="report.unknown_slugs && report.unknown_slugs.length" class="mt-6 text-xs text-slate-500">
+        Not scored (not in our dataset yet): {{ report.unknown_slugs.join(', ') }}
+      </p>
+
+      <!-- Closing CTA -->
+      <div class="mt-12 rounded-2xl bg-navy text-white p-6 md:p-8 flex items-center justify-between gap-6 flex-wrap">
+        <div>
+          <p class="text-lg font-semibold font-heading">Want the green column for your whole backend?</p>
+          <p class="mt-1 text-sm text-text-light">
+            Eurobase is Postgres, auth, storage and edge functions on EU-owned infrastructure in France. No US parent, no CLOUD Act reach.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <router-link
+            to="/"
+            class="inline-flex items-center px-5 py-2.5 rounded-lg font-semibold text-sm bg-accent-blue text-white shadow-lg shadow-accent-blue/25 hover:bg-accent-blue-hover transition-colors"
+          >
+            See Eurobase →
+          </router-link>
+          <router-link
+            to="/sovereignty-check"
+            class="inline-flex items-center px-5 py-2.5 rounded-lg font-semibold text-sm bg-white/10 ring-1 ring-white/15 text-white hover:bg-white/15 transition-colors"
           >
             Score another stack
           </router-link>
         </div>
+      </div>
 
-        <!-- How to read this — dimension legend -->
-        <details class="mb-6 rounded-xl bg-navy-card border border-navy-light" open>
-          <summary class="cursor-pointer list-none px-5 py-3 flex items-center justify-between gap-2 select-none">
-            <span class="text-sm font-semibold">How to read the badges on each vendor</span>
-            <span class="text-xs text-text-muted">tap to toggle</span>
-          </summary>
-          <div class="px-5 pb-4 pt-1 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm">
-            <div>
-              <div class="uppercase tracking-wider text-[10px] text-text-muted mb-0.5">Entity</div>
-              <div class="text-text-light">Who ultimately owns the vendor and which government can compel them (US parent = CLOUD Act exposure, regardless of where servers sit).</div>
-            </div>
-            <div>
-              <div class="uppercase tracking-wider text-[10px] text-text-muted mb-0.5">Location</div>
-              <div class="text-text-light">Where your data physically lives at rest. EU region ≠ EU protection if the operator is US-controlled.</div>
-            </div>
-            <div>
-              <div class="uppercase tracking-wider text-[10px] text-text-muted mb-0.5">Op access</div>
-              <div class="text-text-light">Which countries' support/SRE staff can reach production data during incidents. Follow-the-sun rotations often mean US or IN access.</div>
-            </div>
-            <div>
-              <div class="uppercase tracking-wider text-[10px] text-text-muted mb-0.5">Subproc</div>
-              <div class="text-text-light">Downstream subprocessors in the delivery chain — chiefly whether AWS / GCP / Azure / Cloudflare is underneath.</div>
-            </div>
-            <div class="sm:col-span-2">
-              <div class="uppercase tracking-wider text-[10px] text-text-muted mb-0.5">Transfer</div>
-              <div class="text-text-light">The legal instrument covering EU→non-EU data transfers (SCCs, DPF, adequacy, or none). Post-Schrems II, SCCs alone aren't a full defence against US surveillance law.</div>
-            </div>
-          </div>
-          <div class="px-5 pb-4 text-xs text-text-muted">
-            Each badge is red / amber / green. Overall rating uses the worst dimension (worst-wins).
-            <router-link to="/sovereignty-check/methodology" class="text-accent-blue hover:underline">Read the full methodology →</router-link>
-          </div>
-        </details>
-
-        <!-- Vendor cards -->
-        <div class="space-y-4">
-          <article
-            v-for="card in report.cards"
-            :key="card.slug"
-            class="rounded-xl bg-navy-card border border-navy-light p-5"
-          >
-            <div class="flex items-start justify-between gap-4 mb-2 flex-wrap">
-              <div>
-                <router-link :to="`/sovereignty-check/vendors/${card.slug}`" class="text-lg font-semibold hover:underline">
-                  {{ card.name }}
-                </router-link>
-                <span class="ml-2 text-xs text-text-muted">{{ card.category }}</span>
-                <span
-                  v-if="card.self_disclosure"
-                  class="ml-2 inline-flex items-center rounded-full bg-amber-600/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider"
-                  title="Eurobase maintains this dataset and grades itself here — see methodology"
-                >
-                  Self-disclosed COI
-                </span>
-              </div>
-              <span
-                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-bold uppercase tracking-wider"
-                :class="ratingBadgeClass(card.overall)"
-              >
-                {{ card.overall }}
-              </span>
-            </div>
-            <p class="text-sm text-text-light leading-relaxed">
-              {{ displayReason(card) }}
-            </p>
-            <!-- Per-dimension mini-grid -->
-            <div class="mt-4 grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs">
-              <div v-for="[label, key] in ([
-                ['Entity','entity_control'],
-                ['Location','data_location'],
-                ['Op access','operational_access'],
-                ['Subproc','subprocessor_chain'],
-                ['Transfer','transfer_mechanism'],
-              ] as const)" :key="key"
-                class="rounded-md border px-2 py-1"
-                :class="ratingBadgeClass(card.ratings[key])">
-                <div class="uppercase tracking-wider text-[10px] opacity-80">{{ label }}</div>
-                <div class="font-semibold">{{ card.ratings[key] }}</div>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <!-- Swap suggestions -->
-        <div v-if="report.alternatives.length" class="mt-10">
-          <h2 class="text-lg font-semibold mb-3 font-heading">Swap ideas</h2>
-          <ul class="space-y-2">
-            <li v-for="swap in report.alternatives" :key="swap.from_slug" class="rounded-lg bg-navy-card border border-navy-light p-3 text-sm">
-              For your <strong class="capitalize">{{ swap.category }}</strong>:
-              <span class="text-text-muted">consider </span>
-              <span v-for="(alt, i) in swap.alternatives" :key="alt">
-                <router-link :to="`/sovereignty-check/vendors/${alt}`" class="text-accent-blue hover:underline">
-                  {{ getVendor(alt)?.name ?? alt }}
-                </router-link><span v-if="i < swap.alternatives.length - 1">, </span>
-              </span>
-            </li>
-          </ul>
-        </div>
-
-        <p v-if="report.unknown_slugs && report.unknown_slugs.length" class="mt-6 text-xs text-text-muted">
-          Not scored (not in our dataset yet): {{ report.unknown_slugs.join(', ') }}
-        </p>
-
-        <p class="mt-10 text-xs text-text-muted">
-          Report <code class="rounded bg-navy-card px-1 py-0.5">{{ report.hash }}</code> generated
-          {{ new Date(report.created_at).toISOString().slice(0, 10) }}.
-          Not legal advice — this is a research aid.
-          <router-link to="/sovereignty-check/methodology" class="text-accent-blue hover:underline">Methodology</router-link>.
-        </p>
-      </template>
+      <p class="mt-8 text-xs text-slate-500">
+        Report <code class="rounded bg-slate-200/70 px-1 py-0.5 text-slate-700">{{ report.hash }}</code>
+        <template v-if="createdOn(report.created_at)">generated {{ createdOn(report.created_at) }}.</template>
+        Not legal advice — this is a research aid.
+        <router-link to="/sovereignty-check/methodology" class="text-accent-blue hover:underline">Methodology</router-link>.
+      </p>
     </section>
+
+    <footer class="border-t border-slate-200 bg-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-xs text-slate-500">
+        The dataset is
+        <a
+          href="https://github.com/STGime/sovereignty-vendors"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-accent-blue hover:underline"
+        >open on GitHub</a>
+        under MIT.
+        This tool runs on <router-link to="/" class="text-accent-blue hover:underline">Eurobase</router-link>.
+      </div>
+    </footer>
   </main>
 </template>
