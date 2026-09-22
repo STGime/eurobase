@@ -138,15 +138,12 @@ function createdOn(iso: string): string {
 
         <div v-if="loading" class="py-16 text-center text-text-muted" aria-live="polite">Loading report…</div>
 
-        <div v-else-if="error" class="mt-6 rounded-2xl bg-white/5 ring-1 ring-red-400/40 p-6">
-          <h1 class="text-xl font-bold font-heading mb-2">Report unavailable</h1>
-          <p class="text-red-200">{{ error }}</p>
-          <router-link
-            to="/sovereignty-check"
-            class="mt-5 inline-flex items-center px-5 py-2 rounded-lg font-semibold text-sm bg-accent-blue text-white hover:bg-accent-blue-hover transition-colors"
-          >
-            Start a fresh check →
-          </router-link>
+        <!-- Error state: the hero shrinks to its heading; the card itself
+             renders on the light surface below so it doesn't carry the
+             hero's decorative weight. -->
+        <div v-else-if="error" class="mt-6 pb-2">
+          <p class="text-xs font-semibold uppercase tracking-wider text-accent-gold mb-3">Shared exposure report</p>
+          <h1 class="text-3xl md:text-4xl font-bold font-heading">Report unavailable</h1>
         </div>
 
         <template v-else-if="report">
@@ -220,6 +217,21 @@ function createdOn(iso: string): string {
             </dl>
           </div>
         </template>
+      </div>
+    </section>
+
+    <section v-if="error && !loading" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
+      <div class="rounded-2xl bg-white border border-red-200 shadow-sm p-6 md:p-8 max-w-2xl">
+        <p class="text-base text-slate-700">{{ error }}</p>
+        <p class="mt-2 text-sm text-slate-500">
+          Reports are kept by their permalink hash. If you got this link from someone, ask them to re-share it, or score your own stack in a minute.
+        </p>
+        <router-link
+          to="/sovereignty-check"
+          class="mt-5 inline-flex items-center px-5 py-2.5 rounded-lg font-semibold text-sm bg-accent-blue text-white shadow-md shadow-accent-blue/25 hover:bg-accent-blue-hover transition-colors"
+        >
+          Start a fresh check →
+        </router-link>
       </div>
     </section>
 
