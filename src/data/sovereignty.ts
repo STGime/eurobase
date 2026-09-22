@@ -102,3 +102,78 @@ export function ratingLabel(color: RatingColor): string {
       return 'Green — EU jurisdiction'
   }
 }
+
+// ---- Light-surface helpers (checker landing page) ----------------------
+//
+// The checker landing page renders on a light background; the
+// ratingBadgeClass() variants above are tuned for navy surfaces.
+
+export function ratingChipClass(color: RatingColor): string {
+  switch (color) {
+    case 'red':
+      return 'bg-red-50 text-red-700 ring-1 ring-inset ring-red-200'
+    case 'amber':
+      return 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200'
+    case 'green':
+      return 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200'
+  }
+}
+
+export function ratingDotClass(color: RatingColor): string {
+  switch (color) {
+    case 'red':
+      return 'bg-red-500'
+    case 'amber':
+      return 'bg-amber-400'
+    case 'green':
+      return 'bg-emerald-500'
+  }
+}
+
+// Human labels for the transfer_mechanism enum in the vendor schema.
+export const TRANSFER_LABELS: Record<string, string> = {
+  none: 'No transfer',
+  SCCs: 'SCCs',
+  'SCCs+TIA': 'SCCs + TIA',
+  adequacy: 'Adequacy',
+  DPF: 'Data Privacy Framework',
+  binding_corporate_rules: 'BCRs',
+  unclear: 'Unclear',
+}
+
+// Short form for tight spaces (vendor tiles).
+export const TRANSFER_SHORT: Record<string, string> = {
+  none: 'No transfer',
+  SCCs: 'SCCs',
+  'SCCs+TIA': 'SCCs + TIA',
+  adequacy: 'Adequacy',
+  DPF: 'DPF',
+  binding_corporate_rules: 'BCRs',
+  unclear: 'Unclear',
+}
+
+// ISO 3166-1 alpha-2 (or 'EU') → flag emoji via regional indicators.
+// 'EU' happens to be a valid pair that renders the EU flag.
+export function jurisdictionFlag(code: string): string {
+  const cc = code.trim().toUpperCase()
+  if (!/^[A-Z]{2}$/.test(cc)) return ''
+  return String.fromCodePoint(...[...cc].map((ch) => 0x1f1e6 + ch.charCodeAt(0) - 65))
+}
+
+// Aggregate numbers for the checker hero. Derived from the dataset
+// at build time so the copy never drifts from the data.
+export const datasetStats = (() => {
+  let red = 0
+  let amber = 0
+  let green = 0
+  let latest = ''
+  const categories = new Set<string>()
+  for (const v of vendors) {
+    categories.add(v.category)
+    if (v.ratings.overall === 'red') red++
+    else if (v.ratings.overall === 'amber') amber++
+    else green++
+    if (v.last_reviewed > latest) latest = v.last_reviewed
+  }
+  return { total: vendors.length, categories: categories.size, red, amber, green, latest }
+})()
