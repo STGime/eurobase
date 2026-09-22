@@ -442,10 +442,10 @@
         },
         {
           "@type": "Question",
-          "name": "Do you provide a signable DPA and an up-to-date sub-processor list?",
+          "name": "Do you provide a signed DPA (Auftragsverarbeitungsvertrag) and an up-to-date sub-processor list?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. DPA v2 is signable at eurobase.app/legal. The sub-processor list is auto-generated per project in the console Compliance tab as an Article 30 report (downloadable PDF, updated on every configuration change). No email tickets, no stale spreadsheets."
+            "text": "Yes, on every tier — including Free. Our Data Processing Agreement v2 (Art. 28 GDPR) is accepted click-through when you create your account, which is a valid written form under Art. 28(9). The full text, with Eurobase OÜ's legal name, registered address and registry code, the technical and organisational measures, and the live sub-processor annex, is always at console.eurobase.app/legal/dpa — print it or save it as PDF for your records. The per-project Article 30 report in the console Compliance tab lists the sub-processors actually engaged by the features you have enabled. A countersigned copy of the DPA on our letterhead, with the sub-processor list attached, is a paid-tier service: available on Pro and above on request, not on Free."
           }
         },
         {
@@ -493,7 +493,7 @@
           "name": "How do I script a full export or nightly backup of a project?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Use the compliance export, which works on every tier including Free. Create a Personal Access Token in the console (Account → Personal Access Tokens; it starts with eb_pat_) and call POST /platform/projects/{id}/compliance/export on api.eurobase.app with Authorization: Bearer <token> and a body of {\"format\":\"json\"} or \"csv\". The project's public / anon key cannot call it — it is a platform endpoint, and the token must belong to an admin of the project. The call returns an export id; poll GET …/compliance/exports/{exportId} until status is completed, then fetch download_url (a presigned link valid for one hour). The ZIP holds every table in your project's schema, including the auth users table, and is kept for 7 days. Uploaded files in storage are not in the archive — pull those through the storage API. Limit: one full export per project per hour, so a nightly job is fine. Every export is written to the audit log."
+            "text": "Use the compliance export, which works on every tier including Free. Create a Personal Access Token in the console (Account → Personal Access Tokens; it starts with eb_pat_) and call POST /platform/projects/{id}/compliance/export on api.eurobase.app with Authorization: Bearer <token> and a body of {\"format\":\"json\"} or \"csv\". The project's public / anon key cannot call it — it is a platform endpoint, and the token must belong to an admin of the project. The call returns an export id; poll GET …/compliance/exports/{exportId} until status is completed, then fetch download_url (a presigned link valid for one hour). The ZIP holds every table in your project's schema (up to 100,000 rows per table), including the auth users table, plus the project audit log (latest 10,000 entries) and a metadata file, and is kept for 7 days. Uploaded files in storage are not in the archive — pull those through the storage API. Limit: one full export per project per hour, so a nightly job is fine. Every export is written to the audit log. On Free the export is API-only; the one-click button in the console Compliance tab is Pro and above."
           }
         }
       ]
