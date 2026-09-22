@@ -159,9 +159,16 @@ export const faq: FaqEntry[] = [
   {
     id: 'free-tier-pause',
     category: 'Product & pricing',
-    question: 'Do Free-tier projects really pause?',
+    question: 'Do Free-tier projects really pause, and what counts as activity?',
     answer:
-      'After 30 days without a request, yes. On the next request the project wakes automatically (about 30 s on the first request; instant thereafter). Pro projects never pause. The pause is on the API + realtime + edge-function surface, not the DB — no cold start work.',
+      'After 30 days without a request, yes. Activity means a request to your project\'s own endpoint, <code class="text-accent-gold">&lt;slug&gt;.eurobase.app</code> — anything the SDK, REST API, realtime or an edge-function call sends. Scheduled cron jobs running inside the project and console / CLI actions on the platform API do <strong>not</strong> count. Nothing is deleted or archived when a project pauses: the database keeps running, your data stays exactly where it is, and cron jobs keep firing. The only effect is that the first request after a pause takes about 30 seconds while the project flips back to active; every request after that is instant. Pro projects never pause.',
+  },
+  {
+    id: 'project-export',
+    category: 'Product & pricing',
+    question: 'How do I script a full export or nightly backup of a project?',
+    answer:
+      'Use the compliance export, which works on every tier including Free. Create a Personal Access Token in the console (Account → Personal Access Tokens; it starts with <code class="text-accent-gold">eb_pat_</code>) and call <code class="text-accent-gold">POST /platform/projects/{id}/compliance/export</code> on <code class="text-accent-gold">api.eurobase.app</code> with <code class="text-accent-gold">Authorization: Bearer &lt;token&gt;</code> and a body of <code class="text-accent-gold">{"format":"json"}</code> or <code class="text-accent-gold">"csv"</code>. The project\'s public / anon key cannot call it — it is a platform endpoint, and the token must belong to an admin of the project. The call returns an export id; poll <code class="text-accent-gold">GET …/compliance/exports/{exportId}</code> until <code class="text-accent-gold">status</code> is <code class="text-accent-gold">completed</code>, then fetch <code class="text-accent-gold">download_url</code> (a presigned link valid for one hour). The ZIP holds every table in your project\'s schema, including the auth <code class="text-accent-gold">users</code> table, and is kept for 7 days. Uploaded files in storage are not in the archive — pull those through the storage API. Limit: one full export per project per hour, so a nightly job is fine. Every export is written to the audit log.',
   },
   {
     id: 'auth-methods',
@@ -196,7 +203,7 @@ export const faq: FaqEntry[] = [
     category: 'Product & pricing',
     question: 'Are automatic backups included?',
     answer:
-      'Free and Pro projects share a pooled Postgres cluster (Scaleway Managed Database, France) with cluster-level snapshots (daily, 7-day retention). Restores go through support. <strong>Per-project restore-from-backup and on-demand snapshots land on the Team tier</strong> — Team gets dedicated Postgres per project with daily scheduled backups (7-day retention) plus customer-triggered on-demand snapshots (take one before a risky migration, tag it, restore it later), and 1 self-service restore per calendar month included (from either source — either counts against the same cap). Legal Team keeps 30-day scheduled backup retention as part of the compliance premium. On every tier, <code class="text-accent-gold">eurobase db dump</code> produces a standard <code class="text-accent-gold">pg_dump</code> you can export anywhere at any time — that is the first-line reversibility guarantee independent of us.',
+      'Free and Pro projects share a pooled Postgres cluster (Scaleway Managed Database, France) with cluster-level snapshots (daily, 7-day retention). Restores go through support. <strong>Per-project restore-from-backup and on-demand snapshots land on the Team tier</strong> — Team gets dedicated Postgres per project with daily scheduled backups (7-day retention) plus customer-triggered on-demand snapshots (take one before a risky migration, tag it, restore it later), and 1 self-service restore per calendar month included (from either source — either counts against the same cap). Legal Team keeps 30-day scheduled backup retention as part of the compliance premium. On every tier you can pull all your data out yourself at any time: the <a href="/faq#project-export" class="text-accent-blue hover:underline">compliance export</a> gives you every table as JSON or CSV in a ZIP, and <code class="text-accent-gold">eurobase db dump</code> prints the schema. Team-tier projects also get a direct <code class="text-accent-gold">DATABASE_URL</code> for a real <code class="text-accent-gold">pg_dump</code>. That reversibility is the first-line guarantee independent of us.',
   },
   {
     id: 'overage-pricing',
