@@ -495,6 +495,14 @@
             "@type": "Answer",
             "text": "Use the compliance export, which works on every tier including Free. Create a Personal Access Token in the console (Account → Personal Access Tokens; it starts with eb_pat_) and call POST /platform/projects/{id}/compliance/export on api.eurobase.app with Authorization: Bearer <token> and a body of {\"format\":\"json\"} or \"csv\". The project's public / anon key cannot call it — it is a platform endpoint, and the token must belong to an admin of the project. The call returns an export id; poll GET …/compliance/exports/{exportId} until status is completed, then fetch download_url (a presigned link valid for one hour). The ZIP holds every table in your project's schema (up to 100,000 rows per table), including the auth users table, plus the project audit log (latest 10,000 entries) and a metadata file, and is kept for 7 days. Uploaded files in storage are not in the archive — pull those through the storage API. Limit: one full export per project per hour, so a nightly job is fine. Every export is written to the audit log. On Free the export is API-only; the one-click button in the console Compliance tab is Pro and above."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does my SDK insert fail with 'row-level security policy denied this operation' even with WITH CHECK (true)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This is a Postgres RLS gotcha, not a gateway bug. The SDK executes every insert as INSERT ... RETURNING * so it can return the created row. On RETURNING, Postgres applies RLS twice: the INSERT policy's WITH CHECK when writing, then the SELECT policy's USING when reading the row back. If you have an INSERT policy but no matching SELECT policy, the write rolls back with the same error text as a real INSERT failure — misleading, which is why WITH CHECK (true) did not help. Fix: add a matching SELECT policy, usually with the same predicate. If your INSERT is WITH CHECK (user_id = auth_uid()), add FOR SELECT USING (user_id = auth_uid()). The Table Editor works because it goes through the elevated is_service_role() branch, so tenant RLS does not apply there. Full guide: console.eurobase.app/docs/rls."
+          }
         }
       ]
     }
