@@ -277,6 +277,13 @@ export const faq: FaqEntry[] = [
     answer:
       'Yes — first-class support via a hosted MCP server. Claude Code, Codex, Cursor, and Windsurf can list tables, run SQL, manage the vault, and invoke functions directly against your project. Setup is one JSON snippet per IDE. <a href="/blog/eurobase-mcp-server-ai-native-sovereign-backend" class="text-accent-blue hover:underline">Read the MCP post →</a>',
   },
+  {
+    id: 'rls-insert-returning',
+    category: 'Getting started',
+    question: 'Why does my SDK insert fail with "row-level security policy denied this operation" even with WITH CHECK (true)?',
+    answer:
+      'This is a Postgres RLS gotcha, not a gateway bug. The SDK executes every insert as <code class="text-accent-gold">INSERT ... RETURNING *</code> so it can return the created row. On <code class="text-accent-gold">RETURNING</code>, Postgres applies RLS <strong>twice</strong>: the INSERT policy\'s <code class="text-accent-gold">WITH CHECK</code> when writing, then the SELECT policy\'s <code class="text-accent-gold">USING</code> when reading the row back. If you have an INSERT policy but no matching SELECT policy, the write rolls back with the same error text as a real INSERT failure — misleading, which is why <code class="text-accent-gold">WITH CHECK (true)</code> did not help. Fix: add a matching SELECT policy, usually with the same predicate. If your INSERT is <code class="text-accent-gold">WITH CHECK (user_id = auth_uid())</code>, add <code class="text-accent-gold">FOR SELECT USING (user_id = auth_uid())</code>. The Table Editor works because it goes through the elevated <code class="text-accent-gold">is_service_role()</code> branch, so tenant RLS does not apply there. Full guide: <a href="https://console.eurobase.app/docs/rls" class="text-accent-blue hover:underline">console.eurobase.app/docs/rls</a>.',
+  },
 ]
 
 /** Ordered category list for the on-page render — matches the order
