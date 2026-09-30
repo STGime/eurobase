@@ -402,7 +402,7 @@ export const pricing = {
           { feature: 'DSAR export (Article 15 + 20)', values: ['\u2713', '\u2713', '\u2713', '\u2713'] },
           { feature: 'Article 30 RoPA + hash-chained audit log', values: ['\u2713', '\u2713', '\u2713', '\u2713'] },
           { feature: 'BYO SMTP, priority support', values: [undefined, '\u2713', '\u2713', '\u2713'] },
-          { feature: 'Email usage alerts (80% / 90% / 100% of quota)', values: [undefined, '\u2713', '\u2713', '\u2713'] },
+          { feature: 'Email usage alerts (80% / 90% / 100% of quota)', values: ['\u2713', '\u2713', '\u2713', '\u2713'] },
           { feature: 'Slack / webhook quota alerts', values: [undefined, 'Coming soon', 'Coming soon', 'Coming soon'] },
         ],
       },
