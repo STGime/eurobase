@@ -21,59 +21,59 @@ import { legalStrings as ls } from '@/data/legalStrings'
 </script>
 
 <template>
-  <main class="pt-24 pb-16 bg-navy min-h-screen">
+  <main class="pt-24 pb-16 bg-paper min-h-screen">
     <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl md:text-4xl font-bold text-text-white mb-8 font-heading">Legal notice</h1>
-      <p class="text-text-muted text-sm mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-ink mb-8 font-heading">Legal notice</h1>
+      <p class="text-slate text-sm mb-8">
         Company information published under Estonian Information Society Services Act
         (<em>Infoühiskonna teenuse seadus</em>) §4 and the general E-Commerce Directive
         (2000/31/EC) transparency requirements.
       </p>
 
-      <div class="prose-legal space-y-6 text-text-light text-sm leading-relaxed">
+      <div class="prose-legal space-y-6 text-slate text-sm leading-relaxed">
         <section>
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Company details</h2>
+          <h2 class="text-lg font-bold text-ink mb-3 font-heading">Company details</h2>
           <dl class="grid grid-cols-1 sm:grid-cols-[10rem_1fr] gap-y-1.5 sm:gap-x-6">
-            <dt class="text-text-muted">Company name</dt>
-            <dd class="text-text-white">{{ ls.legalEntity }}</dd>
+            <dt class="text-slate">Company name</dt>
+            <dd class="text-ink">{{ ls.legalEntity }}</dd>
 
-            <dt class="text-text-muted">Type of company</dt>
+            <dt class="text-slate">Type of company</dt>
             <dd>{{ ls.entityType }}</dd>
 
-            <dt class="text-text-muted">Principal activity</dt>
+            <dt class="text-slate">Principal activity</dt>
             <dd>{{ ls.principalActivity }}</dd>
 
-            <dt class="text-text-muted">Registered address</dt>
+            <dt class="text-slate">Registered address</dt>
             <dd>{{ ls.registeredAddress }}, Estonia</dd>
 
-            <dt class="text-text-muted">Registry code</dt>
-            <dd><em class="not-italic text-text-muted">(Estonian commercial register / äriregistri kood)</em> {{ ls.registryNumber }}</dd>
+            <dt class="text-slate">Registry code</dt>
+            <dd><em class="not-italic text-slate">(Estonian commercial register / äriregistri kood)</em> {{ ls.registryNumber }}</dd>
 
-            <dt class="text-text-muted">VAT number</dt>
+            <dt class="text-slate">VAT number</dt>
             <dd>{{ ls.vatNumber }}</dd>
 
-            <dt class="text-text-muted">Share capital</dt>
+            <dt class="text-slate">Share capital</dt>
             <dd>{{ ls.shareCapital }}</dd>
 
-            <dt class="text-text-muted">Financial year</dt>
+            <dt class="text-slate">Financial year</dt>
             <dd>{{ ls.financialYear }}</dd>
 
-            <dt class="text-text-muted">Local contact person</dt>
-            <dd>{{ ls.contactPerson }} <span class="text-text-muted">(Estonian Commercial Code §63<sup>1</sup>)</span></dd>
+            <dt class="text-slate">Local contact person</dt>
+            <dd>{{ ls.contactPerson }} <span class="text-slate">(Estonian Commercial Code §63<sup>1</sup>)</span></dd>
           </dl>
         </section>
 
         <section>
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Contact</h2>
+          <h2 class="text-lg font-bold text-ink mb-3 font-heading">Contact</h2>
           <p>
-            General inquiries: <a :href="`mailto:${ls.supportEmail}`" class="text-accent-blue hover:underline">{{ ls.supportEmail }}</a><br />
-            Data protection: <a :href="`mailto:${ls.dpoEmail}`" class="text-accent-blue hover:underline">{{ ls.dpoEmail }}</a><br />
-            Formal notices: <a :href="`mailto:${ls.noticesEmail}`" class="text-accent-blue hover:underline">{{ ls.noticesEmail }}</a>
+            General inquiries: <a :href="`mailto:${ls.supportEmail}`" class="text-amber-ink hover:underline">{{ ls.supportEmail }}</a><br />
+            Data protection: <a :href="`mailto:${ls.dpoEmail}`" class="text-amber-ink hover:underline">{{ ls.dpoEmail }}</a><br />
+            Formal notices: <a :href="`mailto:${ls.noticesEmail}`" class="text-amber-ink hover:underline">{{ ls.noticesEmail }}</a>
           </p>
         </section>
 
         <section>
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Responsible for the content</h2>
+          <h2 class="text-lg font-bold text-ink mb-3 font-heading">Responsible for the content</h2>
           <p>
             {{ ls.legalEntity }}, at the address above, acting through its board members
             as listed in the Estonian commercial register.
@@ -81,7 +81,7 @@ import { legalStrings as ls } from '@/data/legalStrings'
         </section>
 
         <section>
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Governing law &amp; jurisdiction</h2>
+          <h2 class="text-lg font-bold text-ink mb-3 font-heading">Governing law &amp; jurisdiction</h2>
           <p>
             The operation of this website and the services offered through it are governed by
             the laws of {{ ls.governingLaw }}. Disputes arising out of the service that cannot
@@ -92,10 +92,10 @@ import { legalStrings as ls } from '@/data/legalStrings'
         </section>
 
         <section>
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Online dispute resolution</h2>
+          <h2 class="text-lg font-bold text-ink mb-3 font-heading">Online dispute resolution</h2>
           <p>
             The European Commission provides an Online Dispute Resolution (ODR) platform available at
-            <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline">https://ec.europa.eu/consumers/odr/</a>.
+            <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer" class="text-amber-ink hover:underline">https://ec.europa.eu/consumers/odr/</a>.
             Our contact email is listed above.
           </p>
           <p class="mt-3">
@@ -105,7 +105,7 @@ import { legalStrings as ls } from '@/data/legalStrings'
         </section>
 
         <section>
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Liability for content</h2>
+          <h2 class="text-lg font-bold text-ink mb-3 font-heading">Liability for content</h2>
           <p>
             The content of this website is provided by {{ ls.legalEntity }} to the best of our
             knowledge and belief. We assume no liability for the correctness, completeness, or
@@ -117,7 +117,7 @@ import { legalStrings as ls } from '@/data/legalStrings'
         </section>
 
         <section>
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Liability for external links</h2>
+          <h2 class="text-lg font-bold text-ink mb-3 font-heading">Liability for external links</h2>
           <p>
             This website contains links to external third-party websites, whose content we cannot
             control. Responsibility for the content of linked pages rests solely with their
@@ -128,7 +128,7 @@ import { legalStrings as ls } from '@/data/legalStrings'
         </section>
 
         <section>
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">Copyright</h2>
+          <h2 class="text-lg font-bold text-ink mb-3 font-heading">Copyright</h2>
           <p>
             The content on this site is subject to the copyright laws of Estonia and applicable
             EU law. Reproduction, adaptation, distribution, or any form of exploitation outside

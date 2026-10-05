@@ -152,8 +152,8 @@ function renderTable(block: string): string {
   const headers = parse(rows[0]!)
   const body = rows.slice(1).map(parse)
   return `<div class="overflow-x-auto my-6"><table class="w-full text-sm border-collapse">
-    <thead><tr>${headers.map(h => `<th class="text-left text-text-white font-semibold px-4 py-3 border-b border-navy-light bg-navy-light/30">${h}</th>`).join('')}</tr></thead>
-    <tbody>${body.map((row, i) => `<tr class="${i % 2 ? 'bg-navy-light/10' : ''}">${row.map(c => `<td class="px-4 py-2.5 text-text-light border-b border-navy-light/50">${c}</td>`).join('')}</tr>`).join('')}</tbody>
+    <thead><tr>${headers.map(h => `<th class="text-left text-ink font-semibold px-4 py-3 border-b border-line bg-line/40">${h}</th>`).join('')}</tr></thead>
+    <tbody>${body.map((row, i) => `<tr class="${i % 2 ? 'bg-line/30' : ''}">${row.map(c => `<td class="px-4 py-2.5 text-slate border-b border-line">${c}</td>`).join('')}</tr>`).join('')}</tbody>
   </table></div>`
 }
 
@@ -165,8 +165,8 @@ function renderMarkdown(md: string): string {
   })
   return md
     // Headings first — `### ` must come before `## ` or the latter's regex would eat it.
-    .replace(/^### (.+)$/gm, '<h3 class="text-lg font-semibold text-text-white mt-6 mb-3 font-heading">$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2 class="text-2xl font-bold text-text-white mt-10 mb-4 font-heading">$1</h2>')
+    .replace(/^### (.+)$/gm, '<h3 class="text-lg font-semibold text-ink mt-6 mb-3 font-heading">$1</h3>')
+    .replace(/^## (.+)$/gm, '<h2 class="text-2xl font-bold text-ink mt-10 mb-4 font-heading">$1</h2>')
     // Order matters here: code → bold → italic. Code first turns `eb_sk_*` etc. into <code>…</code>,
     // so the italic rule's `<`-exclusion actually protects those literal asterisks from pairing
     // across emitted tags. If italic ran first it would see the raw backtick tokens and pair the
@@ -175,14 +175,14 @@ function renderMarkdown(md: string): string {
     // The code rule also excludes `\n` — `[^\`\n]` — to stop the pattern from matching across a
     // triple-backtick fence and collapsing an entire fenced block into a single inline <code> chip
     // (that had shipped to main via #25 and mangled two existing posts; fold-in fix here).
-    .replace(/`([^`\n]+)`/g, '<code class="text-accent-blue/90 bg-navy-light/40 px-1 rounded text-[0.9em]">$1</code>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong class="text-text-white">$1</strong>')
+    .replace(/`([^`\n]+)`/g, '<code class="text-amber-ink bg-line/40 px-1 rounded text-[0.9em]">$1</code>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong class="text-ink">$1</strong>')
     // Italic — single `*` NOT adjacent to another `*` and not spanning `<` (would swallow emitted
     // tags) or `\n` (kept single-line to match GFM). `<`-exclusion + running after code is what
     // keeps the two rules from interfering.
     .replace(/(^|[^*])\*([^\s*\n<][^*\n<]*?[^\s*\n<])\*(?!\*)/g, '$1<em class="italic">$2</em>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-accent-blue hover:underline">$1</a>')
-    .replace(/^- (.+)$/gm, '<li class="flex items-start gap-2 text-text-light text-sm"><span class="text-accent-blue mt-1 text-xs">&#9656;</span><span>$1</span></li>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-amber-ink hover:underline">$1</a>')
+    .replace(/^- (.+)$/gm, '<li class="flex items-start gap-2 text-slate text-sm"><span class="text-amber-ink mt-1 text-xs">&#9656;</span><span>$1</span></li>')
     .replace(/((?:<li[^]*?<\/li>\n?)+)/g, '<ul class="space-y-2 my-4">$1</ul>')
     // Paragraph wrap. Lines starting with an INLINE tag (<strong>, <em>, <a>, <code>) still need a
     // <p> wrapper — the previous version bailed out on any leading `<`, so bold-first paragraphs
@@ -190,20 +190,20 @@ function renderMarkdown(md: string): string {
     .replace(/(?:^|\n)(?!<(?:h[1-6]|ul|ol|li|table|thead|tbody|tr|td|th|div|p)\b)((?:.(?!\n\n))+.)/g, (match) => {
       const trimmed = match.trim()
       if (/^<(?:h[1-6]|ul|ol|li|table|thead|tbody|tr|td|th|div|p)\b/.test(trimmed)) return match
-      return `\n<p class="text-text-light leading-relaxed mb-4">${trimmed}</p>`
+      return `\n<p class="text-slate leading-relaxed mb-4">${trimmed}</p>`
     })
 }
 </script>
 
 <template>
-  <main class="pt-24 pb-16 bg-navy min-h-screen">
+  <main class="pt-24 pb-16 bg-paper min-h-screen">
     <article v-if="post" class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="mb-8">
-        <RouterLink to="/#blog" class="text-accent-blue text-sm hover:underline mb-4 inline-block">&larr; Back to blog</RouterLink>
-        <h1 class="text-3xl md:text-4xl font-bold text-text-white mb-4 font-heading leading-tight">
+        <RouterLink to="/#blog" class="text-amber-ink text-sm hover:underline mb-4 inline-block">&larr; Back to blog</RouterLink>
+        <h1 class="text-3xl md:text-4xl font-bold text-ink mb-4 font-heading leading-tight">
           {{ post.title }}
         </h1>
-        <div class="flex items-center gap-4 text-text-muted text-sm">
+        <div class="flex items-center gap-4 text-slate text-sm">
           <span>{{ post.author }}</span>
           <span>·</span>
           <time :datetime="post.date">{{ formatDate(post.date) }}</time>
@@ -216,12 +216,12 @@ function renderMarkdown(md: string): string {
 
       <div class="prose-eurobase" v-html="renderMarkdown(post.content)" />
 
-      <div v-if="post.references.length" class="mt-12 pt-8 border-t border-navy-light">
-        <h3 class="text-text-white font-bold text-lg font-heading mb-4">References</h3>
+      <div v-if="post.references.length" class="mt-12 pt-8 border-t border-line">
+        <h3 class="text-ink font-bold text-lg font-heading mb-4">References</h3>
         <ol class="space-y-2">
-          <li v-for="(ref, i) in post.references" :key="i" class="text-sm text-text-muted">
-            <span class="text-text-light mr-1">[{{ i + 1 }}]</span>
-            <a :href="ref.url" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline">
+          <li v-for="(ref, i) in post.references" :key="i" class="text-sm text-slate">
+            <span class="text-slate mr-1">[{{ i + 1 }}]</span>
+            <a :href="ref.url" target="_blank" rel="noopener noreferrer" class="text-amber-ink hover:underline">
               {{ ref.label }}
             </a>
           </li>
@@ -230,8 +230,8 @@ function renderMarkdown(md: string): string {
     </article>
 
     <div v-else class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-24">
-      <h1 class="text-2xl font-bold text-text-white mb-4">Post not found</h1>
-      <RouterLink to="/#blog" class="text-accent-blue hover:underline">Back to blog</RouterLink>
+      <h1 class="text-2xl font-bold text-ink mb-4">Post not found</h1>
+      <RouterLink to="/#blog" class="text-amber-ink hover:underline">Back to blog</RouterLink>
     </div>
   </main>
 </template>

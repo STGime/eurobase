@@ -95,7 +95,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <main class="pt-16 bg-navy min-h-screen">
+  <main class="pt-16 bg-paper min-h-screen">
     <FounderSection />
   </main>
 </template>

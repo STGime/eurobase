@@ -152,14 +152,14 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <main class="pt-24 pb-16 bg-navy min-h-screen">
+  <main class="pt-24 pb-16 bg-paper min-h-screen">
     <!-- Hero -->
     <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-      <RouterLink to="/" class="text-accent-blue text-sm hover:underline mb-6 inline-block">&larr; Back to home</RouterLink>
-      <h1 class="text-4xl md:text-5xl font-bold text-text-white mb-4 font-heading leading-tight">
+      <RouterLink to="/" class="text-amber-ink text-sm hover:underline mb-6 inline-block">&larr; Back to home</RouterLink>
+      <h1 class="text-4xl md:text-5xl font-bold text-ink mb-4 font-heading leading-tight">
         Frequently asked questions
       </h1>
-      <p class="text-xl text-accent-gold max-w-2xl">
+      <p class="text-xl text-amber-ink max-w-2xl">
         Sovereignty, GDPR, migrations, pricing, the closed beta — the answers most visitors ask before signing up.
       </p>
     </section>
@@ -170,26 +170,26 @@ onBeforeUnmount(() => {
         v-for="group in grouped"
         :key="group.category"
       >
-        <h2 class="text-2xl font-bold text-text-white mb-6 font-heading">{{ group.category }}</h2>
+        <h2 class="text-2xl font-bold text-ink mb-6 font-heading">{{ group.category }}</h2>
         <ul class="space-y-3">
           <li
             v-for="entry in group.entries"
             :key="entry.id"
             :id="entry.id"
-            class="bg-navy-card rounded-lg border border-navy-light overflow-hidden"
+            class="bg-mist rounded-lg border border-line overflow-hidden"
           >
             <button
               type="button"
-              class="w-full text-left px-5 py-4 flex items-start justify-between gap-4 hover:bg-navy-light/20 transition-colors cursor-pointer"
+              class="w-full text-left px-5 py-4 flex items-start justify-between gap-4 hover:bg-line/40 transition-colors cursor-pointer"
               :aria-expanded="!!open[entry.id]"
               :aria-controls="`ans-${entry.id}`"
               @click="toggle(entry.id)"
             >
-              <span class="text-text-white font-semibold text-base leading-snug">
+              <span class="text-ink font-semibold text-base leading-snug">
                 {{ entry.question }}
               </span>
               <span
-                class="text-accent-blue flex-shrink-0 mt-1 transition-transform"
+                class="text-amber-ink flex-shrink-0 mt-1 transition-transform"
                 :class="open[entry.id] ? 'rotate-180' : ''"
                 aria-hidden="true"
               >
@@ -199,7 +199,7 @@ onBeforeUnmount(() => {
             <div
               v-if="open[entry.id]"
               :id="`ans-${entry.id}`"
-              class="px-5 pb-5 pt-1 border-t border-navy-light/50 text-text-light text-sm leading-relaxed"
+              class="px-5 pb-5 pt-1 border-t border-line text-slate text-sm leading-relaxed"
               v-html="entry.answer"
             />
           </li>
@@ -209,16 +209,16 @@ onBeforeUnmount(() => {
 
     <!-- CTA -->
     <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-16">
-      <h2 class="text-3xl font-bold text-text-white mb-4 font-heading">Still have a question?</h2>
-      <p class="text-text-light mb-8 max-w-xl mx-auto">
-        The founder reads every reply. Ping <a href="mailto:founders@eurobase.app" class="text-accent-blue hover:underline">founders@eurobase.app</a>
+      <h2 class="text-3xl font-bold text-ink mb-4 font-heading">Still have a question?</h2>
+      <p class="text-slate mb-8 max-w-xl mx-auto">
+        The founder reads every reply. Ping <a href="mailto:founders@eurobase.app" class="text-amber-ink hover:underline">founders@eurobase.app</a>
         or request beta access below.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/#cta" class="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-accent-blue hover:bg-accent-blue-hover text-white font-semibold transition-colors">
+        <a href="/#cta" class="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-amber hover:bg-amber-hover text-ink font-semibold transition-colors">
           Get Started Free
         </a>
-        <a href="mailto:founders@eurobase.app" class="inline-flex items-center justify-center px-8 py-3 rounded-lg border border-navy-light text-text-light hover:text-text-white hover:border-text-muted transition-colors">
+        <a href="mailto:founders@eurobase.app" class="inline-flex items-center justify-center px-8 py-3 rounded-lg border border-line text-slate hover:text-ink hover:border-slate transition-colors">
           Talk to the Founders
         </a>
       </div>
