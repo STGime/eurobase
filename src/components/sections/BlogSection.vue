@@ -21,7 +21,7 @@ function formatDate(dateStr: string) {
 </script>
 
 <template>
-  <section id="blog" aria-labelledby="heading-blog" class="py-24 bg-navy" ref="elementRef">
+  <section id="blog" aria-labelledby="heading-blog" class="py-24 bg-paper" ref="elementRef">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center" :class="isVisible ? 'animate-fade-in-up' : 'opacity-0'">
         <SectionHeading
@@ -38,22 +38,22 @@ function formatDate(dateStr: string) {
           v-for="(post, i) in sortedPosts"
           :key="post.slug"
           :to="`/blog/${post.slug}`"
-          class="group bg-navy-card rounded-lg border border-navy-light overflow-hidden hover:border-accent-blue/50 transition-all duration-300 hover:shadow-lg hover:shadow-accent-blue/5"
+          class="group bg-paper rounded-lg border border-line shadow-sm overflow-hidden hover:border-amber/60 transition-all duration-300 hover:shadow-lg hover:shadow-amber/10"
           :class="isVisible ? `animate-fade-in-up stagger-${i + 1}` : 'opacity-0'"
         >
           <div class="p-6">
-            <div class="flex items-center gap-3 text-xs text-text-muted mb-3">
+            <div class="flex items-center gap-3 text-xs text-slate mb-3">
               <time :datetime="post.date">{{ formatDate(post.date) }}</time>
               <span>·</span>
               <span>{{ post.readTime }}</span>
             </div>
-            <h3 class="text-text-white font-bold text-lg font-heading mb-3 group-hover:text-accent-blue transition-colors leading-snug">
+            <h3 class="text-ink font-bold text-lg font-heading mb-3 group-hover:text-amber-ink transition-colors leading-snug">
               {{ post.title }}
             </h3>
-            <p class="text-text-muted text-sm leading-relaxed mb-4">
+            <p class="text-slate text-sm leading-relaxed mb-4">
               {{ post.excerpt }}
             </p>
-            <span class="text-accent-blue text-sm font-semibold group-hover:underline">
+            <span class="text-amber-ink text-sm font-semibold group-hover:underline">
               Read more &rarr;
             </span>
           </div>

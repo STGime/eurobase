@@ -82,28 +82,28 @@ onMounted(() => {
 
   const S = 32
   const landSprite = makeSprite(S, [
-    [0, 'rgba(121, 152, 181, 0.85)'],
-    [0.35, 'rgba(96, 125, 153, 0.32)'],
-    [1, 'rgba(96, 125, 153, 0)'],
+    [0, 'rgba(10, 25, 41, 0.6)'],
+    [0.35, 'rgba(10, 25, 41, 0.18)'],
+    [1, 'rgba(10, 25, 41, 0)'],
   ])
   const europeHalo = makeSprite(S, [
-    [0, 'rgba(255, 179, 0, 0.09)'],
-    [0.5, 'rgba(255, 179, 0, 0.04)'],
+    [0, 'rgba(255, 179, 0, 0.1)'],
+    [0.5, 'rgba(255, 179, 0, 0.05)'],
     [1, 'rgba(255, 179, 0, 0)'],
   ])
   const europeCore = makeSprite(S, [
-    [0, 'rgba(255, 224, 130, 0.9)'],
-    [0.35, 'rgba(255, 179, 0, 0.4)'],
+    [0, 'rgba(255, 160, 0, 0.95)'],
+    [0.35, 'rgba(255, 143, 0, 0.45)'],
     [1, 'rgba(255, 143, 0, 0)'],
   ])
   const citySprite = makeSprite(S, [
-    [0, 'rgba(227, 242, 253, 0.95)'],
-    [0.25, 'rgba(100, 181, 246, 0.5)'],
-    [1, 'rgba(100, 181, 246, 0)'],
+    [0, 'rgba(10, 25, 41, 0.95)'],
+    [0.25, 'rgba(42, 63, 84, 0.5)'],
+    [1, 'rgba(42, 63, 84, 0)'],
   ])
   const hubSprite = makeSprite(S, [
-    [0, 'rgba(255, 236, 179, 1)'],
-    [0.3, 'rgba(255, 179, 0, 0.6)'],
+    [0, 'rgba(255, 143, 0, 1)'],
+    [0.3, 'rgba(255, 179, 0, 0.65)'],
     [1, 'rgba(255, 179, 0, 0)'],
   ])
 
@@ -176,9 +176,9 @@ onMounted(() => {
 
     // atmosphere halo
     const atmo = ctx.createRadialGradient(cx * dpr, cy * dpr, r * 0.9 * dpr, cx * dpr, cy * dpr, r * 1.25 * dpr)
-    atmo.addColorStop(0, 'rgba(21, 101, 192, 0.28)')
-    atmo.addColorStop(0.55, 'rgba(21, 101, 192, 0.08)')
-    atmo.addColorStop(1, 'rgba(21, 101, 192, 0)')
+    atmo.addColorStop(0, 'rgba(255, 179, 0, 0.22)')
+    atmo.addColorStop(0.55, 'rgba(255, 179, 0, 0.07)')
+    atmo.addColorStop(1, 'rgba(255, 179, 0, 0)')
     ctx.fillStyle = atmo
     ctx.beginPath()
     ctx.arc(cx * dpr, cy * dpr, r * 1.25 * dpr, 0, Math.PI * 2)
@@ -193,16 +193,20 @@ onMounted(() => {
       cy * dpr,
       r * 1.05 * dpr,
     )
-    body.addColorStop(0, '#16324e')
-    body.addColorStop(0.55, '#0d2137')
-    body.addColorStop(1, '#081627')
+    body.addColorStop(0, '#ffffff')
+    body.addColorStop(0.55, '#f0f3f7')
+    body.addColorStop(1, '#e3e8ef')
     ctx.fillStyle = body
     ctx.beginPath()
     ctx.arc(cx * dpr, cy * dpr, r * dpr, 0, Math.PI * 2)
     ctx.fill()
 
-    // dots are additive so the Europe halos accumulate into a continent-wide glow
-    ctx.globalCompositeOperation = 'lighter'
+    // Daylight inversion: dots composite with normal alpha ('lighter'
+    // was right on the dark sphere, but additive blending on a pale
+    // sphere washes everything toward white — ink dots would vanish).
+    // Overlapping low-alpha amber halos still accumulate into the
+    // continent-wide Europe glow under source-over.
+    ctx.globalCompositeOperation = 'source-over'
     drawLayer(land, rot, cx, cy, r, landSprite, 3.4)
     // Halo is what makes Europe read as "glowing", but too large a base
     // size means each dot's soft edge bleeds past its country polygon
@@ -217,8 +221,8 @@ onMounted(() => {
     ctx.globalCompositeOperation = 'source-over'
     ctx.globalAlpha = 1
     const rim = ctx.createRadialGradient(cx * dpr, cy * dpr, r * 0.82 * dpr, cx * dpr, cy * dpr, r * dpr)
-    rim.addColorStop(0, 'rgba(8, 22, 39, 0)')
-    rim.addColorStop(1, 'rgba(8, 22, 39, 0.55)')
+    rim.addColorStop(0, 'rgba(10, 25, 41, 0)')
+    rim.addColorStop(1, 'rgba(10, 25, 41, 0.12)')
     ctx.fillStyle = rim
     ctx.beginPath()
     ctx.arc(cx * dpr, cy * dpr, r * dpr, 0, Math.PI * 2)
@@ -281,7 +285,7 @@ onBeforeUnmount(() => cleanup?.())
 </script>
 
 <template>
-  <div class="relative w-[420px] h-[420px] max-w-full" role="img" aria-label="Rotating globe with Europe glowing in gold and major world cities shown as bright dots">
+  <div class="relative w-[420px] h-[420px] max-w-full" role="img" aria-label="Rotating globe with Europe glowing in amber and major world cities shown as dark dots">
     <canvas ref="canvasRef" class="w-full h-full block" />
   </div>
 </template>

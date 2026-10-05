@@ -40,13 +40,16 @@ watch(isVisible, (visible) => {
 <template>
   <div
     ref="elementRef"
-    class="relative rounded-lg bg-navy-card overflow-hidden p-6"
+    class="relative rounded-lg bg-paper border border-line shadow-sm overflow-hidden p-6"
   >
-    <div class="absolute top-0 left-0 w-full h-1" :style="{ backgroundColor: color }" />
-    <p class="text-4xl md:text-5xl font-bold font-heading mb-2" :style="{ color }">
+    <!-- Daylight: strip is always amber — the per-stat accent colors
+         (red/purple/blue/...) were retired with the light redesign.
+         The `color` prop stays in the data layer untouched. -->
+    <div class="absolute top-0 left-0 w-full h-1 bg-amber" />
+    <p class="text-4xl md:text-5xl font-bold font-heading mb-2 text-ink">
       {{ displayValue }}
     </p>
-    <p class="text-text-light text-sm">{{ label }}<sup v-if="footnote" class="text-text-muted ml-0.5 text-[10px]">[{{ footnote }}]</sup></p>
-    <p v-if="detail" class="text-xs font-semibold mt-2 text-accent-green">{{ detail }}</p>
+    <p class="text-slate text-sm">{{ label }}<sup v-if="footnote" class="text-slate/70 ml-0.5 text-[10px]">[{{ footnote }}]</sup></p>
+    <p v-if="detail" class="text-xs font-semibold mt-2 text-green-ink">{{ detail }}</p>
   </div>
 </template>

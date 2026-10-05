@@ -13,13 +13,13 @@ const headingId = computed(() => props.id || props.heading.toLowerCase().replace
 
 <template>
   <header class="mb-12 max-w-3xl">
-    <p v-if="subtitle" class="text-accent-gold font-semibold text-sm uppercase tracking-wider mb-3">
+    <p v-if="subtitle" class="text-amber-ink font-semibold text-sm uppercase tracking-wider mb-3">
       {{ subtitle }}
     </p>
-    <h2 :id="headingId" class="text-3xl md:text-4xl font-bold text-text-white mb-4 font-heading">
+    <h2 :id="headingId" class="text-3xl md:text-4xl font-bold text-ink mb-4 font-heading">
       {{ heading }}
     </h2>
-    <p v-if="description" class="text-text-muted text-lg leading-relaxed">
+    <p v-if="description" class="text-slate text-lg leading-relaxed">
       {{ description }}
     </p>
   </header>

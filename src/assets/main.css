@@ -1,6 +1,26 @@
 @import "tailwindcss";
 
 @theme {
+  /* ── Daylight palette (2026-10 redesign) ─────────────────────────
+     The logo defines it: ink #0A1929 ("euro") + amber #FFB300
+     ("base") on white. Light surfaces below; amber is the single
+     accent and is NEVER used as text on light surfaces (1.8:1) —
+     text-size accents use amber-ink (4.6:1 AA). Green/red are
+     reserved for status and use the -ink variants on light ground.
+     The legacy navy/accent tokens further down stay until the inner
+     pages are converted (PR 2 of the redesign); do not add new
+     usages of them. */
+  --color-paper: #FFFFFF;
+  --color-mist: #F5F7FA;
+  --color-line: #E3E8EF;
+  --color-ink: #0A1929;
+  --color-amber: #FFB300;
+  --color-amber-hover: #E6A100;
+  --color-amber-ink: #A66800;
+  --color-slate: #4A5A6A;
+  --color-green-ink: #1B7A3D;
+  --color-red-ink: #B3261E;
+
   --color-navy: #0A1929;
   --color-navy-card: #0D2137;
   --color-navy-light: #132F4C;

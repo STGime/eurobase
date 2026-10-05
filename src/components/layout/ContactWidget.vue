@@ -181,7 +181,7 @@ onBeforeUnmount(() => {
     v-show="!open"
     type="button"
     aria-label="Contact us"
-    class="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 rounded-full bg-accent-blue px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-black/30 hover:bg-accent-blue/90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
+    class="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 rounded-full bg-amber px-5 py-3 text-sm font-semibold text-ink shadow-lg shadow-ink/20 hover:bg-amber-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-ink focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
     @click="openWidget"
   >
     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true">
@@ -200,22 +200,22 @@ onBeforeUnmount(() => {
     aria-modal="true"
     aria-labelledby="contact-widget-title"
   >
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" @click="closeWidget"></div>
+    <div class="absolute inset-0 bg-ink/40 backdrop-blur-sm" @click="closeWidget"></div>
 
-    <div class="relative w-full max-w-sm rounded-2xl bg-navy-light border border-white/10 shadow-2xl p-5 space-y-4">
+    <div class="relative w-full max-w-sm rounded-2xl bg-paper border border-line shadow-2xl shadow-ink/10 p-5 space-y-4">
       <div class="flex items-start justify-between gap-3">
         <div>
-          <h2 id="contact-widget-title" class="text-lg font-semibold text-text-white font-heading">
+          <h2 id="contact-widget-title" class="text-lg font-semibold text-ink font-heading">
             Send us a message
           </h2>
-          <p class="mt-1 text-xs text-text-light/70">
+          <p class="mt-1 text-xs text-slate">
             Questions, feedback, procurement — we read every one.
           </p>
         </div>
         <button
           type="button"
           aria-label="Close"
-          class="rounded-md p-1 text-text-light/60 hover:text-text-white hover:bg-white/5 transition-colors"
+          class="rounded-md p-1 text-slate hover:text-ink hover:bg-ink/5 transition-colors"
           @click="closeWidget"
         >
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
@@ -227,11 +227,11 @@ onBeforeUnmount(() => {
       <!-- Success state -->
       <div
         v-if="submitted"
-        class="rounded-lg border border-emerald-500/40 bg-emerald-500/10 p-4 text-sm text-emerald-200"
+        class="rounded-lg border border-green-ink/30 bg-green-ink/5 p-4 text-sm text-green-ink"
         role="status"
       >
         <p class="font-medium">Message sent — thanks.</p>
-        <p class="mt-1 text-emerald-200/80">
+        <p class="mt-1 text-green-ink/80">
           We'll get back to you at the email you provided.
         </p>
       </div>
@@ -239,8 +239,8 @@ onBeforeUnmount(() => {
       <!-- Form -->
       <form v-else class="space-y-3" @submit="submit" novalidate>
         <div>
-          <label for="cw-name" class="block text-xs font-medium text-text-light/80 mb-1">
-            Name <span class="text-text-light/40 font-normal">(optional)</span>
+          <label for="cw-name" class="block text-xs font-medium text-slate mb-1">
+            Name <span class="text-slate/60 font-normal">(optional)</span>
           </label>
           <input
             id="cw-name"
@@ -248,12 +248,12 @@ onBeforeUnmount(() => {
             type="text"
             maxlength="200"
             autocomplete="name"
-            class="w-full rounded-lg border border-white/10 bg-navy px-3 py-2 text-sm text-text-white placeholder:text-text-light/40 focus:border-accent-blue focus:outline-none focus:ring-1 focus:ring-accent-blue/50"
+            class="w-full rounded-lg border border-line bg-paper px-3 py-2 text-sm text-ink placeholder:text-slate/50 focus:border-amber-ink focus:outline-none focus:ring-1 focus:ring-amber-ink/50"
           />
         </div>
 
         <div>
-          <label for="cw-email" class="block text-xs font-medium text-text-light/80 mb-1">
+          <label for="cw-email" class="block text-xs font-medium text-slate mb-1">
             Email
           </label>
           <input
@@ -265,12 +265,12 @@ onBeforeUnmount(() => {
             maxlength="254"
             autocomplete="email"
             placeholder="you@company.eu"
-            class="w-full rounded-lg border border-white/10 bg-navy px-3 py-2 text-sm text-text-white placeholder:text-text-light/40 focus:border-accent-blue focus:outline-none focus:ring-1 focus:ring-accent-blue/50"
+            class="w-full rounded-lg border border-line bg-paper px-3 py-2 text-sm text-ink placeholder:text-slate/50 focus:border-amber-ink focus:outline-none focus:ring-1 focus:ring-amber-ink/50"
           />
         </div>
 
         <div>
-          <label for="cw-message" class="block text-xs font-medium text-text-light/80 mb-1">
+          <label for="cw-message" class="block text-xs font-medium text-slate mb-1">
             Message
           </label>
           <textarea
@@ -280,31 +280,31 @@ onBeforeUnmount(() => {
             rows="4"
             maxlength="5000"
             placeholder="What's on your mind?"
-            class="w-full rounded-lg border border-white/10 bg-navy px-3 py-2 text-sm text-text-white placeholder:text-text-light/40 focus:border-accent-blue focus:outline-none focus:ring-1 focus:ring-accent-blue/50 resize-none"
+            class="w-full rounded-lg border border-line bg-paper px-3 py-2 text-sm text-ink placeholder:text-slate/50 focus:border-amber-ink focus:outline-none focus:ring-1 focus:ring-amber-ink/50 resize-none"
           ></textarea>
-          <p class="mt-1 text-[10px] text-text-light/40 text-right">
+          <p class="mt-1 text-[10px] text-slate/60 text-right">
             {{ message.length }} / 5000
           </p>
         </div>
 
-        <p v-if="errorMsg" class="text-xs text-red-400" role="alert">
+        <p v-if="errorMsg" class="text-xs text-red-ink" role="alert">
           {{ errorMsg }}
         </p>
 
         <div class="flex items-center justify-between gap-3 pt-1">
-          <p class="text-[10px] text-text-light/50 leading-tight">
+          <p class="text-[10px] text-slate/80 leading-tight">
             By sending you accept our
             <a
               href="/privacy"
               target="_blank"
               rel="noopener"
-              class="underline hover:text-text-light/80"
+              class="underline hover:text-ink"
             >privacy notice</a>.
           </p>
           <button
             type="submit"
             :disabled="submitting"
-            class="inline-flex items-center gap-2 rounded-lg bg-accent-blue px-4 py-2 text-sm font-medium text-white hover:bg-accent-blue/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:ring-offset-2 focus-visible:ring-offset-navy-light"
+            class="inline-flex items-center gap-2 rounded-lg bg-amber px-4 py-2 text-sm font-medium text-ink hover:bg-amber-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-ink focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
           >
             <svg
               v-if="submitting"

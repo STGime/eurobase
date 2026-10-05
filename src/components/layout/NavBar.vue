@@ -44,12 +44,12 @@ function closeMobileMenu() {
   <nav
     aria-label="Main navigation"
     class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-    :class="y > 50 ? 'bg-navy/95 backdrop-blur-md shadow-lg shadow-black/20' : 'bg-transparent'"
+    :class="y > 50 ? 'bg-paper/95 backdrop-blur-md border-b border-line shadow-sm' : 'bg-paper border-b border-line'"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-[var(--nav-h)]">
         <a href="#" class="inline-block" @click.prevent="handleLogoClick">
-          <span class="text-xl font-bold text-text-white font-heading">euro</span><span class="text-xl font-bold text-accent-gold font-heading">base</span>
+          <span class="text-xl font-bold text-ink font-heading">euro</span><span class="text-xl font-bold text-amber font-heading">base</span>
         </a>
 
         <div class="hidden md:flex items-center gap-8">
@@ -57,7 +57,7 @@ function closeMobileMenu() {
             v-for="link in nav.links"
             :key="link.href"
             :href="link.href"
-            class="text-sm text-text-muted hover:text-text-white transition-colors"
+            class="text-sm text-slate hover:text-ink transition-colors"
             @click.prevent="handleNav(link.href)"
           >
             {{ link.label }}
@@ -66,7 +66,7 @@ function closeMobileMenu() {
             href="https://console.eurobase.app/login"
             target="_blank"
             rel="noopener"
-            class="text-sm font-medium text-text-muted hover:text-text-white transition-colors"
+            class="text-sm font-medium text-slate hover:text-ink transition-colors"
           >
             Sign in
           </a>
@@ -74,14 +74,14 @@ function closeMobileMenu() {
             href="https://console.eurobase.app/login?signup=1"
             target="_blank"
             rel="noopener"
-            class="inline-flex items-center justify-center px-6 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-accent-blue text-white hover:bg-accent-blue-hover shadow-lg shadow-accent-blue/25"
+            class="inline-flex items-center justify-center px-6 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-amber text-ink hover:bg-amber-hover shadow-lg shadow-amber/30"
           >
             Sign up free
           </a>
         </div>
 
         <button
-          class="md:hidden text-text-light p-2"
+          class="md:hidden text-ink p-2"
           @click="mobileMenuOpen = !mobileMenuOpen"
           aria-label="Toggle menu"
         >
@@ -103,13 +103,13 @@ function closeMobileMenu() {
       leave-from-class="opacity-100 translate-y-0"
       leave-to-class="opacity-0 -translate-y-2"
     >
-      <div v-if="mobileMenuOpen" class="md:hidden bg-navy-card border-t border-navy-light">
+      <div v-if="mobileMenuOpen" class="md:hidden bg-paper border-t border-line shadow-lg shadow-ink/5">
         <div class="px-4 py-4 space-y-3">
           <a
             v-for="link in nav.links"
             :key="link.href"
             :href="link.href"
-            class="block text-sm text-text-muted hover:text-text-white transition-colors py-2"
+            class="block text-sm text-slate hover:text-ink transition-colors py-2"
             @click.prevent="handleNav(link.href)"
           >
             {{ link.label }}
@@ -118,7 +118,7 @@ function closeMobileMenu() {
             href="https://console.eurobase.app/login"
             target="_blank"
             rel="noopener"
-            class="w-full text-center mt-3 inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer border border-navy-light text-text-white hover:bg-navy-light"
+            class="w-full text-center mt-3 inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer border border-line text-ink hover:bg-mist"
             @click="closeMobileMenu"
           >
             Sign in
@@ -127,7 +127,7 @@ function closeMobileMenu() {
             href="https://console.eurobase.app/login?signup=1"
             target="_blank"
             rel="noopener"
-            class="w-full text-center inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-accent-blue text-white hover:bg-accent-blue-hover shadow-lg shadow-accent-blue/25"
+            class="w-full text-center inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-amber text-ink hover:bg-amber-hover shadow-lg shadow-amber/30"
             @click="closeMobileMenu"
           >
             Sign up free

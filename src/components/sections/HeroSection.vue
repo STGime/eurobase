@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { hero } from '@/data/content'
 import HeroGlobe from '@/components/HeroGlobe.vue'
-import heroImage from '@/assets/images/hero-network.webp'
 </script>
 
 <template>
@@ -9,12 +8,12 @@ import heroImage from '@/assets/images/hero-network.webp'
        vertically centering content, which left large dark padding between the CTA row
        and the next section on tall displays. Inner div's py-32 keeps the hero visually
        generous without wasting viewport. -->
-  <section id="hero" aria-labelledby="hero-heading" class="relative overflow-hidden">
-    <!-- Background gradient -->
-    <div class="absolute inset-0 bg-gradient-to-br from-navy via-navy to-accent-blue/10" />
-    <img :src="heroImage" alt="Abstract network visualization representing European backend infrastructure" class="absolute inset-0 w-full h-full object-cover opacity-15 mix-blend-lighten" loading="eager" />
-    <div class="absolute top-1/4 right-0 w-96 h-96 bg-accent-blue/5 rounded-full blur-3xl" />
-    <div class="absolute bottom-0 left-1/4 w-64 h-64 bg-accent-gold/5 rounded-full blur-3xl" />
+  <section id="hero" aria-labelledby="hero-heading" class="relative overflow-hidden bg-paper">
+    <!-- Light ground + a faint amber radial wash behind the globe column.
+         Replaces the dark navy gradient + hero-network.webp underlay of
+         the pre-Daylight design. -->
+    <div class="absolute inset-0 bg-paper" />
+    <div class="absolute inset-0" style="background: radial-gradient(640px 360px at 82% 12%, rgba(255, 179, 0, 0.10), transparent 65%)" />
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 w-full">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -48,16 +47,16 @@ import heroImage from '@/assets/images/hero-network.webp'
                Same line permeates every marketing surface (comparison
                pages, blog canonical intros, /vs/*). Say it a hundred
                times. -->
-          <p class="text-accent-gold font-semibold text-sm uppercase tracking-wider mb-4 animate-fade-in-up">
+          <p class="text-amber-ink font-semibold text-sm uppercase tracking-wider mb-4 animate-fade-in-up">
             ⚠️ Firebase / Supabase EU region is not GDPR-safe
           </p>
-          <h1 id="hero-heading" class="text-4xl md:text-5xl lg:text-6xl font-bold text-text-white leading-tight mb-6 font-heading animate-fade-in-up stagger-1">
+          <h1 id="hero-heading" class="text-4xl md:text-5xl lg:text-6xl font-bold text-ink leading-tight mb-6 font-heading animate-fade-in-up stagger-1">
             {{ hero.headline }}
           </h1>
-          <p class="text-lg text-text-light leading-relaxed mb-4 animate-fade-in-up stagger-2">
+          <p class="text-lg text-slate leading-relaxed mb-4 animate-fade-in-up stagger-2">
             {{ hero.subheadline }}
           </p>
-          <p class="text-accent-gold font-medium mb-6 animate-fade-in-up stagger-3">
+          <p class="text-amber-ink font-medium mb-6 animate-fade-in-up stagger-3">
             {{ hero.tagline }}
           </p>
           <!-- Hero "what's actually new" pill. DSAR is no longer the
@@ -71,12 +70,12 @@ import heroImage from '@/assets/images/hero-network.webp'
           <p class="mb-8 animate-fade-in-up stagger-3">
             <RouterLink
               to="/security#de-legaltech"
-              class="inline-flex items-center gap-2 text-sm font-semibold text-text-white bg-accent-green/15 hover:bg-accent-green/25 border border-accent-green/40 rounded-full px-4 py-2 transition-colors"
+              class="inline-flex items-center gap-2 text-sm font-semibold text-ink bg-green-ink/5 hover:bg-green-ink/10 border border-green-ink/30 rounded-full px-4 py-2 transition-colors"
             >
-              <span class="text-accent-green">New</span>
-              <span class="text-text-light">·</span>
+              <span class="text-green-ink">New</span>
+              <span class="text-slate">·</span>
               <span>Legal Team tier — §50 BRAO / §257 HGB / §147 AO retention, closed beta for German legal-tech.</span>
-              <span class="text-accent-green">→</span>
+              <span class="text-green-ink">→</span>
             </RouterLink>
           </p>
           <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up stagger-4">
@@ -84,7 +83,7 @@ import heroImage from '@/assets/images/hero-network.webp'
               href="https://console.eurobase.app/login?signup=1"
               target="_blank"
               rel="noopener"
-              class="inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-accent-blue text-white hover:bg-accent-blue-hover shadow-lg shadow-accent-blue/25"
+              class="inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-amber text-ink hover:bg-amber-hover shadow-lg shadow-amber/30"
             >
               {{ hero.primaryCta }}
             </a>
@@ -98,20 +97,20 @@ import heroImage from '@/assets/images/hero-network.webp'
                /gdpr-readiness (backend-level 10-question quiz, 3 minutes)
                answer the two adjacent questions that come up before a
                procurement conversation, so they sit next to each other. -->
-          <p class="mt-4 text-sm text-text-light/80 animate-fade-in-up stagger-4">
+          <p class="mt-4 text-sm text-slate animate-fade-in-up stagger-4">
             Not ready to sign up? Try a free check first:
             <RouterLink
               to="/sovereignty-check"
-              class="text-accent-blue hover:text-accent-blue/80 font-medium underline underline-offset-4 decoration-accent-blue/40 hover:decoration-accent-blue/70 transition-colors"
+              class="text-amber-ink hover:text-ink font-medium underline underline-offset-4 decoration-amber/60 hover:decoration-amber transition-colors"
             >
               Which of your vendors can a US authority legally reach?
             </RouterLink>
             (60 seconds), or
             <RouterLink
               to="/gdpr-readiness"
-              class="text-accent-blue hover:text-accent-blue/80 font-medium underline underline-offset-4 decoration-accent-blue/40 hover:decoration-accent-blue/70 transition-colors"
+              class="text-amber-ink hover:text-ink font-medium underline underline-offset-4 decoration-amber/60 hover:decoration-amber transition-colors"
             >
-              score your backend's GDPR posture
+              score your backend's GDPR exposure
             </RouterLink>
             (3 minutes, 10 questions). No email required either way.
           </p>
@@ -126,25 +125,25 @@ import heroImage from '@/assets/images/hero-network.webp'
           <div class="relative w-[420px] h-[420px] max-w-full">
             <HeroGlobe />
             <!-- 0° top -->
-            <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-yellow/30 text-[11px] text-accent-yellow whitespace-nowrap" style="top: -6%; left: 50%; transform: translateX(-50%)">🔐 Auth</div>
+            <div class="absolute px-2.5 py-1 bg-paper rounded-full border border-line shadow-sm text-[11px] font-medium text-ink whitespace-nowrap" style="top: -6%; left: 50%; transform: translateX(-50%)">🔐 Auth</div>
             <!-- ~51° -->
-            <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-blue/30 text-[11px] text-accent-blue whitespace-nowrap" style="top: 12%; right: -8%">🗄️ Database</div>
+            <div class="absolute px-2.5 py-1 bg-paper rounded-full border border-line shadow-sm text-[11px] font-medium text-ink whitespace-nowrap" style="top: 12%; right: -8%">🗄️ Database</div>
             <!-- ~103° -->
-            <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-green/30 text-[11px] text-accent-green whitespace-nowrap" style="top: 50%; right: -14%; transform: translateY(-50%)">📦 Storage</div>
+            <div class="absolute px-2.5 py-1 bg-paper rounded-full border border-line shadow-sm text-[11px] font-medium text-ink whitespace-nowrap" style="top: 50%; right: -14%; transform: translateY(-50%)">📦 Storage</div>
             <!-- ~154° -->
-            <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-purple/30 text-[11px] text-accent-purple whitespace-nowrap" style="bottom: 6%; right: -4%">🧩 Realtime</div>
+            <div class="absolute px-2.5 py-1 bg-paper rounded-full border border-line shadow-sm text-[11px] font-medium text-ink whitespace-nowrap" style="bottom: 6%; right: -4%">🧩 Realtime</div>
             <!-- ~206° -->
-            <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-orange/30 text-[11px] text-accent-orange whitespace-nowrap" style="bottom: 6%; left: -4%">🔧 Functions</div>
+            <div class="absolute px-2.5 py-1 bg-paper rounded-full border border-line shadow-sm text-[11px] font-medium text-ink whitespace-nowrap" style="bottom: 6%; left: -4%">🔧 Functions</div>
             <!-- ~257° -->
-            <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-dark-red/30 text-[11px] text-accent-dark-red whitespace-nowrap" style="top: 50%; left: -14%; transform: translateY(-50%)">📜 Logging</div>
+            <div class="absolute px-2.5 py-1 bg-paper rounded-full border border-line shadow-sm text-[11px] font-medium text-ink whitespace-nowrap" style="top: 50%; left: -14%; transform: translateY(-50%)">📜 Logging</div>
             <!-- ~309° -->
-            <div class="absolute px-2.5 py-1 bg-navy-card rounded-full border border-accent-teal/30 text-[11px] text-accent-teal whitespace-nowrap" style="top: 12%; left: -8%">🖥️ Dashboard</div>
+            <div class="absolute px-2.5 py-1 bg-paper rounded-full border border-line shadow-sm text-[11px] font-medium text-ink whitespace-nowrap" style="top: 12%; left: -8%">🖥️ Dashboard</div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Gold accent line at top -->
-    <div class="absolute top-0 left-0 right-0 h-1 bg-accent-gold" />
+    <div class="absolute top-0 left-0 right-0 h-1 bg-amber" />
   </section>
 </template>

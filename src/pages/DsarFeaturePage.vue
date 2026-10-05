@@ -2,7 +2,6 @@
 import { onMounted, onBeforeUnmount } from 'vue'
 import { dsar } from '@/data/content'
 import StatCard from '@/components/ui/StatCard.vue'
-import AccentCard from '@/components/ui/AccentCard.vue'
 
 const SITE_ORIGIN = 'https://eurobase.app'
 const PAGE_URL = `${SITE_ORIGIN}/features/dsar`
@@ -212,20 +211,22 @@ onBeforeUnmount(() => {
       </div>
       <p class="text-text-muted mb-6 max-w-3xl">{{ dsar.solution.description }}</p>
       <div class="grid md:grid-cols-2 gap-5">
-        <AccentCard
+        <!-- Inlined dark card (was AccentCard) — AccentCard went light in
+             the Daylight redesign; this page converts in redesign PR 2. -->
+        <div
           v-for="bullet in dsar.solution.bullets"
           :key="bullet.title"
-          accent-color="#1565C0"
-          accent-position="left"
+          class="relative rounded-lg bg-navy-card overflow-hidden"
         >
-          <div class="flex gap-3">
+          <div class="absolute left-0 top-0 w-1 h-full bg-accent-blue" />
+          <div class="p-6 flex gap-3">
             <span class="text-accent-blue text-lg leading-none mt-0.5">✓</span>
             <div>
               <p class="text-text-white font-semibold mb-1">{{ bullet.title }}</p>
               <p class="text-text-muted text-sm leading-relaxed">{{ bullet.body }}</p>
             </div>
           </div>
-        </AccentCard>
+        </div>
       </div>
     </section>
 

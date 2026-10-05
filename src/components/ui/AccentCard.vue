@@ -6,7 +6,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="relative rounded-lg bg-navy-card overflow-hidden">
+  <div class="relative rounded-lg bg-paper border border-line shadow-sm overflow-hidden">
     <div
       v-if="accentColor"
       class="absolute"
