@@ -8,7 +8,7 @@ const { elementRef, isVisible } = useScrollReveal()
 </script>
 
 <template>
-  <section id="differentiators" aria-labelledby="heading-differentiators" class="py-24 bg-navy" ref="elementRef">
+  <section id="differentiators" aria-labelledby="heading-differentiators" class="py-24 bg-paper" ref="elementRef">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="mb-12" :class="isVisible ? 'animate-fade-in-up' : 'opacity-0'">
         <SectionHeading
@@ -22,12 +22,12 @@ const { elementRef, isVisible } = useScrollReveal()
         <AccentCard
           v-for="(item, i) in differentiators.items"
           :key="item.title"
-          :accent-color="item.color"
+          accent-color="#FFB300"
           accent-position="top"
           :class="isVisible ? `animate-fade-in-up stagger-${i + 1}` : 'opacity-0'"
         >
-          <h3 class="text-text-white font-bold text-sm mb-2 font-heading">{{ item.title }}</h3>
-          <p class="text-text-muted text-xs leading-relaxed">{{ item.description }}</p>
+          <h3 class="text-ink font-bold text-sm mb-2 font-heading">{{ item.title }}</h3>
+          <p class="text-slate text-xs leading-relaxed">{{ item.description }}</p>
         </AccentCard>
       </div>
     </div>

@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <footer aria-label="Site footer" class="bg-navy-footer border-t border-navy-light">
+  <footer aria-label="Site footer" class="bg-ink border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
         <div class="md:col-span-1">
@@ -13,7 +13,7 @@
             The sovereign backend platform for Europe. Built with privacy and compliance at the core.
           </p>
           <div class="mt-4 flex items-center gap-2">
-            <span class="text-xs bg-accent-blue/20 text-accent-blue px-2 py-1 rounded">EU-Native</span>
+            <span class="text-xs bg-white/10 text-text-light px-2 py-1 rounded">EU-Native</span>
             <span class="text-xs bg-accent-gold/20 text-accent-gold px-2 py-1 rounded">GDPR-Ready</span>
           </div>
         </div>

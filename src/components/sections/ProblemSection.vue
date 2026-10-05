@@ -9,7 +9,7 @@ const { elementRef, isVisible } = useScrollReveal()
 </script>
 
 <template>
-  <section id="problem" aria-labelledby="heading-problem" class="py-24 bg-navy" ref="elementRef">
+  <section id="problem" aria-labelledby="heading-problem" class="py-24 bg-paper" ref="elementRef">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div :class="isVisible ? 'animate-fade-in-up' : 'opacity-0'">
         <SectionHeading
@@ -33,20 +33,20 @@ const { elementRef, isVisible } = useScrollReveal()
       </div>
 
       <div
-        class="rounded-xl bg-navy-card border border-white/10 p-6 md:p-8 mb-10"
+        class="rounded-xl bg-paper border border-line shadow-sm p-6 md:p-8 mb-10"
         :class="isVisible ? 'animate-fade-in-up stagger-5' : 'opacity-0'"
       >
-        <p class="text-sm font-semibold uppercase tracking-wide text-accent-yellow mb-4">
+        <p class="text-sm font-semibold uppercase tracking-wide text-amber-ink mb-4">
           Foreign jurisdiction is not theoretical — 2025 made that clear
         </p>
         <div class="grid md:grid-cols-2 gap-6">
           <div v-for="(r, i) in problem.receipts" :key="i" class="flex gap-3">
-            <span class="text-accent-yellow text-xl leading-none mt-0.5">▸</span>
+            <span class="text-amber-ink text-xl leading-none mt-0.5">▸</span>
             <div>
-              <p class="text-text-white font-semibold mb-1">
-                {{ r.title }}<sup v-if="r.footnote" class="text-text-muted ml-0.5 text-[10px]">[{{ r.footnote }}]</sup>
+              <p class="text-ink font-semibold mb-1">
+                {{ r.title }}<sup v-if="r.footnote" class="text-slate/70 ml-0.5 text-[10px]">[{{ r.footnote }}]</sup>
               </p>
-              <p class="text-text-light text-sm leading-relaxed">{{ r.body }}</p>
+              <p class="text-slate text-sm leading-relaxed">{{ r.body }}</p>
             </div>
           </div>
         </div>
@@ -63,10 +63,10 @@ const { elementRef, isVisible } = useScrollReveal()
           <div class="flex items-start gap-3">
             <span class="text-2xl leading-none mt-0.5" aria-hidden="true">{{ point.icon }}</span>
             <div>
-              <p class="text-text-white font-semibold mb-2">
-                {{ point.title }}<sup v-if="point.footnote" class="text-text-muted ml-0.5 text-[10px]">[{{ point.footnote }}]</sup>
+              <p class="text-ink font-semibold mb-2">
+                {{ point.title }}<sup v-if="point.footnote" class="text-slate/70 ml-0.5 text-[10px]">[{{ point.footnote }}]</sup>
               </p>
-              <p class="text-text-light text-sm leading-relaxed">{{ point.text }}</p>
+              <p class="text-slate text-sm leading-relaxed">{{ point.text }}</p>
             </div>
           </div>
         </AccentCard>
@@ -77,33 +77,33 @@ const { elementRef, isVisible } = useScrollReveal()
         accent-position="left"
         :class="isVisible ? 'animate-fade-in-up stagger-4' : 'opacity-0'"
       >
-        <p class="text-text-muted mb-4">Every European team hits the same trade-off:</p>
+        <p class="text-slate mb-4">Every European team hits the same trade-off:</p>
         <div class="grid md:grid-cols-2 gap-4 mb-6">
           <div v-for="(option, i) in problem.tradeoff" :key="i" class="flex items-start gap-3">
-            <span class="text-accent-red text-lg mt-0.5">{{ i === 0 ? '⚡' : '🛡️' }}</span>
-            <p class="text-text-light">{{ option }}</p>
+            <span class="text-red-ink text-lg mt-0.5">{{ i === 0 ? '⚡' : '🛡️' }}</span>
+            <p class="text-slate">{{ option }}</p>
           </div>
         </div>
-        <p class="text-2xl font-bold text-text-white font-heading">{{ problem.conclusion }}</p>
+        <p class="text-2xl font-bold text-ink font-heading">{{ problem.conclusion }}</p>
       </AccentCard>
 
       <div
-        class="mt-12 pt-6 border-t border-white/10"
+        class="mt-12 pt-6 border-t border-line"
         :class="isVisible ? 'animate-fade-in-up stagger-6' : 'opacity-0'"
       >
-        <p class="text-xs uppercase tracking-wide text-text-muted mb-3 font-semibold">References</p>
+        <p class="text-xs uppercase tracking-wide text-slate mb-3 font-semibold">References</p>
         <ol class="space-y-1.5">
           <li
             v-for="ref in problem.references"
             :key="ref.id"
-            class="text-xs text-text-muted leading-relaxed"
+            class="text-xs text-slate leading-relaxed"
           >
-            <span class="text-text-light">[{{ ref.id }}]</span>
+            <span class="text-ink">[{{ ref.id }}]</span>
             <a
               :href="ref.url"
               target="_blank"
               rel="noopener noreferrer"
-              class="ml-1 hover:text-accent-yellow transition-colors underline decoration-white/20 hover:decoration-accent-yellow"
+              class="ml-1 hover:text-amber-ink transition-colors underline decoration-line hover:decoration-amber"
             >{{ ref.text }}</a>
           </li>
         </ol>

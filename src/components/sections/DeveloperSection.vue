@@ -8,7 +8,7 @@ const { elementRef, isVisible } = useScrollReveal()
 </script>
 
 <template>
-  <section id="developers" aria-labelledby="heading-developers" class="py-24 bg-gradient-to-b from-navy to-navy-card/30" ref="elementRef">
+  <section id="developers" aria-labelledby="heading-developers" class="py-24 bg-mist" ref="elementRef">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div :class="isVisible ? 'animate-fade-in-up' : 'opacity-0'">
         <SectionHeading
@@ -32,8 +32,8 @@ const { elementRef, isVisible } = useScrollReveal()
               class="flex items-start gap-3"
               :class="isVisible ? `animate-fade-in-up stagger-${i + 2}` : 'opacity-0'"
             >
-              <span class="text-accent-green mt-0.5">&#10003;</span>
-              <span class="text-text-light">{{ feature }}</span>
+              <span class="text-green-ink mt-0.5">&#10003;</span>
+              <span class="text-ink">{{ feature }}</span>
             </li>
           </ul>
 
@@ -41,7 +41,7 @@ const { elementRef, isVisible } = useScrollReveal()
             class="mt-8 space-y-1"
             :class="isVisible ? 'animate-fade-in-up stagger-7' : 'opacity-0'"
           >
-            <p v-for="line in developer.footer" :key="line" class="text-text-muted text-sm italic">
+            <p v-for="line in developer.footer" :key="line" class="text-slate text-sm italic">
               {{ line }}
             </p>
           </div>

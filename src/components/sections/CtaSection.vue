@@ -6,16 +6,16 @@ const { elementRef, isVisible } = useScrollReveal()
 </script>
 
 <template>
-  <section id="cta" aria-labelledby="heading-cta" class="py-24 bg-gradient-to-b from-navy to-navy-footer relative overflow-hidden" ref="elementRef">
+  <section id="cta" aria-labelledby="heading-cta" class="py-24 bg-ink relative overflow-hidden" ref="elementRef">
     <!-- Background accents -->
     <div class="absolute inset-0">
-      <div class="absolute top-0 left-1/4 w-96 h-96 bg-accent-blue/5 rounded-full blur-3xl" />
-      <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-accent-gold/5 rounded-full blur-3xl" />
+      <div class="absolute top-0 left-1/4 w-96 h-96 bg-amber/10 rounded-full blur-3xl" />
+      <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-amber/5 rounded-full blur-3xl" />
     </div>
 
     <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div :class="isVisible ? 'animate-fade-in-up' : 'opacity-0'">
-        <p class="text-accent-gold font-semibold text-sm uppercase tracking-wider mb-4">Get Started</p>
+        <p class="text-amber font-semibold text-sm uppercase tracking-wider mb-4">Get Started</p>
         <h2 id="heading-cta" class="text-3xl md:text-4xl font-bold text-text-white mb-4 font-heading">
           {{ cta.headline }}
         </h2>
@@ -32,7 +32,7 @@ const { elementRef, isVisible } = useScrollReveal()
           href="https://console.eurobase.app/login?signup=1"
           target="_blank"
           rel="noopener"
-          class="inline-flex items-center justify-center px-8 py-3.5 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-accent-blue text-white hover:bg-accent-blue-hover shadow-lg shadow-accent-blue/25"
+          class="inline-flex items-center justify-center px-8 py-3.5 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-amber text-ink hover:bg-amber-hover shadow-lg shadow-amber/20"
         >
           {{ cta.primaryCta }}
         </a>
