@@ -169,47 +169,47 @@ async function submit() {
 <template>
   <main class="min-h-screen bg-slate-50 text-slate-900">
     <!-- Hero: stays navy so the fixed, transparent site nav is readable. -->
-    <section class="relative overflow-hidden bg-navy text-white">
+    <section class="relative overflow-hidden bg-paper text-ink">
       <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div class="absolute -top-32 left-1/2 h-96 w-[48rem] -translate-x-1/2 rounded-full bg-accent-blue/30 blur-3xl"></div>
-        <div class="absolute -bottom-40 -right-20 h-80 w-80 rounded-full bg-accent-gold/15 blur-3xl"></div>
+        <div class="absolute -top-32 left-1/2 h-96 w-[48rem] -translate-x-1/2 rounded-full bg-amber/30 blur-3xl"></div>
+        <div class="absolute -bottom-40 -right-20 h-80 w-80 rounded-full bg-amber/15 blur-3xl"></div>
       </div>
       <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-14 text-center">
-        <p class="inline-flex items-center gap-2 rounded-full bg-white/10 ring-1 ring-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent-gold mb-6">
+        <p class="inline-flex items-center gap-2 rounded-full bg-mist ring-1 ring-line px-3 py-1 text-xs font-semibold uppercase tracking-wider text-amber-ink mb-6">
           <span aria-hidden="true">⚠️</span>
           Firebase / Supabase EU region is not GDPR-safe
         </p>
         <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-4 font-heading">
           Which parts of your stack can a US authority legally reach?
         </h1>
-        <p class="text-lg md:text-xl text-text-light max-w-3xl mx-auto leading-relaxed">
+        <p class="text-lg md:text-xl text-slate max-w-3xl mx-auto leading-relaxed">
           Pick the vendors you use. In 60 seconds you'll see which are subject to the US CLOUD Act
           because of their corporate parent — regardless of which region you configured.
         </p>
-        <p class="mt-4 text-sm text-text-muted">
+        <p class="mt-4 text-sm text-slate">
           Free. No signup. Every rating cites its source. The score is shareable via a permalink.
         </p>
 
         <!-- Dataset stats, derived from the data at build time. -->
         <dl class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto text-left">
-          <div class="rounded-xl bg-white/5 ring-1 ring-white/10 px-4 py-3">
-            <dt class="text-[11px] uppercase tracking-wider text-text-muted">Vendors rated</dt>
+          <div class="rounded-xl bg-mist ring-1 ring-line px-4 py-3">
+            <dt class="text-[11px] uppercase tracking-wider text-slate">Vendors rated</dt>
             <dd class="mt-1 text-xl md:text-2xl font-bold font-heading">{{ datasetStats.total }}</dd>
           </div>
-          <div class="rounded-xl bg-white/5 ring-1 ring-white/10 px-4 py-3">
-            <dt class="text-[11px] uppercase tracking-wider text-text-muted">Categories</dt>
+          <div class="rounded-xl bg-mist ring-1 ring-line px-4 py-3">
+            <dt class="text-[11px] uppercase tracking-wider text-slate">Categories</dt>
             <dd class="mt-1 text-xl md:text-2xl font-bold font-heading">{{ datasetStats.categories }}</dd>
           </div>
-          <div class="rounded-xl bg-white/5 ring-1 ring-white/10 px-4 py-3">
-            <dt class="text-[11px] uppercase tracking-wider text-text-muted">Ratings</dt>
+          <div class="rounded-xl bg-mist ring-1 ring-line px-4 py-3">
+            <dt class="text-[11px] uppercase tracking-wider text-slate">Ratings</dt>
             <dd class="mt-1 flex items-center gap-3 text-sm font-semibold">
               <span class="inline-flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-full bg-red-500"></span>{{ datasetStats.red }}</span>
               <span class="inline-flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-full bg-amber-400"></span>{{ datasetStats.amber }}</span>
               <span class="inline-flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-full bg-emerald-500"></span>{{ datasetStats.green }}</span>
             </dd>
           </div>
-          <div class="rounded-xl bg-white/5 ring-1 ring-white/10 px-4 py-3">
-            <dt class="text-[11px] uppercase tracking-wider text-text-muted">Last reviewed</dt>
+          <div class="rounded-xl bg-mist ring-1 ring-line px-4 py-3">
+            <dt class="text-[11px] uppercase tracking-wider text-slate">Last reviewed</dt>
             <dd class="mt-1 text-xl md:text-2xl font-bold font-heading tabular-nums">{{ datasetStats.latest }}</dd>
           </div>
         </dl>
@@ -218,7 +218,7 @@ async function submit() {
 
     <!-- Sticky toolbar: search + live score + CTA. Sits directly under the
          fixed nav; --nav-h is defined in assets/main.css and consumed by NavBar.vue. -->
-    <section class="sticky top-[var(--nav-h)] z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
+    <section class="sticky top-[var(--nav-h)] z-20 border-b border-slate-200 bg-paper/90 backdrop-blur">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-3 md:gap-5 flex-wrap">
         <label class="relative flex-1 min-w-[12rem]">
           <span class="sr-only">Search vendors</span>
@@ -229,7 +229,7 @@ async function submit() {
             v-model="query"
             type="search"
             :placeholder="`Search ${datasetStats.total} vendors — name, parent company, category…`"
-            class="w-full rounded-lg border border-slate-300 bg-white pl-9 pr-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-accent-blue focus:outline-none focus:ring-2 focus:ring-accent-blue/20"
+            class="w-full rounded-lg border border-slate-300 bg-white pl-9 pr-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-amber-ink focus:outline-none focus:ring-2 focus:ring-amber-ink/20"
           />
         </label>
 
@@ -257,7 +257,7 @@ async function submit() {
         <button
           type="button"
           :disabled="submitting || picks.length === 0"
-          class="inline-flex items-center px-5 py-2 rounded-lg font-semibold text-sm bg-accent-blue text-white shadow-md shadow-accent-blue/25 hover:bg-accent-blue-hover transition-colors disabled:opacity-40 disabled:shadow-none disabled:cursor-not-allowed cursor-pointer"
+          class="inline-flex items-center px-5 py-2 rounded-lg font-semibold text-sm bg-amber text-ink shadow-md shadow-amber/25 hover:bg-amber-hover transition-colors disabled:opacity-40 disabled:shadow-none disabled:cursor-not-allowed cursor-pointer"
           @click="submit"
         >
           {{ submitting ? 'Generating report…' : `See my exposure${picks.length ? ` (${picks.length})` : ''} →` }}
@@ -289,7 +289,7 @@ async function submit() {
               @keydown="onSeverityKeydown($event, i)"
               class="rounded-full px-3.5 py-1.5 text-sm font-medium ring-1 ring-inset transition-colors cursor-pointer"
               :class="severity === opt.value
-                ? 'bg-navy text-white ring-navy'
+                ? 'bg-ink text-white ring-ink'
                 : 'bg-white text-slate-700 ring-slate-300 hover:bg-slate-50'"
               @click="severity = opt.value"
             >
@@ -304,7 +304,7 @@ async function submit() {
           v-for="g in groups"
           :key="g.category"
           :href="`#cat-${g.category}`"
-          class="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-medium text-slate-700 ring-1 ring-inset ring-slate-200 hover:ring-accent-blue hover:text-accent-blue transition-colors"
+          class="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-medium text-slate-700 ring-1 ring-inset ring-slate-200 hover:ring-amber hover:text-amber-ink transition-colors"
         >
           {{ g.label }}
           <span class="text-slate-400 tabular-nums">{{ g.vendors.length }}</span>
@@ -336,9 +336,9 @@ async function submit() {
           <div v-for="v in group.vendors" :key="v.slug" class="group relative">
           <button
             type="button"
-            class="flex h-full w-full md:aspect-square flex-col overflow-hidden rounded-2xl border-2 bg-white p-3.5 text-left shadow-sm transition-all duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue/40"
+            class="flex h-full w-full md:aspect-square flex-col overflow-hidden rounded-2xl border-2 bg-white p-3.5 text-left shadow-sm transition-all duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-ink/40"
             :class="isPicked(v.slug)
-              ? 'border-accent-blue bg-blue-50/60 shadow-md shadow-accent-blue/10'
+              ? 'border-amber bg-blue-50/60 shadow-md shadow-amber/10'
               : 'border-slate-200 hover:border-slate-300 hover:shadow-md hover:-translate-y-0.5'"
             :aria-pressed="isPicked(v.slug)"
             :title="v.one_line_reason.trim()"
@@ -355,7 +355,7 @@ async function submit() {
               <span
                 class="flex h-5 w-5 items-center justify-center rounded-full border transition-colors"
                 :class="isPicked(v.slug)
-                  ? 'border-accent-blue bg-accent-blue text-white'
+                  ? 'border-amber bg-amber text-ink'
                   : 'border-slate-300 bg-white text-transparent group-hover:border-slate-400'"
                 aria-hidden="true"
               >
@@ -394,7 +394,7 @@ async function submit() {
                button is invalid HTML) and a real URL for crawlers. -->
           <router-link
             :to="`/sovereignty-check/vendors/${v.slug}`"
-            class="absolute bottom-3 right-3 rounded bg-white/90 px-1.5 py-0.5 text-[11px] font-medium text-slate-400 hover:text-accent-blue md:opacity-0 md:group-hover:opacity-100 focus:opacity-100 transition-opacity"
+            class="absolute bottom-3 right-3 rounded bg-paper/90 px-1.5 py-0.5 text-[11px] font-medium text-slate-400 hover:text-amber-ink md:opacity-0 md:group-hover:opacity-100 focus:opacity-100 transition-opacity"
             :aria-label="`${v.name}: rating details and sources`"
           >
             Details ↗
@@ -405,25 +405,25 @@ async function submit() {
 
       <p v-if="visibleGroups.length === 0" class="rounded-2xl bg-white border border-dashed border-slate-300 p-10 text-center text-sm text-slate-500">
         No vendor matches “{{ query }}”.
-        <a href="https://github.com/STGime/sovereignty-vendors" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline">Open a PR</a>
+        <a href="https://github.com/STGime/sovereignty-vendors" target="_blank" rel="noopener noreferrer" class="text-amber-ink hover:underline">Open a PR</a>
         to add it to the public dataset.
       </p>
 
       <!-- Bottom CTA mirror — 112 vendors is a long scroll, so repeat
            the submit at the end so the user doesn't have to scroll back up. -->
-      <div class="mt-4 rounded-2xl bg-navy text-white p-6 md:p-8 flex items-center justify-between gap-6 flex-wrap">
+      <div class="mt-4 rounded-2xl bg-ink text-white p-6 md:p-8 flex items-center justify-between gap-6 flex-wrap">
         <div>
           <p class="text-lg font-semibold font-heading">
             {{ picks.length ? `${picks.length} vendor${picks.length === 1 ? '' : 's'} selected` : 'Nothing selected yet' }}
           </p>
-          <p class="mt-1 text-sm text-text-light">
+          <p class="mt-1 text-sm text-slate">
             {{ picks.length ? `Preview: ${preview.exposure}% exposed — get the full report with EU alternatives.` : 'Tick the vendors in your stack above to get a shareable exposure report.' }}
           </p>
         </div>
         <button
           type="button"
           :disabled="submitting || picks.length === 0"
-          class="inline-flex items-center px-6 py-3 rounded-lg font-semibold text-sm bg-accent-blue text-white shadow-lg shadow-accent-blue/25 hover:bg-accent-blue-hover transition-colors disabled:opacity-40 disabled:shadow-none disabled:cursor-not-allowed cursor-pointer"
+          class="inline-flex items-center px-6 py-3 rounded-lg font-semibold text-sm bg-amber text-ink shadow-lg shadow-amber/25 hover:bg-amber-hover transition-colors disabled:opacity-40 disabled:shadow-none disabled:cursor-not-allowed cursor-pointer"
           @click="submit"
         >
           {{ submitting ? 'Generating report…' : `See my exposure${picks.length ? ` (${picks.length})` : ''} →` }}
@@ -436,15 +436,15 @@ async function submit() {
           href="https://github.com/STGime/sovereignty-vendors"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-accent-blue hover:underline"
+          class="text-amber-ink hover:underline"
         >
           Open a PR
         </a>
         against the public dataset. Every rating cites its source.
-        <router-link to="/sovereignty-check/methodology" class="text-accent-blue hover:underline ml-1">
+        <router-link to="/sovereignty-check/methodology" class="text-amber-ink hover:underline ml-1">
           How ratings are assigned →
         </router-link>
-        <router-link to="/sovereignty-check/vendors" class="text-accent-blue hover:underline ml-1">
+        <router-link to="/sovereignty-check/vendors" class="text-amber-ink hover:underline ml-1">
           Browse all vendors →
         </router-link>
       </p>
@@ -457,10 +457,10 @@ async function submit() {
           href="https://github.com/STGime/sovereignty-vendors"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-accent-blue hover:underline"
+          class="text-amber-ink hover:underline"
         >open on GitHub</a>
         under MIT.
-        This tool runs on <router-link to="/" class="text-accent-blue hover:underline">Eurobase</router-link>.
+        This tool runs on <router-link to="/" class="text-amber-ink hover:underline">Eurobase</router-link>.
       </div>
     </footer>
   </main>

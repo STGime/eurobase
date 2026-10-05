@@ -159,85 +159,85 @@ const nis2Rows: Nis2Row[] = [
 </script>
 
 <template>
-  <main class="pt-24 pb-16 bg-navy min-h-screen">
+  <main class="pt-24 pb-16 bg-paper min-h-screen">
     <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
       <!-- Hero -->
       <section class="mb-16">
-        <RouterLink to="/" class="text-accent-blue text-sm hover:underline mb-6 inline-block">&larr; Back to home</RouterLink>
-        <h1 class="text-4xl md:text-5xl font-bold text-text-white mb-4 font-heading leading-tight">Security, vulnerability disclosure &amp; German legal-tech</h1>
-        <p class="text-xl text-accent-gold max-w-3xl">
-          How we secure the platform, where our controls sit against EU NIS2 Article 21 and GDPR Article 32, how to responsibly report a security issue, and the dated <RouterLink :to="{ hash: '#de-legaltech' }" class="text-accent-gold underline underline-offset-4 hover:text-accent-blue">German legal-tech dossier</RouterLink> (BSI C5 / ISO 27001 / IT-Grundschutz / NIS2 / AI Act).
+        <RouterLink to="/" class="text-amber-ink text-sm hover:underline mb-6 inline-block">&larr; Back to home</RouterLink>
+        <h1 class="text-4xl md:text-5xl font-bold text-ink mb-4 font-heading leading-tight">Security, vulnerability disclosure &amp; German legal-tech</h1>
+        <p class="text-xl text-amber-ink max-w-3xl">
+          How we secure the platform, where our controls sit against EU NIS2 Article 21 and GDPR Article 32, how to responsibly report a security issue, and the dated <RouterLink :to="{ hash: '#de-legaltech' }" class="text-amber-ink underline underline-offset-4 hover:text-amber-ink">German legal-tech dossier</RouterLink> (BSI C5 / ISO 27001 / IT-Grundschutz / NIS2 / AI Act).
         </p>
       </section>
 
       <!-- TL;DR -->
       <section class="mb-16">
-        <div class="bg-accent-blue/5 border border-accent-blue/30 rounded-xl p-6">
-          <h2 class="text-lg font-bold text-text-white mb-3 font-heading">TL;DR</h2>
-          <ul class="space-y-2 text-text-light text-sm">
-            <li class="flex gap-2"><span class="text-accent-blue">▸</span> All customer data lives on Scaleway <strong>fr-par</strong> (Paris, France). No US-owned processor in the critical path.</li>
-            <li class="flex gap-2"><span class="text-accent-blue">▸</span> Corporate parent is <strong>Eurobase OÜ</strong> (Estonian commercial-register code 17557586). No US corporate parent means no CLOUD Act or FISA §702 reach.</li>
-            <li class="flex gap-2"><span class="text-accent-blue">▸</span> Encryption in transit is TLS 1.3; at rest is AES-256; secrets vault is AES-256-GCM per-tenant; signing is HMAC-SHA256 with domain separation.</li>
-            <li class="flex gap-2"><span class="text-accent-blue">▸</span> Data-breach and cyber-incident SLAs align with GDPR Article 33 and NIS2 Article 23 — 24 h early warning, 72 h notification, 1-month final report.</li>
-            <li class="flex gap-2"><span class="text-accent-blue">▸</span> Written ISMS-lite governs the platform — <a href="https://github.com/STGime/euroback/blob/main/docs/legal/v2/isms.md" target="_blank" rel="noopener" class="text-accent-blue hover:underline">public, versioned</a>.</li>
-            <li class="flex gap-2"><span class="text-accent-blue">▸</span> Report a security issue: <a href="mailto:security@eurobase.app" class="text-accent-blue hover:underline">security@eurobase.app</a> — response within 3 business days.</li>
+        <div class="bg-amber/10 border border-amber/40 rounded-xl p-6">
+          <h2 class="text-lg font-bold text-ink mb-3 font-heading">TL;DR</h2>
+          <ul class="space-y-2 text-slate text-sm">
+            <li class="flex gap-2"><span class="text-amber-ink">▸</span> All customer data lives on Scaleway <strong>fr-par</strong> (Paris, France). No US-owned processor in the critical path.</li>
+            <li class="flex gap-2"><span class="text-amber-ink">▸</span> Corporate parent is <strong>Eurobase OÜ</strong> (Estonian commercial-register code 17557586). No US corporate parent means no CLOUD Act or FISA §702 reach.</li>
+            <li class="flex gap-2"><span class="text-amber-ink">▸</span> Encryption in transit is TLS 1.3; at rest is AES-256; secrets vault is AES-256-GCM per-tenant; signing is HMAC-SHA256 with domain separation.</li>
+            <li class="flex gap-2"><span class="text-amber-ink">▸</span> Data-breach and cyber-incident SLAs align with GDPR Article 33 and NIS2 Article 23 — 24 h early warning, 72 h notification, 1-month final report.</li>
+            <li class="flex gap-2"><span class="text-amber-ink">▸</span> Written ISMS-lite governs the platform — <a href="https://github.com/STGime/euroback/blob/main/docs/legal/v2/isms.md" target="_blank" rel="noopener" class="text-amber-ink hover:underline">public, versioned</a>.</li>
+            <li class="flex gap-2"><span class="text-amber-ink">▸</span> Report a security issue: <a href="mailto:security@eurobase.app" class="text-amber-ink hover:underline">security@eurobase.app</a> — response within 3 business days.</li>
           </ul>
         </div>
       </section>
 
       <!-- NIS2 & scope -->
       <section class="mb-16">
-        <h2 class="text-2xl font-bold text-text-white mb-4 font-heading">NIS2 &amp; regulatory posture</h2>
-        <p class="text-text-light leading-relaxed mb-4">
+        <h2 class="text-2xl font-bold text-ink mb-4 font-heading">NIS2 &amp; regulatory posture</h2>
+        <p class="text-slate leading-relaxed mb-4">
           Eurobase OÜ is currently below the size threshold for direct NIS2 applicability (fewer than 50 employees AND less than €10&nbsp;M annual turnover). Cloud computing service providers of our size are, per Article 2(1), not directly obligated entities under NIS2. We adopt the controls anyway because our customers do rely on us at that standard.
         </p>
-        <p class="text-text-light leading-relaxed mb-4">
-          When Eurobase crosses the threshold, we will register with the Estonian national CSIRT (<a href="https://ria.ee/en" target="_blank" rel="noopener" class="text-accent-blue hover:underline">RIA</a> / CERT-EE) and issue an updated ISMS reflecting our new status as an important entity.
+        <p class="text-slate leading-relaxed mb-4">
+          When Eurobase crosses the threshold, we will register with the Estonian national CSIRT (<a href="https://ria.ee/en" target="_blank" rel="noopener" class="text-amber-ink hover:underline">RIA</a> / CERT-EE) and issue an updated ISMS reflecting our new status as an important entity.
         </p>
-        <p class="text-text-light leading-relaxed mb-4">
-          GDPR compliance is not conditional on the size threshold. GDPR Articles 32 (security of processing) and 33 (breach notification) apply from day one, and are governed by our published <a href="/legal" class="text-accent-blue hover:underline">Privacy Policy</a>, <a href="/faq" class="text-accent-blue hover:underline">FAQ</a>, and DPA.
+        <p class="text-slate leading-relaxed mb-4">
+          GDPR compliance is not conditional on the size threshold. GDPR Articles 32 (security of processing) and 33 (breach notification) apply from day one, and are governed by our published <a href="/legal" class="text-amber-ink hover:underline">Privacy Policy</a>, <a href="/faq" class="text-amber-ink hover:underline">FAQ</a>, and DPA.
         </p>
-        <p class="text-text-light leading-relaxed">
-          German legal-tech / Steuerberater / regulated-industry customers: see the <RouterLink :to="{ hash: '#de-legaltech' }" class="text-accent-blue hover:underline">German legal-tech dossier</RouterLink> for BSI C5 / ISO 27001 / IT-Grundschutz / NIS2 / AI Act positioning.
+        <p class="text-slate leading-relaxed">
+          German legal-tech / Steuerberater / regulated-industry customers: see the <RouterLink :to="{ hash: '#de-legaltech' }" class="text-amber-ink hover:underline">German legal-tech dossier</RouterLink> for BSI C5 / ISO 27001 / IT-Grundschutz / NIS2 / AI Act positioning.
         </p>
       </section>
 
       <!-- NIS2 Article 21 matrix -->
       <section id="nis2-matrix" class="mb-16 scroll-mt-20">
-        <h2 class="text-2xl font-bold text-text-white mb-6 font-heading">NIS2 Article 21 control matrix</h2>
-        <p class="text-text-light leading-relaxed mb-6">
+        <h2 class="text-2xl font-bold text-ink mb-6 font-heading">NIS2 Article 21 control matrix</h2>
+        <p class="text-slate leading-relaxed mb-6">
           The ten risk-management measures required by Article 21(2). Status reflects the platform as of the ISMS effective date — 22 July 2026.
         </p>
-        <div class="overflow-x-auto rounded-lg border border-navy-light">
+        <div class="overflow-x-auto rounded-lg border border-line">
           <table class="w-full text-sm">
             <thead>
-              <tr class="bg-navy-light/50">
-                <th class="text-left text-text-muted font-semibold px-4 py-3 w-12">§</th>
-                <th class="text-left text-text-muted font-semibold px-4 py-3 w-72">Requirement</th>
-                <th class="text-left text-text-muted font-semibold px-4 py-3 w-24">Status</th>
-                <th class="text-left text-text-muted font-semibold px-4 py-3">Notes</th>
+              <tr class="bg-line/50">
+                <th class="text-left text-slate font-semibold px-4 py-3 w-12">§</th>
+                <th class="text-left text-slate font-semibold px-4 py-3 w-72">Requirement</th>
+                <th class="text-left text-slate font-semibold px-4 py-3 w-24">Status</th>
+                <th class="text-left text-slate font-semibold px-4 py-3">Notes</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="row in nis2Rows" :key="row.id" class="border-t border-navy-light/30">
-                <td class="px-4 py-3 text-text-muted font-mono text-xs">(2)({{ row.id }})</td>
-                <td class="px-4 py-3 text-text-white font-medium">{{ row.requirement }}</td>
+              <tr v-for="row in nis2Rows" :key="row.id" class="border-t border-line">
+                <td class="px-4 py-3 text-slate font-mono text-xs">(2)({{ row.id }})</td>
+                <td class="px-4 py-3 text-ink font-medium">{{ row.requirement }}</td>
                 <td class="px-4 py-3">
                   <span
                     v-if="row.status === 'shipped'"
-                    class="inline-block rounded-full bg-accent-green/15 text-accent-green text-[11px] uppercase tracking-wide font-semibold px-2 py-0.5"
+                    class="inline-block rounded-full bg-green-ink/10 text-green-ink text-[11px] uppercase tracking-wide font-semibold px-2 py-0.5"
                   >Shipped</span>
                   <span
                     v-else-if="row.status === 'partial'"
-                    class="inline-block rounded-full bg-accent-blue/15 text-accent-blue text-[11px] uppercase tracking-wide font-semibold px-2 py-0.5"
+                    class="inline-block rounded-full bg-amber/15 text-amber-ink text-[11px] uppercase tracking-wide font-semibold px-2 py-0.5"
                   >Partial</span>
                   <span
                     v-else
                     class="inline-block rounded-full bg-amber-500/15 text-amber-300 text-[11px] uppercase tracking-wide font-semibold px-2 py-0.5"
                   >Roadmap</span>
                 </td>
-                <td class="px-4 py-3 text-text-light">{{ row.notes }}</td>
+                <td class="px-4 py-3 text-slate">{{ row.notes }}</td>
               </tr>
             </tbody>
           </table>
@@ -246,25 +246,25 @@ const nis2Rows: Nis2Row[] = [
 
       <!-- Encryption -->
       <section class="mb-16">
-        <h2 class="text-2xl font-bold text-text-white mb-4 font-heading">Encryption</h2>
-        <div class="overflow-x-auto rounded-lg border border-navy-light">
+        <h2 class="text-2xl font-bold text-ink mb-4 font-heading">Encryption</h2>
+        <div class="overflow-x-auto rounded-lg border border-line">
           <table class="w-full text-sm">
             <thead>
-              <tr class="bg-navy-light/50">
-                <th class="text-left text-text-muted font-semibold px-4 py-3 w-60">Surface</th>
-                <th class="text-left text-text-muted font-semibold px-4 py-3">Algorithm</th>
-                <th class="text-left text-text-muted font-semibold px-4 py-3">Notes</th>
+              <tr class="bg-line/50">
+                <th class="text-left text-slate font-semibold px-4 py-3 w-60">Surface</th>
+                <th class="text-left text-slate font-semibold px-4 py-3">Algorithm</th>
+                <th class="text-left text-slate font-semibold px-4 py-3">Notes</th>
               </tr>
             </thead>
-            <tbody class="text-text-light">
-              <tr class="border-t border-navy-light/30"><td class="px-4 py-3 font-medium text-text-white">Data in transit — all HTTP</td><td class="px-4 py-3">TLS 1.3 (1.2 fallback)</td><td class="px-4 py-3">HSTS 1-year max-age.</td></tr>
-              <tr class="border-t border-navy-light/30"><td class="px-4 py-3 font-medium text-text-white">Data at rest — Postgres</td><td class="px-4 py-3">AES-256</td><td class="px-4 py-3">Scaleway managed disk encryption.</td></tr>
-              <tr class="border-t border-navy-light/30"><td class="px-4 py-3 font-medium text-text-white">Data at rest — Object storage</td><td class="px-4 py-3">AES-256 (SSE-S3)</td><td class="px-4 py-3">Scaleway managed.</td></tr>
-              <tr class="border-t border-navy-light/30"><td class="px-4 py-3 font-medium text-text-white">Vault secrets</td><td class="px-4 py-3">AES-256-GCM, per-tenant key</td><td class="px-4 py-3">Application-layer envelope; key rotated per major release.</td></tr>
-              <tr class="border-t border-navy-light/30"><td class="px-4 py-3 font-medium text-text-white">JWT session tokens</td><td class="px-4 py-3">HMAC-SHA256</td><td class="px-4 py-3">Kubernetes Secret; never logged.</td></tr>
-              <tr class="border-t border-navy-light/30"><td class="px-4 py-3 font-medium text-text-white">Webhook signing</td><td class="px-4 py-3">HMAC-SHA256</td><td class="px-4 py-3">Per-webhook secret; timestamp in signed payload for replay protection.</td></tr>
-              <tr class="border-t border-navy-light/30"><td class="px-4 py-3 font-medium text-text-white">Unsubscribe tokens</td><td class="px-4 py-3">HMAC-SHA256</td><td class="px-4 py-3">Domain-separated from JWT via SHA-256 derivation.</td></tr>
-              <tr class="border-t border-navy-light/30"><td class="px-4 py-3 font-medium text-text-white">Password storage</td><td class="px-4 py-3">bcrypt cost 12</td><td class="px-4 py-3">Platform + tenant end-user passwords alike.</td></tr>
+            <tbody class="text-slate">
+              <tr class="border-t border-line"><td class="px-4 py-3 font-medium text-ink">Data in transit — all HTTP</td><td class="px-4 py-3">TLS 1.3 (1.2 fallback)</td><td class="px-4 py-3">HSTS 1-year max-age.</td></tr>
+              <tr class="border-t border-line"><td class="px-4 py-3 font-medium text-ink">Data at rest — Postgres</td><td class="px-4 py-3">AES-256</td><td class="px-4 py-3">Scaleway managed disk encryption.</td></tr>
+              <tr class="border-t border-line"><td class="px-4 py-3 font-medium text-ink">Data at rest — Object storage</td><td class="px-4 py-3">AES-256 (SSE-S3)</td><td class="px-4 py-3">Scaleway managed.</td></tr>
+              <tr class="border-t border-line"><td class="px-4 py-3 font-medium text-ink">Vault secrets</td><td class="px-4 py-3">AES-256-GCM, per-tenant key</td><td class="px-4 py-3">Application-layer envelope; key rotated per major release.</td></tr>
+              <tr class="border-t border-line"><td class="px-4 py-3 font-medium text-ink">JWT session tokens</td><td class="px-4 py-3">HMAC-SHA256</td><td class="px-4 py-3">Kubernetes Secret; never logged.</td></tr>
+              <tr class="border-t border-line"><td class="px-4 py-3 font-medium text-ink">Webhook signing</td><td class="px-4 py-3">HMAC-SHA256</td><td class="px-4 py-3">Per-webhook secret; timestamp in signed payload for replay protection.</td></tr>
+              <tr class="border-t border-line"><td class="px-4 py-3 font-medium text-ink">Unsubscribe tokens</td><td class="px-4 py-3">HMAC-SHA256</td><td class="px-4 py-3">Domain-separated from JWT via SHA-256 derivation.</td></tr>
+              <tr class="border-t border-line"><td class="px-4 py-3 font-medium text-ink">Password storage</td><td class="px-4 py-3">bcrypt cost 12</td><td class="px-4 py-3">Platform + tenant end-user passwords alike.</td></tr>
             </tbody>
           </table>
         </div>
@@ -272,15 +272,15 @@ const nis2Rows: Nis2Row[] = [
 
       <!-- Incident SLAs -->
       <section class="mb-16">
-        <h2 class="text-2xl font-bold text-text-white mb-4 font-heading">Incident-response SLAs</h2>
-        <p class="text-text-light leading-relaxed mb-4">
+        <h2 class="text-2xl font-bold text-ink mb-4 font-heading">Incident-response SLAs</h2>
+        <p class="text-slate leading-relaxed mb-4">
           Aligned with GDPR Article 33 and NIS2 Article 23. Timing is measured from the moment Eurobase becomes aware of the incident.
         </p>
-        <ul class="space-y-3 text-text-light leading-relaxed">
-          <li class="flex gap-3"><span class="text-accent-blue font-mono text-sm mt-1 min-w-16">6 h</span><span><strong>Internal early warning.</strong> Incident opened; on-call founder acknowledges.</span></li>
-          <li class="flex gap-3"><span class="text-accent-blue font-mono text-sm mt-1 min-w-16">24 h</span><span><strong>Customer early warning.</strong> Notice that a significant incident has occurred, where customer-facing impact is suspected.</span></li>
-          <li class="flex gap-3"><span class="text-accent-blue font-mono text-sm mt-1 min-w-16">72 h</span><span><strong>Formal incident notification.</strong> Notice to affected customers with initial assessment and known-facts summary. Regulatory notification when GDPR Article 33 thresholds are met — to the Estonian Data Protection Inspectorate (<em>Andmekaitse Inspektsioon</em>).</span></li>
-          <li class="flex gap-3"><span class="text-accent-blue font-mono text-sm mt-1 min-w-16">30 d</span><span><strong>Final report.</strong> Root cause, corrective actions, lessons learned. Anonymised post-mortem published on <a href="/#blog" class="text-accent-blue hover:underline">/blog</a> if impact was material.</span></li>
+        <ul class="space-y-3 text-slate leading-relaxed">
+          <li class="flex gap-3"><span class="text-amber-ink font-mono text-sm mt-1 min-w-16">6 h</span><span><strong>Internal early warning.</strong> Incident opened; on-call founder acknowledges.</span></li>
+          <li class="flex gap-3"><span class="text-amber-ink font-mono text-sm mt-1 min-w-16">24 h</span><span><strong>Customer early warning.</strong> Notice that a significant incident has occurred, where customer-facing impact is suspected.</span></li>
+          <li class="flex gap-3"><span class="text-amber-ink font-mono text-sm mt-1 min-w-16">72 h</span><span><strong>Formal incident notification.</strong> Notice to affected customers with initial assessment and known-facts summary. Regulatory notification when GDPR Article 33 thresholds are met — to the Estonian Data Protection Inspectorate (<em>Andmekaitse Inspektsioon</em>).</span></li>
+          <li class="flex gap-3"><span class="text-amber-ink font-mono text-sm mt-1 min-w-16">30 d</span><span><strong>Final report.</strong> Root cause, corrective actions, lessons learned. Anonymised post-mortem published on <a href="/#blog" class="text-amber-ink hover:underline">/blog</a> if impact was material.</span></li>
         </ul>
       </section>
 
@@ -293,35 +293,35 @@ const nis2Rows: Nis2Row[] = [
            docs/runbooks/backup-pitr-test.md § "Publishing measured
            numbers" for the fill procedure. -->
       <section id="backup-recovery" class="mb-16 scroll-mt-20">
-        <h2 class="text-2xl font-bold text-text-white mb-4 font-heading">Backup &amp; recovery</h2>
-        <p class="text-text-light leading-relaxed mb-4">
+        <h2 class="text-2xl font-bold text-ink mb-4 font-heading">Backup &amp; recovery</h2>
+        <p class="text-slate leading-relaxed mb-4">
           Team-tier dedicated Postgres instances carry <strong>daily scheduled backups (7-day retention) plus customer-triggered on-demand snapshots</strong>, with 1 self-service restore per calendar month included (from either source, either counts against the same cap). Free and Pro tiers share a managed instance without customer-selectable restore; Eurobase restores the shared instance to its own recovery targets in a disaster scenario.
         </p>
-        <p class="text-text-light leading-relaxed mb-4">
-          The RTO below is measured, not aspirational — it comes from a runbook and script an operator can run against a throwaway Scaleway RDB instance in ~30 minutes (<a href="https://github.com/STGime/euroback/blob/main/docs/runbooks/backup-pitr-test.md" target="_blank" rel="noopener" class="text-accent-blue hover:underline">docs/runbooks/backup-pitr-test.md</a>). The RPO is a policy bound set by the daily-backup schedule, not a measurement — an on-demand snapshot tightens it to a customer-chosen window on that specific recovery.
+        <p class="text-slate leading-relaxed mb-4">
+          The RTO below is measured, not aspirational — it comes from a runbook and script an operator can run against a throwaway Scaleway RDB instance in ~30 minutes (<a href="https://github.com/STGime/euroback/blob/main/docs/runbooks/backup-pitr-test.md" target="_blank" rel="noopener" class="text-amber-ink hover:underline">docs/runbooks/backup-pitr-test.md</a>). The RPO is a policy bound set by the daily-backup schedule, not a measurement — an on-demand snapshot tightens it to a customer-chosen window on that specific recovery.
         </p>
-        <ul class="space-y-3 text-text-light leading-relaxed">
-          <li class="flex gap-3"><span class="text-accent-blue font-mono text-sm mt-1 min-w-24">RTO</span><span><strong>Measured restore time at ~5 MB dataset: <code class="text-accent-gold">16s</code></strong> (fixed provisioning + plumbing overhead — the baseline that dominates at small data volumes). Restore time increases with database size; for workloads above ~100 MB we provide a bespoke measurement on request. Test executed 2026-09-06 via the customer-facing <code class="text-accent-gold">backup create → backup restore</code> path.</span></li>
-          <li class="flex gap-3"><span class="text-accent-blue font-mono text-sm mt-1 min-w-24">RPO</span><span><strong>Up to 24 hours between scheduled backups</strong>. Team-tier customers can take on-demand snapshots at any point to reduce this to a window of their own choosing — a snapshot immediately before a risky migration means the RPO on that recovery is seconds. Tighter guarantees than "the last scheduled backup" require customer action; this is a deliberate trade-off against the cost of continuous shipping to a warm standby.</span></li>
+        <ul class="space-y-3 text-slate leading-relaxed">
+          <li class="flex gap-3"><span class="text-amber-ink font-mono text-sm mt-1 min-w-24">RTO</span><span><strong>Measured restore time at ~5 MB dataset: <code class="text-amber-ink">16s</code></strong> (fixed provisioning + plumbing overhead — the baseline that dominates at small data volumes). Restore time increases with database size; for workloads above ~100 MB we provide a bespoke measurement on request. Test executed 2026-09-06 via the customer-facing <code class="text-amber-ink">backup create → backup restore</code> path.</span></li>
+          <li class="flex gap-3"><span class="text-amber-ink font-mono text-sm mt-1 min-w-24">RPO</span><span><strong>Up to 24 hours between scheduled backups</strong>. Team-tier customers can take on-demand snapshots at any point to reduce this to a window of their own choosing — a snapshot immediately before a risky migration means the RPO on that recovery is seconds. Tighter guarantees than "the last scheduled backup" require customer action; this is a deliberate trade-off against the cost of continuous shipping to a warm standby.</span></li>
         </ul>
-        <p class="text-text-light leading-relaxed mt-4">
+        <p class="text-slate leading-relaxed mt-4">
           An automated monthly regression job (Kubernetes CronJob) is scaffolded to re-measure the RTO on the 1st of every month and alert on drift; today it runs on operator demand until the ops image build lands. The runbook covers scenarios T1–T8 including cross-project isolation and backup-ciphertext-in-EU verification.
         </p>
       </section>
 
       <!-- CVD -->
       <section id="cvd" class="mb-16 scroll-mt-20">
-        <h2 class="text-2xl font-bold text-text-white mb-4 font-heading">Coordinated Vulnerability Disclosure</h2>
-        <p class="text-text-light leading-relaxed mb-4">
-          If you believe you have found a security vulnerability in the Eurobase platform, please report it to <a href="mailto:security@eurobase.app" class="text-accent-blue hover:underline">security@eurobase.app</a>.
+        <h2 class="text-2xl font-bold text-ink mb-4 font-heading">Coordinated Vulnerability Disclosure</h2>
+        <p class="text-slate leading-relaxed mb-4">
+          If you believe you have found a security vulnerability in the Eurobase platform, please report it to <a href="mailto:security@eurobase.app" class="text-amber-ink hover:underline">security@eurobase.app</a>.
         </p>
-        <p class="text-text-light leading-relaxed mb-4">
+        <p class="text-slate leading-relaxed mb-4">
           <strong>What to include:</strong> a description of the issue, the affected surface (URL, API endpoint, CLI command, etc.), reproduction steps, and any suggested mitigation. Attach proof-of-concept material as needed.
         </p>
-        <p class="text-text-light leading-relaxed mb-4">
+        <p class="text-slate leading-relaxed mb-4">
           <strong>Our commitments:</strong>
         </p>
-        <ul class="space-y-2 text-text-light leading-relaxed list-disc list-inside mb-4">
+        <ul class="space-y-2 text-slate leading-relaxed list-disc list-inside mb-4">
           <li>Acknowledgement of receipt within 3 business days.</li>
           <li>Initial assessment within 10 business days.</li>
           <li>Fix or documented mitigation within 90 days of confirmation for high/critical; 180 days for medium.</li>
@@ -329,34 +329,34 @@ const nis2Rows: Nis2Row[] = [
           <li>Public credit for the reporter, on request.</li>
           <li>No legal action against good-faith researchers who follow this policy.</li>
         </ul>
-        <p class="text-text-light leading-relaxed mb-4">
+        <p class="text-slate leading-relaxed mb-4">
           <strong>Please do not:</strong>
         </p>
-        <ul class="space-y-2 text-text-light leading-relaxed list-disc list-inside">
+        <ul class="space-y-2 text-slate leading-relaxed list-disc list-inside">
           <li>Access, modify, or delete data belonging to other customers.</li>
           <li>Conduct denial-of-service testing without prior written consent.</li>
           <li>Publicly disclose the vulnerability before an agreed coordination window.</li>
           <li>Use social engineering against Eurobase staff or contractors.</li>
         </ul>
-        <p class="text-text-light leading-relaxed mt-4">
-          Machine-readable pointer at <a href="/.well-known/security.txt" class="text-accent-blue hover:underline"><code class="text-accent-gold">/.well-known/security.txt</code></a> (RFC 9116).
+        <p class="text-slate leading-relaxed mt-4">
+          Machine-readable pointer at <a href="/.well-known/security.txt" class="text-amber-ink hover:underline"><code class="text-amber-ink">/.well-known/security.txt</code></a> (RFC 9116).
         </p>
       </section>
 
       <!-- ISMS -->
       <section id="isms" class="mb-16 scroll-mt-20">
-        <h2 class="text-2xl font-bold text-text-white mb-4 font-heading">ISMS-lite</h2>
-        <p class="text-text-light leading-relaxed mb-4">
+        <h2 class="text-2xl font-bold text-ink mb-4 font-heading">ISMS-lite</h2>
+        <p class="text-slate leading-relaxed mb-4">
           The full written Information Security Management System is public and versioned in the Eurobase source repository:
         </p>
         <p class="mb-4">
-          <a href="https://github.com/STGime/euroback/blob/main/docs/legal/v2/isms.md" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-lg bg-navy-light/30 hover:bg-navy-light/60 border border-navy-light px-4 py-2 text-text-white text-sm transition-colors">
+          <a href="https://github.com/STGime/euroback/blob/main/docs/legal/v2/isms.md" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-lg bg-line/40 hover:bg-line/60 border border-line px-4 py-2 text-ink text-sm transition-colors">
             <span>📄</span>
-            <span><code class="text-accent-gold">docs/legal/v2/isms.md</code></span>
-            <span class="text-accent-blue">→</span>
+            <span><code class="text-amber-ink">docs/legal/v2/isms.md</code></span>
+            <span class="text-amber-ink">→</span>
           </a>
         </p>
-        <p class="text-text-light leading-relaxed">
+        <p class="text-slate leading-relaxed">
           Reviewed annually and after every significant incident. Version 2.0, effective 22 July 2026, approved by the sole board member of Eurobase OÜ.
         </p>
       </section>
@@ -366,22 +366,22 @@ const nis2Rows: Nis2Row[] = [
            lying. scroll-mt-20 keeps the H2 clear of the fixed 64px
            navbar when arrived at via #de-legaltech. -->
       <section id="de-legaltech" class="mb-16 scroll-mt-20">
-        <h2 class="text-2xl font-bold text-text-white mb-4 font-heading">German legal-tech</h2>
-        <ul class="space-y-3 text-text-light mb-6">
+        <h2 class="text-2xl font-bold text-ink mb-4 font-heading">German legal-tech</h2>
+        <ul class="space-y-3 text-slate mb-6">
           <li v-for="doc in germanLegalTechDocs.dossier" :key="doc.slug" class="flex gap-2">
-            <span class="text-accent-blue shrink-0">▸</span>
+            <span class="text-amber-ink shrink-0">▸</span>
             <span>
-              <a :href="`${legalDocsBase}/${doc.slug}`" target="_blank" rel="noopener" class="text-accent-blue hover:underline">{{ doc.label }}</a>
+              <a :href="`${legalDocsBase}/${doc.slug}`" target="_blank" rel="noopener" class="text-amber-ink hover:underline">{{ doc.label }}</a>
               — {{ doc.note }}
             </span>
           </li>
         </ul>
-        <h3 class="text-lg font-semibold text-text-white mb-2 mt-6">Legal Team tier backing docs</h3>
-        <ul class="space-y-3 text-text-light mb-6">
+        <h3 class="text-lg font-semibold text-ink mb-2 mt-6">Legal Team tier backing docs</h3>
+        <ul class="space-y-3 text-slate mb-6">
           <li v-for="doc in germanLegalTechDocs.backing" :key="doc.slug" class="flex gap-2">
-            <span class="text-accent-blue shrink-0">▸</span>
+            <span class="text-amber-ink shrink-0">▸</span>
             <span>
-              <a :href="`${legalDocsBase}/${doc.slug}`" target="_blank" rel="noopener" class="text-accent-blue hover:underline">{{ doc.label }}</a>
+              <a :href="`${legalDocsBase}/${doc.slug}`" target="_blank" rel="noopener" class="text-amber-ink hover:underline">{{ doc.label }}</a>
               — {{ doc.note }}
             </span>
           </li>
@@ -390,13 +390,13 @@ const nis2Rows: Nis2Row[] = [
 
       <!-- Sub-processors + related -->
       <section class="mb-16">
-        <h2 class="text-2xl font-bold text-text-white mb-4 font-heading">Related documents</h2>
-        <ul class="space-y-3 text-text-light">
-          <li>▸ <a href="/legal" class="text-accent-blue hover:underline">Legal notice</a> — company details published under Estonian ISTS §4.</li>
-          <li>▸ <a href="/privacy" class="text-accent-blue hover:underline">Privacy policy</a> — GDPR notice, sub-processor list, DSAR contact.</li>
-          <li>▸ <a href="/terms" class="text-accent-blue hover:underline">Terms &amp; conditions</a>.</li>
-          <li>▸ <a href="/features/dsar" class="text-accent-blue hover:underline">One-click DSAR</a> — how the export works.</li>
-          <li>▸ <a href="/faq" class="text-accent-blue hover:underline">FAQ</a> — sovereignty, migration, GDPR questions.</li>
+        <h2 class="text-2xl font-bold text-ink mb-4 font-heading">Related documents</h2>
+        <ul class="space-y-3 text-slate">
+          <li>▸ <a href="/legal" class="text-amber-ink hover:underline">Legal notice</a> — company details published under Estonian ISTS §4.</li>
+          <li>▸ <a href="/privacy" class="text-amber-ink hover:underline">Privacy policy</a> — GDPR notice, sub-processor list, DSAR contact.</li>
+          <li>▸ <a href="/terms" class="text-amber-ink hover:underline">Terms &amp; conditions</a>.</li>
+          <li>▸ <a href="/features/dsar" class="text-amber-ink hover:underline">One-click DSAR</a> — how the export works.</li>
+          <li>▸ <a href="/faq" class="text-amber-ink hover:underline">FAQ</a> — sovereignty, migration, GDPR questions.</li>
         </ul>
       </section>
 

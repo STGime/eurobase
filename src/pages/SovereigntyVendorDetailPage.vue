@@ -20,9 +20,9 @@ watchEffect(() => {
 </script>
 
 <template>
-  <main class="min-h-screen bg-navy-deep text-text-white">
+  <main class="min-h-screen bg-paper text-ink">
     <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <router-link to="/sovereignty-check/vendors" class="text-accent-blue text-sm hover:underline mb-6 inline-block">
+      <router-link to="/sovereignty-check/vendors" class="text-amber-ink text-sm hover:underline mb-6 inline-block">
         &larr; All vendors
       </router-link>
 
@@ -30,7 +30,7 @@ watchEffect(() => {
         <h1 class="text-xl font-bold mb-2">Vendor not found</h1>
         <p class="text-red-200">
           We don't have this vendor in the dataset yet.
-          <a href="https://github.com/STGime/sovereignty-vendors" class="text-accent-blue hover:underline" target="_blank" rel="noopener">
+          <a href="https://github.com/STGime/sovereignty-vendors" class="text-amber-ink hover:underline" target="_blank" rel="noopener">
             Open a PR to add it →
           </a>
         </p>
@@ -46,53 +46,53 @@ watchEffect(() => {
             {{ vendor.ratings.overall }}
           </span>
         </div>
-        <p class="text-text-muted mb-6">
+        <p class="text-slate mb-6">
           {{ CATEGORY_LABELS[vendor.category] ?? vendor.category }} · Reviewed {{ vendor.last_reviewed }}
         </p>
 
         <div v-if="vendor.self_disclosure" class="mb-6 rounded-lg bg-amber-900/20 border border-amber-500/40 p-4 text-sm text-amber-100">
           <strong class="block mb-1 uppercase tracking-wider text-xs">Conflict of interest disclosure</strong>
           Eurobase OÜ maintains the sovereignty-vendors dataset and is graded on it. If you think this rating is too generous,
-          <a href="https://github.com/STGime/sovereignty-vendors/issues" class="text-accent-blue hover:underline" target="_blank" rel="noopener">open an issue</a>.
+          <a href="https://github.com/STGime/sovereignty-vendors/issues" class="text-amber-ink hover:underline" target="_blank" rel="noopener">open an issue</a>.
           Grading ourselves green while denying others the same grade would destroy the dataset's credibility.
         </div>
 
-        <p class="text-base text-text-light leading-relaxed mb-8">
+        <p class="text-base text-slate leading-relaxed mb-8">
           {{ vendor.one_line_reason.trim() }}
         </p>
 
         <!-- Facts table -->
-        <div class="rounded-xl bg-navy-card border border-navy-light overflow-hidden mb-8">
-          <dl class="divide-y divide-navy-light">
+        <div class="rounded-xl bg-mist border border-line overflow-hidden mb-8">
+          <dl class="divide-y divide-line">
             <div class="grid grid-cols-3 gap-2 p-4 text-sm">
-              <dt class="text-text-muted">Contracting entity</dt>
+              <dt class="text-slate">Contracting entity</dt>
               <dd class="col-span-2">{{ vendor.contracting_entity }}</dd>
             </div>
             <div class="grid grid-cols-3 gap-2 p-4 text-sm">
-              <dt class="text-text-muted">Ultimate parent</dt>
+              <dt class="text-slate">Ultimate parent</dt>
               <dd class="col-span-2">{{ vendor.ultimate_parent }} ({{ vendor.parent_jurisdiction }})</dd>
             </div>
             <div v-if="vendor.hosting_regions?.length" class="grid grid-cols-3 gap-2 p-4 text-sm">
-              <dt class="text-text-muted">Hosting regions</dt>
+              <dt class="text-slate">Hosting regions</dt>
               <dd class="col-span-2">{{ vendor.hosting_regions.join(', ') }}</dd>
             </div>
             <div v-if="vendor.subprocessors?.length" class="grid grid-cols-3 gap-2 p-4 text-sm">
-              <dt class="text-text-muted">Subprocessors</dt>
+              <dt class="text-slate">Subprocessors</dt>
               <dd class="col-span-2">
                 <router-link
                   v-for="(s, i) in vendor.subprocessors"
                   :key="s"
                   :to="`/sovereignty-check/vendors/${s}`"
-                  class="text-accent-blue hover:underline"
+                  class="text-amber-ink hover:underline"
                 >{{ s }}<span v-if="i < (vendor.subprocessors!.length - 1)">, </span></router-link>
               </dd>
             </div>
             <div v-if="vendor.transfer_mechanism" class="grid grid-cols-3 gap-2 p-4 text-sm">
-              <dt class="text-text-muted">Transfer mechanism</dt>
+              <dt class="text-slate">Transfer mechanism</dt>
               <dd class="col-span-2">{{ vendor.transfer_mechanism }}</dd>
             </div>
             <div v-if="vendor.operational_access_regions?.length" class="grid grid-cols-3 gap-2 p-4 text-sm">
-              <dt class="text-text-muted">Operational access from</dt>
+              <dt class="text-slate">Operational access from</dt>
               <dd class="col-span-2">{{ vendor.operational_access_regions.join(', ') }}</dd>
             </div>
           </dl>
@@ -123,38 +123,38 @@ watchEffect(() => {
               v-for="alt in vendor.eu_alternatives"
               :key="alt"
               :to="`/sovereignty-check/vendors/${alt}`"
-              class="inline-flex items-center px-3 py-1 rounded-full bg-navy-card border border-navy-light text-sm hover:border-accent-blue transition-colors"
+              class="inline-flex items-center px-3 py-1 rounded-full bg-mist border border-line text-sm hover:border-amber transition-colors"
             >{{ getVendor(alt)?.name ?? alt }}</router-link>
           </div>
         </template>
 
         <!-- Sources -->
         <h2 class="text-lg font-semibold font-heading mb-3">Sources</h2>
-        <ul class="list-disc list-inside space-y-1 text-sm text-text-light mb-8">
+        <ul class="list-disc list-inside space-y-1 text-sm text-slate mb-8">
           <li v-for="src in vendor.sources" :key="src">
             <a
               v-if="src.startsWith('http')"
               :href="src"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-accent-blue hover:underline break-all"
+              class="text-amber-ink hover:underline break-all"
             >{{ src }}</a>
-            <span v-else class="text-text-muted">{{ src }}</span>
+            <span v-else class="text-slate">{{ src }}</span>
           </li>
         </ul>
 
-        <div v-if="vendor.notes" class="rounded-lg bg-navy-card border border-navy-light p-4 text-sm text-text-light">
+        <div v-if="vendor.notes" class="rounded-lg bg-mist border border-line p-4 text-sm text-slate">
           <strong class="block mb-1 uppercase tracking-wider text-xs">Note</strong>
           {{ vendor.notes.trim() }}
         </div>
 
-        <p class="mt-8 text-xs text-text-muted">
+        <p class="mt-8 text-xs text-slate">
           Disagree with this rating?
           <a
             :href="`https://github.com/STGime/sovereignty-vendors/issues/new?title=[${vendor.slug}]%20dispute`"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-accent-blue hover:underline"
+            class="text-amber-ink hover:underline"
           >Open an issue on GitHub</a>
           — we review disputes publicly. Not legal advice.
         </p>

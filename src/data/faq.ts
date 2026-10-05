@@ -45,21 +45,21 @@ export const faq: FaqEntry[] = [
     category: 'Sovereignty & compliance',
     question: 'What is the CLOUD Act and why does it matter for a US-region deployment?',
     answer:
-      'The US CLOUD Act (2018) lets US authorities compel a US-headquartered provider to hand over data anywhere in the world — including data stored in the EU. Picking a US provider\'s "EU region" moves the bytes physically but does not remove the jurisdiction. Microsoft France <a href="/blog/supabase-gdpr-dpa-eu-region" class="text-accent-blue hover:underline">testified under oath to the French Senate</a> in 2025 that they cannot guarantee EU data stays out of that reach. Eurobase removes the exposure by using an Estonian OÜ parent and Scaleway-only infrastructure.',
+      'The US CLOUD Act (2018) lets US authorities compel a US-headquartered provider to hand over data anywhere in the world — including data stored in the EU. Picking a US provider\'s "EU region" moves the bytes physically but does not remove the jurisdiction. Microsoft France <a href="/blog/supabase-gdpr-dpa-eu-region" class="text-amber-ink hover:underline">testified under oath to the French Senate</a> in 2025 that they cannot guarantee EU data stays out of that reach. Eurobase removes the exposure by using an Estonian OÜ parent and Scaleway-only infrastructure.',
   },
   {
     id: 'data-location',
     category: 'Sovereignty & compliance',
     question: 'Where is my data stored?',
     answer:
-      'Scaleway <code class="text-accent-gold">fr-par</code> (Paris, France). Postgres, S3-compatible object storage, and Deno edge functions all run on Scaleway. No AWS, no GCP, no Azure in the critical path. Every sub-processor in our Record of Processing Activities is EU-headquartered.',
+      'Scaleway <code class="text-amber-ink">fr-par</code> (Paris, France). Postgres, S3-compatible object storage, and Deno edge functions all run on Scaleway. No AWS, no GCP, no Azure in the critical path. Every sub-processor in our Record of Processing Activities is EU-headquartered.',
   },
   {
     id: 'dsar-cost',
     category: 'Sovereignty & compliance',
     question: 'How much does a manual DSAR fulfilment cost?',
     answer:
-      'Around $1,500 per request per industry surveys — typically 8–12 hours of engineering time exporting CSVs, searching support tools, and stitching application logs. Volume is up 246% in two years. Eurobase replaces the manual workflow with a one-click console export and a SDK call (<code class="text-accent-gold">eb.auth.exportMyData()</code>) that lets end-users self-serve, rate-limited and audited.',
+      'Around $1,500 per request per industry surveys — typically 8–12 hours of engineering time exporting CSVs, searching support tools, and stitching application logs. Volume is up 246% in two years. Eurobase replaces the manual workflow with a one-click console export and a SDK call (<code class="text-amber-ink">eb.auth.exportMyData()</code>) that lets end-users self-serve, rate-limited and audited.',
   },
   {
     id: 'legal-entity',
@@ -73,14 +73,14 @@ export const faq: FaqEntry[] = [
     category: 'Sovereignty & compliance',
     question: 'Do you provide a signed DPA (Auftragsverarbeitungsvertrag) and an up-to-date sub-processor list?',
     answer:
-      'Yes, on every tier — including Free. Our Data Processing Agreement v2 (Art. 28 GDPR) is accepted click-through when you create your account, which is a valid written form under Art. 28(9). The full text, with Eurobase OÜ\'s legal name, registered address and registry code, the technical and organisational measures, and the live sub-processor annex, is always at <a href="https://console.eurobase.app/legal/dpa" class="text-accent-blue hover:underline">console.eurobase.app/legal/dpa</a> — print it or save it as PDF for your records. The always-current list of authorised sub-processors is at <a href="https://console.eurobase.app/legal/sub-processors" class="text-accent-blue hover:underline">console.eurobase.app/legal/sub-processors</a>, and the per-project Article 30 report in the console Compliance tab lists the ones actually engaged by the features you have enabled. A countersigned copy of the DPA on our letterhead, with the sub-processor list attached, is a paid-tier service: available on Pro and above on request, not on Free.',
+      'Yes, on every tier — including Free. Our Data Processing Agreement v2 (Art. 28 GDPR) is accepted click-through when you create your account, which is a valid written form under Art. 28(9). The full text, with Eurobase OÜ\'s legal name, registered address and registry code, the technical and organisational measures, and the live sub-processor annex, is always at <a href="https://console.eurobase.app/legal/dpa" class="text-amber-ink hover:underline">console.eurobase.app/legal/dpa</a> — print it or save it as PDF for your records. The always-current list of authorised sub-processors is at <a href="https://console.eurobase.app/legal/sub-processors" class="text-amber-ink hover:underline">console.eurobase.app/legal/sub-processors</a>, and the per-project Article 30 report in the console Compliance tab lists the ones actually engaged by the features you have enabled. A countersigned copy of the DPA on our letterhead, with the sub-processor list attached, is a paid-tier service: available on Pro and above on request, not on Free.',
   },
   {
     id: 'operator-access',
     category: 'Sovereignty & compliance',
     question: 'When can your team access customer data, and can I audit it?',
     answer:
-      'Our team is three people, all physically in the EU. Every operator SQL call goes through an authenticated pool that writes to <code class="text-accent-gold">public.data_access_log</code> — every query stamped with actor, source IP, and active Postgres role. You see that table from your own console (Audit tab). We do not process your data content for any purpose other than platform operation. No support-tooling shortcuts that bypass the audit log.',
+      'Our team is three people, all physically in the EU. Every operator SQL call goes through an authenticated pool that writes to <code class="text-amber-ink">public.data_access_log</code> — every query stamped with actor, source IP, and active Postgres role. You see that table from your own console (Audit tab). We do not process your data content for any purpose other than platform operation. No support-tooling shortcuts that bypass the audit log.',
   },
 
   // ── Supabase alternative ──────────────────────────────────────
@@ -89,49 +89,49 @@ export const faq: FaqEntry[] = [
     category: 'Supabase alternative',
     question: 'Is there a Supabase alternative in the EU?',
     answer:
-      'Yes — Eurobase. Same Postgres foundation, same auth + storage + realtime + edge-functions surface, same SDK shape. The difference is the corporate parent (Estonian OÜ vs Delaware) and the infrastructure floor (Scaleway in France vs AWS). See the <a href="/vs/supabase" class="text-accent-blue hover:underline">full comparison</a>.',
+      'Yes — Eurobase. Same Postgres foundation, same auth + storage + realtime + edge-functions surface, same SDK shape. The difference is the corporate parent (Estonian OÜ vs Delaware) and the infrastructure floor (Scaleway in France vs AWS). See the <a href="/vs/supabase" class="text-amber-ink hover:underline">full comparison</a>.',
   },
   {
     id: 'supabase-eu-region-gdpr',
     category: 'Supabase alternative',
     question: 'Is a Supabase EU-region deployment enough for GDPR?',
     answer:
-      'It gets you physical data residency in the EEA and a standard SCC-based DPA — a competent baseline, but not immunity from the CLOUD Act. Because Supabase Inc. is a Delaware corporation using AWS, US authorities can compel data access even for EU-region deployments. <a href="/blog/supabase-gdpr-dpa-eu-region" class="text-accent-blue hover:underline">Read the full post →</a>',
+      'It gets you physical data residency in the EEA and a standard SCC-based DPA — a competent baseline, but not immunity from the CLOUD Act. Because Supabase Inc. is a Delaware corporation using AWS, US authorities can compel data access even for EU-region deployments. <a href="/blog/supabase-gdpr-dpa-eu-region" class="text-amber-ink hover:underline">Read the full post →</a>',
   },
   {
     id: 'supabase-gdpr-compliant',
     category: 'Supabase alternative',
     question: 'Is Supabase GDPR compliant?',
     answer:
-      'Yes in the ordinary sense — Supabase ships a signed DPA, Standard Contractual Clauses, EU regions (Frankfurt, Ireland), and a published sub-processor list. That closes the ticket for most SaaS deployments. The DPO-level caveat is jurisdictional: Supabase Inc. is a Delaware corporation, so US authorities can compel disclosure under the CLOUD Act even for EU-region projects — a DPA is a contract and cannot override that statute. See the <a href="/vs/supabase-gdpr" class="text-accent-blue hover:underline">DPO-eye analysis</a> for what a Supabase deployment covers under Articles 28/30/32 and where an EU-native alternative fits.',
+      'Yes in the ordinary sense — Supabase ships a signed DPA, Standard Contractual Clauses, EU regions (Frankfurt, Ireland), and a published sub-processor list. That closes the ticket for most SaaS deployments. The DPO-level caveat is jurisdictional: Supabase Inc. is a Delaware corporation, so US authorities can compel disclosure under the CLOUD Act even for EU-region projects — a DPA is a contract and cannot override that statute. See the <a href="/vs/supabase-gdpr" class="text-amber-ink hover:underline">DPO-eye analysis</a> for what a Supabase deployment covers under Articles 28/30/32 and where an EU-native alternative fits.',
   },
   {
     id: 'supabase-dpa',
     category: 'Supabase alternative',
     question: 'Does Supabase have a DPA?',
     answer:
-      'Yes. Supabase Inc. publishes a GDPR Data Processing Addendum with Standard Contractual Clauses (Module 2 controller-to-processor, 2021 SCCs). Available via the Supabase dashboard for paid plans and on request otherwise; click-to-accept for standard terms, negotiated for Enterprise. Post-Schrems II, SCCs alone are not sufficient where the recipient country\'s law permits compelled disclosure. See <a href="/vs/supabase-dpa" class="text-accent-blue hover:underline">the DPA anatomy</a> for the sub-processor list, the Article 28 vs 30 distinction, and how the Eurobase DPA (Estonian law, no SCCs required) compares.',
+      'Yes. Supabase Inc. publishes a GDPR Data Processing Addendum with Standard Contractual Clauses (Module 2 controller-to-processor, 2021 SCCs). Available via the Supabase dashboard for paid plans and on request otherwise; click-to-accept for standard terms, negotiated for Enterprise. Post-Schrems II, SCCs alone are not sufficient where the recipient country\'s law permits compelled disclosure. See <a href="/vs/supabase-dpa" class="text-amber-ink hover:underline">the DPA anatomy</a> for the sub-processor list, the Article 28 vs 30 distinction, and how the Eurobase DPA (Estonian law, no SCCs required) compares.',
   },
   {
     id: 'migrate-from-supabase',
     category: 'Supabase alternative',
     question: 'How do I migrate from Supabase to Eurobase?',
     answer:
-      'Use the CLI: <code class="text-accent-gold">eurobase import supabase assess</code> for a read-only report against your existing project, then <code class="text-accent-gold">eurobase import supabase schema | data | storage | functions</code> to move each surface. Auth-user import is next. Reads your Supabase project directly and emits an executable plan; no rewrites on your app code.',
+      'Use the CLI: <code class="text-amber-ink">eurobase import supabase assess</code> for a read-only report against your existing project, then <code class="text-amber-ink">eurobase import supabase schema | data | storage | functions</code> to move each surface. Auth-user import is next. Reads your Supabase project directly and emits an executable plan; no rewrites on your app code.',
   },
   {
     id: 'supabase-js-compat',
     category: 'Supabase alternative',
     question: 'My app is built on the supabase-js client. Do I have to rewrite my client layer?',
     answer:
-      'The honest picture on three levels. (1) <strong>Shape-parity</strong>: <code class="text-accent-gold">@eurobase/sdk</code> mirrors <code class="text-accent-gold">@supabase/supabase-js</code> deliberately — same <code class="text-accent-gold">.from(table).select().eq()</code> chain, same <code class="text-accent-gold">.channel(name).on(\'postgres_changes\', …)</code> subscribe shape, same auth methods. In practice this is search-replace on imports + package name, not a rewrite of query call sites. (2) <strong>Drop-in <code class="text-accent-gold">supabase-js</code> wire-compat</strong> (same package name, no code change at all) is on the roadmap as a shim package — it removes the "young company" objection entirely. If this would move you off the fence, tell us — customer signal drives the priority. (3) <strong>Zero-SDK escape hatch on Team tier</strong>: a direct Postgres <code class="text-accent-gold">DATABASE_URL</code> means Payload, Prisma, Drizzle, or any Postgres client works without any Eurobase-specific code — the reversibility guarantee then covers your app code too, not just your data.',
+      'The honest picture on three levels. (1) <strong>Shape-parity</strong>: <code class="text-amber-ink">@eurobase/sdk</code> mirrors <code class="text-amber-ink">@supabase/supabase-js</code> deliberately — same <code class="text-amber-ink">.from(table).select().eq()</code> chain, same <code class="text-amber-ink">.channel(name).on(\'postgres_changes\', …)</code> subscribe shape, same auth methods. In practice this is search-replace on imports + package name, not a rewrite of query call sites. (2) <strong>Drop-in <code class="text-amber-ink">supabase-js</code> wire-compat</strong> (same package name, no code change at all) is on the roadmap as a shim package — it removes the "young company" objection entirely. If this would move you off the fence, tell us — customer signal drives the priority. (3) <strong>Zero-SDK escape hatch on Team tier</strong>: a direct Postgres <code class="text-amber-ink">DATABASE_URL</code> means Payload, Prisma, Drizzle, or any Postgres client works without any Eurobase-specific code — the reversibility guarantee then covers your app code too, not just your data.',
   },
   {
     id: 'why-not-firebase',
     category: 'Supabase alternative',
     question: 'How is Eurobase different from Firebase?',
     answer:
-      'Firebase uses Firestore (proprietary NoSQL) on Google Cloud. Eurobase uses PostgreSQL (standard SQL) on Scaleway. No vendor lock-in, no proprietary query language, no Google-owned processor. <a href="/vs/firebase" class="text-accent-blue hover:underline">Full Firebase comparison →</a>',
+      'Firebase uses Firestore (proprietary NoSQL) on Google Cloud. Eurobase uses PostgreSQL (standard SQL) on Scaleway. No vendor lock-in, no proprietary query language, no Google-owned processor. <a href="/vs/firebase" class="text-amber-ink hover:underline">Full Firebase comparison →</a>',
   },
 
   // ── Product & pricing ─────────────────────────────────────────
@@ -161,14 +161,14 @@ export const faq: FaqEntry[] = [
     category: 'Product & pricing',
     question: 'Do Free-tier projects really pause, and what counts as activity?',
     answer:
-      'After 30 days without a request, yes. Activity means a request to your project\'s own endpoint, <code class="text-accent-gold">&lt;slug&gt;.eurobase.app</code> — anything the SDK, REST API, realtime or an edge-function call sends. Scheduled cron jobs running inside the project and console / CLI actions on the platform API do <strong>not</strong> count. Nothing is deleted or archived when a project pauses: the database keeps running, your data stays exactly where it is, and cron jobs keep firing. The only effect is that the first request after a pause takes about 30 seconds while the project flips back to active; every request after that is instant. Pro projects never pause.',
+      'After 30 days without a request, yes. Activity means a request to your project\'s own endpoint, <code class="text-amber-ink">&lt;slug&gt;.eurobase.app</code> — anything the SDK, REST API, realtime or an edge-function call sends. Scheduled cron jobs running inside the project and console / CLI actions on the platform API do <strong>not</strong> count. Nothing is deleted or archived when a project pauses: the database keeps running, your data stays exactly where it is, and cron jobs keep firing. The only effect is that the first request after a pause takes about 30 seconds while the project flips back to active; every request after that is instant. Pro projects never pause.',
   },
   {
     id: 'project-export',
     category: 'Product & pricing',
     question: 'How do I script a full export or nightly backup of a project?',
     answer:
-      'Use the compliance export, which works on every tier including Free. Create a Personal Access Token in the console (Account → Personal Access Tokens; it starts with <code class="text-accent-gold">eb_pat_</code>) and call <code class="text-accent-gold">POST /platform/projects/{id}/compliance/export</code> on <code class="text-accent-gold">api.eurobase.app</code> with <code class="text-accent-gold">Authorization: Bearer &lt;token&gt;</code> and a body of <code class="text-accent-gold">{"format":"json"}</code> or <code class="text-accent-gold">"csv"</code>. The project\'s public / anon key cannot call it — it is a platform endpoint, and the token must belong to an admin of the project. The call returns an export id; poll <code class="text-accent-gold">GET …/compliance/exports/{exportId}</code> until <code class="text-accent-gold">status</code> is <code class="text-accent-gold">completed</code>, then fetch <code class="text-accent-gold">download_url</code> (a presigned link valid for one hour). The ZIP holds every table in your project\'s schema (up to 100,000 rows per table), including the auth <code class="text-accent-gold">users</code> table, plus the project audit log (latest 10,000 entries) and a metadata file, and is kept for 7 days. Uploaded files in storage are not in the archive — pull those through the storage API. Limit: one full export per project per hour, so a nightly job is fine. Every export is written to the audit log. On Free the export is API-only; the one-click button in the console Compliance tab is Pro and above.',
+      'Use the compliance export, which works on every tier including Free. Create a Personal Access Token in the console (Account → Personal Access Tokens; it starts with <code class="text-amber-ink">eb_pat_</code>) and call <code class="text-amber-ink">POST /platform/projects/{id}/compliance/export</code> on <code class="text-amber-ink">api.eurobase.app</code> with <code class="text-amber-ink">Authorization: Bearer &lt;token&gt;</code> and a body of <code class="text-amber-ink">{"format":"json"}</code> or <code class="text-amber-ink">"csv"</code>. The project\'s public / anon key cannot call it — it is a platform endpoint, and the token must belong to an admin of the project. The call returns an export id; poll <code class="text-amber-ink">GET …/compliance/exports/{exportId}</code> until <code class="text-amber-ink">status</code> is <code class="text-amber-ink">completed</code>, then fetch <code class="text-amber-ink">download_url</code> (a presigned link valid for one hour). The ZIP holds every table in your project\'s schema (up to 100,000 rows per table), including the auth <code class="text-amber-ink">users</code> table, plus the project audit log (latest 10,000 entries) and a metadata file, and is kept for 7 days. Uploaded files in storage are not in the archive — pull those through the storage API. Limit: one full export per project per hour, so a nightly job is fine. Every export is written to the audit log. On Free the export is API-only; the one-click button in the console Compliance tab is Pro and above.',
   },
   {
     id: 'auth-methods',
@@ -196,14 +196,14 @@ export const faq: FaqEntry[] = [
     category: 'Product & pricing',
     question: 'Can I fully customize verification, password-reset, and magic-link emails?',
     answer:
-      '<strong>Yes on Pro and above</strong> — subject line and HTML body are independently customizable per template type (<code class="text-accent-gold">verification</code>, <code class="text-accent-gold">password_reset</code>, <code class="text-accent-gold">magic_link</code>). Templates are picked up automatically on every send with no code change. Free tier uses the default templates.',
+      '<strong>Yes on Pro and above</strong> — subject line and HTML body are independently customizable per template type (<code class="text-amber-ink">verification</code>, <code class="text-amber-ink">password_reset</code>, <code class="text-amber-ink">magic_link</code>). Templates are picked up automatically on every send with no code change. Free tier uses the default templates.',
   },
   {
     id: 'backups',
     category: 'Product & pricing',
     question: 'Are automatic backups included?',
     answer:
-      'Free and Pro projects share a pooled Postgres cluster (Scaleway Managed Database, France) with cluster-level snapshots (daily, 7-day retention). Restores go through support. <strong>Per-project restore-from-backup and on-demand snapshots land on the Team tier</strong> — Team gets dedicated Postgres per project with daily scheduled backups (7-day retention) plus customer-triggered on-demand snapshots (take one before a risky migration, tag it, restore it later), and 1 self-service restore per calendar month included (from either source — either counts against the same cap). Legal Team keeps 30-day scheduled backup retention as part of the compliance premium. On every tier you can pull all your data out yourself at any time: the <a href="/faq#project-export" class="text-accent-blue hover:underline">compliance export</a> gives you every table as JSON or CSV in a ZIP, and <code class="text-accent-gold">eurobase db dump</code> prints the schema. Team-tier projects also get a direct <code class="text-accent-gold">DATABASE_URL</code> for a real <code class="text-accent-gold">pg_dump</code>. That reversibility is the first-line guarantee independent of us.',
+      'Free and Pro projects share a pooled Postgres cluster (Scaleway Managed Database, France) with cluster-level snapshots (daily, 7-day retention). Restores go through support. <strong>Per-project restore-from-backup and on-demand snapshots land on the Team tier</strong> — Team gets dedicated Postgres per project with daily scheduled backups (7-day retention) plus customer-triggered on-demand snapshots (take one before a risky migration, tag it, restore it later), and 1 self-service restore per calendar month included (from either source — either counts against the same cap). Legal Team keeps 30-day scheduled backup retention as part of the compliance premium. On every tier you can pull all your data out yourself at any time: the <a href="/faq#project-export" class="text-amber-ink hover:underline">compliance export</a> gives you every table as JSON or CSV in a ZIP, and <code class="text-amber-ink">eurobase db dump</code> prints the schema. Team-tier projects also get a direct <code class="text-amber-ink">DATABASE_URL</code> for a real <code class="text-amber-ink">pg_dump</code>. That reversibility is the first-line guarantee independent of us.',
   },
   {
     id: 'overage-pricing',
@@ -238,7 +238,7 @@ export const faq: FaqEntry[] = [
     category: 'Product & pricing',
     question: 'What happens to my data — and my app code — if Eurobase ceases operations?',
     answer:
-      '<strong>Data reversibility (four lines of defence).</strong> (1) <em>Standard formats</em>: Postgres + S3-compatible = migration to any host (Scaleway direct, OVH, Aiven, self-hosted) is documented, not a rewrite. (2) <em>Export CLI</em>: <code class="text-accent-gold">eurobase export</code> produces a full dump (schema + data + storage + functions). (3) <em>Source is public today</em>: platform code lives on <a href="https://github.com/STGime/euroback" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline">github.com/STGime/euroback</a> under BUSL-1.1, with an Additional Use Grant that permits self-hosting for your own apps and internal tools; each commit auto-converts to Apache 2.0 four years after it lands. SDK + MCP server are MIT. What is not shipped yet is a supported self-host distribution — no packaged installer or reference Terraform — so \'self-host as a real Plan B\' is a source-available-now / supported-later story, not a today story. (4) On shutdown: 90-day notice + 90 additional days of read-only service to finalise export.<br><br><strong>App-code reversibility — the point our earlier answer missed.</strong> Data reversibility does not cover the client layer if your app is bound to a proprietary SDK. Two mitigations: (a) <code class="text-accent-gold">@eurobase/sdk</code> is shape-parity with <code class="text-accent-gold">supabase-js</code>, so migrating away is search-replace on imports, not query-site rewrites (see the <a href="#supabase-js-compat" class="text-accent-blue hover:underline">SDK compatibility FAQ</a>). (b) On <strong>Team tier</strong>, the direct <code class="text-accent-gold">DATABASE_URL</code> means your app can talk to Postgres with Payload / Prisma / Drizzle / <code class="text-accent-gold">psql</code> — no Eurobase code in the client at all — so migration is a hostname change. That is the strongest reversibility guarantee we ship today.',
+      '<strong>Data reversibility (four lines of defence).</strong> (1) <em>Standard formats</em>: Postgres + S3-compatible = migration to any host (Scaleway direct, OVH, Aiven, self-hosted) is documented, not a rewrite. (2) <em>Export CLI</em>: <code class="text-amber-ink">eurobase export</code> produces a full dump (schema + data + storage + functions). (3) <em>Source is public today</em>: platform code lives on <a href="https://github.com/STGime/euroback" target="_blank" rel="noopener noreferrer" class="text-amber-ink hover:underline">github.com/STGime/euroback</a> under BUSL-1.1, with an Additional Use Grant that permits self-hosting for your own apps and internal tools; each commit auto-converts to Apache 2.0 four years after it lands. SDK + MCP server are MIT. What is not shipped yet is a supported self-host distribution — no packaged installer or reference Terraform — so \'self-host as a real Plan B\' is a source-available-now / supported-later story, not a today story. (4) On shutdown: 90-day notice + 90 additional days of read-only service to finalise export.<br><br><strong>App-code reversibility — the point our earlier answer missed.</strong> Data reversibility does not cover the client layer if your app is bound to a proprietary SDK. Two mitigations: (a) <code class="text-amber-ink">@eurobase/sdk</code> is shape-parity with <code class="text-amber-ink">supabase-js</code>, so migrating away is search-replace on imports, not query-site rewrites (see the <a href="#supabase-js-compat" class="text-amber-ink hover:underline">SDK compatibility FAQ</a>). (b) On <strong>Team tier</strong>, the direct <code class="text-amber-ink">DATABASE_URL</code> means your app can talk to Postgres with Payload / Prisma / Drizzle / <code class="text-amber-ink">psql</code> — no Eurobase code in the client at all — so migration is a hostname change. That is the strongest reversibility guarantee we ship today.',
   },
   {
     id: 'team-size-funding',
@@ -254,14 +254,14 @@ export const faq: FaqEntry[] = [
     category: 'Getting started',
     question: 'Is Eurobase in production or still in beta?',
     answer:
-      'In production and open to everyone. Signup is open at <a href="https://console.eurobase.app" class="text-accent-blue hover:underline">console.eurobase.app</a>, with paid Pro live since August 2026. The platform surface — auth, DB, storage, realtime, functions, vault, cron, webhooks, MCP, CLI, compliance — is built and running. Team and Legal Team tiers remain invite-only for now (email <a href="mailto:contact@eurobase.app" class="text-accent-blue hover:underline">contact@eurobase.app</a>).',
+      'In production and open to everyone. Signup is open at <a href="https://console.eurobase.app" class="text-amber-ink hover:underline">console.eurobase.app</a>, with paid Pro live since August 2026. The platform surface — auth, DB, storage, realtime, functions, vault, cron, webhooks, MCP, CLI, compliance — is built and running. Team and Legal Team tiers remain invite-only for now (email <a href="mailto:contact@eurobase.app" class="text-amber-ink hover:underline">contact@eurobase.app</a>).',
   },
   {
     id: 'signup',
     category: 'Getting started',
     question: 'How do I sign up?',
     answer:
-      'Instant signup at <a href="https://console.eurobase.app" class="text-accent-blue hover:underline">console.eurobase.app</a> — no credit card required for Free, €25/mo per project for Pro. Team and Legal Team tiers are invite-only for now.',
+      'Instant signup at <a href="https://console.eurobase.app" class="text-amber-ink hover:underline">console.eurobase.app</a> — no credit card required for Free, €25/mo per project for Pro. Team and Legal Team tiers are invite-only for now.',
   },
   {
     id: 'sdk-languages',
@@ -275,14 +275,14 @@ export const faq: FaqEntry[] = [
     category: 'Getting started',
     question: 'Does Eurobase support AI IDEs like Claude Code or Cursor?',
     answer:
-      'Yes — first-class support via a hosted MCP server. Claude Code, Codex, Cursor, and Windsurf can list tables, run SQL, manage the vault, and invoke functions directly against your project. Setup is one JSON snippet per IDE. <a href="/blog/eurobase-mcp-server-ai-native-sovereign-backend" class="text-accent-blue hover:underline">Read the MCP post →</a>',
+      'Yes — first-class support via a hosted MCP server. Claude Code, Codex, Cursor, and Windsurf can list tables, run SQL, manage the vault, and invoke functions directly against your project. Setup is one JSON snippet per IDE. <a href="/blog/eurobase-mcp-server-ai-native-sovereign-backend" class="text-amber-ink hover:underline">Read the MCP post →</a>',
   },
   {
     id: 'rls-insert-returning',
     category: 'Getting started',
     question: 'Why does my SDK insert fail with "row-level security policy denied this operation" even with WITH CHECK (true)?',
     answer:
-      'This is a Postgres RLS gotcha, not a gateway bug. The SDK executes every insert as <code class="text-accent-gold">INSERT ... RETURNING *</code> so it can return the created row. On <code class="text-accent-gold">RETURNING</code>, Postgres applies RLS <strong>twice</strong>: the INSERT policy\'s <code class="text-accent-gold">WITH CHECK</code> when writing, then the SELECT policy\'s <code class="text-accent-gold">USING</code> when reading the row back. If you have an INSERT policy but no matching SELECT policy, the write rolls back with the same error text as a real INSERT failure — misleading, which is why <code class="text-accent-gold">WITH CHECK (true)</code> did not help. Fix: add a matching SELECT policy, usually with the same predicate. If your INSERT is <code class="text-accent-gold">WITH CHECK (user_id = auth_uid())</code>, add <code class="text-accent-gold">FOR SELECT USING (user_id = auth_uid())</code>. The Table Editor works because it goes through the elevated <code class="text-accent-gold">is_service_role()</code> branch, so tenant RLS does not apply there. Full guide: <a href="https://console.eurobase.app/docs/rls" class="text-accent-blue hover:underline">console.eurobase.app/docs/rls</a>.',
+      'This is a Postgres RLS gotcha, not a gateway bug. The SDK executes every insert as <code class="text-amber-ink">INSERT ... RETURNING *</code> so it can return the created row. On <code class="text-amber-ink">RETURNING</code>, Postgres applies RLS <strong>twice</strong>: the INSERT policy\'s <code class="text-amber-ink">WITH CHECK</code> when writing, then the SELECT policy\'s <code class="text-amber-ink">USING</code> when reading the row back. If you have an INSERT policy but no matching SELECT policy, the write rolls back with the same error text as a real INSERT failure — misleading, which is why <code class="text-amber-ink">WITH CHECK (true)</code> did not help. Fix: add a matching SELECT policy, usually with the same predicate. If your INSERT is <code class="text-amber-ink">WITH CHECK (user_id = auth_uid())</code>, add <code class="text-amber-ink">FOR SELECT USING (user_id = auth_uid())</code>. The Table Editor works because it goes through the elevated <code class="text-amber-ink">is_service_role()</code> branch, so tenant RLS does not apply there. Full guide: <a href="https://console.eurobase.app/docs/rls" class="text-amber-ink hover:underline">console.eurobase.app/docs/rls</a>.',
   },
 ]
 

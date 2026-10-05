@@ -118,19 +118,19 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <main class="pt-24 pb-16 bg-navy min-h-screen">
+  <main class="pt-24 pb-16 bg-paper min-h-screen">
     <!-- Hero -->
     <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-      <RouterLink to="/" class="text-accent-blue text-sm hover:underline mb-6 inline-block">
+      <RouterLink to="/" class="text-amber-ink text-sm hover:underline mb-6 inline-block">
         &larr; Back to home
       </RouterLink>
-      <p class="text-accent-gold font-semibold text-xs uppercase tracking-wider mb-3">
+      <p class="text-amber-ink font-semibold text-xs uppercase tracking-wider mb-3">
         Feature · {{ dsar.subtitle }}
       </p>
-      <h1 class="text-4xl md:text-5xl font-bold text-text-white mb-4 font-heading leading-tight">
+      <h1 class="text-4xl md:text-5xl font-bold text-ink mb-4 font-heading leading-tight">
         {{ dsar.headline }}
       </h1>
-      <p class="text-lg text-text-light leading-relaxed max-w-3xl">
+      <p class="text-lg text-slate leading-relaxed max-w-3xl">
         {{ dsar.description }}
       </p>
     </section>
@@ -138,10 +138,10 @@ onBeforeUnmount(() => {
     <!-- Cost -->
     <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
       <div class="flex items-baseline gap-3 mb-2">
-        <span class="text-accent-red font-semibold text-xs uppercase tracking-wider">The Cost</span>
-        <h2 class="text-text-white font-bold text-2xl font-heading">{{ dsar.cost.title }}</h2>
+        <span class="text-red-ink font-semibold text-xs uppercase tracking-wider">The Cost</span>
+        <h2 class="text-ink font-bold text-2xl font-heading">{{ dsar.cost.title }}</h2>
       </div>
-      <p class="text-text-muted mb-6 max-w-3xl">{{ dsar.cost.description }}</p>
+      <p class="text-slate mb-6 max-w-3xl">{{ dsar.cost.description }}</p>
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
         <StatCard
           v-for="stat in dsar.cost.stats"
@@ -153,9 +153,9 @@ onBeforeUnmount(() => {
           :footnote="stat.footnote"
         />
       </div>
-      <p class="text-xs text-text-muted mt-4">
+      <p class="text-xs text-slate mt-4">
         <sup>[{{ dsar.cost.footnoteSource.id }}]</sup>
-        <a :href="dsar.cost.footnoteSource.url" class="hover:text-accent-blue underline ml-1">
+        <a :href="dsar.cost.footnoteSource.url" class="hover:text-amber-ink underline ml-1">
           {{ dsar.cost.footnoteSource.text }}
         </a>
       </p>
@@ -164,17 +164,17 @@ onBeforeUnmount(() => {
     <!-- Gap -->
     <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
       <div class="flex items-baseline gap-3 mb-2">
-        <span class="text-accent-gold font-semibold text-xs uppercase tracking-wider">The Gap</span>
-        <h2 class="text-text-white font-bold text-2xl font-heading">{{ dsar.gap.title }}</h2>
+        <span class="text-amber-ink font-semibold text-xs uppercase tracking-wider">The Gap</span>
+        <h2 class="text-ink font-bold text-2xl font-heading">{{ dsar.gap.title }}</h2>
       </div>
-      <p class="text-text-muted mb-6 max-w-3xl">{{ dsar.gap.description }}</p>
-      <div class="rounded-lg bg-navy-card overflow-hidden border border-navy-light">
+      <p class="text-slate mb-6 max-w-3xl">{{ dsar.gap.description }}</p>
+      <div class="rounded-lg bg-mist overflow-hidden border border-line">
         <table class="w-full text-sm">
           <thead>
-            <tr class="bg-navy-light/40">
-              <th class="text-left text-text-muted font-semibold px-4 py-3 w-1/4">Platform</th>
-              <th class="text-left text-text-muted font-semibold px-4 py-3 w-1/3">Built-in DSAR?</th>
-              <th class="text-left text-text-muted font-semibold px-4 py-3">What you do instead</th>
+            <tr class="bg-line/40">
+              <th class="text-left text-slate font-semibold px-4 py-3 w-1/4">Platform</th>
+              <th class="text-left text-slate font-semibold px-4 py-3 w-1/3">Built-in DSAR?</th>
+              <th class="text-left text-slate font-semibold px-4 py-3">What you do instead</th>
             </tr>
           </thead>
           <tbody>
@@ -182,21 +182,21 @@ onBeforeUnmount(() => {
               v-for="(row, i) in dsar.gap.rows"
               :key="row.name"
               :class="[
-                i % 2 ? 'bg-navy-light/10' : '',
-                row.supported ? 'bg-accent-green/5' : '',
+                i % 2 ? 'bg-line/30' : '',
+                row.supported ? 'bg-green-ink/5' : '',
               ]"
             >
-              <td class="px-4 py-3 font-medium border-t border-navy-light/30"
-                :class="row.supported ? 'text-accent-green' : 'text-text-white'"
+              <td class="px-4 py-3 font-medium border-t border-line"
+                :class="row.supported ? 'text-green-ink' : 'text-ink'"
               >
                 {{ row.name }}
               </td>
-              <td class="px-4 py-3 border-t border-navy-light/30"
-                :class="row.supported ? 'text-accent-green font-semibold' : 'text-accent-red'"
+              <td class="px-4 py-3 border-t border-line"
+                :class="row.supported ? 'text-green-ink font-semibold' : 'text-red-ink'"
               >
                 <span class="mr-2">{{ row.supported ? '✓' : '✗' }}</span>{{ row.status }}
               </td>
-              <td class="px-4 py-3 text-text-muted border-t border-navy-light/30">{{ row.detail }}</td>
+              <td class="px-4 py-3 text-slate border-t border-line">{{ row.detail }}</td>
             </tr>
           </tbody>
         </table>
@@ -206,24 +206,22 @@ onBeforeUnmount(() => {
     <!-- Solution -->
     <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
       <div class="flex items-baseline gap-3 mb-2">
-        <span class="text-accent-blue font-semibold text-xs uppercase tracking-wider">The Answer</span>
-        <h2 class="text-text-white font-bold text-2xl font-heading">{{ dsar.solution.title }}</h2>
+        <span class="text-amber-ink font-semibold text-xs uppercase tracking-wider">The Answer</span>
+        <h2 class="text-ink font-bold text-2xl font-heading">{{ dsar.solution.title }}</h2>
       </div>
-      <p class="text-text-muted mb-6 max-w-3xl">{{ dsar.solution.description }}</p>
+      <p class="text-slate mb-6 max-w-3xl">{{ dsar.solution.description }}</p>
       <div class="grid md:grid-cols-2 gap-5">
-        <!-- Inlined dark card (was AccentCard) — AccentCard went light in
-             the Daylight redesign; this page converts in redesign PR 2. -->
         <div
           v-for="bullet in dsar.solution.bullets"
           :key="bullet.title"
-          class="relative rounded-lg bg-navy-card overflow-hidden"
+          class="relative rounded-lg bg-mist overflow-hidden"
         >
-          <div class="absolute left-0 top-0 w-1 h-full bg-accent-blue" />
+          <div class="absolute left-0 top-0 w-1 h-full bg-amber" />
           <div class="p-6 flex gap-3">
-            <span class="text-accent-blue text-lg leading-none mt-0.5">✓</span>
+            <span class="text-amber-ink text-lg leading-none mt-0.5">✓</span>
             <div>
-              <p class="text-text-white font-semibold mb-1">{{ bullet.title }}</p>
-              <p class="text-text-muted text-sm leading-relaxed">{{ bullet.body }}</p>
+              <p class="text-ink font-semibold mb-1">{{ bullet.title }}</p>
+              <p class="text-slate text-sm leading-relaxed">{{ bullet.body }}</p>
             </div>
           </div>
         </div>
@@ -232,12 +230,12 @@ onBeforeUnmount(() => {
 
     <!-- API surface -->
     <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-      <h2 class="text-text-white font-bold text-2xl font-heading mb-4">In code</h2>
-      <p class="text-text-muted mb-6 max-w-3xl">
+      <h2 class="text-ink font-bold text-2xl font-heading mb-4">In code</h2>
+      <p class="text-slate mb-6 max-w-3xl">
         End-users can self-serve. Operators can trigger a per-user or full-project export from the console or the platform API. All paths are audit-logged.
       </p>
-      <div class="rounded-lg bg-navy-card border border-navy-light overflow-hidden">
-        <pre class="p-6 text-sm text-text-light leading-relaxed overflow-x-auto"><code>// Article 15 — end-user exports their own data via the SDK
+      <div class="rounded-lg bg-mist border border-line overflow-hidden">
+        <pre class="p-6 text-sm text-slate leading-relaxed overflow-x-auto"><code>// Article 15 — end-user exports their own data via the SDK
 const { data: req } = await eb.auth.exportMyData('json')
 
 // Article 20 — operator triggers a per-user export (single subject)
@@ -251,8 +249,8 @@ POST /platform/projects/{id}/compliance/exports</code></pre>
 
     <!-- CTA -->
     <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold text-text-white mb-4 font-heading">Built in. Audit-trailed. EU-only.</h2>
-      <p class="text-text-light mb-8 max-w-xl mx-auto">
+      <h2 class="text-3xl font-bold text-ink mb-4 font-heading">Built in. Audit-trailed. EU-only.</h2>
+      <p class="text-slate mb-8 max-w-xl mx-auto">
         Sign up in a minute and stop hand-rolling DSAR responses the fortnight before launch.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -260,13 +258,13 @@ POST /platform/projects/{id}/compliance/exports</code></pre>
           href="https://console.eurobase.app/login?signup=1"
           target="_blank"
           rel="noopener"
-          class="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-accent-blue hover:bg-accent-blue-hover text-white font-semibold transition-colors"
+          class="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-amber hover:bg-amber-hover text-ink font-semibold transition-colors"
         >
           Sign up free
         </a>
         <RouterLink
           to="/blog/compliance-tab-dsar-ropa-audit-log"
-          class="inline-flex items-center justify-center px-8 py-3 rounded-lg border border-navy-light text-text-light hover:text-text-white hover:border-text-muted transition-colors"
+          class="inline-flex items-center justify-center px-8 py-3 rounded-lg border border-line text-slate hover:text-ink hover:border-slate transition-colors"
         >
           Read: The $1,500 GDPR Tax
         </RouterLink>

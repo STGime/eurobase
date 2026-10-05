@@ -169,28 +169,28 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <main class="pt-24 pb-16 bg-navy min-h-screen">
+  <main class="pt-24 pb-16 bg-paper min-h-screen">
     <template v-if="comparison">
       <!-- Hero -->
       <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <RouterLink to="/" class="text-accent-blue text-sm hover:underline mb-6 inline-block">&larr; Back to home</RouterLink>
-        <h1 class="text-4xl md:text-5xl font-bold text-text-white mb-4 font-heading leading-tight">
+        <RouterLink to="/" class="text-amber-ink text-sm hover:underline mb-6 inline-block">&larr; Back to home</RouterLink>
+        <h1 class="text-4xl md:text-5xl font-bold text-ink mb-4 font-heading leading-tight">
           {{ comparison.heroHeadline }}
         </h1>
-        <p class="text-xl text-accent-gold max-w-2xl">{{ comparison.heroSubheadline }}</p>
+        <p class="text-xl text-amber-ink max-w-2xl">{{ comparison.heroSubheadline }}</p>
       </section>
 
       <!-- Context sections -->
       <section v-for="(section, i) in comparison.sections" :key="i" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <h2 class="text-2xl font-bold text-text-white mb-3 font-heading">{{ section.title }}</h2>
-        <p class="text-text-light leading-relaxed">{{ section.description }}</p>
+        <h2 class="text-2xl font-bold text-ink mb-3 font-heading">{{ section.title }}</h2>
+        <p class="text-slate leading-relaxed">{{ section.description }}</p>
         <!-- Optional extra paragraphs (long-form comparisons carry
              multiple to hit depth targets Google needs to move
              /vs/* pages from page 2 to page 1). -->
         <p
           v-for="(para, pi) in section.paragraphs || []"
           :key="`p-${pi}`"
-          class="text-text-light leading-relaxed mt-4"
+          class="text-slate leading-relaxed mt-4"
         >
           {{ para }}
         </p>
@@ -204,9 +204,9 @@ onBeforeUnmount(() => {
           <li
             v-for="(bullet, bi) in section.bullets"
             :key="`b-${bi}`"
-            class="flex items-start gap-3 text-text-light leading-relaxed"
+            class="flex items-start gap-3 text-slate leading-relaxed"
           >
-            <span class="text-accent-blue mt-1 text-xs flex-shrink-0">&#9656;</span>
+            <span class="text-amber-ink mt-1 text-xs flex-shrink-0">&#9656;</span>
             <span>{{ bullet }}</span>
           </li>
         </ul>
@@ -215,20 +215,20 @@ onBeforeUnmount(() => {
              just finished the relevant section (not buried at the end
              of the whole page in relatedLinks). -->
         <p v-if="section.readMore" class="mt-4">
-          <RouterLink :to="section.readMore.href" class="text-accent-blue hover:underline font-medium">{{ section.readMore.text }} →</RouterLink>
+          <RouterLink :to="section.readMore.href" class="text-amber-ink hover:underline font-medium">{{ section.readMore.text }} →</RouterLink>
         </p>
       </section>
 
       <!-- Comparison Table -->
       <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <h2 class="text-2xl font-bold text-text-white mb-6 font-heading">Feature comparison</h2>
-        <div class="overflow-x-auto rounded-lg border border-navy-light">
+        <h2 class="text-2xl font-bold text-ink mb-6 font-heading">Feature comparison</h2>
+        <div class="overflow-x-auto rounded-lg border border-line">
           <table class="w-full text-sm">
             <thead>
-              <tr class="bg-navy-light/50">
-                <th class="text-left text-text-muted font-semibold px-4 py-3 w-1/3">Feature</th>
-                <th class="text-left text-accent-blue font-semibold px-4 py-3 w-1/3">Eurobase</th>
-                <th class="text-left text-text-muted font-semibold px-4 py-3 w-1/3">{{ comparison.competitor }}</th>
+              <tr class="bg-line/50">
+                <th class="text-left text-slate font-semibold px-4 py-3 w-1/3">Feature</th>
+                <th class="text-left text-amber-ink font-semibold px-4 py-3 w-1/3">Eurobase</th>
+                <th class="text-left text-slate font-semibold px-4 py-3 w-1/3">{{ comparison.competitor }}</th>
               </tr>
             </thead>
             <tbody>
@@ -236,13 +236,13 @@ onBeforeUnmount(() => {
                 v-for="(row, i) in comparison.rows"
                 :key="i"
                 :class="[
-                  i % 2 ? 'bg-navy-light/10' : '',
-                  row.highlight ? 'bg-accent-blue/5' : '',
+                  i % 2 ? 'bg-line/30' : '',
+                  row.highlight ? 'bg-amber/10' : '',
                 ]"
               >
-                <td class="px-4 py-3 text-text-white font-medium border-t border-navy-light/30">{{ row.feature }}</td>
-                <td class="px-4 py-3 text-accent-green border-t border-navy-light/30">{{ row.eurobase }}</td>
-                <td class="px-4 py-3 text-text-muted border-t border-navy-light/30">{{ row.competitor }}</td>
+                <td class="px-4 py-3 text-ink font-medium border-t border-line">{{ row.feature }}</td>
+                <td class="px-4 py-3 text-green-ink border-t border-line">{{ row.eurobase }}</td>
+                <td class="px-4 py-3 text-slate border-t border-line">{{ row.competitor }}</td>
               </tr>
             </tbody>
           </table>
@@ -251,12 +251,12 @@ onBeforeUnmount(() => {
 
       <!-- Sovereignty Section -->
       <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div class="bg-navy-card rounded-xl p-8 border border-navy-light">
-          <h2 class="text-2xl font-bold text-text-white mb-6 font-heading">{{ comparison.sovereigntyHeadline }}</h2>
+        <div class="bg-mist rounded-xl p-8 border border-line">
+          <h2 class="text-2xl font-bold text-ink mb-6 font-heading">{{ comparison.sovereigntyHeadline }}</h2>
           <ul class="space-y-4">
             <li v-for="(point, i) in comparison.sovereigntyPoints" :key="i" class="flex items-start gap-3">
-              <span class="text-accent-blue mt-1 text-xs flex-shrink-0">&#9656;</span>
-              <span class="text-text-light leading-relaxed">{{ point }}</span>
+              <span class="text-amber-ink mt-1 text-xs flex-shrink-0">&#9656;</span>
+              <span class="text-slate leading-relaxed">{{ point }}</span>
             </li>
           </ul>
         </div>
@@ -268,11 +268,11 @@ onBeforeUnmount(() => {
            pages out of orphan-page status by giving them ≥1 non-
            sitemap inbound link from a semantically related page. -->
       <section v-if="comparison.relatedLinks && comparison.relatedLinks.length" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <h2 class="text-xl font-bold text-text-white mb-4 font-heading">Related reading</h2>
+        <h2 class="text-xl font-bold text-ink mb-4 font-heading">Related reading</h2>
         <ul class="space-y-2">
           <li v-for="link in comparison.relatedLinks" :key="link.href">
-            <RouterLink :to="link.href" class="text-accent-blue hover:underline font-medium">{{ link.title }}</RouterLink>
-            <span v-if="link.note" class="text-text-light">&nbsp;— {{ link.note }}</span>
+            <RouterLink :to="link.href" class="text-amber-ink hover:underline font-medium">{{ link.title }}</RouterLink>
+            <span v-if="link.note" class="text-slate">&nbsp;— {{ link.note }}</span>
           </li>
         </ul>
       </section>
@@ -286,19 +286,19 @@ onBeforeUnmount(() => {
         v-if="comparison.faqs && comparison.faqs.length"
         class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16"
       >
-        <h2 class="text-2xl font-bold text-text-white mb-6 font-heading">
+        <h2 class="text-2xl font-bold text-ink mb-6 font-heading">
           {{ comparison.competitor }} vs Eurobase — FAQ
         </h2>
         <div class="space-y-6">
           <div
             v-for="(faq, i) in comparison.faqs"
             :key="i"
-            class="bg-navy-card rounded-xl p-6 border border-navy-light"
+            class="bg-mist rounded-xl p-6 border border-line"
           >
-            <h3 class="text-lg font-semibold text-text-white mb-3 font-heading">
+            <h3 class="text-lg font-semibold text-ink mb-3 font-heading">
               {{ faq.question }}
             </h3>
-            <p class="text-text-light leading-relaxed">{{ faq.answer }}</p>
+            <p class="text-slate leading-relaxed">{{ faq.answer }}</p>
           </div>
         </div>
       </section>
@@ -306,30 +306,30 @@ onBeforeUnmount(() => {
       <!-- Related reading — internal links help SEO and give visitors
            the next step in their evaluation journey. -->
       <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <h2 class="text-2xl font-bold text-text-white mb-6 font-heading">Related reading</h2>
+        <h2 class="text-2xl font-bold text-ink mb-6 font-heading">Related reading</h2>
         <ul class="space-y-3">
           <li>
-            <RouterLink to="/blog/supabase-migration-cli" class="text-accent-blue hover:underline">
+            <RouterLink to="/blog/supabase-migration-cli" class="text-amber-ink hover:underline">
               Move off Supabase in one CLI command — what the migrator does and why teams are asking now &rarr;
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="/blog/supabase-gdpr-dpa-eu-region" class="text-accent-blue hover:underline">
+            <RouterLink to="/blog/supabase-gdpr-dpa-eu-region" class="text-amber-ink hover:underline">
               Supabase GDPR + DPA: what an EU-region deployment actually gets you &rarr;
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="/blog/compliance-tab-dsar-ropa-audit-log" class="text-accent-blue hover:underline">
+            <RouterLink to="/blog/compliance-tab-dsar-ropa-audit-log" class="text-amber-ink hover:underline">
               The $1,500 GDPR Tax: Why DSAR fulfilment belongs in your platform &rarr;
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="/blog/ai-kill-switch-eu-sovereignty" class="text-accent-blue hover:underline">
+            <RouterLink to="/blog/ai-kill-switch-eu-sovereignty" class="text-amber-ink hover:underline">
               The AI kill-switch and the case for EU sovereignty &rarr;
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="/features/dsar" class="text-accent-blue hover:underline">
+            <RouterLink to="/features/dsar" class="text-amber-ink hover:underline">
               How the one-click DSAR feature works &rarr;
             </RouterLink>
           </li>
@@ -338,13 +338,13 @@ onBeforeUnmount(() => {
 
       <!-- CTA -->
       <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold text-text-white mb-4 font-heading">{{ comparison.ctaHeadline }}</h2>
-        <p class="text-text-light mb-8 max-w-xl mx-auto">{{ comparison.ctaDescription }}</p>
+        <h2 class="text-3xl font-bold text-ink mb-4 font-heading">{{ comparison.ctaHeadline }}</h2>
+        <p class="text-slate mb-8 max-w-xl mx-auto">{{ comparison.ctaDescription }}</p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/#cta" class="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-accent-blue hover:bg-accent-blue-hover text-white font-semibold transition-colors">
+          <a href="/#cta" class="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-amber hover:bg-amber-hover text-ink font-semibold transition-colors">
             Get Started Free
           </a>
-          <a href="mailto:founders@eurobase.app" class="inline-flex items-center justify-center px-8 py-3 rounded-lg border border-navy-light text-text-light hover:text-text-white hover:border-text-muted transition-colors">
+          <a href="mailto:founders@eurobase.app" class="inline-flex items-center justify-center px-8 py-3 rounded-lg border border-line text-slate hover:text-ink hover:border-slate transition-colors">
             Talk to the Founders
           </a>
         </div>
@@ -353,8 +353,8 @@ onBeforeUnmount(() => {
 
     <!-- Not found -->
     <div v-else class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-24">
-      <h1 class="text-2xl font-bold text-text-white mb-4">Comparison not found</h1>
-      <RouterLink to="/" class="text-accent-blue hover:underline">Back to home</RouterLink>
+      <h1 class="text-2xl font-bold text-ink mb-4">Comparison not found</h1>
+      <RouterLink to="/" class="text-amber-ink hover:underline">Back to home</RouterLink>
     </div>
   </main>
 </template>

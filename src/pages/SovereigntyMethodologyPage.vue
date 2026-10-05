@@ -5,13 +5,13 @@ usePageTitle('Methodology — Sovereignty Check | Eurobase')
 </script>
 
 <template>
-  <main class="min-h-screen bg-navy-deep text-text-white">
+  <main class="min-h-screen bg-paper text-ink">
     <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 prose prose-invert prose-neutral">
-      <router-link to="/sovereignty-check" class="text-accent-blue text-sm hover:underline mb-6 inline-block no-underline">
+      <router-link to="/sovereignty-check" class="text-amber-ink text-sm hover:underline mb-6 inline-block no-underline">
         &larr; Back to the checker
       </router-link>
       <h1 class="text-3xl md:text-4xl font-bold font-heading mb-2">Methodology</h1>
-      <p class="text-text-muted text-sm mb-8">
+      <p class="text-slate text-sm mb-8">
         How the CLOUD Act Exposure Checker rates vendors. Written so a citing journalist, a reviewing lawyer, or an LLM can decide whether to trust it.
       </p>
 

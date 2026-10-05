@@ -126,30 +126,30 @@ function createdOn(iso: string): string {
 <template>
   <main class="min-h-screen bg-slate-50 text-slate-900">
     <!-- Hero: stays navy so the fixed, transparent site nav is readable. -->
-    <section class="relative overflow-hidden bg-navy text-white">
+    <section class="relative overflow-hidden bg-paper text-ink">
       <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div class="absolute -top-32 left-1/2 h-96 w-[48rem] -translate-x-1/2 rounded-full bg-accent-blue/30 blur-3xl"></div>
-        <div class="absolute -bottom-40 -right-20 h-80 w-80 rounded-full bg-accent-gold/15 blur-3xl"></div>
+        <div class="absolute -top-32 left-1/2 h-96 w-[48rem] -translate-x-1/2 rounded-full bg-amber/30 blur-3xl"></div>
+        <div class="absolute -bottom-40 -right-20 h-80 w-80 rounded-full bg-amber/15 blur-3xl"></div>
       </div>
       <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12">
-        <router-link to="/sovereignty-check" class="inline-flex items-center gap-1 text-sm text-text-light hover:text-white transition-colors">
+        <router-link to="/sovereignty-check" class="inline-flex items-center gap-1 text-sm text-slate hover:text-ink transition-colors">
           &larr; Score another stack
         </router-link>
 
-        <div v-if="loading" class="py-16 text-center text-text-muted" aria-live="polite">Loading report…</div>
+        <div v-if="loading" class="py-16 text-center text-slate" aria-live="polite">Loading report…</div>
 
         <!-- Error state: the hero shrinks to its heading; the card itself
              renders on the light surface below so it doesn't carry the
              hero's decorative weight. -->
         <div v-else-if="error" class="mt-6 pb-2">
-          <p class="text-xs font-semibold uppercase tracking-wider text-accent-gold mb-3">Shared exposure report</p>
+          <p class="text-xs font-semibold uppercase tracking-wider text-amber-ink mb-3">Shared exposure report</p>
           <h1 class="text-3xl md:text-4xl font-bold font-heading">Report unavailable</h1>
         </div>
 
         <template v-else-if="report">
           <div class="mt-6 md:flex md:items-end md:justify-between md:gap-8">
             <div>
-              <p class="text-xs font-semibold uppercase tracking-wider text-accent-gold mb-3">Shared exposure report</p>
+              <p class="text-xs font-semibold uppercase tracking-wider text-amber-ink mb-3">Shared exposure report</p>
               <div class="flex items-center gap-4 flex-wrap">
                 <h1 class="text-5xl md:text-7xl font-bold font-heading leading-none tabular-nums">
                   {{ report.exposure_percent }}%
@@ -161,14 +161,14 @@ function createdOn(iso: string): string {
                   >
                     {{ report.overall }}
                   </span>
-                  <p class="mt-2 text-lg text-text-light">
+                  <p class="mt-2 text-lg text-slate">
                     of this stack is reachable by a US authority
                   </p>
                 </div>
               </div>
-              <p v-if="report.severity_modifier" class="mt-3 text-sm text-text-muted">
+              <p v-if="report.severity_modifier" class="mt-3 text-sm text-slate">
                 Thresholds tightened for
-                <strong class="text-text-light">{{ SEVERITY_LABELS[report.severity_modifier] ?? report.severity_modifier }}</strong>:
+                <strong class="text-slate">{{ SEVERITY_LABELS[report.severity_modifier] ?? report.severity_modifier }}</strong>:
                 amber ratings count as red.
               </p>
             </div>
@@ -176,14 +176,14 @@ function createdOn(iso: string): string {
             <div class="mt-6 md:mt-0 flex flex-wrap items-center gap-3">
               <button
                 type="button"
-                class="inline-flex items-center gap-2 rounded-lg bg-accent-blue px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-accent-blue/25 hover:bg-accent-blue-hover transition-colors cursor-pointer"
+                class="inline-flex items-center gap-2 rounded-lg bg-amber px-5 py-2.5 text-sm font-semibold text-ink shadow-md shadow-amber/25 hover:bg-amber-hover transition-colors cursor-pointer"
                 @click="copyLink"
               >
                 {{ copied ? '✓ Link copied' : 'Copy shareable link' }}
               </button>
               <router-link
                 to="/sovereignty-check"
-                class="inline-flex items-center rounded-lg bg-white/10 ring-1 ring-white/15 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/15 transition-colors"
+                class="inline-flex items-center rounded-lg bg-mist ring-1 ring-line px-5 py-2.5 text-sm font-semibold text-ink hover:bg-line/50 transition-colors"
               >
                 Score another stack
               </router-link>
@@ -191,27 +191,27 @@ function createdOn(iso: string): string {
           </div>
 
           <!-- Score breakdown -->
-          <div class="mt-8 rounded-xl bg-white/5 ring-1 ring-white/10 p-4 md:p-5">
-            <div class="flex h-2.5 overflow-hidden rounded-full bg-white/10" aria-hidden="true">
+          <div class="mt-8 rounded-xl bg-mist ring-1 ring-line p-4 md:p-5">
+            <div class="flex h-2.5 overflow-hidden rounded-full bg-mist" aria-hidden="true">
               <span class="bg-red-500" :style="{ width: pct(report.red_count) }"></span>
               <span class="bg-amber-400" :style="{ width: pct(report.amber_count) }"></span>
               <span class="bg-emerald-500" :style="{ width: pct(report.green_count) }"></span>
             </div>
             <dl class="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
               <div>
-                <dt class="text-[11px] uppercase tracking-wider text-text-muted">Vendors scored</dt>
+                <dt class="text-[11px] uppercase tracking-wider text-slate">Vendors scored</dt>
                 <dd class="mt-0.5 text-xl font-bold font-heading tabular-nums">{{ report.cards.length }}</dd>
               </div>
               <div>
-                <dt class="text-[11px] uppercase tracking-wider text-text-muted">Red · CLOUD Act exposure</dt>
+                <dt class="text-[11px] uppercase tracking-wider text-slate">Red · CLOUD Act exposure</dt>
                 <dd class="mt-0.5 flex items-center gap-2 text-xl font-bold font-heading tabular-nums"><span class="h-2.5 w-2.5 rounded-full bg-red-500"></span>{{ report.red_count }}</dd>
               </div>
               <div>
-                <dt class="text-[11px] uppercase tracking-wider text-text-muted">Amber · mitigations</dt>
+                <dt class="text-[11px] uppercase tracking-wider text-slate">Amber · mitigations</dt>
                 <dd class="mt-0.5 flex items-center gap-2 text-xl font-bold font-heading tabular-nums"><span class="h-2.5 w-2.5 rounded-full bg-amber-400"></span>{{ report.amber_count }}</dd>
               </div>
               <div>
-                <dt class="text-[11px] uppercase tracking-wider text-text-muted">Green · EU jurisdiction</dt>
+                <dt class="text-[11px] uppercase tracking-wider text-slate">Green · EU jurisdiction</dt>
                 <dd class="mt-0.5 flex items-center gap-2 text-xl font-bold font-heading tabular-nums"><span class="h-2.5 w-2.5 rounded-full bg-emerald-500"></span>{{ report.green_count }}</dd>
               </div>
             </dl>
@@ -228,7 +228,7 @@ function createdOn(iso: string): string {
         </p>
         <router-link
           to="/sovereignty-check"
-          class="mt-5 inline-flex items-center px-5 py-2.5 rounded-lg font-semibold text-sm bg-accent-blue text-white shadow-md shadow-accent-blue/25 hover:bg-accent-blue-hover transition-colors"
+          class="mt-5 inline-flex items-center px-5 py-2.5 rounded-lg font-semibold text-sm bg-amber text-ink shadow-md shadow-amber/25 hover:bg-amber-hover transition-colors"
         >
           Start a fresh check →
         </router-link>
@@ -266,7 +266,7 @@ function createdOn(iso: string): string {
         </div>
         <div class="px-5 pb-4 text-xs text-slate-500">
           Each badge is red / amber / green. The overall rating uses the worst dimension (worst-wins).
-          <router-link to="/sovereignty-check/methodology" class="text-accent-blue hover:underline">Read the full methodology →</router-link>
+          <router-link to="/sovereignty-check/methodology" class="text-amber-ink hover:underline">Read the full methodology →</router-link>
         </div>
       </details>
 
@@ -296,7 +296,7 @@ function createdOn(iso: string): string {
           </div>
 
           <h3 class="mt-3 text-[15px] font-semibold leading-snug text-slate-900 line-clamp-2">
-            <router-link :to="`/sovereignty-check/vendors/${card.slug}`" class="hover:text-accent-blue transition-colors">
+            <router-link :to="`/sovereignty-check/vendors/${card.slug}`" class="hover:text-amber-ink transition-colors">
               {{ card.name }}
             </router-link>
           </h3>
@@ -349,7 +349,7 @@ function createdOn(iso: string): string {
           >
             <p class="text-sm text-slate-600">
               Instead of
-              <router-link :to="`/sovereignty-check/vendors/${swap.from_slug}`" class="font-semibold text-slate-900 hover:text-accent-blue">
+              <router-link :to="`/sovereignty-check/vendors/${swap.from_slug}`" class="font-semibold text-slate-900 hover:text-amber-ink">
                 {{ getVendor(swap.from_slug)?.name ?? swap.from_slug }}
               </router-link>
               <span class="ml-1 text-slate-400">· {{ categoryLabel(swap.category) }}</span>
@@ -374,23 +374,23 @@ function createdOn(iso: string): string {
       </p>
 
       <!-- Closing CTA -->
-      <div class="mt-12 rounded-2xl bg-navy text-white p-6 md:p-8 flex items-center justify-between gap-6 flex-wrap">
+      <div class="mt-12 rounded-2xl bg-ink text-white p-6 md:p-8 flex items-center justify-between gap-6 flex-wrap">
         <div>
           <p class="text-lg font-semibold font-heading">Want the green column for your whole backend?</p>
-          <p class="mt-1 text-sm text-text-light">
+          <p class="mt-1 text-sm text-slate">
             Eurobase is Postgres, auth, storage and edge functions on EU-owned infrastructure in France. No US parent, no CLOUD Act reach.
           </p>
         </div>
         <div class="flex flex-wrap gap-3">
           <router-link
             to="/"
-            class="inline-flex items-center px-5 py-2.5 rounded-lg font-semibold text-sm bg-accent-blue text-white shadow-lg shadow-accent-blue/25 hover:bg-accent-blue-hover transition-colors"
+            class="inline-flex items-center px-5 py-2.5 rounded-lg font-semibold text-sm bg-amber text-ink shadow-lg shadow-amber/25 hover:bg-amber-hover transition-colors"
           >
             See Eurobase →
           </router-link>
           <router-link
             to="/sovereignty-check"
-            class="inline-flex items-center px-5 py-2.5 rounded-lg font-semibold text-sm bg-white/10 ring-1 ring-white/15 text-white hover:bg-white/15 transition-colors"
+            class="inline-flex items-center px-5 py-2.5 rounded-lg font-semibold text-sm bg-mist ring-1 ring-line text-ink hover:bg-line/50 transition-colors"
           >
             Score another stack
           </router-link>
@@ -401,7 +401,7 @@ function createdOn(iso: string): string {
         Report <code class="rounded bg-slate-200/70 px-1 py-0.5 text-slate-700">{{ report.hash }}</code>
         <template v-if="createdOn(report.created_at)">generated {{ createdOn(report.created_at) }}.</template>
         Not legal advice — this is a research aid.
-        <router-link to="/sovereignty-check/methodology" class="text-accent-blue hover:underline">Methodology</router-link>.
+        <router-link to="/sovereignty-check/methodology" class="text-amber-ink hover:underline">Methodology</router-link>.
       </p>
     </section>
 
@@ -412,10 +412,10 @@ function createdOn(iso: string): string {
           href="https://github.com/STGime/sovereignty-vendors"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-accent-blue hover:underline"
+          class="text-amber-ink hover:underline"
         >open on GitHub</a>
         under MIT.
-        This tool runs on <router-link to="/" class="text-accent-blue hover:underline">Eurobase</router-link>.
+        This tool runs on <router-link to="/" class="text-amber-ink hover:underline">Eurobase</router-link>.
       </div>
     </footer>
   </main>

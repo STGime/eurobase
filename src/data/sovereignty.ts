@@ -81,14 +81,18 @@ export function vendorsByCategory(): { category: string; label: string; vendors:
 }
 
 // Color helpers — used everywhere ratings show up in the UI.
+// Daylight redesign: every page renders on light surfaces now, so the
+// badge variant uses the same light-tuned colors as ratingChipClass
+// (the old navy-surface classes — text-red-300 etc. — were unreadable
+// on white).
 export function ratingBadgeClass(color: RatingColor): string {
   switch (color) {
     case 'red':
-      return 'bg-red-600/20 text-red-300 border border-red-500/40'
+      return 'bg-red-50 text-red-700 border border-red-200'
     case 'amber':
-      return 'bg-amber-600/20 text-amber-300 border border-amber-500/40'
+      return 'bg-amber-50 text-amber-700 border border-amber-200'
     case 'green':
-      return 'bg-emerald-600/20 text-emerald-300 border border-emerald-500/40'
+      return 'bg-emerald-50 text-emerald-700 border border-emerald-200'
   }
 }
 
@@ -103,10 +107,7 @@ export function ratingLabel(color: RatingColor): string {
   }
 }
 
-// ---- Light-surface helpers (checker landing page) ----------------------
-//
-// The checker landing page renders on a light background; the
-// ratingBadgeClass() variants above are tuned for navy surfaces.
+// ---- Chip/dot variants (checker landing + report pages) ----------------
 
 export function ratingChipClass(color: RatingColor): string {
   switch (color) {
