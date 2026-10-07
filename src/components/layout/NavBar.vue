@@ -11,13 +11,12 @@ const { y } = useWindowScroll()
 const { scrollToSection } = useSmoothScroll()
 const mobileMenuOpen = ref(false)
 
-function handleNav(href: string) {
+function handleNav(event: MouseEvent, href: string) {
   mobileMenuOpen.value = false
-  // Absolute URL (e.g. the docs on console.eurobase.app) — plain navigation.
-  if (/^https?:\/\//.test(href)) {
-    window.location.href = href
-    return
-  }
+  // Absolute URL (e.g. the docs on console.eurobase.app) — let the
+  // browser follow the link so cmd/ctrl-click still opens a new tab.
+  if (/^https?:\/\//.test(href)) return
+  event.preventDefault()
   // Full-path route (e.g. /faq) — hand to the router directly
   // rather than treating as a homepage-section anchor.
   if (href.startsWith('/')) {
@@ -63,7 +62,7 @@ function closeMobileMenu() {
             :key="link.href"
             :href="link.href"
             class="text-sm text-slate hover:text-ink transition-colors"
-            @click.prevent="handleNav(link.href)"
+            @click="handleNav($event, link.href)"
           >
             {{ link.label }}
           </a>
@@ -115,7 +114,7 @@ function closeMobileMenu() {
             :key="link.href"
             :href="link.href"
             class="block text-sm text-slate hover:text-ink transition-colors py-2"
-            @click.prevent="handleNav(link.href)"
+            @click="handleNav($event, link.href)"
           >
             {{ link.label }}
           </a>
