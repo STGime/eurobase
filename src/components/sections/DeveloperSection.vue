@@ -3,6 +3,7 @@ import { developer } from '@/data/content'
 import { useScrollReveal } from '@/composables/useScrollReveal'
 import SectionHeading from '@/components/ui/SectionHeading.vue'
 import CodeBlock from '@/components/ui/CodeBlock.vue'
+import CtaButton from '@/components/ui/CtaButton.vue'
 
 const { elementRef, isVisible } = useScrollReveal()
 </script>
@@ -44,6 +45,15 @@ const { elementRef, isVisible } = useScrollReveal()
             <p v-for="line in developer.footer" :key="line" class="text-slate text-sm italic">
               {{ line }}
             </p>
+          </div>
+
+          <div
+            class="mt-8"
+            :class="isVisible ? 'animate-fade-in-up stagger-7' : 'opacity-0'"
+          >
+            <CtaButton variant="secondary" href="https://console.eurobase.app/docs">
+              Read the docs &rarr;
+            </CtaButton>
           </div>
         </div>
       </div>

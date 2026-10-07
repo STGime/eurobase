@@ -2014,13 +2014,12 @@ export const nav = {
     { label: 'Problem', href: '#problem' },
     { label: 'Solution', href: '#solution' },
     { label: 'For Developers', href: '#developers' },
-    { label: 'Market', href: '#market' },
     { label: 'Pricing', href: '#pricing' },
     { label: 'Blog', href: '#blog' },
-    { label: 'Founder', href: '/founder' },
-    // Full-path routes — NavBar's handleNav dispatches on the
-    // leading '/' vs '#' so these route via vue-router instead of
-    // scroll-to-section.
+    { label: 'Docs', href: 'https://console.eurobase.app/docs' },
+    // NavBar's handleNav dispatches on the href: 'https://…' is a plain
+    // navigation (Docs), a leading '/' routes via vue-router, '#' scrolls
+    // to a homepage section.
     //
     // "Trust" surfaces /security (security + German legal-tech
     // dossier) into the top nav — matches the competitor
