@@ -13,6 +13,11 @@ const mobileMenuOpen = ref(false)
 
 function handleNav(href: string) {
   mobileMenuOpen.value = false
+  // Absolute URL (e.g. the docs on console.eurobase.app) — plain navigation.
+  if (/^https?:\/\//.test(href)) {
+    window.location.href = href
+    return
+  }
   // Full-path route (e.g. /faq) — hand to the router directly
   // rather than treating as a homepage-section anchor.
   if (href.startsWith('/')) {

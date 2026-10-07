@@ -44,6 +44,7 @@
           <ul class="space-y-2">
             <li><a href="/#enterprise" class="text-text-muted text-sm hover:text-text-white transition-colors">Enterprise</a></li>
             <li><a href="/#market" class="text-text-muted text-sm hover:text-text-white transition-colors">Market</a></li>
+            <li><RouterLink to="/founder" class="text-text-muted text-sm hover:text-text-white transition-colors">Founder</RouterLink></li>
             <li><a href="mailto:hello@eurobase.app" class="text-text-muted text-sm hover:text-text-white transition-colors">Contact</a></li>
           </ul>
         </div>
