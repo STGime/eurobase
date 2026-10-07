@@ -2014,7 +2014,6 @@ export const nav = {
     { label: 'Problem', href: '#problem' },
     { label: 'Solution', href: '#solution' },
     { label: 'For Developers', href: '#developers' },
-    { label: 'Market', href: '#market' },
     { label: 'Pricing', href: '#pricing' },
     { label: 'Blog', href: '#blog' },
     { label: 'Founder', href: '/founder' },
