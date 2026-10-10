@@ -263,7 +263,7 @@ export const enterprise = {
     { name: 'AES-256 encrypted vault for secrets and API keys', icon: '\uD83D\uDEE1\uFE0F' },
     { name: 'Row-level security with preset policies', icon: '\uD83D\uDD12' },
   ],
-  footer: 'This is backend infrastructure your compliance team can approve.',
+  footer: 'DPA, sub-processor register, and audit evidence, ready when procurement asks.',
   valueProp: [
     { title: 'For Developers', description: 'Launch apps in minutes without touching infrastructure \u2014 like Firebase, but privacy-first and EU-native.', color: '#1565C0' },
     { title: 'For Enterprises & GovTech', description: 'A modern backend that satisfies strict EU regulatory, sovereignty, and compliance requirements.', color: '#00695C' },
