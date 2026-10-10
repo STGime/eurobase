@@ -47,7 +47,6 @@ const { elementRef, isVisible } = useScrollReveal()
             :is="'href' in feature && feature.href ? 'a' : 'div'"
             v-bind="'href' in feature && feature.href ? { href: feature.href, target: '_blank', rel: 'noopener noreferrer', class: 'block hover:opacity-80 transition-opacity' } : {}"
           >
-            <div class="text-3xl mb-3">{{ feature.icon }}</div>
             <h3 class="text-ink font-semibold mb-1">
               {{ feature.name }}<span v-if="'href' in feature && feature.href" class="ml-1 text-slate text-xs">↗</span>
             </h3>

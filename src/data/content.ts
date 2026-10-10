@@ -1,5 +1,5 @@
 export const hero = {
-  headline: 'Eurobase — The Sovereign, GDPR-Native BaaS for Europe',
+  headline: 'Are you building in Europe?',
   subheadline: 'Auth, database, storage, realtime, functions, plus one-click DSAR export, Article 30 RoPA, and a tamper-evident audit trail — fully EU-native, zero US jurisdiction, zero DevOps.',
   tagline: 'Firebase simplicity. Postgres power. GDPR primitives built in. European sovereignty. Sign up in a minute — no credit card.',
   primaryCta: 'Sign up free',
