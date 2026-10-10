@@ -1,19 +1,16 @@
 <script setup lang="ts">
 import { howItWorks } from '@/data/content'
-import { useScrollReveal } from '@/composables/useScrollReveal'
 import SectionHeading from '@/components/ui/SectionHeading.vue'
 import AccentCard from '@/components/ui/AccentCard.vue'
 
-const { elementRef, isVisible } = useScrollReveal()
 </script>
 
 <template>
-  <section id="how-it-works" aria-labelledby="heading-how-it-works" class="py-24 bg-paper" ref="elementRef">
+  <section id="how-it-works" aria-labelledby="heading-how-it-works" class="py-24 bg-paper">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div :class="isVisible ? 'animate-fade-in-up' : 'opacity-0'">
+      <div>
         <SectionHeading
           id="heading-how-it-works"
-          subtitle="How It Works"
           :heading="howItWorks.headline"
           :description="howItWorks.description"
         />
@@ -25,9 +22,8 @@ const { elementRef, isVisible } = useScrollReveal()
           v-for="(step, i) in howItWorks.steps"
           :key="step.step"
           class="relative"
-          :class="isVisible ? `animate-fade-in-up stagger-${i + 1}` : 'opacity-0'"
         >
-          <AccentCard accent-color="#FFB300" accent-position="top">
+          <AccentCard>
             <div class="text-center">
               <span class="w-12 h-12 rounded-full bg-amber text-ink text-2xl font-bold font-heading mb-3 mx-auto flex items-center justify-center">
                 {{ step.step }}
@@ -46,7 +42,7 @@ const { elementRef, isVisible } = useScrollReveal()
       </div>
 
       <!-- Platform layers -->
-      <div :class="isVisible ? 'animate-fade-in-up stagger-4' : 'opacity-0'">
+      <div>
         <p class="text-slate text-sm mb-4">Under the hood, Eurobase provides:</p>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           <div

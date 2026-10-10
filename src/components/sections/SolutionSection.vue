@@ -1,19 +1,16 @@
 <script setup lang="ts">
 import { solution } from '@/data/content'
-import { useScrollReveal } from '@/composables/useScrollReveal'
 import SectionHeading from '@/components/ui/SectionHeading.vue'
 import AccentCard from '@/components/ui/AccentCard.vue'
 
-const { elementRef, isVisible } = useScrollReveal()
 </script>
 
 <template>
   <section id="solution" aria-labelledby="heading-solution" class="pt-12 pb-24 bg-mist">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref="elementRef">
-      <div :class="isVisible ? 'animate-fade-in-up' : 'opacity-0'">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div>
         <SectionHeading
           id="heading-solution"
-          subtitle="The Solution"
           :heading="solution.headline"
           :description="solution.description"
         />
@@ -23,9 +20,8 @@ const { elementRef, isVisible } = useScrollReveal()
         <AccentCard
           v-for="(feature, i) in solution.features"
           :key="feature.name"
-          accent-color="#FFB300"
-          accent-position="top"
-          :class="isVisible ? `animate-fade-in-up stagger-${i + 1}` : 'opacity-0'"
+         
+         
         >
           <!-- Coming-soon badge for features that have landed in code
                but not yet been validated end-to-end. Kept as a visible
@@ -47,7 +43,6 @@ const { elementRef, isVisible } = useScrollReveal()
             :is="'href' in feature && feature.href ? 'a' : 'div'"
             v-bind="'href' in feature && feature.href ? { href: feature.href, target: '_blank', rel: 'noopener noreferrer', class: 'block hover:opacity-80 transition-opacity' } : {}"
           >
-            <div class="text-3xl mb-3">{{ feature.icon }}</div>
             <h3 class="text-ink font-semibold mb-1">
               {{ feature.name }}<span v-if="'href' in feature && feature.href" class="ml-1 text-slate text-xs">↗</span>
             </h3>
@@ -58,7 +53,6 @@ const { elementRef, isVisible } = useScrollReveal()
 
       <div
         class="mt-12 text-center"
-        :class="isVisible ? 'animate-fade-in-up stagger-7' : 'opacity-0'"
       >
         <p v-for="line in solution.footer" :key="line" class="text-slate text-lg">
           {{ line }}

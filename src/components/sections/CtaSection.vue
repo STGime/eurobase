@@ -1,21 +1,12 @@
 <script setup lang="ts">
 import { cta } from '@/data/content'
-import { useScrollReveal } from '@/composables/useScrollReveal'
 
-const { elementRef, isVisible } = useScrollReveal()
 </script>
 
 <template>
-  <section id="cta" aria-labelledby="heading-cta" class="py-24 bg-ink relative overflow-hidden" ref="elementRef">
-    <!-- Background accents -->
-    <div class="absolute inset-0">
-      <div class="absolute top-0 left-1/4 w-96 h-96 bg-amber/10 rounded-full blur-3xl" />
-      <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-amber/5 rounded-full blur-3xl" />
-    </div>
-
+  <section id="cta" aria-labelledby="heading-cta" class="py-24 bg-ink relative overflow-hidden">
     <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <div :class="isVisible ? 'animate-fade-in-up' : 'opacity-0'">
-        <p class="text-amber font-semibold text-sm uppercase tracking-wider mb-4">Get Started</p>
+      <div>
         <h2 id="heading-cta" class="text-3xl md:text-4xl font-bold text-text-white mb-4 font-heading">
           {{ cta.headline }}
         </h2>
@@ -26,7 +17,6 @@ const { elementRef, isVisible } = useScrollReveal()
 
       <div
         class="max-w-md mx-auto mb-8"
-        :class="isVisible ? 'animate-fade-in-up stagger-2' : 'opacity-0'"
       >
         <a
           href="https://console.eurobase.app/login?signup=1"
@@ -38,24 +28,9 @@ const { elementRef, isVisible } = useScrollReveal()
         </a>
       </div>
 
-      <!-- Trust badges -->
-      <div
-        class="mt-12 flex flex-wrap items-center justify-center gap-6"
-        :class="isVisible ? 'animate-fade-in-up stagger-4' : 'opacity-0'"
-      >
-        <span class="text-xs text-text-muted flex items-center gap-1.5">
-          <span class="text-accent-green">&#10003;</span> 100% EU-Owned
-        </span>
-        <span class="text-xs text-text-muted flex items-center gap-1.5">
-          <span class="text-accent-green">&#10003;</span> GDPR-Native
-        </span>
-        <span class="text-xs text-text-muted flex items-center gap-1.5">
-          <span class="text-accent-green">&#10003;</span> No CLOUD Act Exposure
-        </span>
-        <span class="text-xs text-text-muted flex items-center gap-1.5">
-          <span class="text-accent-green">&#10003;</span> Schrems II-Safe
-        </span>
-      </div>
+      <p class="mt-12 text-xs text-text-muted">
+        100% EU-owned · GDPR-native · no CLOUD Act exposure · Schrems II-safe
+      </p>
     </div>
 
   </section>

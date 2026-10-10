@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { blog } from '@/data/content'
-import { useScrollReveal } from '@/composables/useScrollReveal'
 import SectionHeading from '@/components/ui/SectionHeading.vue'
 
-const { elementRef, isVisible } = useScrollReveal()
 
 // Strict newest-first ordering. We used to pin a specific slug on top
 // to promote a high-intent SEO piece, but chronological order is
@@ -21,12 +19,11 @@ function formatDate(dateStr: string) {
 </script>
 
 <template>
-  <section id="blog" aria-labelledby="heading-blog" class="py-24 bg-paper" ref="elementRef">
+  <section id="blog" aria-labelledby="heading-blog" class="py-24 bg-paper">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center" :class="isVisible ? 'animate-fade-in-up' : 'opacity-0'">
+      <div class="text-center">
         <SectionHeading
           id="heading-blog"
-          subtitle="Blog"
           :heading="blog.headline"
           :description="blog.description"
           class="mx-auto"
@@ -39,7 +36,6 @@ function formatDate(dateStr: string) {
           :key="post.slug"
           :to="`/blog/${post.slug}`"
           class="group bg-paper rounded-lg border border-line shadow-sm overflow-hidden hover:border-amber/60 transition-all duration-300 hover:shadow-lg hover:shadow-amber/10"
-          :class="isVisible ? `animate-fade-in-up stagger-${i + 1}` : 'opacity-0'"
         >
           <div class="p-6">
             <div class="flex items-center gap-3 text-xs text-slate mb-3">

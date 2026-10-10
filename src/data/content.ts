@@ -1,13 +1,13 @@
 export const hero = {
-  headline: 'Eurobase — The Sovereign, GDPR-Native BaaS for Europe',
-  subheadline: 'Auth, database, storage, realtime, functions, plus one-click DSAR export, Article 30 RoPA, and a tamper-evident audit trail — fully EU-native, zero US jurisdiction, zero DevOps.',
-  tagline: 'Firebase simplicity. Postgres power. GDPR primitives built in. European sovereignty. Sign up in a minute — no credit card.',
+  headline: 'Are you building in Europe?',
+  subheadline: 'Auth, database, storage, realtime, functions, plus one-click DSAR export, Article 30 RoPA, and a tamper-evident audit trail. Everything runs EU-native under European jurisdiction, and there is nothing for you to operate.',
+  tagline: 'The simplicity of Firebase on real Postgres, with GDPR built in and a European owner top to bottom. Sign up in a minute, no credit card.',
   primaryCta: 'Sign up free',
   secondaryCta: 'Explore the Platform',
 }
 
 export const problem = {
-  headline: 'Europe Builds on Infrastructure It Doesn\'t Control',
+  headline: 'Europe builds on infrastructure it doesn\'t control',
   description:
     'Every European app that uses Firebase, Supabase, Vercel, or AWS Amplify runs on a US-owned control plane. The data may live in Frankfurt, but the company that operates the platform, holds the keys, and answers subpoenas is a US corporation. In 2025 the consequences stopped being theoretical.',
 
@@ -114,11 +114,11 @@ export const solution = {
     // are met.
     { name: 'Supabase Migration', icon: '🔀', color: '#3ECF8E', description: 'One-command CLI to import database, auth users, storage, and edge functions from Supabase — coming soon', comingSoon: true },
   ],
-  footer: ['No DevOps required.', 'No sovereignty compromise.'],
+  footer: ['Nothing to operate, and no sovereignty trade-off.'],
 }
 
 export const differentiators = {
-  headline: 'Built for Europe. Built for Developers.',
+  headline: 'Why teams choose Eurobase',
   items: [
     {
       title: '100% EU-Owned',
@@ -150,7 +150,7 @@ export const differentiators = {
 
 export const dsar = {
   subtitle: 'Automated DSAR',
-  headline: 'One click. Article 15 + 20. Built into every project.',
+  headline: 'One-click Article 15 + 20 exports, built into every project',
   description: 'When a user emails "what do you have on me?" (Article 15) or asks for their data on the way out (Article 20), Eurobase turns the answer into a one-click console export. No SQL to write each time. No middleware to maintain. The 30-day deadline stays statutory; the tooling stops being the bottleneck.',
   cost: {
     title: 'The cost of DIY DSAR',
@@ -200,7 +200,7 @@ export const dsar = {
 }
 
 export const developer = {
-  headline: 'Build Fast. Stay Sovereign.',
+  headline: 'The developer experience you already know, under European law',
   description: 'Start a project in minutes with the @eurobase/sdk on npm.',
   code: `import { createClient } from '@eurobase/sdk'
 
@@ -252,7 +252,7 @@ const { data: req } = await eb.auth.exportMyData('json')`,
 }
 
 export const enterprise = {
-  headline: 'Sovereign Infrastructure Without Compromise',
+  headline: 'Infrastructure your compliance team can sign off',
   description: 'Eurobase is built for organizations that need certainty.',
   features: [
     { name: 'European legal governance', icon: '\u2696\uFE0F' },
@@ -263,7 +263,7 @@ export const enterprise = {
     { name: 'AES-256 encrypted vault for secrets and API keys', icon: '\uD83D\uDEE1\uFE0F' },
     { name: 'Row-level security with preset policies', icon: '\uD83D\uDD12' },
   ],
-  footer: 'This is backend infrastructure your compliance team can approve.',
+  footer: 'DPA, sub-processor register, and audit evidence, ready when procurement asks.',
   valueProp: [
     { title: 'For Developers', description: 'Launch apps in minutes without touching infrastructure \u2014 like Firebase, but privacy-first and EU-native.', color: '#1565C0' },
     { title: 'For Enterprises & GovTech', description: 'A modern backend that satisfies strict EU regulatory, sovereignty, and compliance requirements.', color: '#00695C' },
@@ -272,7 +272,7 @@ export const enterprise = {
 }
 
 export const market = {
-  headline: 'The Sovereignty Shift Has Begun',
+  headline: "Europe's cloud market is shifting",
   description: 'The BaaS market is booming \u2014 and Europe has zero sovereign options.',
   stats: [
     { value: '$8.4B', label: 'Global BaaS Market (2024)', detail: '\u2192 $31.1B by 2030', color: '#1565C0', footnote: 1 },
@@ -286,7 +286,7 @@ export const market = {
     { id: 3, text: 'Impossible Cloud \u2014 "Cloud Storage Cost Comparison Europe 2025" (citing industry survey data)', url: 'https://impossiblecloud.com/magazine/cloud-storage-cost-comparison-europe' },
   ],
   euGap: {
-    headline: 'THE EU GAP',
+    headline: 'The EU gap',
     text: 'US hyperscalers control >70% of Europe\'s cloud infrastructure. There is no EU-native BaaS platform. Every major option \u2014 Firebase, Supabase, Amplify \u2014 is US-owned, US-hosted, and subject to the CLOUD Act.',
     stat: '0',
     statLabel: 'EU-native BaaS platforms exist today',
@@ -294,7 +294,7 @@ export const market = {
 }
 
 export const howItWorks = {
-  headline: 'One Platform. Complete Backend.',
+  headline: 'From signup to production in three steps',
   description: 'Developers interact with a single dashboard and API.',
   steps: [
     { step: '01', title: 'Sign Up', description: 'Create your Eurobase project in seconds. No credit card required.', color: '#1565C0' },
@@ -314,7 +314,7 @@ export const howItWorks = {
 }
 
 export const pricing = {
-  headline: 'Built to Grow With You',
+  headline: 'Free to start, predictable as you grow',
   description: 'Free for personal projects, learning, and development. €25/mo per project for commercial use. Team tier for the SMB stack. No surprises, no bait-and-switch.',
   tiers: [
     {
@@ -441,7 +441,7 @@ export const pricing = {
 }
 
 export const cta = {
-  headline: 'Join the Next Generation of European Infrastructure',
+  headline: 'Build on European soil',
   description: 'Sign up in a minute, no credit card required — Free tier is genuinely free, Pro is €25/mo per project.',
   primaryCta: 'Sign up free',
   secondaryCta: 'Talk to the Founders',
@@ -486,7 +486,7 @@ export interface BlogPost {
 }
 
 export const blog = {
-  headline: 'From the Blog',
+  headline: 'From the blog',
   description: 'Thoughts on European data sovereignty, cloud infrastructure, and building for developers.',
   posts: [
     {
