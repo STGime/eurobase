@@ -174,7 +174,7 @@ onBeforeUnmount(() => {
     <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
       <!-- Intro -->
       <div v-if="stage === 'intro'" class="text-center">
-        <p class="text-amber-ink font-semibold text-sm uppercase tracking-wider mb-4">Free assessment · 3 minutes · no signup</p>
+        <p class="text-amber-ink font-semibold text-sm mb-4">Free assessment · 3 minutes · no signup</p>
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-ink mb-6 font-heading leading-tight">
           Score your backend on 10 GDPR obligations
         </h1>
@@ -243,7 +243,7 @@ onBeforeUnmount(() => {
 
       <!-- Report -->
       <div v-else-if="stage === 'report'" class="text-left">
-        <p class="text-amber-ink font-semibold text-sm uppercase tracking-wider mb-4 text-center">Your GDPR posture</p>
+        <p class="text-amber-ink font-semibold text-sm mb-4 text-center">Your GDPR exposure</p>
         <div class="text-center mb-8">
           <div class="text-6xl sm:text-7xl font-bold text-ink font-heading mb-2">
             {{ totalScore }}<span class="text-slate/60 text-3xl sm:text-4xl">/30</span>

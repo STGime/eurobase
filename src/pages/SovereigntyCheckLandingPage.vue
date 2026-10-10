@@ -171,12 +171,9 @@ async function submit() {
     <!-- Hero: stays navy so the fixed, transparent site nav is readable. -->
     <section class="relative overflow-hidden bg-paper text-ink">
       <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div class="absolute -top-32 left-1/2 h-96 w-[48rem] -translate-x-1/2 rounded-full bg-amber/30 blur-3xl"></div>
-        <div class="absolute -bottom-40 -right-20 h-80 w-80 rounded-full bg-amber/15 blur-3xl"></div>
       </div>
       <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-14 text-center">
-        <p class="inline-flex items-center gap-2 rounded-full bg-mist ring-1 ring-line px-3 py-1 text-xs font-semibold uppercase tracking-wider text-amber-ink mb-6">
-          <span aria-hidden="true">⚠️</span>
+        <p class="inline-flex items-center gap-2 rounded-full bg-mist ring-1 ring-line px-3 py-1 text-xs font-semibold text-amber-ink mb-6">
           Firebase / Supabase EU region is not GDPR-safe
         </p>
         <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-4 font-heading">

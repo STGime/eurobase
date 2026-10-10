@@ -128,8 +128,6 @@ function createdOn(iso: string): string {
     <!-- Hero: stays navy so the fixed, transparent site nav is readable. -->
     <section class="relative overflow-hidden bg-paper text-ink">
       <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div class="absolute -top-32 left-1/2 h-96 w-[48rem] -translate-x-1/2 rounded-full bg-amber/30 blur-3xl"></div>
-        <div class="absolute -bottom-40 -right-20 h-80 w-80 rounded-full bg-amber/15 blur-3xl"></div>
       </div>
       <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12">
         <router-link to="/sovereignty-check" class="inline-flex items-center gap-1 text-sm text-slate hover:text-ink transition-colors">

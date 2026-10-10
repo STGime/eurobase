@@ -234,7 +234,7 @@ const nis2Rows: Nis2Row[] = [
                   >Partial</span>
                   <span
                     v-else
-                    class="inline-block rounded-full bg-amber-500/15 text-amber-300 text-[11px] uppercase tracking-wide font-semibold px-2 py-0.5"
+                    class="inline-block rounded-full bg-amber/15 text-amber-ink text-[11px] uppercase tracking-wide font-semibold px-2 py-0.5"
                   >Roadmap</span>
                 </td>
                 <td class="px-4 py-3 text-slate">{{ row.notes }}</td>
