@@ -1,20 +1,17 @@
 <script setup lang="ts">
 import { problem } from '@/data/content'
-import { useScrollReveal } from '@/composables/useScrollReveal'
 import SectionHeading from '@/components/ui/SectionHeading.vue'
 import AccentCard from '@/components/ui/AccentCard.vue'
 import StatCard from '@/components/ui/StatCard.vue'
 
-const { elementRef, isVisible } = useScrollReveal()
 </script>
 
 <template>
-  <section id="problem" aria-labelledby="heading-problem" class="py-24 bg-paper" ref="elementRef">
+  <section id="problem" aria-labelledby="heading-problem" class="py-24 bg-paper">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div :class="isVisible ? 'animate-fade-in-up' : 'opacity-0'">
+      <div>
         <SectionHeading
           id="heading-problem"
-          subtitle="The Problem"
           :heading="problem.headline"
           :description="problem.description"
         />
@@ -28,13 +25,11 @@ const { elementRef, isVisible } = useScrollReveal()
           :label="stat.label"
           :color="stat.color"
           :footnote="stat.footnote"
-          :class="isVisible ? `animate-fade-in-up stagger-${i + 2}` : 'opacity-0'"
         />
       </div>
 
       <div
         class="rounded-xl bg-paper border border-line shadow-sm p-6 md:p-8 mb-10"
-        :class="isVisible ? 'animate-fade-in-up stagger-5' : 'opacity-0'"
       >
         <p class="text-sm font-semibold uppercase tracking-wide text-amber-ink mb-4">
           Foreign jurisdiction is not theoretical — 2025 made that clear
@@ -56,12 +51,8 @@ const { elementRef, isVisible } = useScrollReveal()
         <AccentCard
           v-for="(point, i) in problem.painPoints"
           :key="i"
-          accent-color="#E53935"
-          accent-position="left"
-          :class="isVisible ? `animate-fade-in-up stagger-${i + 2}` : 'opacity-0'"
         >
           <div class="flex items-start gap-3">
-            <span class="text-2xl leading-none mt-0.5" aria-hidden="true">{{ point.icon }}</span>
             <div>
               <p class="text-ink font-semibold mb-2">
                 {{ point.title }}<sup v-if="point.footnote" class="text-slate/70 ml-0.5 text-[10px]">[{{ point.footnote }}]</sup>
@@ -73,14 +64,10 @@ const { elementRef, isVisible } = useScrollReveal()
       </div>
 
       <AccentCard
-        accent-color="#E53935"
-        accent-position="left"
-        :class="isVisible ? 'animate-fade-in-up stagger-4' : 'opacity-0'"
       >
         <p class="text-slate mb-4">Every European team hits the same trade-off:</p>
         <div class="grid md:grid-cols-2 gap-4 mb-6">
           <div v-for="(option, i) in problem.tradeoff" :key="i" class="flex items-start gap-3">
-            <span class="text-red-ink text-lg mt-0.5">{{ i === 0 ? '⚡' : '🛡️' }}</span>
             <p class="text-slate">{{ option }}</p>
           </div>
         </div>
@@ -89,7 +76,6 @@ const { elementRef, isVisible } = useScrollReveal()
 
       <div
         class="mt-12 pt-6 border-t border-line"
-        :class="isVisible ? 'animate-fade-in-up stagger-6' : 'opacity-0'"
       >
         <p class="text-xs uppercase tracking-wide text-slate mb-3 font-semibold">References</p>
         <ol class="space-y-1.5">

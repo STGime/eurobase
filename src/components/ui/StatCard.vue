@@ -42,10 +42,6 @@ watch(isVisible, (visible) => {
     ref="elementRef"
     class="relative rounded-lg bg-paper border border-line shadow-sm overflow-hidden p-6"
   >
-    <!-- Daylight: strip is always amber — the per-stat accent colors
-         (red/purple/blue/...) were retired with the light redesign.
-         The `color` prop stays in the data layer untouched. -->
-    <div class="absolute top-0 left-0 w-full h-1 bg-amber" />
     <p class="text-4xl md:text-5xl font-bold font-heading mb-2 text-ink">
       {{ displayValue }}
     </p>

@@ -1,19 +1,16 @@
 <script setup lang="ts">
 import { market } from '@/data/content'
-import { useScrollReveal } from '@/composables/useScrollReveal'
 import SectionHeading from '@/components/ui/SectionHeading.vue'
 import StatCard from '@/components/ui/StatCard.vue'
 
-const { elementRef, isVisible } = useScrollReveal()
 </script>
 
 <template>
-  <section id="market" aria-labelledby="heading-market" class="py-24 bg-mist" ref="elementRef">
+  <section id="market" aria-labelledby="heading-market" class="py-24 bg-mist">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div :class="isVisible ? 'animate-fade-in-up' : 'opacity-0'">
+      <div>
         <SectionHeading
           id="heading-market"
-          subtitle="Market Opportunity"
           :heading="market.headline"
           :description="market.description"
         />
@@ -24,13 +21,11 @@ const { elementRef, isVisible } = useScrollReveal()
           v-for="(stat, i) in market.stats"
           :key="stat.label"
           v-bind="stat"
-          :class="isVisible ? `animate-fade-in-up stagger-${i + 1}` : 'opacity-0'"
         />
       </div>
 
       <div
         class="flex flex-col md:flex-row gap-5"
-        :class="isVisible ? 'animate-fade-in-up stagger-5' : 'opacity-0'"
       >
         <div class="flex-1 bg-ink rounded-lg p-6 border-l-4 border-amber">
           <p class="text-amber font-bold text-xs uppercase tracking-wider mb-2">{{ market.euGap.headline }}</p>
@@ -45,7 +40,6 @@ const { elementRef, isVisible } = useScrollReveal()
       <!-- Sources -->
       <div
         class="mt-10 pt-6 border-t border-line"
-        :class="isVisible ? 'animate-fade-in-up stagger-6' : 'opacity-0'"
       >
         <p class="text-amber-ink font-bold text-[10px] uppercase tracking-wider mb-3">Sources</p>
         <ol class="space-y-1.5">

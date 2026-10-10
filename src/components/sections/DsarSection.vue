@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { dsar } from '@/data/content'
-import { useScrollReveal } from '@/composables/useScrollReveal'
 import SectionHeading from '@/components/ui/SectionHeading.vue'
 import AccentCard from '@/components/ui/AccentCard.vue'
 import StatCard from '@/components/ui/StatCard.vue'
 
-const { elementRef, isVisible } = useScrollReveal()
 </script>
 
 <template>
@@ -13,20 +11,19 @@ const { elementRef, isVisible } = useScrollReveal()
     id="automated-dsar"
     aria-labelledby="heading-dsar"
     class="py-24 bg-mist"
-    ref="elementRef"
+   
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div :class="isVisible ? 'animate-fade-in-up' : 'opacity-0'">
+      <div>
         <SectionHeading
           id="heading-dsar"
-          :subtitle="dsar.subtitle"
           :heading="dsar.headline"
           :description="dsar.description"
         />
       </div>
 
       <!-- Cost of DIY DSAR -->
-      <div class="mb-12" :class="isVisible ? 'animate-fade-in-up stagger-1' : 'opacity-0'">
+      <div class="mb-12">
         <div class="flex items-baseline gap-3 mb-2">
           <span class="text-red-ink font-semibold text-xs uppercase tracking-wider">The Cost</span>
           <h3 class="text-ink font-bold text-xl font-heading">{{ dsar.cost.title }}</h3>
@@ -52,7 +49,7 @@ const { elementRef, isVisible } = useScrollReveal()
       </div>
 
       <!-- The Gap on other platforms -->
-      <div class="mb-12" :class="isVisible ? 'animate-fade-in-up stagger-2' : 'opacity-0'">
+      <div class="mb-12">
         <div class="flex items-baseline gap-3 mb-2">
           <span class="text-amber-ink font-semibold text-xs uppercase tracking-wider">The Gap</span>
           <h3 class="text-ink font-bold text-xl font-heading">{{ dsar.gap.title }}</h3>
@@ -94,7 +91,7 @@ const { elementRef, isVisible } = useScrollReveal()
       </div>
 
       <!-- Eurobase solution -->
-      <div :class="isVisible ? 'animate-fade-in-up stagger-3' : 'opacity-0'">
+      <div>
         <div class="flex items-baseline gap-3 mb-2">
           <span class="text-amber-ink font-semibold text-xs uppercase tracking-wider">The Answer</span>
           <h3 class="text-ink font-bold text-xl font-heading">{{ dsar.solution.title }}</h3>
@@ -104,9 +101,6 @@ const { elementRef, isVisible } = useScrollReveal()
           <AccentCard
             v-for="(bullet, i) in dsar.solution.bullets"
             :key="bullet.title"
-            accent-color="#FFB300"
-            accent-position="left"
-            :class="isVisible ? `animate-fade-in-up stagger-${i + 3}` : 'opacity-0'"
           >
             <div class="flex gap-3">
               <span class="text-amber-ink text-lg leading-none mt-0.5">✓</span>

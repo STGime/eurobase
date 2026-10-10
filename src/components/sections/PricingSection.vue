@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { pricing } from '@/data/content'
-import { useScrollReveal } from '@/composables/useScrollReveal'
 import SectionHeading from '@/components/ui/SectionHeading.vue'
 
-const { elementRef, isVisible } = useScrollReveal()
 
 // Cell classes for the per-tier matrix. Beta = green italic;
 // "Coming soon" = amber italic; "Invite-only beta" reuses the
@@ -25,12 +23,11 @@ function cellText(value: string | undefined): string {
 </script>
 
 <template>
-  <section id="pricing" aria-labelledby="heading-pricing" class="py-24 bg-mist" ref="elementRef">
+  <section id="pricing" aria-labelledby="heading-pricing" class="py-24 bg-mist">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mx-auto" :class="isVisible ? 'animate-fade-in-up' : 'opacity-0'">
+      <div class="text-center mx-auto">
         <SectionHeading
           id="heading-pricing"
-          subtitle="Pricing"
           :heading="pricing.headline"
           :description="pricing.description"
           class="mx-auto"
@@ -46,9 +43,7 @@ function cellText(value: string | undefined): string {
           :key="tier.name"
           class="relative rounded-lg overflow-hidden flex flex-col"
           :class="[
-            tier.highlighted ? 'bg-paper ring-2 ring-amber shadow-xl shadow-amber/20' : 'bg-paper border border-line shadow-sm',
-            isVisible ? `animate-fade-in-up stagger-${i + 1}` : 'opacity-0'
-          ]"
+            tier.highlighted ? 'bg-paper ring-2 ring-amber shadow-xl shadow-amber/20' : 'bg-paper border border-line shadow-sm']"
         >
           <div v-if="tier.highlighted" class="bg-amber text-ink text-xs font-semibold text-center py-1.5">
             Recommended
@@ -72,7 +67,6 @@ function cellText(value: string | undefined): string {
             Closed beta
           </span>
           <div class="p-6 flex flex-col items-center text-center flex-1">
-            <span class="text-4xl mb-4">{{ tier.icon }}</span>
             <h3 class="text-ink font-bold text-lg font-heading mb-1">{{ tier.name }}</h3>
             <div class="mb-4">
               <span class="text-2xl font-bold font-heading" :class="tier.price === 'Free' ? 'text-amber-ink' : 'text-ink'">{{ tier.price }}</span>
@@ -94,7 +88,6 @@ function cellText(value: string | undefined): string {
            RouterLink so the SPA scroll-to-hash behaviour kicks in. -->
       <p
         class="text-center text-slate text-sm mt-10"
-        :class="isVisible ? 'animate-fade-in-up stagger-5' : 'opacity-0'"
       >
         <span class="text-ink font-semibold">{{ pricing.builtFor.lead }}</span>
         <template v-for="(a, i) in pricing.builtFor.audiences" :key="a.label">
@@ -114,7 +107,6 @@ function cellText(value: string | undefined): string {
            component. -->
       <div
         class="mt-12 max-w-4xl mx-auto rounded-lg border border-line bg-paper shadow-sm p-6"
-        :class="isVisible ? 'animate-fade-in-up stagger-5' : 'opacity-0'"
       >
         <h3 class="text-ink font-heading font-bold text-lg mb-4">{{ pricing.recentShipments.heading }}</h3>
         <ul class="space-y-2">
@@ -142,7 +134,6 @@ function cellText(value: string | undefined): string {
            §147 AO split (10y books, 6y letters) is preserved. -->
       <div
         class="mt-14 max-w-6xl mx-auto"
-        :class="isVisible ? 'animate-fade-in-up stagger-6' : 'opacity-0'"
       >
         <h3 class="text-ink font-heading font-bold text-xl text-center mb-6">{{ pricing.matrix.heading }}</h3>
         <div class="overflow-x-auto rounded-lg border border-line bg-paper shadow-sm">
@@ -183,7 +174,7 @@ function cellText(value: string | undefined): string {
         </div>
       </div>
 
-      <div class="text-center mt-12" :class="isVisible ? 'animate-fade-in-up stagger-6' : 'opacity-0'">
+      <div class="text-center mt-12">
         <p class="text-slate text-sm mb-6">Free tier, no credit card required. Upgrade to Pro any time from the console.</p>
         <a
           href="https://console.eurobase.app/login?signup=1"
