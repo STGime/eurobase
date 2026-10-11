@@ -124,9 +124,6 @@ onBeforeUnmount(() => {
       <RouterLink to="/" class="text-amber-ink text-sm hover:underline mb-6 inline-block">
         &larr; Back to home
       </RouterLink>
-      <p class="text-amber-ink font-semibold text-xs uppercase tracking-wider mb-3">
-        Feature · {{ dsar.subtitle }}
-      </p>
       <h1 class="text-4xl md:text-5xl font-bold text-ink mb-4 font-heading leading-tight">
         {{ dsar.headline }}
       </h1>

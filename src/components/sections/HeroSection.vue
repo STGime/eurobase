@@ -59,25 +59,6 @@ import HeroGlobe from '@/components/HeroGlobe.vue'
           <p class="text-amber-ink font-medium mb-6">
             {{ hero.tagline }}
           </p>
-          <!-- Hero "what's actually new" pill. DSAR is no longer the
-               new thing — it now lives in the differentiators grid
-               (card 3, right after Zero-DevOps). This slot promotes
-               the current shipment: the Legal Team tier for German
-               legal-tech, in closed beta. Points at the dossier
-               section on /security so the click resolves to the
-               dated, evidence-backed page rather than the marketing
-               pricing block. -->
-          <p class="mb-8">
-            <RouterLink
-              to="/security#de-legaltech"
-              class="inline-flex items-center gap-2 text-sm font-semibold text-ink bg-green-ink/5 hover:bg-green-ink/10 border border-green-ink/30 rounded-full px-4 py-2 transition-colors"
-            >
-              <span class="text-green-ink">New</span>
-              <span class="text-slate">·</span>
-              <span>Legal Team tier — §50 BRAO / §257 HGB / §147 AO retention, closed beta for German legal-tech.</span>
-              <span class="text-green-ink">→</span>
-            </RouterLink>
-          </p>
           <div class="flex flex-col sm:flex-row gap-4">
             <a
               href="https://console.eurobase.app/login?signup=1"
