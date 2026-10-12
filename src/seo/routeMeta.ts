@@ -43,6 +43,15 @@ export interface RouteMeta {
 // values render unchanged. Legal-boilerplate pages (privacy/terms/
 // legal) inherit the shell too until they get their own copy.
 const staticRouteMeta: Record<string, Omit<RouteMeta, 'canonical' | 'ogType'>> = {
+  '/integrations/lovable': {
+    title: 'Lovable with an EU backend: connect Lovable to Eurobase',
+    description:
+      'Use Eurobase instead of Lovable Cloud or Supabase as the backend of your Lovable app. Six steps, about 6-7 minutes, with a video. Your data stays in the EU.',
+    ogTitle: 'Lovable with an EU backend: connect Lovable to Eurobase',
+    ogDescription:
+      'Use Eurobase instead of Lovable Cloud or Supabase as the backend of your Lovable app. Six steps, about 6-7 minutes, with a video.',
+    ogImage: `${SITE_ORIGIN}/blog-lovable-eurobase.jpg`,
+  },
   '/faq': {
     title: 'FAQ — Eurobase (EU-sovereign backend)',
     description:

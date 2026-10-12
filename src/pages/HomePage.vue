@@ -2,6 +2,7 @@
 import { onMounted } from 'vue'
 import HeroSection from '@/components/sections/HeroSection.vue'
 import ProblemSection from '@/components/sections/ProblemSection.vue'
+import NewsSection from '@/components/sections/NewsSection.vue'
 import SolutionSection from '@/components/sections/SolutionSection.vue'
 import DsarSection from '@/components/sections/DsarSection.vue'
 import DifferentiatorsSection from '@/components/sections/DifferentiatorsSection.vue'
@@ -37,6 +38,7 @@ onMounted(() => {
 <template>
   <main>
     <HeroSection />
+    <NewsSection />
     <!-- SolutionSection moved to slot 2 so first-scroll shows features
          (Postgres, auth, storage, realtime, edge functions, vault…) —
          Problem section stays in the flow one down for the "why this

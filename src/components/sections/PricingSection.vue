@@ -102,29 +102,6 @@ function cellText(value: string | undefined): string {
         </template>.
       </p>
 
-      <!-- Shipped-recently callout. Data-driven from content.ts so
-           the ledger stays honest and current without touching the
-           component. -->
-      <div
-        class="mt-12 max-w-4xl mx-auto rounded-lg border border-line bg-paper shadow-sm p-6"
-      >
-        <h3 class="text-ink font-heading font-bold text-lg mb-4">{{ pricing.recentShipments.heading }}</h3>
-        <ul class="space-y-2">
-          <li v-for="item in pricing.recentShipments.items" :key="item.label" class="flex gap-3 text-sm">
-            <span class="text-amber-ink shrink-0 mt-0.5">▸</span>
-            <span>
-              <RouterLink
-                v-if="item.href"
-                :to="item.href"
-                class="font-semibold text-ink hover:text-amber-ink hover:underline"
-              >{{ item.label }}</RouterLink>
-              <span v-else class="font-semibold text-ink">{{ item.label }}</span>
-              <span class="text-slate"> — {{ item.detail }}</span>
-            </span>
-          </li>
-        </ul>
-      </div>
-
       <!-- Per-tier feature matrix. Beta cells render green italic;
            "Coming soon" cells render amber italic — matches the
            source-of-truth SvelteKit pricing table so a customer
