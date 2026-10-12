@@ -83,8 +83,8 @@ export const problem = {
 
 // News card, shown on the homepage between the hero and "Meet
 // Eurobase". Newest item first — add new feature announcements at the
-// top of `items`. Items link to a blog post via `href`; the key is
-// deliberately NOT called `slug`, because scripts/build-sitemap.mjs
+// top of `items`. Links are plain `href`s; no key here is called
+// `slug`, deliberately, because scripts/build-sitemap.mjs
 // finds blog posts by regex on `slug: '…'` and would count these too.
 export interface NewsItem {
   tag: string

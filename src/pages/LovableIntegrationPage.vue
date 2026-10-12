@@ -89,8 +89,7 @@ const notes = [
         poster="/blog-lovable-eurobase.jpg"
       />
       <p class="text-sm text-slate mt-3">
-        The video only loads from YouTube when you press play.
-        <a href="https://youtu.be/pG7lmA7A3aE" target="_blank" rel="noopener noreferrer" class="text-amber-ink hover:underline">Open it on YouTube</a>
+        <a href="https://youtu.be/pG7lmA7A3aE" target="_blank" rel="noopener noreferrer" class="text-amber-ink hover:underline">Open the video on YouTube</a>
         if you prefer that.
       </p>
     </section>
@@ -139,7 +138,8 @@ const notes = [
     <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-ink font-bold text-2xl font-heading mb-3">Try it with your next project</h2>
       <p class="text-slate leading-relaxed max-w-3xl mb-6">
-        The free tier is enough to build and test a Lovable app. Every project also gets the GDPR
+        The free tier is enough to build and test a Lovable app. It is for non-commercial use, so
+        once the app earns money you need Pro, which is €25 a month. Every project also gets the GDPR
         tools: the <RouterLink to="/features/dsar" class="text-amber-ink hover:underline">one-click data export</RouterLink>,
         the Article 30 report and the audit log. If something in the setup doesn't work, write to
         <a href="mailto:hello@eurobase.app" class="text-amber-ink hover:underline">hello@eurobase.app</a>
