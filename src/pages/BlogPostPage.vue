@@ -2,6 +2,7 @@
 import { computed, watchEffect, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
 import { blog } from '@/data/content'
+import VideoEmbed from '@/components/ui/VideoEmbed.vue'
 
 const route = useRoute()
 const post = computed(() => blog.posts.find(p => p.slug === route.params.slug))
@@ -212,7 +213,14 @@ function renderMarkdown(md: string): string {
         </div>
       </div>
 
-      <img v-if="post.image" :src="post.image" :alt="post.title" class="w-full rounded-lg mb-8" />
+      <VideoEmbed
+        v-if="post.youtubeId"
+        :youtube-id="post.youtubeId"
+        :title="post.title"
+        :poster="post.image ?? '/og-image.png'"
+        class="mb-8"
+      />
+      <img v-else-if="post.image" :src="post.image" :alt="post.title" class="w-full rounded-lg mb-8" />
 
       <div class="prose-eurobase" v-html="renderMarkdown(post.content)" />
 

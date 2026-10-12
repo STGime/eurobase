@@ -56,7 +56,9 @@ function closeMobileMenu() {
           <span class="text-xl font-bold text-ink font-heading">euro</span><span class="text-xl font-bold text-amber font-heading">base</span>
         </a>
 
-        <div class="hidden md:flex items-center gap-8">
+        <!-- Nine links + two buttons need ~950px, so the full bar starts
+             at lg (tighter gaps until xl); below that it is the menu. -->
+        <div class="hidden lg:flex items-center gap-4 xl:gap-8 whitespace-nowrap">
           <a
             v-for="link in nav.links"
             :key="link.href"
@@ -78,14 +80,14 @@ function closeMobileMenu() {
             href="https://console.eurobase.app/login?signup=1"
             target="_blank"
             rel="noopener"
-            class="inline-flex items-center justify-center px-6 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-amber text-ink hover:bg-amber-hover shadow-lg shadow-amber/30"
+            class="inline-flex items-center justify-center px-4 xl:px-6 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer bg-amber text-ink hover:bg-amber-hover shadow-lg shadow-amber/30"
           >
             Sign up free
           </a>
         </div>
 
         <button
-          class="md:hidden text-ink p-2"
+          class="lg:hidden text-ink p-2"
           @click="mobileMenuOpen = !mobileMenuOpen"
           aria-label="Toggle menu"
         >
@@ -107,7 +109,7 @@ function closeMobileMenu() {
       leave-from-class="opacity-100 translate-y-0"
       leave-to-class="opacity-0 -translate-y-2"
     >
-      <div v-if="mobileMenuOpen" class="md:hidden bg-paper border-t border-line shadow-lg shadow-ink/5">
+      <div v-if="mobileMenuOpen" class="lg:hidden bg-paper border-t border-line shadow-lg shadow-ink/5">
         <div class="px-4 py-4 space-y-3">
           <a
             v-for="link in nav.links"

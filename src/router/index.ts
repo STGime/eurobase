@@ -50,6 +50,11 @@ export const routes: RouteRecordRaw[] = [
     component: () => import('@/pages/DsarFeaturePage.vue'),
   },
   {
+    path: '/integrations/lovable',
+    name: 'integration-lovable',
+    component: () => import('@/pages/LovableIntegrationPage.vue'),
+  },
+  {
     path: '/gdpr-readiness',
     name: 'gdpr-readiness',
     component: () => import('@/pages/GdprReadinessPage.vue'),

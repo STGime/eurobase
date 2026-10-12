@@ -81,6 +81,55 @@ export const problem = {
   ],
 }
 
+// News card, shown on the homepage between the hero and "Meet
+// Eurobase". Newest item first — add new feature announcements at the
+// top of `items`. Items link to a blog post via `href`; the key is
+// deliberately NOT called `slug`, because scripts/build-sitemap.mjs
+// finds blog posts by regex on `slug: '…'` and would count these too.
+export interface NewsItem {
+  tag: string
+  date: string
+  title: string
+  paragraphs: string[]
+  stepsTitle?: string
+  steps?: string[]
+  image: string
+  imageAlt: string
+  primaryLink: { label: string; href: string }
+  secondaryLink?: { label: string; href: string }
+  videoLink?: { label: string; href: string }
+}
+
+export const news = {
+  headline: 'News',
+  description: 'New features and integrations, as they ship.',
+  items: [
+    {
+      tag: 'New integration',
+      date: '2026-10-12',
+      title: 'Eurobase loves Lovable: run your Lovable app on a European backend',
+      paragraphs: [
+        'Lovable is a great product that helps people everywhere create amazing apps. By default it saves your data in Lovable Cloud or Supabase. Both are great products, but neither is 100% EU owned and operated.',
+        'So we made a guide on how to set up your Lovable project to use Eurobase as its backend. It takes about 6-7 minutes, and the Connect page in the Eurobase console fills in every value for you.',
+      ],
+      stepsTitle: 'The setup in six steps',
+      steps: [
+        'Set Lovable Cloud to "Ask each time", so Lovable does not create its own backend',
+        'Copy the three .env lines from Connect → Lovable into your project',
+        'Add the Eurobase skill, which teaches Lovable the Eurobase SDK',
+        'Connect the Eurobase MCP server with a project token',
+        'Allow your app\'s preview and published URLs with one click',
+        'Paste the first prompt and start building',
+      ],
+      image: '/news-eurobase-loves-lovable.jpg',
+      imageAlt: 'Building in Europe? Eurobase loves Lovable. Run your backend on the European BaaS.',
+      primaryLink: { label: 'Set it up', href: '/integrations/lovable' },
+      secondaryLink: { label: 'Read the blog post', href: '/blog/lovable-on-eurobase-eu-backend-setup-guide' },
+      videoLink: { label: 'Watch the video walkthrough', href: 'https://youtu.be/pG7lmA7A3aE' },
+    },
+  ] as NewsItem[],
+}
+
 export const solution = {
   headline: 'Meet Eurobase',
   description: 'Eurobase is a fully European-operated backend platform designed to give developers everything they need to build modern applications — without infrastructure complexity and without exposure to non-European jurisdiction.',
@@ -369,19 +418,6 @@ export const pricing = {
       { label: 'legal-tech startups in Germany', href: '/security#de-legaltech' },
     ],
   },
-  // "Shipped recently" callout — dated, honest ledger of what
-  // landed in the last few weeks. Kept in content.ts so a marketing
-  // edit doesn't require touching component code.
-  recentShipments: {
-    heading: 'Shipped recently',
-    items: [
-      { label: 'Team orgs + SSO enforcement', detail: 'One org per user, auto-attach projects at create, email-notified invites, org-level SSO-only switch. Mix Team + Pro + Free projects under one org.' },
-      { label: 'Payment-first Pro checkout', detail: 'Card details captured before signup — no dangling accounts if the payment fails. Now also carries org_id through to Mollie so a Pro project can be created directly into your org.' },
-      { label: 'Dedicated Postgres on Team', detail: 'Rotatable postgres:// URL for Payload, Prisma, Drizzle, Directus and psql (invite-only beta).' },
-      { label: 'Test-mode billing rehearsal', detail: 'Full Mollie test-mode dry-run of the checkout + invoicing surface before you touch a live card.' },
-      { label: 'Legal Team preview', detail: 'German legal-tech dossier + Legal Team tier backing docs.', href: '/security#de-legaltech' },
-    ],
-  },
   // Per-tier feature matrix rendered under the tier cards. Beta cells
   // render green italic; "Coming soon" cells amber italic; empty cells
   // (undefined) render as an em-dash. Kept data-driven so the copy
@@ -481,6 +517,9 @@ export interface BlogPost {
   author: string
   readTime: string
   image?: string
+  // YouTube video id. When set, BlogPostPage shows a click-to-play
+  // player in place of the header image (the image is its poster).
+  youtubeId?: string
   content: string
   references: { label: string; url: string }[]
 }
@@ -489,6 +528,85 @@ export const blog = {
   headline: 'From the blog',
   description: 'Thoughts on European data sovereignty, cloud infrastructure, and building for developers.',
   posts: [
+    {
+      slug: 'lovable-on-eurobase-eu-backend-setup-guide',
+      title: 'Eurobase loves Lovable: how to run your Lovable app on a European backend',
+      excerpt: 'Lovable saves your data in Lovable Cloud or Supabase by default. Both are great products, but neither is 100% EU owned and operated. This guide shows how to point a Lovable project at Eurobase instead: six steps, about 6-7 minutes, with every value pre-filled in the console. Includes a video walkthrough.',
+      date: '2026-10-12',
+      author: 'Stefan Gimeson',
+      readTime: '4 min read',
+      image: '/blog-lovable-eurobase.jpg',
+      youtubeId: 'pG7lmA7A3aE',
+      content: `[Lovable](https://lovable.dev) is a great product. It helps people everywhere create amazing apps by describing what they want, and a lot of those people have never set up a backend in their life. That is exactly why the default matters.
+
+By default, Lovable saves your data in Lovable Cloud or in Supabase. Both are great products. But Lovable Cloud is built on Supabase, and Supabase is a US company running on AWS, so neither is 100% EU owned and operated. If you are building for European users, that is a question your customers or your DPO will ask sooner or later. We wrote about why an EU region is not the same thing as EU jurisdiction in ["Our Data Deserves a Better Agreement"](/blog/our-data-deserves-a-better-agreement).
+
+So we made a guide on how to set up your Lovable project to use Eurobase as its backend. It takes about 6-7 minutes, and Eurobase makes it really easy for you: the console has a **Connect → Lovable** page where every value is already filled in for your project. You mostly copy and paste.
+
+**Prefer to watch?** I recorded the whole setup, start to finish. It is the video at the top of this page. There is also a shorter reference version of these steps on the [Lovable integration page](/integrations/lovable).
+
+## Before you start
+
+You need a Eurobase project. [Sign up](https://console.eurobase.app/login?signup=1) (free, no credit card), create a project, and open **Connect → Lovable** in the console. Keep that tab open next to Lovable; the six steps below are the same six steps you see there.
+
+## 1. Stop Lovable from creating its own backend
+
+In Lovable, go to **Connectors → Cloud → Manage my agent's permissions** and set **Enable Cloud** to **Ask each time**. If Lovable asks later whether it should enable Cloud, decline. Without this step, the first "add a login" prompt puts your users on Lovable Cloud.
+
+## 2. Copy the environment values
+
+Connect → Lovable shows three lines for your project. Copy them into your Lovable project:
+
+- \`VITE_EUROBASE_URL\` is the address of your project, for example \`https://my-app.eurobase.app\`
+- \`VITE_EUROBASE_PROJECT_ID\` is your project id
+- \`VITE_EUROBASE_PUBLIC_KEY\` is your public key, it starts with \`eb_pk_\`
+
+Only the public key ever goes into Lovable. Never paste a secret key (\`eb_sk_\`) into Lovable or any other app builder. Anything that needs a secret belongs in an edge function.
+
+## 3. Add the Eurobase skill
+
+The skill teaches Lovable how to use \`@eurobase/sdk\` correctly: the right method signatures, row-level security, file privacy, and where secrets belong. Copy \`SKILL.md\` from the Connect page into **Project settings → Knowledge** in Lovable. If you are a workspace owner or admin, you can add it to your workspace skills instead, and then every project can use it.
+
+## 4. Connect the Eurobase MCP server
+
+This lets Lovable see your tables and create new ones. In Lovable, go to **Connectors → + → MCP server** and enter:
+
+- Server URL: \`https://mcp.eurobase.app/mcp\`
+- Authentication: **Bearer token**
+
+The Connect page has a button that creates the token for you. It is a project token with **Developer** access, so Lovable can work in this one project and nothing else.
+
+## 5. Allow your app's URLs
+
+A Lovable app runs on several addresses: two for the preview, one for the published app, one for its shareable preview, and maybe your own domain. Paste your Lovable editor URL and your published URL into the Connect page and click **Add to allowed URLs**. The console works out all of the addresses and adds them to the allowed CORS origins and redirect URLs. Wildcards like \`*.lovable.app\` are not accepted, because anyone can publish there.
+
+## 6. Start building
+
+Copy the first prompt from the Connect page. It tells Lovable to use the Eurobase skill and to use Eurobase instead of Lovable Cloud. Add what you want to build, and send it.
+
+That's it. From here on you work in Lovable the way you always do, and auth, database, storage, realtime and functions run on Eurobase.
+
+## What you get
+
+- **Your data stays in the EU.** Eurobase is operated by an Estonian company and runs on Scaleway in France. No US provider in the path.
+- **GDPR tooling is already there.** One-click DSAR export, the Article 30 report and the audit log come with every project, including Lovable ones. [Here is how that works](/features/dsar).
+- **Real Postgres.** Tables that Lovable creates are normal Postgres tables with row-level security. You can open them in the console's SQL editor at any time.
+
+## Try it
+
+- **[Sign up free](https://console.eurobase.app/login?signup=1)** and open Connect → Lovable
+- **[Watch the video walkthrough](https://youtu.be/pG7lmA7A3aE)**
+- Not sure how exposed your current stack is? **[Take the 60-second sovereignty check](/sovereignty-check)**
+
+If you get stuck anywhere, write to us. We would love to see what you build.
+
+— Stefan`,
+      references: [
+        { label: 'Video: Connect Lovable to Eurobase (YouTube)', url: 'https://youtu.be/pG7lmA7A3aE' },
+        { label: 'Eurobase console — sign up and open Connect → Lovable', url: 'https://console.eurobase.app/login?signup=1' },
+        { label: 'Lovable', url: 'https://lovable.dev' },
+      ],
+    },
     {
       slug: 'sovereignty-check-60-second-cloud-act-audit',
       title: 'Which parts of your stack can a US authority legally reach? A 60-second check',
@@ -2011,6 +2129,7 @@ If you've spotted something we missed — about this class of issue or any other
 
 export const nav = {
   links: [
+    { label: 'News', href: '#news' },
     { label: 'Problem', href: '#problem' },
     { label: 'Solution', href: '#solution' },
     { label: 'For Developers', href: '#developers' },

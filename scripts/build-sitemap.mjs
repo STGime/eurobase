@@ -75,6 +75,7 @@ function lastmodFor(route, paths) {
 const staticRoutes = [
   { path: '/', changefreq: 'weekly', priority: '1.0', src: ['src/pages/HomePage.vue', 'src/components/sections', 'index.html'] },
   { path: '/features/dsar', changefreq: 'monthly', priority: '0.95', src: ['src/pages/DsarFeaturePage.vue'] },
+  { path: '/integrations/lovable', changefreq: 'monthly', priority: '0.9', src: ['src/pages/LovableIntegrationPage.vue'] },
   { path: '/gdpr-readiness', changefreq: 'monthly', priority: '0.95', src: ['src/pages/GdprReadinessPage.vue'] },
   { path: '/sovereignty-check', changefreq: 'monthly', priority: '0.95', src: ['src/pages/SovereigntyCheckLandingPage.vue'] },
   { path: '/sovereignty-check/methodology', changefreq: 'monthly', priority: '0.9', src: ['src/pages/SovereigntyMethodologyPage.vue'] },
