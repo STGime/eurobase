@@ -1,7 +1,7 @@
 export const hero = {
   headline: 'Are you building in Europe?',
   subheadline: 'Auth, database, storage, realtime, functions, plus one-click DSAR export, Article 30 RoPA, and a tamper-evident audit trail. Everything runs EU-native under European jurisdiction, and there is nothing for you to operate.',
-  tagline: 'The simplicity of Firebase on real Postgres, with GDPR built in and a European owner top to bottom. Sign up in a minute, no credit card.',
+  tagline: 'Real Postgres, with GDPR built in and a European owner top to bottom. Sign up in a minute, no credit card.',
   primaryCta: 'Sign up free',
   secondaryCta: 'Explore the Platform',
 }
