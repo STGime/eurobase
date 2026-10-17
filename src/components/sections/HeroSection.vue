@@ -18,27 +18,6 @@ import HeroGlobe from '@/components/HeroGlobe.vue'
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 w-full">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
-          <!--
-            Product Hunt — live-launch featured badge. Swapped in on
-            2026-08-26 (launch day) from the pre-launch "get notified"
-            pill. The badge points at the product page with PH's own
-            badge-attribution UTM string, so upvote flows attribute
-            back to this placement in PH's dashboard.
-          -->
-          <a
-            href="https://www.producthunt.com/products/eurobase?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-eurobase"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-block mb-6"
-          >
-            <img
-              alt="Eurobase - The Sovereign, GDPR-Native BaaS for Europe | Product Hunt"
-              width="250"
-              height="54"
-              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1191233&amp;theme=light&amp;t=1787728446785"
-            />
-          </a>
-
           <!-- Positioning eyebrow — the fear before the fix. Replaces
                the earlier "EU-Native Backend-as-a-Service" line which
                was a feature statement, not a hook. What converts is a
