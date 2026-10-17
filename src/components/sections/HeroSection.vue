@@ -29,8 +29,9 @@ import HeroGlobe from '@/components/HeroGlobe.vue'
           <p class="text-amber-ink font-semibold text-sm mb-4">
             Firebase / Supabase EU region is not GDPR-safe
           </p>
-          <h1 id="hero-heading" class="text-4xl md:text-5xl lg:text-6xl font-bold text-ink leading-tight mb-6 font-heading">
-            {{ hero.headline }}
+          <h1 id="hero-heading" class="font-bold leading-tight mb-6 font-heading">
+            <span class="block text-4xl md:text-5xl lg:text-6xl text-ink">{{ hero.headline }}</span>
+            <span class="block mt-2 text-3xl md:text-4xl lg:text-5xl text-amber-ink">{{ hero.headlineAnswer }}</span>
           </h1>
           <p class="text-lg text-slate leading-relaxed mb-4">
             {{ hero.subheadline }}
