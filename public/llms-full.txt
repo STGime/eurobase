@@ -187,7 +187,7 @@ await euro.db.from('todos').update('row-uuid', { done: true })
 await euro.db.from('todos').delete('row-uuid')
 
 // Raw SQL (via REST)
-POST /v1/db/sql  — body: { query: "SELECT ...", params: [] }
+POST /v1/db/sql  — body: { sql: "SELECT ...", limit: 100 }  (SELECT only; limit optional)
 POST /v1/db/rpc/{function_name} — call a stored procedure
 ```
 
