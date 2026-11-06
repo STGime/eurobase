@@ -60,7 +60,7 @@ const euro = createClient('eurobase://eb_pk_xxx@my-app.eurobase.app')
 
 Two key types:
 - **Public key** (`eb_pk_*`) — safe for client-side code. Used for auth, database reads (with RLS), storage, realtime.
-- **Secret key** (`eb_sk_*`) — server-side only. Required for vault, schema DDL, and bypassing RLS.
+- **Secret key** (`eb_sk_*`) — server-side only. Required for vault and schema DDL. It does NOT skip RLS: it passes a policy only through that policy's `public.is_service_role()` branch. Console RLS presets and imported Supabase policies include it; policies you write yourself must add it (e.g. `USING (public.is_service_role() OR user_id = auth_uid())`).
 
 ---
 
@@ -191,6 +191,14 @@ POST /v1/db/sql  — body: { sql: "SELECT ...", limit: 100 }  (SELECT only; limi
 POST /v1/db/rpc/{function_name} — call a stored procedure
 ```
 
+**RPC access:** any function in your schema can be called with the PUBLIC key; the endpoint doesn't check the key type and GRANT/REVOKE are refused. Policies still apply to tables the function touches. A server-only function must check the caller itself:
+
+```sql
+IF NOT public.is_service_role() THEN RAISE EXCEPTION 'server only'; END IF;
+```
+
+For functions signed-in users may call, check `auth_uid()` (only set when a user token is sent).
+
 ### Schema DDL (requires secret key eb_sk_*)
 
 ```typescript
@@ -235,7 +243,7 @@ POST   /v1/db/{table}            — Insert row
 PATCH  /v1/db/{table}/{id}       — Update row
 DELETE /v1/db/{table}/{id}       — Delete row
 POST   /v1/db/{table}/bulk-delete — Bulk delete
-POST   /v1/db/sql                — Raw SQL query
+POST   /v1/db/sql                — Raw SQL, SELECT only (body: { sql, limit? })
 POST   /v1/db/rpc/{function}     — Call stored procedure
 POST   /v1/db/schema/tables/     — Create table (secret key)
 DELETE /v1/db/schema/tables/{name} — Drop table (secret key)
