@@ -2,9 +2,12 @@
 import { news } from '@/data/content'
 import SectionHeading from '@/components/ui/SectionHeading.vue'
 
-// Home page shows the two newest items only, so the section stays a
-// teaser and "Meet Eurobase" is still close to the top.
-const latest = [...news.items].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 2)
+// Home page shows the two newest items that aren't archived, so the
+// section stays a teaser and "Meet Eurobase" is still close to the top.
+const latest = news.items
+  .filter((item) => !item.archived)
+  .sort((a, b) => b.date.localeCompare(a.date))
+  .slice(0, 2)
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })

@@ -90,9 +90,15 @@
   </url>
   <url>
     <loc>https://eurobase.app/llms-full.txt</loc>
-    <lastmod>2026-09-04</lastmod>
+    <lastmod>2026-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eurobase.app/blog/whats-new-in-eurobase-november-2026</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eurobase.app/blog/lovable-on-eurobase-eu-backend-setup-guide</loc>
