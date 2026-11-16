@@ -158,7 +158,20 @@ function renderTable(block: string): string {
   </table></div>`
 }
 
+function escapeHtml(text: string): string {
+  return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+}
+
 function renderMarkdown(md: string): string {
+  // Fenced code blocks first: take them out (HTML-escaped, untouched by
+  // the inline rules below) and put them back at the end.
+  const codeBlocks: string[] = []
+  md = md.replace(/^```[\w-]*\n([\s\S]*?)^```$/gm, (_m, code: string) => {
+    codeBlocks.push(
+      `<pre class="bg-ink text-mist text-[0.85em] leading-relaxed rounded-lg p-4 my-5 overflow-x-auto"><code>${escapeHtml(code.replace(/\n$/, ''))}</code></pre>`,
+    )
+    return `<div data-code-block="${codeBlocks.length - 1}"></div>`
+  })
   // Handle tables first
   md = md.replace(/((?:^\|.+\|$\n?)+)/gm, (match) => {
     if (match.includes('|---') || match.includes('| ---')) return renderTable(match)
@@ -183,16 +196,18 @@ function renderMarkdown(md: string): string {
     // keeps the two rules from interfering.
     .replace(/(^|[^*])\*([^\s*\n<][^*\n<]*?[^\s*\n<])\*(?!\*)/g, '$1<em class="italic">$2</em>')
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-amber-ink hover:underline">$1</a>')
+    .replace(/^> (.+)$/gm, '<blockquote class="border-l-4 border-amber pl-4 my-5 text-ink italic">$1</blockquote>')
     .replace(/^- (.+)$/gm, '<li class="flex items-start gap-2 text-slate text-sm"><span class="text-amber-ink mt-1 text-xs">&#9656;</span><span>$1</span></li>')
     .replace(/((?:<li[^]*?<\/li>\n?)+)/g, '<ul class="space-y-2 my-4">$1</ul>')
     // Paragraph wrap. Lines starting with an INLINE tag (<strong>, <em>, <a>, <code>) still need a
     // <p> wrapper — the previous version bailed out on any leading `<`, so bold-first paragraphs
     // rendered unstyled. Now: skip only block-level tags (h1-h6, ul, ol, li, table, div, p).
-    .replace(/(?:^|\n)(?!<(?:h[1-6]|ul|ol|li|table|thead|tbody|tr|td|th|div|p)\b)((?:.(?!\n\n))+.)/g, (match) => {
+    .replace(/(?:^|\n)(?!<(?:h[1-6]|ul|ol|li|table|thead|tbody|tr|td|th|div|p|blockquote)\b)((?:.(?!\n\n))+.)/g, (match) => {
       const trimmed = match.trim()
-      if (/^<(?:h[1-6]|ul|ol|li|table|thead|tbody|tr|td|th|div|p)\b/.test(trimmed)) return match
+      if (/^<(?:h[1-6]|ul|ol|li|table|thead|tbody|tr|td|th|div|p|blockquote)\b/.test(trimmed)) return match
       return `\n<p class="text-slate leading-relaxed mb-4">${trimmed}</p>`
     })
+    .replace(/<div data-code-block="(\d+)"><\/div>/g, (_m, i: string) => codeBlocks[Number(i)] ?? '')
 }
 </script>
 

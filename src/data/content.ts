@@ -99,6 +99,9 @@ export interface NewsItem {
   primaryLink: { label: string; href: string }
   secondaryLink?: { label: string; href: string }
   videoLink?: { label: string; href: string }
+  // Archived items stay in the data (and their pages stay online) but
+  // aren't shown in the News section any more.
+  archived?: boolean
 }
 
 export const news = {
@@ -106,8 +109,30 @@ export const news = {
   description: 'New features and integrations, as they ship.',
   items: [
     {
+      tag: 'Product update',
+      date: '2026-11-16',
+      title: "What's new in Eurobase: ten things we shipped since October",
+      paragraphs: [
+        'The last five weeks were busy. Your app can now call database functions straight from the SDK, check user tokens on its own server, and let users sign in with a passkey. Scheduled jobs run in your timezone, and your AI assistant can deploy edge functions for you.',
+        'Most of it works today without changing anything. The blog post has a short example for each feature.',
+      ],
+      stepsTitle: 'Highlights',
+      steps: [
+        'Call database functions with db.rpc()',
+        'Verify user tokens on your own server (ES256 + JWKS)',
+        'Passkeys for your app\'s users',
+        'Scheduled jobs in your timezone, with the next run times',
+        'Deploy and roll back edge functions from your AI assistant',
+        'Rotate only the secret key, keep the public one',
+      ],
+      image: '/news-whats-new-november-2026.jpg',
+      imageAlt: "What's new in Eurobase, shipped since October: database functions, token verification, passkeys, scheduled jobs in your timezone, edge functions from your AI, and more.",
+      primaryLink: { label: 'Read what\'s new', href: '/blog/whats-new-in-eurobase-november-2026' },
+    },
+    {
       tag: 'New integration',
       date: '2026-10-12',
+      archived: true,
       title: 'Eurobase loves Lovable: run your Lovable app on a European backend',
       paragraphs: [
         'Lovable is a great product that helps people everywhere create amazing apps. By default it saves your data in Lovable Cloud or Supabase. Both are great products, but neither is 100% EU owned and operated.',
@@ -529,6 +554,133 @@ export const blog = {
   headline: 'From the blog',
   description: 'Thoughts on European data sovereignty, cloud infrastructure, and building for developers.',
   posts: [
+    {
+      slug: 'whats-new-in-eurobase-november-2026',
+      title: "What's new in Eurobase: ten things we shipped since October",
+      excerpt: 'Database functions from the SDK, token verification on your own server, passkeys for your users, scheduled jobs in your timezone, edge functions from your AI assistant, secret key rotation and more: the ten features we shipped in the last five weeks, each with a short example.',
+      date: '2026-11-16',
+      author: 'Stefan Gimeson',
+      readTime: '6 min read',
+      image: '/blog-whats-new-november-2026.jpg',
+      content: `The last five weeks were busy. Since we [launched the Lovable integration](/blog/lovable-on-eurobase-eu-backend-setup-guide) in October, we shipped a long list of features, most of them asked for by people building on Eurobase. Here are the ten that matter most, each with a short example, and a list of smaller things at the end.
+
+Most of it works today without changing anything. Where you need a newer SDK, we say so. Run \`npm install @eurobase/sdk@latest\` to get version 0.12.
+
+## 1. Call database functions from the SDK
+
+You can now call a Postgres function by name with \`db.rpc()\`. It runs as the signed-in user, so row-level security applies, and errors come back readable: the message from your function's own \`RAISE EXCEPTION\`, a Postgres error code, and 403 when the user isn't allowed.
+
+\`\`\`ts
+const { data, error, code } = await eb.db.rpc('mission_summary', { mission_id: id })
+
+if (code === 'P0001') {
+  // the function's own RAISE EXCEPTION, error is its message
+}
+\`\`\`
+
+You can also look at a function's definition in the console, CLI and MCP. Needs SDK 0.12.
+
+## 2. Verify user tokens on your own server
+
+User access tokens are now signed with ES256, using a key pair that belongs to your project. Your server can check a token by itself, without calling Eurobase on every request. The public keys are published at your project's JWKS address.
+
+\`\`\`ts
+import { createRemoteJWKSet, jwtVerify } from 'jose'
+
+const JWKS = createRemoteJWKSet(
+  new URL('https://your-project.eurobase.app/v1/auth/.well-known/jwks.json'),
+)
+
+const { payload } = await jwtVerify(accessToken, JWKS, {
+  issuer: 'eurobase',
+  audience: 'YOUR_PROJECT_ID',
+})
+// payload.sub is the user's id
+\`\`\`
+
+The docs have the same example in Go.
+
+## 3. Passkeys for your app's users
+
+Your users can sign in with Face ID, Touch ID or a security key instead of a password. Turn passkeys on under **Auth → Passkeys** in the console, with your app's domain, and use the SDK in the browser:
+
+\`\`\`ts
+if (eb.auth.passkeysSupported()) {
+  // Sign in: the browser lists the user's passkeys for your site
+  const { data, error } = await eb.auth.signInWithPasskey()
+
+  // Signed in already? Add a passkey to the account
+  await eb.auth.registerPasskey('My laptop')
+}
+\`\`\`
+
+## 4. More control over your users' accounts
+
+- **Change the password while signed in.** \`eb.auth.updatePassword({ currentPassword, newPassword })\`, and the user gets a "your password was changed" email.
+- **Email confirmation that holds.** With confirmation on, a new account gets no session until the address is confirmed, and sign-in answers \`email_not_confirmed\` until then.
+- **Invitation-only apps.** The new **Allow new signups** switch turns off self-service signup. You add users yourself (see the next section).
+- **Your app's name in auth emails.** Set an app name, and verification and reset emails use it instead of the project name.
+
+## 5. Manage users from your server
+
+Everything on the console's Users page is now also an API, for importing users or managing them from your own backend. It uses a project token with the Admin role (**Account → Personal Access Tokens**). Keep it on your server, like the secret key.
+
+\`\`\`bash
+API=https://api.eurobase.app/platform/projects/$PROJECT_ID/users
+AUTH="Authorization: Bearer $EUROBASE_PROJECT_TOKEN"   # eb_ptk_…, Admin role
+
+# Find a user by exact email
+curl -G "$API" -H "$AUTH" --data-urlencode "email=ann@example.com"
+
+# Import up to 500 users in one request (passwords optional)
+curl -X POST "$API/batch" -H "$AUTH" -H "Content-Type: application/json" \\
+  -d '{"users": [{"email": "ann@example.com", "email_confirmed": true}]}'
+\`\`\`
+
+## 6. Scheduled jobs in your timezone
+
+Scheduled jobs now run in the timezone you pick, daylight saving time included. The console shows the next three run times while you type the schedule, and refuses schedules that would never run, like 31 February.
+
+\`\`\`ts
+await eb.functions.schedules.create('nightly-report', {
+  functionName: 'nightly-report',
+  cron: '30 6 * * 1,2,3,4,5',     // weekdays at 06:30
+  timezone: 'Europe/Berlin',
+})
+\`\`\`
+
+## 7. Edge functions from your AI assistant
+
+The Eurobase MCP server can now deploy, read, roll back and delete edge functions, and read their logs. Connect it to Claude, Cursor or Lovable and ask in plain words:
+
+> Create an edge function called send-receipt that emails the order total to the customer, deploy it, and show me the logs of the first run.
+
+Members with the Developer role can now also see a function's code, versions, logs and environment variables in the console.
+
+## 8. Rotate only the secret key
+
+If a secret key leaks, you can now replace just that key. The public key stays the same, so the apps that ship it keep working. Go to **Settings → API Keys** and click **Rotate** on the secret key. The old secret key stops working with the next request, and realtime connections opened with it are closed within a minute.
+
+## 9. Hand a project to someone else
+
+The owner can transfer a project to another account, for example when you built an app for a client, a club or an association. Go to **Settings → Transfer this project** and enter their email; they accept while signed in, and you stay on as an admin. On a paid project, your subscription ends with the period you already paid for, and the new owner can subscribe right away: they're first charged the day your period ends.
+
+## 10. The console on your phone
+
+The console now works on phones and narrow screens, so you can check a table, a log or a failed job without a laptop.
+
+## And smaller things
+
+- Row numbers in the table data view.
+- A **Bolt** tab on the Connect page, next to Lovable.
+- Compliance exports now include tables with \`FORCE ROW LEVEL SECURITY\` in full.
+- Billing: see and change your payment method, and **Pay now** if a payment failed.
+- The console warns you before your session expires, and keeps the scheduled job form when you sign in again.
+- Clearer errors from REST requests when a database trigger refuses a write.
+
+Thank you to everyone who sent questions and bug reports. Most of this list started as an email. Keep them coming at [contact@eurobase.app](mailto:contact@eurobase.app).`,
+      references: [],
+    },
     {
       slug: 'lovable-on-eurobase-eu-backend-setup-guide',
       title: 'Eurobase loves Lovable: how to run your Lovable app on a European backend',
