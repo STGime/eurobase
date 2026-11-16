@@ -564,7 +564,7 @@ export const blog = {
       image: '/blog-whats-new-november-2026.jpg',
       content: `The last five weeks were busy. Since we [launched the Lovable integration](/blog/lovable-on-eurobase-eu-backend-setup-guide) in October, we shipped a long list of features, most of them asked for by people building on Eurobase. Here are the ten that matter most, each with a short example, and a list of smaller things at the end.
 
-Most of it works today without changing anything. Where you need a newer SDK, we say so. Run \`npm install @eurobase/sdk@latest\` to get version 0.12.
+Most of it works today without changing anything. Where a feature needs a newer SDK, we say so. Run \`npm install @eurobase/sdk@latest\` to get version 0.12, which has all of them.
 
 ## 1. Call database functions from the SDK
 
@@ -578,7 +578,7 @@ if (code === 'P0001') {
 }
 \`\`\`
 
-You can also look at a function's definition in the console, CLI and MCP. Needs SDK 0.12.
+Needs SDK 0.12. You can also look at a function's definition in the console, CLI and MCP.
 
 ## 2. Verify user tokens on your own server
 
@@ -592,6 +592,7 @@ const JWKS = createRemoteJWKSet(
 )
 
 const { payload } = await jwtVerify(accessToken, JWKS, {
+  algorithms: ['ES256'],
   issuer: 'eurobase',
   audience: 'YOUR_PROJECT_ID',
 })
@@ -602,7 +603,7 @@ The docs have the same example in Go.
 
 ## 3. Passkeys for your app's users
 
-Your users can sign in with Face ID, Touch ID or a security key instead of a password. Turn passkeys on under **Auth → Passkeys** in the console, with your app's domain, and use the SDK in the browser:
+Your users can sign in with Face ID, Touch ID or a security key instead of a password. Turn passkeys on under **Auth → Settings** in the console, with your app's domain, and use the SDK (0.9 or newer) in the browser:
 
 \`\`\`ts
 if (eb.auth.passkeysSupported()) {
@@ -616,8 +617,8 @@ if (eb.auth.passkeysSupported()) {
 
 ## 4. More control over your users' accounts
 
-- **Change the password while signed in.** \`eb.auth.updatePassword({ currentPassword, newPassword })\`, and the user gets a "your password was changed" email.
-- **Email confirmation that holds.** With confirmation on, a new account gets no session until the address is confirmed, and sign-in answers \`email_not_confirmed\` until then.
+- **Change the password while signed in.** \`eb.auth.updatePassword({ currentPassword, newPassword })\` (SDK 0.11 or newer), and the user gets a "your password was changed" email.
+- **Email confirmation that holds.** With confirmation on, a new account gets no session until the address is confirmed, and sign-in answers \`email_not_confirmed\` until then. If you turn confirmation on, use SDK 0.10 or newer: older versions expect a session right after sign-up.
 - **Invitation-only apps.** The new **Allow new signups** switch turns off self-service signup. You add users yourself (see the next section).
 - **Your app's name in auth emails.** Set an app name, and verification and reset emails use it instead of the project name.
 
@@ -632,7 +633,7 @@ AUTH="Authorization: Bearer $EUROBASE_PROJECT_TOKEN"   # eb_ptk_…, Admin role
 # Find a user by exact email
 curl -G "$API" -H "$AUTH" --data-urlencode "email=ann@example.com"
 
-# Import up to 500 users in one request (passwords optional)
+# Import up to 500 users in one request (bcrypt password hashes optional)
 curl -X POST "$API/batch" -H "$AUTH" -H "Content-Type: application/json" \\
   -d '{"users": [{"email": "ann@example.com", "email_confirmed": true}]}'
 \`\`\`
@@ -663,7 +664,7 @@ If a secret key leaks, you can now replace just that key. The public key stays t
 
 ## 9. Hand a project to someone else
 
-The owner can transfer a project to another account, for example when you built an app for a client, a club or an association. Go to **Settings → Transfer this project** and enter their email; they accept while signed in, and you stay on as an admin. On a paid project, your subscription ends with the period you already paid for, and the new owner can subscribe right away: they're first charged the day your period ends.
+The owner can transfer a project to another account, for example when you built an app for a client, a club or an association. Go to **Settings → Transfer this project** and enter their email; they accept while signed in, and you stay on as an admin. On a paid project, your subscription ends with the period you already paid for, and the new owner can subscribe right away: they're first charged the day your period ends. Team projects and projects in an organization can't be transferred this way yet; write to us for those.
 
 ## 10. The console on your phone
 
