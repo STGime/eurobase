@@ -110,7 +110,7 @@ export const news = {
   items: [
     {
       tag: 'Product update',
-      date: '2026-11-17',
+      date: '2026-11-16',
       title: "What's new in Eurobase: ten things we shipped since October",
       paragraphs: [
         'The last five weeks were busy. Your app can now call database functions straight from the SDK, check user tokens on its own server, and let users sign in with a passkey. Scheduled jobs run in your timezone, and your AI assistant can deploy edge functions for you.',
@@ -558,7 +558,7 @@ export const blog = {
       slug: 'whats-new-in-eurobase-november-2026',
       title: "What's new in Eurobase: ten things we shipped since October",
       excerpt: 'Database functions from the SDK, token verification on your own server, passkeys for your users, scheduled jobs in your timezone, edge functions from your AI assistant, secret key rotation and more: the ten features we shipped in the last five weeks, each with a short example.',
-      date: '2026-11-17',
+      date: '2026-11-16',
       author: 'Stefan Gimeson',
       readTime: '6 min read',
       image: '/blog-whats-new-november-2026.jpg',
