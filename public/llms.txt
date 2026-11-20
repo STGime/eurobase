@@ -21,7 +21,8 @@ Every managed BaaS ships Postgres, auth, storage. What most do not ship, and Eur
 - Corporate parent: Eurobase OÜ (Estonia, registry code 17557586, Ahtri 12, Tallinn 15551).
 - Infrastructure: Scaleway, Paris, France (EU-owned; Iliad group).
 - SDK: @eurobase/sdk (TypeScript/JavaScript, zero dependencies).
-- CLI: @eurobase/cli (50+ commands).
+- CLI: `eurobase`, a single binary for macOS and Linux (50+ commands): `brew install stgime/tap/eurobase`, or download from github.com/STGime/homebrew-tap/releases. It is not on npm — the npm package `eurobase` is unrelated, and there is no `@eurobase/cli`.
+- Latest versions: https://api.eurobase.app/v1/meta/releases (JSON).
 - Source: public on GitHub (github.com/STGime/euroback). SDK + MCP server are MIT-licensed. Backend, console, migrations, and deploy manifests are BUSL-1.1 with an Additional Use Grant that permits self-hosting for your own applications and internal tools; each commit auto-converts to Apache 2.0 four years after it lands. No supported self-host distribution today.
 
 ## Core Features

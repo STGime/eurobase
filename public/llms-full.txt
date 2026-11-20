@@ -15,7 +15,8 @@ cron jobs, webhooks, CLI tooling, and audit/compliance. All infrastructure runs 
 - Docs: https://console.eurobase.app/docs
 - Status: Publicly available (public beta opened Aug 2026; Pro is paid)
 - SDK package: @eurobase/sdk (npm)
-- CLI package: @eurobase/cli (npm)
+- CLI: `brew install stgime/tap/eurobase`, or a binary from github.com/STGime/homebrew-tap/releases (not on npm; the npm package `eurobase` is unrelated, and there is no `@eurobase/cli`)
+- Latest SDK and CLI versions: https://api.eurobase.app/v1/meta/releases (JSON)
 
 ---
 
@@ -552,7 +553,7 @@ Enterprise plan: custom limits, dedicated infrastructure, SLA, compliance toolin
 - **Infrastructure**: Scaleway Kubernetes (Paris, France)
 - **DNS**: EU-managed DNS
 - **SDK**: TypeScript, zero dependencies, browser + Node.js 18+
-- **CLI**: Node.js, 50+ commands
+- **CLI**: a single Go binary (macOS, Linux; amd64, arm64), 50+ commands
 
 ### Security
 
