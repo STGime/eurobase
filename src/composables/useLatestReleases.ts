@@ -6,7 +6,7 @@ import { onMounted, reactive } from 'vue'
 // pre-rendered, so the fallback below is what the HTML carries; the live
 // versions replace it in the browser.
 export const FALLBACK_SDK_VERSION = '0.13.1'
-export const FALLBACK_CLI_VERSION = '0.7.1'
+export const FALLBACK_CLI_VERSION = '0.7.2'
 
 const API_URL =
   (import.meta.env.VITE_RELEASES_API as string | undefined) ||
