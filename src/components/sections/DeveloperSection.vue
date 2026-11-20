@@ -3,6 +3,7 @@ import { developer } from '@/data/content'
 import SectionHeading from '@/components/ui/SectionHeading.vue'
 import CodeBlock from '@/components/ui/CodeBlock.vue'
 import CtaButton from '@/components/ui/CtaButton.vue'
+import LatestReleases from '@/components/ui/LatestReleases.vue'
 
 </script>
 
@@ -48,6 +49,10 @@ import CtaButton from '@/components/ui/CtaButton.vue'
             <CtaButton variant="secondary" href="https://console.eurobase.app/docs">
               Read the docs &rarr;
             </CtaButton>
+          </div>
+
+          <div class="mt-6">
+            <LatestReleases />
           </div>
         </div>
       </div>
