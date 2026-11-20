@@ -1191,8 +1191,8 @@ The reversibility story is deliberate: standard formats (Postgres, S3-compatible
 
 - Sign up: [console.eurobase.app](https://console.eurobase.app)
 - Docs: [console.eurobase.app/docs](https://console.eurobase.app/docs)
-- CLI: \`npm install -g @eurobase/cli\`
-- SDK: \`npm install @eurobase/sdk\`
+- CLI: \`brew install stgime/tap/eurobase\` (or a binary from [github.com/STGime/homebrew-tap/releases](https://github.com/STGime/homebrew-tap/releases)). The CLI is not on npm.
+- SDK: \`npm install @eurobase/sdk@latest\`
 - Issues + roadmap: [github.com/STGime/euroback](https://github.com/STGime/euroback)
 - Anything else: reply to any email from us, we read every word.`,
       references: [
